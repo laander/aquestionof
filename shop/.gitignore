@@ -9,3 +9,4 @@ system/cache/*
 image/cache/*
 system/logs/*
 php.ini
+system/logs/*

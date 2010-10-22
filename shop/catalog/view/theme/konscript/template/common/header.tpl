@@ -80,7 +80,7 @@
 	foreach ($results as $result) {
 
 		$route = isset($_GET["route"]) ? $_GET["route"] : "";
-		$link = $route=="product/all" ? '<a class="gridButton" href="index.php?route=product/category&path='.$result["category_id"].'">'.$result['name'].'</a> ' : '<a href="index.php?route=product/all&path='.$result["category_id"].'">'.$result['name'].'</a> ';   
+		$link = $route!="product/all" ? '<a class="gridButton" href="index.php?route=product/category&path='.$result["category_id"].'">'.$result['name'].'</a> ' : '<a href="index.php?route=product/all&path='.$result["category_id"].'">'.$result['name'].'</a> ';   
 		
 		$new_path = $result['category_id'];
 		$unrewritten = HTTP_SERVER.'index.php?route=product/category&path='.$new_path;
