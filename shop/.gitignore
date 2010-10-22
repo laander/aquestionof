@@ -7,3 +7,4 @@ admin/config.php
 system/cache/*
 image/cache/*
 php.ini
+shop/system/logs/*
