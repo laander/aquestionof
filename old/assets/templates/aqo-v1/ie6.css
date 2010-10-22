@@ -1,0 +1,11 @@
+/*
+// Website: A Question Of (http://www.aqo.dk)
+// Author: Laander (http://www.laander.com)
+// Version: 1.0
+*/
+
+/* Provides fixes for jScrollPane if browser is IE6 */
+	
+#contentwrapper {
+	margin: 55px 0 0 280px;
+	border-bottom: 1px solid #808080; }
