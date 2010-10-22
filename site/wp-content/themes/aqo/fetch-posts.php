@@ -1,6 +1,6 @@
 <?php
 /**
- * Fetches posts based on current category selection
+ * Template Name: Custom Fetch Posts
  *
  * @package Hybrid
  * @subpackage Template
@@ -8,12 +8,13 @@
 ?>
 
 <ul>
-	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+	<?php query_posts(array('post_type' => 'post', 'posts_per_page' => -1));			
+	if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-		<li id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
+		<li data-id="post-<?php the_ID(); ?>">
 			<?php the_title(); ?>
 		</li><!-- .hentry -->
 	
-	<?php endwhile; ?><?php endif; ?>	
+	<?php endwhile; ?><?php endif; ?>		
 </ul>
 

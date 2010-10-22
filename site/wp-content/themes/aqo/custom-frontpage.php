@@ -10,22 +10,19 @@ get_header(); ?>
 
 	<div id="content" class="hfeed content">
 
-	A Question Of
-	
-	<a href="#">About</a>
-	<a href="#">Media</a>
-	<a href="#">Shop</a>
-	
-	<br /><br />
-
-	<p>About Pages
-	<a href="about-list">Here</a></p>
-
-	<br />
-	
-	<p>Media Categories
-	<?php wp_list_categories(); ?></p>
-	
+		A Question Of
+		
+		<a href="fetch-pages/" class="gridButton">About</a>
+		<a href="fetch-posts/" class="gridButton">Media</a>
+		<a href="http://localhost:8888/aquestionof/shop/index.php?route=product/all" class="gridButton">Shop</a>
+		<a href="fetch-all/" class="gridButton">ALL</a>
+		
+		<br /><br />
+		
+		<ul class="grid">
+		
+		</ul>
+			
 	</div><!-- .content .hfeed -->
 
 <?php get_footer(); ?>

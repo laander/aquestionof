@@ -11,7 +11,7 @@
 	<?php query_posts(array('post_type' => 'page'));		
 	if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>		
 
-		<li id="post-<?php the_ID(); ?>">
+		<li data-id="page-<?php the_ID(); ?>">
 			<?php the_title(); ?>
 		</li>
 		

@@ -11,4 +11,4 @@
  */
 ?>
 
-<?php include('fetch-posts.php'); ?>
+<?php include('fetch-posts-cat.php'); ?>

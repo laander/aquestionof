@@ -16,7 +16,7 @@ function load_jquery() {
 	
 	if( !is_admin()){
 	   wp_deregister_script('jquery'); 
-	   wp_register_script('jquery', (CHILD_THEME_URI . '/library/js/jquery-1.4.2.min.js'), false, '1.4.2'); 
+	   wp_register_script('jquery', (CHILD_THEME_URI . '/library/js/jquery-1.4.3.min.js'), false, '1.4.3'); 
 	   wp_enqueue_script('jquery');
 	}
 	
