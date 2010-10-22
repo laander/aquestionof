@@ -67,10 +67,13 @@ body {
 	clear: right;
 }
 #content {
-	margin-left: 190px;
+	
+	/*margin-left: 190px;*/
 	margin-right: 190px;
-	margin-bottom: 10px;
+	/*margin-bottom: 10px;*/
+	
 }
+/*
 #content .top .left {
 	background: url('../image/content_top_left.png') no-repeat;
 	width: 5px;
@@ -123,6 +126,7 @@ body {
 	height: 5px;
 	margin: 0 5px 10px 5px;
 }
+*/
 .box {
 	margin-bottom: 10px;
 	background: url('../image/box_top.png') no-repeat;
@@ -411,4 +415,11 @@ body {
 #content .middle .box .middle {
 	width: 158px;
 	min-height: 0px;
+}
+
+
+
+/******** sqren ********/
+a.selected {
+	background-color: #ccc;
 }

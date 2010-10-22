@@ -17,11 +17,13 @@
 <link href="<?php echo str_replace('&', '&amp;', $link['href']); ?>" rel="<?php echo $link['rel']; ?>" />
 <?php } ?>
 <link rel="stylesheet" type="text/css" href="catalog/view/theme/<?php echo $template; ?>/stylesheet/stylesheet.css" />
-<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/all/all.css" />
+<link rel="stylesheet" type="text/css" href="catalog/view/javascript/jquery/quicksand/quicksand.css" />
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.3.min.js"></script> 
+<script type="text/javascript" src="catalog/view/javascript/jquery/quicksand/jquery.quicksand.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="catalog/view/javascript/jquery/quicksand/quicksand_custom.js" type="text/javascript"></script> 
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>
@@ -68,19 +70,22 @@
         </form>
         <?php } ?>
 
-
     <?php      
 	$this->load->model('tool/seo_url');
 	$results = $this->model_catalog_category->getCategories();
-	$output = '<div id="filter">  <div class="type"><p>Filter by type</p>';
-	$output .= '<a href="index.php?route=product/all#" data-value="all">All</a> ';
+	$output = '<p id="grid-navigation">';
+	
+	$output .= '<a class="gridButton" href="index.php?route=product/all">All</a> ';
 	foreach ($results as $result) {
+		
+		$link = $_GET["route"]=="product/all" ? '<a class="gridButton" href="index.php?route=product/category&path='.$result["category_id"].'">'.$result['name'].'</a> ' : '<a href="index.php?route=product/all&path='.$result["category_id"].'">'.$result['name'].'</a> ';   
+		
 		$new_path = $result['category_id'];
 		$unrewritten = HTTP_SERVER.'index.php?route=product/category&path='.$new_path;
 		$rewritten = $this->model_tool_seo_url->rewrite($unrewritten);	
- 		$output .= '<a href="index.php?route=product/all#" data-value="'.$result["category_id"].'">'.$result['name'].'</a> ';
+ 		$output .= $link;
 	}
-	$output .= "</div></div>";   
+	$output .= "</p>";   
 	echo $output;
 	?>   
 	

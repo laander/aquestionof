@@ -1,4 +1,7 @@
-.image-grid li {
+.grid {
+	overflow: hidden;
+}
+.grid li {
   width: 128px;
   height: 177px;
   margin: 20px 0 0 35px;
@@ -8,3 +11,7 @@
   color: #686f74;
   overflow: hidden;
 }
+
+.grid li a img {
+		border: none;
+	}

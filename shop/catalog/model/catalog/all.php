@@ -12,11 +12,12 @@ class ModelCatalogAll extends Model {
 	}
 
   	public function getAllProducts($sort = 'pd.name', $order = 'ASC', $start = 0, $limit = 16) {
+  		//LEFT JOIN " . DB_PREFIX . "product_to_category pc on p.product_id=pc.product_id
+  		
 		$sql = "
-			SELECT *, pc.category_id AS category_id, pd.name AS name, p.image, m.name AS manufacturer, ss.name AS stock,
+			SELECT DISTINCT *, pd.name AS name, p.image, m.name AS manufacturer, ss.name AS stock,
 			(SELECT AVG(r.rating) FROM " . DB_PREFIX . "review r WHERE p.product_id = r.product_id GROUP BY r.product_id) AS rating
-			FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id)
-			LEFT JOIN " . DB_PREFIX . "product_to_category pc on p.product_id=pc.product_id
+			FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id)			
 			LEFT JOIN " . DB_PREFIX . "manufacturer m ON (p.manufacturer_id = m.manufacturer_id)
 			LEFT JOIN " . DB_PREFIX . "stock_status ss ON (p.stock_status_id = ss.stock_status_id)
 			LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id)
