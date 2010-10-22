@@ -7,4 +7,5 @@ config.php
 admin/config.php
 system/cache/*
 image/cache/*
+system/logs/*
 php.ini
