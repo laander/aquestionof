@@ -6,13 +6,13 @@
  * @subpackage Template
  */
 ?>
-			<?php hybrid_after_container(); // After container hook ?>
+			<?php //hybrid_after_container(); // After container hook ?>
 	
 		</div><!-- #container -->
 	
 		<div id="footer-container">
 	
-			<?php hybrid_before_footer(); // Before footer hook ?>
+			<?php //hybrid_before_footer(); // Before footer hook ?>
 	
 			<div id="footer">
 	
@@ -20,14 +20,14 @@
 	
 			</div><!-- #footer -->
 	
-			<?php hybrid_after_footer(); // After footer hook ?>
+			<?php //hybrid_after_footer(); // After footer hook ?>
 	
 		</div><!-- #footer-container -->
 	
 	</div><!-- #body-container -->
 	
 	<?php wp_footer(); // WordPress footer hook ?>
-	<?php hybrid_after_html(); // After HTML hook ?>
+	<?php //hybrid_after_html(); // After HTML hook ?>
 	
 </body>
 </html>

@@ -27,24 +27,24 @@ hybrid_doctype(); ?>
 
 <body class="<?php hybrid_body_class(); ?>">
 
-	<?php hybrid_before_html(); // Before HTML hook ?>
+	<?php //hybrid_before_html(); // Before HTML hook ?>
 	
 	<div id="body-container">
 	
-		<?php hybrid_before_header(); // Before header hook ?>
+		<?php //hybrid_before_header(); // Before header hook ?>
 	
 		<div id="header-container">
 	
 			<div id="header">
 	
-				<?php hybrid_header(); // Header hook ?>
+				<?php //hybrid_header(); // Header hook ?>
 	
 			</div><!-- #header -->
 	
 		</div><!-- #header-container -->
 	
-		<?php hybrid_after_header(); // After header hook ?>
+		<?php //hybrid_after_header(); // After header hook ?>
 	
 		<div id="container">
 	
-			<?php hybrid_before_container(); // Before container hook ?>
+			<?php //hybrid_before_container(); // Before container hook ?>
