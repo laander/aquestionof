@@ -6,10 +6,9 @@ $(function() {
 	});
 	
 	if($.urlParam('path')!=0 && $.urlParam('route')=="product/all"){
-		//debugger
 		var url = this["URL"];
 		var url = url.replace("product/all", "product/category");
-		var $elm = $OuterDiv = $('<a></a>').attr('href', url);
+		var $elm = $('<a></a>').attr('href', url);
 		$.makeAnimattion($elm);		
 	}	
 });
