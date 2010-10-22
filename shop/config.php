@@ -1,21 +1,21 @@
 <?php
 // DIR
-define('DIR_APPLICATION', '/home/sqren/Softwareudvikling/konscript/opencart/catalog/');
-define('DIR_SYSTEM', '/home/sqren/Softwareudvikling/konscript/opencart/system/');
-define('DIR_DATABASE', '/home/sqren/Softwareudvikling/konscript/opencart/system/database/');
-define('DIR_LANGUAGE', '/home/sqren/Softwareudvikling/konscript/opencart/catalog/language/');
-define('DIR_TEMPLATE', '/home/sqren/Softwareudvikling/konscript/opencart/catalog/view/theme/');
-define('DIR_CONFIG', '/home/sqren/Softwareudvikling/konscript/opencart/system/config/');
-define('DIR_IMAGE', '/home/sqren/Softwareudvikling/konscript/opencart/image/');
-define('DIR_CACHE', '/home/sqren/Softwareudvikling/konscript/opencart/system/cache/');
-define('DIR_DOWNLOAD', '/home/sqren/Softwareudvikling/konscript/opencart/download/');
-define('DIR_LOGS', '/home/sqren/Softwareudvikling/konscript/opencart/system/logs/');
+define('DIR_APPLICATION', '/Users/la/Sites/aquestionof/shop/catalog/');
+define('DIR_SYSTEM', '/Users/la/Sites/aquestionof/shop/system/');
+define('DIR_DATABASE', '/Users/la/Sites/aquestionof/shop/system/database/');
+define('DIR_LANGUAGE', '/Users/la/Sites/aquestionof/shop/catalog/language/');
+define('DIR_TEMPLATE', '/Users/la/Sites/aquestionof/shop/catalog/view/theme/');
+define('DIR_CONFIG', '/Users/la/Sites/aquestionof/shop/system/config/');
+define('DIR_IMAGE', '/Users/la/Sites/aquestionof/shop/image/');
+define('DIR_CACHE', '/Users/la/Sites/aquestionof/shop/system/cache/');
+define('DIR_DOWNLOAD', '/Users/la/Sites/aquestionof/shop/download/');
+define('DIR_LOGS', '/Users/la/Sites/aquestionof/shop/system/logs/');
 
 // DB
 define('DB_DRIVER', 'mysql');
 define('DB_HOSTNAME', 'localhost');
-define('DB_USERNAME', 'sqren');
-define('DB_PASSWORD', 'sqren');
-define('DB_DATABASE', 'opencart');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', 'root');
+define('DB_DATABASE', 'aquestionof-oc');
 define('DB_PREFIX', '');
 ?>

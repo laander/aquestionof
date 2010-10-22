@@ -2,8 +2,13 @@ AQO by Konscript
 ----------------
 
 Setup notes:
+
+WordPress:
 - change WordPress config for DB pointers in site/wp-config.php
-- change OpenCart config for DB pointers and path references in shop/config.php
 - manually update DB entries for WordPress to updated site URL
 	wp_options -> option_id 37 (home, change option_value to reflect URL
 	wp_options -> option_id 1 (siteurl), change option_value to reflect URL
+	
+OpenCart:
+- install OpenCart as usual and setup DB
+- overwrite all files in Catalog
