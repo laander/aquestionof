@@ -6,9 +6,11 @@ $(function() {
 	});
 	
 	if($.urlParam('path')!=0 && $.urlParam('route')=="product/all"){
-		var test = this;
-		var url = test.replace("product/all", "product/category");
-		$.makeAnimattion(test);		
+		//debugger
+		var url = this["URL"];
+		var url = url.replace("product/all", "product/category");
+		var $elm = $OuterDiv = $('<a></a>').attr('href', url);
+		$.makeAnimattion($elm);		
 	}	
 });
 
