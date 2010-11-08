@@ -16,6 +16,8 @@ hybrid_doctype(); ?>
 	<link rel="shortcut icon" type="image/ico" href="<?php echo CHILD_THEME_URI.'/library/images/favicon.ico'; ?>" />
 	<link rel="apple-touch-icon" href="<?php echo IMAGES . '/apple-touch-icon.png'; ?>" />
 
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
 	<?php hybrid_head(); // Hybrid head hook ?>
 	<?php wp_head(); // WP head hook ?>
 
@@ -24,32 +26,45 @@ hybrid_doctype(); ?>
 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/quicksand/jquery.quicksand.min.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/quicksand/quicksand_custom.js'; ?>"></script>
-	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/js/quicksand/quicksand.css'; ?>" rel="stylesheet" media="screen" />
+	<link type="text/css" href="<?php // echo CHILD_THEME_URI.'/library/js/quicksand/quicksand.css'; ?>" rel="stylesheet" media="screen" />
 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/screen.js'; ?>"></script>
 
 </head>
 
 <body class="<?php hybrid_body_class(); ?>">
-
-	<?php //hybrid_before_html(); // Before HTML hook ?>
 	
 	<div id="body-container">
-	
-		<?php //hybrid_before_header(); // Before header hook ?>
-	
+
 		<div id="header-container">
-	
 			<div id="header">
-	
-				<?php //hybrid_header(); // Header hook ?>
-	
+			
+				A Question Of
+				
+				<br /><br />
+				<a href="fetch-all/" class="gridButton">Everything</a>
+				<br /><br />
+				<a class="gridButton" href="category/about">ABOUT:</a>
+				<a class="gridButton" href="about/contact">Contact</a> - 
+				<a class="gridButton" href="about/social-responsibility">Social Responsibility</a> -	
+				<a class="gridButton" href="about/who-we-are">Who We Are</a>
+				<br />
+				<a class="gridButton" href="category/media">MEDIA:</a>
+				<a class="gridButton" href="media/campaigns">Campaigns</a> -
+				<a class="gridButton" href="media/press">Press</a> -
+				<a class="gridButton" href="media/social">Social</a>
+				<br />
+				<a class="gridButton" href="category/creatives">CREATIVES:</a>
+				<a class="gridButton" href="creatives/creative-team">Creative Team</a> -
+				<a class="gridButton" href="creatives/join-us">Join Us</a>
+				<br />
+				<a class="gridButton" href="http://localhost:8888/aquestionof/shop/index.php?route=product/all">STORE:</a>
+				<a class="gridButton" href="http://localhost:8888/aquestionof/shop/index.php?route=product/category&path=20">Desktops</a> -
+				<a class="gridButton" href="http://localhost:8888/aquestionof/shop/index.php?route=product/category&path=18">Laptops</a>
+				<br /><br />
+						
 			</div><!-- #header -->
-	
 		</div><!-- #header-container -->
-	
-		<?php //hybrid_after_header(); // After header hook ?>
-	
+		
 		<div id="container">
 	
-			<?php //hybrid_before_container(); // Before container hook ?>

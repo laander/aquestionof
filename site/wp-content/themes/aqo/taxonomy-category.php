@@ -9,6 +9,5 @@
  * @package Hybrid
  * @subpackage Template
  */
-?>
 
-<?php include('fetch-posts-cat.php'); ?>
+include('fetch-category.php'); ?>

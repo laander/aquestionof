@@ -5,12 +5,12 @@
  * @package Hybrid
  * @subpackage Template
  */
-?>
+
+get_header(); ?>
 	
-<ul>
+<ul class="grid">
 	
-	<?php 
-	
+	<?php 	
 	$products_url = 'http://' . $_SERVER['HTTP_HOST'] . '/aquestionof/shop/index.php?route=product/all&type=array'; 
 	
 	$ch = curl_init();
@@ -21,26 +21,18 @@
 	
 	$products_unserialized = unserialize($products);
 	$items = $products_unserialized;
-	
 	?>	
 	
 	<?php query_posts(array('post_type' => 'post', 'posts_per_page' => -1));			
 	if ( have_posts() ) : while ( have_posts() ) : the_post();
 		
-		$items[] = '<li data-id="post-' . get_the_ID() . '" >' . get_the_title() . '</li>';
+		$items[] = '<li data-id="post-' . get_the_ID() . '" ><div class="post-title">' . get_the_title() . '</div>' .  get_the_post_thumbnail( $post->ID, 'thumbnail' ) . '</li>';
 			
 	endwhile; endif; ?>
-	
-	<?php query_posts(array('post_type' => 'page', 'posts_per_page' => -1));		
-	if ( have_posts() ) : while ( have_posts() ) : the_post();		
-
-		$items[] = '<li data-id="page-' . get_the_ID() . '" >' . get_the_title() . '</li>';
 		
-	endwhile; endif; ?>
-	
 	<?php 
-	shuffle($items);
-	
+
+	shuffle($items);	
 	//print_r($items_rand);
 	
 	foreach ($items as $item) {
@@ -49,3 +41,5 @@
 	?>
 	
 </ul>
+
+<?php get_footer(); ?>

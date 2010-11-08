@@ -16,9 +16,44 @@ function load_jquery() {
 	
 	if( !is_admin()){
 	   wp_deregister_script('jquery'); 
-	   wp_register_script('jquery', (CHILD_THEME_URI . '/library/js/jquery-1.4.3.min.js'), false, '1.4.3'); 
-	   wp_enqueue_script('jquery');
+	   //wp_register_script('jquery', (CHILD_THEME_URI . '/library/js/jquery-1.4.2.min.js'), false, '1.4.2'); 
+	   //wp_enqueue_script('jquery');
 	}
+	
+}
+
+add_action( 'hybrid_init', 'build_taxanomies', 1 );
+function build_taxanomies() {
+	register_taxonomy(
+		'about',
+		'post',
+		array(
+			'hierarchical' => true,
+			'label' => 'About',
+			'query_var' => true,
+			'rewrite' => true
+		)
+	);
+	register_taxonomy(
+		'media',
+		'post',
+		array(
+			'hierarchical' => true,
+			'label' => 'Media',
+			'query_var' => true,
+			'rewrite' => true
+		)
+	);
+	register_taxonomy(
+		'creatives',
+		'post',
+		array(
+			'hierarchical' => true,
+			'label' => 'Creatives',
+			'query_var' => true,
+			'rewrite' => true
+		)
+	);
 	
 }
 
