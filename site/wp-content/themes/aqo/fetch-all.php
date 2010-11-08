@@ -26,7 +26,12 @@ get_header(); ?>
 	<?php query_posts(array('post_type' => 'post', 'posts_per_page' => -1));			
 	if ( have_posts() ) : while ( have_posts() ) : the_post();
 		
-		$items[] = '<li data-id="post-' . get_the_ID() . '" ><div class="post-title">' . get_the_title() . '</div>' .  get_the_post_thumbnail( $post->ID, 'thumbnail' ) . '</li>';
+		$items[] = 
+			'<li data-id="post-' . get_the_ID() . '" >
+				<div class="post-title">
+					<a href="' . get_permalink($post->ID) . '">' . get_the_title() . '</a>
+				</div>' .  get_the_post_thumbnail( $post->ID, 'thumbnail' ) . 
+			'</li>';
 			
 	endwhile; endif; ?>
 		

@@ -12,7 +12,9 @@ get_header(); ?>
 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
 		<li data-id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
-			<div class="post-title"><?php the_title(); ?></div>
+			<div class="post-title">
+				<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>			
+			</div>
 		</li><!-- .hentry -->
 	
 	<?php endwhile; ?><?php endif; ?>	

@@ -1,27 +1,19 @@
-<?php
-/*<ul>
-<?php foreach($products as $productid=>$product){ ?>
-	<li data-id="<?php echo $productid ?>"><a
-		href="<?php echo $product["href"]?>"><img
-		src="<?php echo $product["thumb"] ?>" width="128" height="128" alt="" /></a>
-	<strong><?php echo $product["name"] ?></strong> <span data-type="size"><?php echo $product["price"] ?></span>
-	</li>
-	<?php } ?>
-
-*/
-?>
 <?php 
 $itemArray = array();
 $itemOutput = "<ul>";
-foreach($products as $productid=>$product){
+foreach($products as $index => $product){
+	$product_model_pattern = '/\d+/';
+	preg_match($product_model_pattern, $product["model"], $product_id);
 	$item = '
-	<li data-id="'.$productid.'"><a
-		href="'.$product["href"].'"><img
-		src="'.$product["thumb"].'" width="128" height="128" alt="" /></a>
-	<strong>'.$product["name"].'</strong> <span data-type="size">'.$product["price"].'</span>
+	<li data-id="product-'. $product_id[0] .'">
+		<a href="'.$product["href"].'">
+			<img src="'.$product["thumb"].'" width="128" height="128" alt="" />
+			<div class="product-title">'.$product["name"].'</div>
+		</a>
+		<div data-type="size">'.$product["price"].'</div>
 	</li>';	
 	
-	if($_GET["type"]=="array"){
+	if(isset($_GET["type"]) == "array"){
 		$itemArray[] = $item;
 	}else{
 		$itemOutput .= $item;
@@ -29,7 +21,7 @@ foreach($products as $productid=>$product){
 }
 $itemOutput .= "</ul>";
 
-if($_GET["type"]=="array"){
+if(isset($_GET["type"]) == "array"){
 	echo serialize($itemArray);
 }else{
 	echo $itemOutput;

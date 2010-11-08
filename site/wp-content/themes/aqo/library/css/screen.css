@@ -1591,9 +1591,8 @@ ul.grid li {
 * html ul.grid li {
   overflow-x: hidden;
 }
-/* line 93, ../src/partials/_master.scss */
-ul.grid li .page-title,
-ul.grid li .post-title,
+/* line 92, ../src/partials/_master.scss */
+ul.grid li .post-title a,
 ul.grid li .product-title {
   position: absolute;
   padding: 5px;
@@ -1609,7 +1608,7 @@ ul.grid li .product-title {
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 113, ../src/partials/_master.scss */
+/* line 112, ../src/partials/_master.scss */
 #footer-container {
   display: inline;
   float: left;
