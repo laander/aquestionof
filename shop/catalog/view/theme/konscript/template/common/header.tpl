@@ -24,6 +24,8 @@
 <script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.4.3.min.js"></script> 
 <script type="text/javascript" src="catalog/view/javascript/jquery/quicksand/jquery.quicksand.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="catalog/view/javascript/jquery/quicksand/quicksand_custom.js" type="text/javascript"></script> 
+<script type="text/javascript" src="catalog/view/javascript/jquery/onhashchange.min.js" type="text/javascript"></script> 
+
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>

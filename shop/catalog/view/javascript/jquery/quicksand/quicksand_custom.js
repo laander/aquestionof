@@ -1,20 +1,27 @@
-$(function() {
-	
-	$('#grid-navigation a.gridButton').click(function(e) {			
-		$.makeAnimattion(this);
+$(document).ready(function() {	
+	/*** invoke on initial run ***/	
+	$.makeAnimattion(getRoute());
+
+	/**invoke hashchange on button click **/
+	$('#grid-navigation a.gridButton').click(function(e) {	
+		var route = this["search"].substring(7);
+		setHash(route);	
 		e.preventDefault();
-	});
-	
-	if($.urlParam('path')!=0 && $.urlParam('route')=="product/all"){
-		var url = this["URL"];
-		var url = url.replace("product/all", "product/category");
-		var $elm = $('<a></a>').attr('href', url);
-		$.makeAnimattion($elm);		
-	}	
+	});	
+ 
+	/** invoke on hashchange **/
+	$(window).hashchange( function(){		
+		$.makeAnimattion(getRoute());		
+	});		
 });
 
-$.makeAnimattion = function(elm){
-	$.get($(elm).attr('href'), function(data) {			
+/** do quicksand effect **/
+$.makeAnimattion = function(route){
+	/** load last app state **/
+	var url = "index.php?route="+route;
+	var $elm = $('<a></a>').attr('href', url);
+
+	$.get($elm.attr('href'), function(data) {			
 		$('.grid').quicksand($(data).find('li'), {
 			adjustHeight : 'dynamic',
 			attribute : function(v) {
@@ -24,8 +31,14 @@ $.makeAnimattion = function(elm){
 	});
 }
 
-$.urlParam = function(name){
-	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
-	if (!results) { return 0; }
-	return results[1] || 0;
-};
+/** make hash in url to save app instance (for bookmark, back button etc) **/
+function setHash(urlHash){
+	window.location.hash = urlHash;
+}
+
+function getRoute(){
+	/** determine last app state **/
+	var urlHash= window.location.hash=="" ? "#product/all" : window.location.hash;
+	return urlHash.substring(1);
+}
+
