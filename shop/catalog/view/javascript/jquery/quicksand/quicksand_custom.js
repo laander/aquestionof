@@ -4,8 +4,11 @@ $(document).ready(function() {
 
 	/**invoke hashchange on button click **/
 	$('#grid-navigation a.gridButton').click(function(e) {	
-		var route = this["search"].substring(7);
-		setHash(route);	
+		var hlink = $(this).attr("href"); //get clicked link
+		var routePos = hlink.indexOf("route")+6; //find route param in hlink - NB: "route=" is 6 long
+		var test = 1;	
+		var route = hlink.substring(routePos);
+		window.location.hash = route; //set hash
 		e.preventDefault();
 	});	
  
@@ -31,14 +34,10 @@ $.makeAnimattion = function(route){
 	});
 }
 
-/** make hash in url to save app instance (for bookmark, back button etc) **/
-function setHash(urlHash){
-	window.location.hash = urlHash;
-}
-
 function getRoute(){
 	/** determine last app state **/
 	var urlHash= window.location.hash=="" ? "#product/all" : window.location.hash;
-	return urlHash.substring(1);
+	urlHash = urlHash.substring(1); //remove # (hash) from beginning string
+	return urlHash; 
 }
 
