@@ -1,0 +1,123 @@
+/**
+ * Hybrid (partial)
+ * Default styling for Hybrid plugins
+ *
+ * @author Konscript
+ * @version 1.1
+ */
+
+/**
+* Plugins (default styles)
+************************************************/
+
+.wp-pagenavi .pages {
+	margin: 2px 3px 2px 0;
+	font-style: italic; }
+
+.wp-pagenavi .current {
+	margin: 2px;
+	padding: 1px 6px;
+	font-weight: 700; }
+
+.wp-pagenavi .extend {
+	margin: 2px; }
+
+.wp-pagenavi a {
+	margin: 0 2px;
+	padding: 1px 6px;
+	font-style: italic;
+	border: 1px solid #ccc; }
+
+.WP-EmailIcon {
+	padding: 0;
+	margin: 0;
+	border: none; }
+
+.comment_license {
+	font-style: italic; }
+
+img#wpstats {
+	overflow: hidden!important;
+	width: 0!important;
+	height: 0!important;
+	padding: 0!important;
+	margin: 0!important; }
+
+.contact-form {
+	margin-bottom: 21px; }
+
+.contact-form legend {
+	display: none; }
+
+.contact-form .form-input input {
+	display: block;
+	margin-bottom: 6px;
+	padding: 3px 6px;
+	width: 300px; }
+
+.contact-form label {
+	font-size: .9em; }
+
+.contact-form textarea {
+	width: 97%;
+	margin-bottom: 6px;
+	padding: 6px; }
+
+.contact-form .form-option {
+	margin-bottom: 6px; }
+
+.contact-form .button {
+	width: 100px;
+	margin-right: 9px;
+	padding: 6px 9px; }
+
+.contact-form .button:hover {
+	cursor: pointer; }
+
+/**
+* Drop-down
+************************************************/
+
+div.menu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	line-height: 1.0; }
+
+div.menu ul ul {
+	position: absolute;
+	top: -999em;
+	width: 10em; }
+
+div.menu ul ul li {
+	width: 100%; }
+
+div.menu li:hover {
+	visibility: inherit; }
+
+div.menu li {
+	float: left;
+	position: relative; }
+
+div.menu a {
+	display: block;
+	position: relative; }
+
+div.menu li:hover ul,li.sfHover ul {
+	left: 0;
+	top: 2em;
+	z-index: 99; }
+
+div.menu li:hover li ul,li.sfHover li ul {
+	top: -999em; }
+
+div.menu li li:hover ul,li li.sfHover ul {
+	left: 10em;
+	top: 0; }
+
+div.menu li li:hover li ul,li li.sfHover li ul {
+	top: -999em; }
+
+div.menu li li li:hover ul,li li li.sfHover ul {
+	left: 10em;
+	top: 0; }

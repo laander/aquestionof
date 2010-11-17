@@ -1,0 +1,175 @@
+/**
+ * Base (partial)
+ * Main stylesheet for setting up variables (typography, colors), blueprint and basic site elements
+ *
+ * @author Konscript
+ * @version 1.1
+ */
+
+/**
+* Settings
+************************************************/
+
+// Layout
+$grid-columns: 24;
+$grid-totalwidth: 960px;
+$grid-margin: 10px;
+$grid-spacing: 40px;
+$grid-spacing-small: 18px;
+$grid-spacing-large: $grid-spacing + ($grid-spacing / 2);
+
+// Color
+$color-primary: #000; 		// Black
+$color-primary-b: #535353; 	// Dark Grey
+$color-primary-c: #bebbb6; 	// Light Grey
+$color-secondary: #fff;		// White
+$color-tertiary: #fff;		// White
+$color-font: $color-primary;
+$color-link: $color-primary;
+
+// Typography
+$typography-family-primary: "Helvetica Neue", Arial, Helvetica, sans-serif;
+$typography-size-header: 16px;
+$typography-size-subheader: 14px;
+$typography-size-normal: 11px;
+
+/**
+* Blueprint Setup
+************************************************/
+
+// Grid
+$blueprint-grid-columns: $grid-columns;
+$blueprint-container-size: $grid-totalwidth - $grid-margin;
+$blueprint-grid-margin: $grid-margin;
+$blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin; 
+
+// Colors 
+$link-color: $color-link;
+$link-hover-color: $color-link;
+$link-focus-color: $color-link;
+$link-active-color: $color-link;
+$link-visited-color: $color-link;
+@import "blueprint/colors";
+
+// Fonts
+$blueprint-font-family: $typography-family-primary;
+$blueprint-font-size: $typography-size-normal;
+@import "blueprint/typography";
+
+/**
+* Elements
+************************************************/
+
+/* Hyperlinks */
+a:link {}
+a:visited {}
+a:hover {}
+a:active {}
+
+/* Headers */
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+
+/* Text elements */
+strong {}
+em {}
+cite {}
+abbr {}
+acronym {}
+sup {}
+sub {}
+address {}
+ins {}
+dfn {}
+del {}
+
+/* Paragraphs */
+p {}
+
+/* Unordered lists */
+ul {}
+	ul li {}
+
+/* Ordered lists */
+ol {}
+	ol li {}
+
+/* Defition lists */
+dl {}
+	dt {}
+	dd {}
+
+/* Blockquotes */
+blockquote {}
+	blockquote blockquote {}
+	blockquote em {}
+
+/* Object */
+object {}
+
+/* Code */
+code {}
+pre {}
+pre code {}
+
+/* Tables */
+table {}
+	caption {}
+	tr {}
+	th {}
+	td {}
+
+/* Forms */
+form {
+	@include blueprint-form-layout;
+	@include blueprint-form-borders;
+	@include blueprint-form-sizes; }
+	textarea {}
+	input {}
+	label {}
+	option {}
+
+/* Notes */
+.note {}
+
+/* Warnings/Alerts */
+.warning, .alert {}
+
+/* Errors */
+.error {}
+
+/* Downloads */
+.download {}
+
+/* Alignment */
+.left, .alignleft {}
+.right, .alignright {}
+.center, .aligncenter {}
+.block, .alignnone {}
+.clear {}
+
+/* Normal images */
+img {}
+a img {}
+
+/* WP Smilies */
+img.wp-smiley {}
+
+/* Thumbnails */
+.thumbnail {}
+
+/* WP Captions [caption] */
+.wp-caption {}
+	.wp-caption img {}
+	.wp-caption p {}
+
+/* Gallery [gallery] */
+.gallery {}
+	.gallery img {}
+
+/* Avatars */
+.avatar {}

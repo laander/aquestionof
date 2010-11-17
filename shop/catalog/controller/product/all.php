@@ -111,8 +111,11 @@ class ControllerProductAll extends Controller {
 					$special = $this->currency->format($this->tax->calculate($special, $result['tax_class_id'], $this->config->get('config_tax')));
 				} else {
 					$special = FALSE;
-				}		
+				}
+				
+				// Products info, added the product id to view array
 				$this->data['products'][] = array(
+           			'id'    => $result['product_id'],
            			'name'    => $result['name'],
 					'model'   => $result['model'],
 					'rating'  => $rating,

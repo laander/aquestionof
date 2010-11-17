@@ -1,0 +1,159 @@
+/**
+ * Master (partial)
+ * The default template for any page
+ *
+ * @author Konscript
+ * @version 1.1
+ */
+
+/**
+* Body
+************************************************/
+
+/* Contains everything */
+body {
+	@include blueprint(true);
+	@include blueprint-typography(true);
+	@include blueprint-utilities;
+	@include blueprint-debug;
+	@include blueprint-interaction;
+	overflow: scroll; 
+	color: $color-primary; }
+
+	/* Wrapper for everything inside of the body */
+	#body-container {
+		@include container; }
+
+/**
+* Header
+************************************************/
+
+/* Contains entire header */
+#header-container {
+	@include column($grid-columns, true);
+	width: $grid-totalwidth + $grid-margin; }	
+
+	/* Contains site title and tagline */
+	#header {}
+
+		ul.grid-menu {
+			@include column($grid-columns, true);
+			width: $grid-totalwidth + $grid-margin;
+			margin: 0;
+			padding: 0;
+			
+			li {
+				@include column(6);
+				position: relative;
+				height: 102px;
+				font-weight: bold;
+				background-color: black;
+				margin-bottom: $grid-margin;
+				overflow: hidden;
+				//border-top: 1px solid gray; 
+				-moz-border-radius: 2px;
+				-webkit-border-radius: 2px; }
+			
+				li a {
+					color: #fff;
+					margin: 3px 10px;
+					clear: both;
+					float: left;
+					text-decoration: none;
+					font-weight: normal; }
+			
+			}
+			
+
+		/* Site title */
+		#site-title {
+			margin: 20px 0 15px 0; }
+
+/**
+* Primary Menu
+************************************************/
+
+/* Wrapper for entire menu area */
+#primary-menu {
+	@include column($grid-columns); }
+
+	/* Wrapper for unordered list of menu items */
+	#primary-menu div.menu {}
+
+		/* Menu list. */
+		#primary-menu ul {}
+			#primary-menu li {}
+				#primary-menu li a {}
+			#primary-menu li.current-menu-item {}
+
+/**
+* Containers below the header and navigation
+************************************************/
+
+/* Wrapper for the content and primary/secondary widget sections */
+#container {
+	@include column($grid-columns, true);
+	width: $grid-totalwidth + $grid-margin; }
+
+	/**
+	* Content
+	************************************************/
+	
+	#content {}
+	
+		ul.grid {
+			@include column($grid-columns, true);
+			width: $grid-totalwidth + $grid-margin;
+			margin: 0;
+			padding: 0; 
+			
+			li {
+				@include column(6);
+				position: relative;
+				height: 306px;
+				min-height: 306px;
+				font-weight: bold;
+				background-color: #fff;
+				margin-bottom: $grid-margin;
+				overflow: hidden;
+				//border-top: 1px solid gray;
+				-moz-border-radius: 2px;
+				-webkit-border-radius: 2px; }				
+				
+				li .post-title a,
+				li .product-title {
+					position: absolute;
+					padding: 5px;
+					bottom: 0;
+					left: 0;
+					background-color: black;
+					width: 100%;
+					color: $color-secondary;
+					opacity: 0.7; }
+					
+				li img {
+					margin: auto auto; }
+				
+				//li a, li span { display: none; } 
+			}	
+
+/**
+* Footer
+************************************************/
+
+/* Wrapper for the entire footer */
+#footer-container {
+	@include column($grid-columns); }
+
+	/* Subsidiary widget section */
+	#subsidiary {}
+		#subsidiary .widget {}
+			#subsidiary .widget-inside {}
+				#subsidiary .widget-title {}
+
+	/* Footer section */
+	#footer {}
+
+		/* Footer extra */
+		#footer .copyright {}
+		#footer .credit {}

@@ -165,6 +165,7 @@ class ControllerProductCategory extends Controller {
 					}
 					
 					$this->data['products'][] = array(
+	           			'id'    => $result['product_id'],
             			'name'    => $result['name'],
 						'model'   => $result['model'],
             			'rating'  => $rating,
