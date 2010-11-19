@@ -16,7 +16,7 @@ hybrid_doctype(); ?>
 	<link rel="shortcut icon" type="image/ico" href="<?php echo CHILD_THEME_URI.'/library/images/favicon.ico'; ?>" />
 	<link rel="apple-touch-icon" href="<?php echo IMAGES . '/apple-touch-icon.png'; ?>" />
 
-	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery-1.4.3.min.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery-1.4.4.min.js'; ?>"></script>
 <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>-->
 
 	<?php hybrid_head(); // Hybrid head hook ?>
@@ -24,10 +24,13 @@ hybrid_doctype(); ?>
 
 	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/screen.css'; ?>" rel="stylesheet" media="screen" />
 	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/print.css'; ?>" rel="stylesheet" media="print" />
+	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/masonry.css'; ?>" rel="stylesheet" media="print" />
 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/onhashchange.min.js'; ?>"></script> 
-	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/quicksand/jquery.quicksand.min.js'; ?>"></script>
-	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/quicksand/quicksand_custom.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.masonry.min.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/masonryLoad.js'; ?>"></script>
+
+
 	<link type="text/css" href="<?php // echo CHILD_THEME_URI.'/library/js/quicksand/quicksand.css'; ?>" rel="stylesheet" media="screen" />
 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/screen.js'; ?>"></script>
@@ -50,27 +53,27 @@ hybrid_doctype(); ?>
 				<ul class="grid-menu">
 				
 					<li>
-						<a class="gridButton" href="category/about">ABOUT:</a>
-						<a class="gridButton" href="about/contact">Contact</a>
+						<a class="gridButton" href="category/about" id="cat_about">ABOUT:</a>
+						<a class="gridButton" href="about/contact" id="cat_contact">Contact</a>
 						<a class="gridButton" href="about/social-responsibility">Social Responsibility</a>
 						<a class="gridButton" href="about/who-we-are">Who We Are</a>					
 					</li>
 					
 					<li>
-						<a class="gridButton" href="category/media">MEDIA:</a>
+						<a class="gridButton" href="category/media" id="cat_media">MEDIA:</a>
 						<a class="gridButton" href="media/campaigns">Campaigns</a>
 						<a class="gridButton" href="media/press">Press</a>
 						<a class="gridButton" href="media/social">Social</a>					
 					</li>
 
 					<li>
-						<a class="gridButton" href="category/creatives">CREATIVES:</a>
+						<a class="gridButton" href="category/creatives" id="cat_creatives">CREATIVES:</a>
 						<a class="gridButton" href="creatives/creative-team">Creative Team</a>
 						<a class="gridButton" href="creatives/join-us">Join Us</a>					
 					</li>
 					
 					<li>
-						<a class="gridButton" href="shop/index.php?route=product/all">STORE:</a>
+						<a class="gridButton" href="shop/index.php?route=product/all" id="cat_store">STORE:</a>
 						<a class="gridButton" href="shop/index.php?route=product/category&path=20">Men</a>
 						<a class="gridButton" href="shop/index.php?route=product/category&path=18">Women</a>					
 					</li>

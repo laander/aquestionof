@@ -6,9 +6,9 @@
  * @subpackage Template
  */
 
-get_header(); ?>
+//get_header(); ?>
 	
-<ul class="grid">
+<div id="grid">
 	
 	<?php 	
 	$products_url = 'http://' . $_SERVER['HTTP_HOST'] . '/aquestionof/shop/index.php?route=product/all&type=array'; 
@@ -26,12 +26,22 @@ get_header(); ?>
 	<?php query_posts(array('post_type' => 'post', 'posts_per_page' => -1));			
 	if ( have_posts() ) : while ( have_posts() ) : the_post();
 		
+
+$cat = "";
+$delimiter = "";
+foreach((get_the_category()) as $category) { 
+    $cat .= $delimiter."cat_".$category->category_nicename;
+    $delimiter = " "; 
+} 
+		
+
 		$items[] = 
-			'<li data-id="post-' . get_the_ID() . '" class="grid-item">
+	'		<div class="box col2 ' . $cat . '">
 				<div class="post-title">
 					<a href="' . get_permalink($post->ID) . '">' . get_the_title() . '</a>
-				</div>' .  get_the_post_thumbnail( $post->ID, 'thumbnail' ) . 
-			'</li>';
+				</div>
+				'.  get_the_post_thumbnail( $post->ID, 'thumbnail' ) .'
+			</div>'."\n";
 			
 	endwhile; endif; ?>
 		
@@ -45,6 +55,6 @@ get_header(); ?>
 	}
 	?>
 	
-</ul>
+</div>
 
-<?php get_footer(); ?>
+<?php //get_footer(); ?>

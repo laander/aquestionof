@@ -10,7 +10,9 @@ get_header(); ?>
 
 	<div id="content" class="hfeed content">
 		
-		<ul class="grid"></ul>
+		<div id="grid">
+		<?php include("fetch-all.php");?>
+		</div>
 			
 	</div><!-- .content .hfeed -->
 
