@@ -101,17 +101,17 @@ body {
 	
 	#content {}
 	
-		ul.grid {
+		#grid {
 			@include column($grid-columns, true);
 			width: $grid-totalwidth + $grid-margin;
 			margin: 0;
 			padding: 0; 
 			
-			li {
-				@include column(6);
+			.box {
+				//@include column(6);
 				position: relative;
-				height: 306px;
-				min-height: 306px;
+				//height: 306px;
+				//min-height: 306px;
 				font-weight: bold;
 				background-color: #fff;
 				margin-bottom: $grid-margin;
@@ -120,8 +120,8 @@ body {
 				-moz-border-radius: 2px;
 				-webkit-border-radius: 2px; }				
 				
-				li .post-title a,
-				li .product-title {
+				.box .post-title a,
+				.box .product-title {
 					position: absolute;
 					padding: 5px;
 					bottom: 0;
@@ -131,10 +131,56 @@ body {
 					color: $color-secondary;
 					opacity: 0.7; }
 					
-				li img {
-					margin: auto auto; }
+				.box img {
+					//margin: auto auto; 
+					}
 				
-				//li a, li span { display: none; } 
+			.col1 { @include column(1); }
+			.col1 img { max-width: $grid-columnwidth - $grid-margin; height: auto; }
+			
+			.col2 { @include column(2); }
+			.col2 img { max-width: $grid-columnwidth * 2 - $grid-margin; height: auto; }
+						
+			.col3 { @include column(3); }
+			.col3 img { max-width: $grid-columnwidth * 3 - $grid-margin; height: auto; }
+						
+			.col4 { @include column(4); }
+			.col4 img { max-width: $grid-columnwidth * 4 - $grid-margin; height: auto; }
+						
+			.col5 { @include column(5); }
+			.col5 img { max-width: $grid-columnwidth * 5 - $grid-margin; height: auto; }
+			
+			.col6 { @include column(6); }
+			.col6 img { max-width: $grid-columnwidth * 6 - $grid-margin; height: auto; }
+						
+			.col7 { @include column(7); }
+			.col7 img { max-width: $grid-columnwidth * 7 - $grid-margin; min-height: auto; }
+						
+			.col8 { @include column(8); }
+			.col9 { @include column(9); }			
+			.col10 { @include column(10); }
+			.col11 { @include column(11); }
+			.col12 { @include column(12); }
+
+			.row1 { height: $grid-columnwidth; }
+			.row2 { height: $grid-columnwidth * 2; }
+			.row3 { height: $grid-columnwidth * 3; }
+			.row4 { height: $grid-columnwidth * 4; }
+			.row5 { height: $grid-columnwidth * 5; }
+			.row6 { height: $grid-columnwidth * 6; }
+			.row7 { height: $grid-columnwidth * 7; }
+			.row8 { height: $grid-columnwidth * 8; }
+			.row9 { height: $grid-columnwidth * 9; }
+			.row10 { height: $grid-columnwidth * 10; }
+			.row11 { height: $grid-columnwidth * 11; }
+			.row12 { height: $grid-columnwidth * 12; }																		
+			
+			//.col1 img { max-width: 80px; }
+			//.col2 img { max-width: 180px; }
+			//.col3 img { max-width: 280px; }
+			//.col4 img { max-width: 380px; }
+			//.col5 img { max-width: 480px; }
+							
 			}	
 
 /**

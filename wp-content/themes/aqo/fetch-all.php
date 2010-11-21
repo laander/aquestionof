@@ -7,9 +7,7 @@
  */
 
 //get_header(); ?>
-	
-<div id="grid">
-	
+		
 	<?php 	
 	$products_url = 'http://' . $_SERVER['HTTP_HOST'] . '/aquestionof/shop/index.php?route=product/all&type=array'; 
 	
@@ -33,14 +31,19 @@ foreach((get_the_category()) as $category) {
     $cat .= $delimiter."cat_".$category->category_nicename;
     $delimiter = " "; 
 } 
-		
-
-		$items[] = 
-	'		<div class="box col2 ' . $cat . '">
+	
+	$custom_fields = get_post_custom($post->ID);
+	if (isset($custom_fields['width'])) { $item_width = $custom_fields['width'][0]; }
+	else { $item_width = 5; }
+	if (isset($custom_fields['height'])) { $item_height = $custom_fields['height'][0]; }
+	else { $item_height = 6; }
+	
+		$items[] = '
+			<div id="post-' . $post->ID . '" class="box col' . $item_width . ' row' . $item_height . ' ' . $cat . '">
 				<div class="post-title">
 					<a href="' . get_permalink($post->ID) . '">' . get_the_title() . '</a>
 				</div>
-				'.  get_the_post_thumbnail( $post->ID, 'thumbnail' ) .'
+				'.  get_the_post_thumbnail( $post->ID, 'large' ) .'
 			</div>'."\n";
 			
 	endwhile; endif; ?>
@@ -55,6 +58,4 @@ foreach((get_the_category()) as $category) {
 	}
 	?>
 	
-</div>
-
 <?php //get_footer(); ?>

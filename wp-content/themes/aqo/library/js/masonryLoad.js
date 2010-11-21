@@ -84,7 +84,7 @@ jQuery(document).ready(function() {
 function doMasonry(){  
 	var route = getRoute();
 		jQuery('#grid').masonry({
-		  columnWidth: 100, 
+		  columnWidth: 40, 
 		  animate: true,
 		  itemSelector: '.box', 
 		  animationOptions: {

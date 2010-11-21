@@ -13,6 +13,7 @@
 // Layout
 $grid-columns: 24;
 $grid-totalwidth: 960px;
+$grid-columnwidth: $grid-totalwidth / $grid-columns;
 $grid-margin: 10px;
 $grid-spacing: 40px;
 $grid-spacing-small: 18px;
