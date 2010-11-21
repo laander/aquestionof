@@ -1626,7 +1626,7 @@ ul.grid-menu li a {
 #grid .box {
   position: relative;
   font-weight: bold;
-  background-color: #fff;
+  background-color: gray;
   margin-bottom: 10px;
   overflow: hidden;
   -moz-border-radius: 2px;
@@ -1655,11 +1655,6 @@ ul.grid-menu li a {
 * html #grid .col1 {
   overflow-x: hidden;
 }
-/* line 139, ../src/partials/_master.scss */
-#grid .col1 img {
-  max-width: 30px;
-  height: auto;
-}
 /* line 141, ../src/partials/_master.scss */
 #grid .col2 {
   display: inline;
@@ -1670,11 +1665,6 @@ ul.grid-menu li a {
 /* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html #grid .col2 {
   overflow-x: hidden;
-}
-/* line 142, ../src/partials/_master.scss */
-#grid .col2 img {
-  max-width: 70px;
-  height: auto;
 }
 /* line 144, ../src/partials/_master.scss */
 #grid .col3 {
@@ -1687,11 +1677,6 @@ ul.grid-menu li a {
 * html #grid .col3 {
   overflow-x: hidden;
 }
-/* line 145, ../src/partials/_master.scss */
-#grid .col3 img {
-  max-width: 110px;
-  height: auto;
-}
 /* line 147, ../src/partials/_master.scss */
 #grid .col4 {
   display: inline;
@@ -1702,11 +1687,6 @@ ul.grid-menu li a {
 /* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html #grid .col4 {
   overflow-x: hidden;
-}
-/* line 148, ../src/partials/_master.scss */
-#grid .col4 img {
-  max-width: 150px;
-  height: auto;
 }
 /* line 150, ../src/partials/_master.scss */
 #grid .col5 {
@@ -1719,11 +1699,6 @@ ul.grid-menu li a {
 * html #grid .col5 {
   overflow-x: hidden;
 }
-/* line 151, ../src/partials/_master.scss */
-#grid .col5 img {
-  max-width: 190px;
-  height: auto;
-}
 /* line 153, ../src/partials/_master.scss */
 #grid .col6 {
   display: inline;
@@ -1735,11 +1710,6 @@ ul.grid-menu li a {
 * html #grid .col6 {
   overflow-x: hidden;
 }
-/* line 154, ../src/partials/_master.scss */
-#grid .col6 img {
-  max-width: 230px;
-  height: auto;
-}
 /* line 156, ../src/partials/_master.scss */
 #grid .col7 {
   display: inline;
@@ -1750,11 +1720,6 @@ ul.grid-menu li a {
 /* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html #grid .col7 {
   overflow-x: hidden;
-}
-/* line 157, ../src/partials/_master.scss */
-#grid .col7 img {
-  max-width: 270px;
-  min-height: auto;
 }
 /* line 159, ../src/partials/_master.scss */
 #grid .col8 {

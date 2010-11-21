@@ -1,6 +1,6 @@
 var $allElm = "";
 $(document).ready(function() {	
-	$allElm = $('#grid div'); //set allElm variable
+	$allElm = $('#grid div.box'); //set allElm variable
 	
 	/************* quicksand code to be reused ******************/	
 	// Check if site is accessed correctly through the hashes (for index pages). If not, redirect to home and set hash route.	
@@ -14,7 +14,6 @@ $(document).ready(function() {
 		}		
 				
 		jQuery('a.gridButton').click(function(){
-			alert("masonry!");
 			var category = $(this).attr("href");
 			
 			//category - form: category/about
@@ -61,11 +60,9 @@ function prepareMasonry(){
 	var category = getRoute();	
 	//jQuery("#status").html("id: "+category+"<br>");
 	//jQuery("#status").append("All: "+$allElm.size()+"<br>");
-	
-	alert("prepare "+category);
-	 			
+		 			
 	//previous elements
-	var $previousElm = jQuery('#grid div');  
+	var $previousElm = jQuery('#grid div.box');  
 	//jQuery("#status").append("Prev: "+$previousElm.size()+"<br>");
 	
 	
@@ -83,7 +80,7 @@ function prepareMasonry(){
 		//jQuery("#status").append("new: "+$newElm.size()+"<br>");
 		
 		//make changes: remove elements from previous view 
-		jQuery('#grid div').filter($removeElm).fadeOut().remove();
+		jQuery('#grid div.box').filter($removeElm).fadeOut().remove();
 	}else{
 		//get all elements not in previous view
 		var $newElm = $allElm.not($previousElm);
@@ -92,14 +89,15 @@ function prepareMasonry(){
 	
 	//make changes!
 	jQuery('#grid').append($newElm);
-	jQuery('#grid div').fadeIn("slow");
+	jQuery('#grid div.box').fadeIn("slow");
+	
 	bindMasonry();
 }
 
 function bindMasonry(){	
 
 	jQuery('#grid').masonry({
-		  columnWidth: 100, 
+		  columnWidth: 40, 
 		  animate: true,
 		  itemSelector: '.box', 
 		  animationOptions: {
