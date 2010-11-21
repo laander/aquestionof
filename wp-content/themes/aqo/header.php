@@ -17,8 +17,6 @@ hybrid_doctype(); ?>
 	<link rel="apple-touch-icon" href="<?php echo IMAGES . '/apple-touch-icon.png'; ?>" />
 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery-1.4.4.min.js'; ?>"></script>
-<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>-->
-
 	<?php hybrid_head(); // Hybrid head hook ?>
 	<?php wp_head(); // WP head hook ?>
 
@@ -42,8 +40,7 @@ hybrid_doctype(); ?>
 	<div id="body-container">
 
 		<div id="header-container">
-			<div id="header">
-				
+			<div id="header">				
 				<div id="site-title">
 					<a class="gridButton" href="fetch-all">
 						<img src="<?php echo CHILD_THEME_URI . '/library/images/logo.png'; ?>" alt="A Question Of" />
@@ -53,21 +50,21 @@ hybrid_doctype(); ?>
 				<ul class="grid-menu">
 				
 					<li>
-						<a class="gridButton" href="category/about" id="cat_about">ABOUT:</a>
-						<a class="gridButton" href="about/contact" id="cat_contact">Contact</a>
+						<a class="gridButton" href="category/about">ABOUT:</a>
+						<a class="gridButton" href="about/contact">Contact</a>
 						<a class="gridButton" href="about/social-responsibility">Social Responsibility</a>
 						<a class="gridButton" href="about/who-we-are">Who We Are</a>					
 					</li>
 					
 					<li>
-						<a class="gridButton" href="category/media" id="cat_media">MEDIA:</a>
+						<a class="gridButton" href="category/media">MEDIA:</a>
 						<a class="gridButton" href="media/campaigns">Campaigns</a>
 						<a class="gridButton" href="media/press">Press</a>
 						<a class="gridButton" href="media/social">Social</a>					
 					</li>
 
 					<li>
-						<a class="gridButton" href="category/creatives" id="cat_creatives">CREATIVES:</a>
+						<a class="gridButton" href="category/creatives">CREATIVES:</a>
 						<a class="gridButton" href="creatives/creative-team">Creative Team</a>
 						<a class="gridButton" href="creatives/join-us">Join Us</a>					
 					</li>
