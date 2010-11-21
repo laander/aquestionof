@@ -83,7 +83,6 @@ jQuery(document).ready(function() {
   	
 function doMasonry(){  
 	var route = getRoute();
-	$.get( route, function(data) {
 		jQuery('#grid').masonry({
 		  columnWidth: 100, 
 		  animate: true,
@@ -94,7 +93,6 @@ function doMasonry(){
 			    queue: false
 		  }    		  
 		});  
-	});
 }
  
 //Call to set a new route hash value
