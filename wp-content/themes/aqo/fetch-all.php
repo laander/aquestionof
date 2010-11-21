@@ -9,7 +9,7 @@
 //get_header(); ?>
 		
 	<?php 	
-	//$products_url = 'http://' . $_SERVER['HTTP_HOST'] . '/konscript/aquestionof/shop/index.php?route=product/all&type=array'; 
+	$products_url = 'http://' . $_SERVER['HTTP_HOST'] . '/aquestionof/shop/index.php?route=product/all&type=array'; 
 	
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $products_url); 

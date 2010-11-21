@@ -14,7 +14,6 @@ $(document).ready(function() {
 		}		
 				
 		jQuery('a.gridButton').click(function(){
-			alert("masonry!");
 			var category = $(this).attr("href");
 			
 			//category - form: category/about
@@ -61,9 +60,7 @@ function prepareMasonry(){
 	var category = getRoute();	
 	//jQuery("#status").html("id: "+category+"<br>");
 	//jQuery("#status").append("All: "+$allElm.size()+"<br>");
-	
-	alert("prepare "+category);
-	 			
+		 			
 	//previous elements
 	var $previousElm = jQuery('#grid div.box');  
 	//jQuery("#status").append("Prev: "+$previousElm.size()+"<br>");

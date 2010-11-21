@@ -7,7 +7,7 @@ foreach($products as $index => $product){
 	$item = '
 	<div id="product-' .$product["id"]. '" class="box col6 row8">
 		<a href="'.$product["href"].'">
-			<img src="'.$product["thumb"].'" width="230" height="306" alt="" />
+			<img src="'.$product["thumb"].'" width="230" height="320" alt="" />
 			<div class="product-title">'.$product["name"].'</div>
 		</a>
 		<div>'. $product["price"] .'</div>
