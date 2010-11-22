@@ -48,25 +48,25 @@ hybrid_doctype(); ?>
 				</div>
 			
 				<ul class="grid-menu">
-				
+					
 					<li>
 						<a class="gridButton" href="category/about">ABOUT:</a>
-						<a class="gridButton" href="about/contact">Contact</a>
-						<a class="gridButton" href="about/social-responsibility">Social Responsibility</a>
-						<a class="gridButton" href="about/who-we-are">Who We Are</a>					
+						<a class="gridButton" href="category/about/contact">Contact</a>
+						<a class="gridButton" href="category/about/social-responsibility">Social Responsibility</a>
+						<a class="gridButton" href="category/about/who-we-are">Who We Are</a>					
 					</li>
 					
 					<li>
 						<a class="gridButton" href="category/media">MEDIA:</a>
-						<a class="gridButton" href="media/campaigns">Campaigns</a>
-						<a class="gridButton" href="media/press">Press</a>
-						<a class="gridButton" href="media/social">Social</a>					
+						<a class="gridButton" href="category/media/campaigns">Campaigns</a>
+						<a class="gridButton" href="category/media/press">Press</a>
+						<a class="gridButton" href="category/media/social">Social</a>					
 					</li>
 
 					<li>
 						<a class="gridButton" href="category/creatives">CREATIVES:</a>
-						<a class="gridButton" href="creatives/creative-team">Creative Team</a>
-						<a class="gridButton" href="creatives/join-us">Join Us</a>					
+						<a class="gridButton" href="category/creatives/creative-team">Creative Team</a>
+						<a class="gridButton" href="category/creatives/join-us">Join Us</a>					
 					</li>
 					
 					<li>

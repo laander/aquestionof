@@ -6,35 +6,47 @@ Requires at least: 2.8
 Tested up to: 3.0
 Stable tag: trunk
 
-Allows you to regenerate all thumbnails after changing the thumbnail sizes.
+Allows you to regenerate your thumbnails after changing the thumbnail sizes.
 
 == Description ==
 
-Regenerate Thumbnails allows you to regenerate the thumbnails for all of your image attachments. This is very handy if you've changed any of your thumbnail dimensions (via Settings -> Media) after previously uploading images.
+Regenerate Thumbnails allows you to regenerate the thumbnails for your image attachments. This is very handy if you've changed any of your thumbnail dimensions (via Settings -> Media) after previously uploading images or have changed to a theme with different featured post image dimensions.
+
+You can either regenerate the thumbnails for all image uploads, individual image uploads, or specific multiple image uploads (WordPress 3.1+ only).
+
+See the [screenshots tab](http://wordpress.org/extend/plugins/regenerate-thumbnails/screenshots/) for more details.
 
 == Installation ==
 
-###Updgrading From A Previous Version###
-
-To upgrade from a previous version of this plugin, delete the entire folder and files from the previous version of the plugin and then follow the installation instructions below.
-
-###Installing The Plugin###
-
-Extract all files from the ZIP file, making sure to keep the file structure intact, and then upload it to `/wp-content/plugins/`.
-
-Then just visit your admin area and activate the plugin.
-
-###Plugin Usage###
-
-Visit Tools -> Regen. Thumbnails to get started.
-
-**See Also:** ["Installing Plugins" article on the WP Codex](http://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
+1. Go to your admin area and select Plugins -> Add new from the menu.
+2. Search for "Regenerate Thumbnails".
+3. Click install.
+4. Click activate.
 
 == Screenshots ==
 
-1. The plugin at work.
+1. The plugin at work regenerating thumbnails
+2. You can resize single images by hovering over their row in the Media Library
+2. You can resize specific multiples images using the checkboxes and the "Bulk Actions" dropdown (WordPress 3.1+ only)
 
 == ChangeLog ==
+
+= Version 2.1.1 =
+
+* Clean up the wording a bit to better match the new features and just be easier to understand.
+* Updated screenshots.
+
+= Version 2.1.0 =
+
+Lots of new features!
+
+* Thanks to a lot of jQuery help from [Boris Schapira](http://borisschapira.com/), a failed image regeneration will no longer stop the whole process.
+* The results of each image regeneration is now outputted. You can easily see which images were successfully regenerated and which failed. Was inspired by a concept by Boris.
+* There is now a button on the regeneration page that will allow you to abort resizing images for any reason. Based on code by Boris.
+* You can now regenerate single images from the Media page. The link to do so will show up in the actions list when you hover over the row.
+* You can now bulk regenerate multiple from the Media page. Check the boxes and then select "Regenerate Thumbnails" form the "Bulk Actions" dropdown. WordPress 3.1+ only.
+* The total time that the regeneration process took is now displayed in the final status message.
+* jQuery UI Progressbar version upgraded.
 
 = Version 2.0.3 =
 

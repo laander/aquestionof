@@ -109,9 +109,9 @@ body {
 			
 			.box {
 				//@include column(6);
-				position: relative;
 				//height: 306px;
 				//min-height: 306px;
+				position: absolute;				
 				font-weight: bold;
 				background-color: gray;
 				margin-bottom: $grid-margin;
