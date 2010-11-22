@@ -2,7 +2,7 @@ var base = $("base").attr("href");
 var $allElm = "";
 $(document).ready(function() {
 	$allElm = $('#grid div.box'); // set allElm variable
-	
+	$allElm.hide();
 	
 	//if the grid is present do masonry
 	if($allElm.length != 0){		
@@ -27,7 +27,9 @@ $(document).ready(function() {
 		// do masonry on hash change
 		$(window).hashchange(function() {
 			prepareMasonry();
-		});		
+		});
+
+	// if grid is not present			
 	}else{		
 		//change hash on click
 		jQuery('a.gridButton').click(function() {
