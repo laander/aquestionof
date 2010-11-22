@@ -42,7 +42,7 @@ hybrid_doctype(); ?>
 		<div id="header-container">
 			<div id="header">				
 				<div id="site-title">
-					<a class="gridButton" href="fetch-all">
+					<a class="gridButton" href="all">
 						<img src="<?php echo CHILD_THEME_URI . '/library/images/logo.png'; ?>" alt="A Question Of" />
 					</a>
 				</div>

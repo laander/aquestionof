@@ -9,7 +9,7 @@ $(document).ready(function() {
 		
 		// Initialize splash screen by getting all items - filter if hash is set
 		if (getRoute() == '') {
-			setRoute('fetch-all');
+			setRoute('all');
 		} else {			
 			prepareMasonry();
 		}
@@ -53,7 +53,7 @@ function prepareMasonry() {
 	var $previousElm = jQuery('#grid div.box');
 	// jQuery("#status").append("Prev: "+$previousElm.size()+"<br>");
 
-	if (category != "fetch-all") {
+	if (category != "all") {
 		// remove elements which are not chosen from previous
 		var $removeElm = $previousElm.not("div.box." + category);
 		// jQuery("#status").append("Remove: "+$removeElm.size()+"<br>");
@@ -76,7 +76,7 @@ function prepareMasonry() {
 			counter++;
 			// make changes!
 			if ($elmToBeRemoved.length == counter) {
-				//jQuery('#grid').append($newElm);
+				jQuery('#grid').append($newElm);
 				
 				initiateMasonry($newElm);				
 				jQuery('#grid div.box').fadeIn("slow");
@@ -87,7 +87,7 @@ function prepareMasonry() {
 	} else {
 		var $newElm = $allElm.not($previousElm);
 		// make changes!
-		//jQuery('#grid').append($newElm);
+		jQuery('#grid').append($newElm);
 		jQuery('#grid div.box').fadeIn("slow");
 		initiateMasonry($newElm);
 	}

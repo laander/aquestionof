@@ -4,4 +4,8 @@
 .externalToolBuilders
 .settings
 .htaccess
+<<<<<<< HEAD
 wp-config.php
+=======
+wp-config.php
+>>>>>>> laander/master

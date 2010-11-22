@@ -31,7 +31,13 @@ get_header(); ?>
 		$post_cat = "";
 		$delimiter = "";
 		foreach($post_categories as $category) { 
-		    $post_cat .= $delimiter . "category_" . $category->category_nicename;
+
+			$post_cat .= $delimiter . "category-";
+			if ($category->parent != 0) {
+				$parent_category = get_category( $category->parent );
+				$post_cat .= $parent_category->category_nicename . "-";
+			}
+		    $post_cat .= $category->category_nicename;
 		    $delimiter = " ";
 		} 
 		
