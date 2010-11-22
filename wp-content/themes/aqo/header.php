@@ -10,7 +10,7 @@ hybrid_doctype(); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes( 'xhtml' ); ?>>
 <head profile="<?php hybrid_profile_uri(); ?>">
 	
-	<base href="<?php echo get_bloginfo( 'wpurl' ); ?>" />
+	<base href="<?php echo get_bloginfo( 'wpurl' ); ?>/" />
 	<title><?php custom_document_title(); ?></title>
 	<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<meta name="viewport" content="width=960,maximum-scale=1.0" />
