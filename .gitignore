@@ -3,4 +3,5 @@
 .project
 .externalToolBuilders
 .settings
+.htaccess
 wp-config.php
