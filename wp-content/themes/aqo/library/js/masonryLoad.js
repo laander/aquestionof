@@ -42,6 +42,7 @@ $(document).ready(function() {
 });
 
 function prepareMasonry() {
+	$("#loader").fadeIn("fast");
 	var category = getRoute();
 	// $("#status").html("id: "+category+"<br>");
 	// $("#status").append("All: "+$allElm.size()+"<br>");
@@ -114,7 +115,7 @@ function goToTopDir(){
 }
 
 //do masonry effect
-function doMasonry() {
+function doMasonry() {	
 	$('#grid').masonry({
 		columnWidth : 40,
 		animate : true,
@@ -124,7 +125,14 @@ function doMasonry() {
 			easing : 'swing',
 			queue : false
 		}
+	}, function(){
+		$("#loader").fadeOut("fast");
 	});	
+	
+	//if there are no boxes we wont get a callback above
+	if($('#grid div.box').size()==0){
+		$("#loader").fadeOut("fast");
+	}
 }
 
 // Call to set a new route hash value

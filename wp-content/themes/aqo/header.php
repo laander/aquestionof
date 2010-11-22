@@ -45,6 +45,7 @@ hybrid_doctype(); ?>
 					<a class="gridButton" href="all">
 						<img src="<?php echo CHILD_THEME_URI . '/library/images/logo.png'; ?>" alt="A Question Of" />
 					</a>
+					<img id="loader" style="display:none;" src="<?php echo CHILD_THEME_URI . '/library/images/loader.gif'; ?>"/>
 				</div>
 				<ul class="grid-menu">
 					
