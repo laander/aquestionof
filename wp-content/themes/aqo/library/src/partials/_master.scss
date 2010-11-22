@@ -111,7 +111,8 @@ body {
 				//@include column(6);
 				//height: 306px;
 				//min-height: 306px;
-				position: absolute;				
+				position: relative;
+				float: left;		
 				font-weight: bold;
 				background-color: #fff;
 				//margin-bottom: $grid-margin;
