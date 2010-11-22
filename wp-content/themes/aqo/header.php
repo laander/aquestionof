@@ -9,7 +9,7 @@
 hybrid_doctype(); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes( 'xhtml' ); ?>>
 <head profile="<?php hybrid_profile_uri(); ?>">
-
+	<base href="http://localhost/konscript/aquestionof/" />
 	<title><?php custom_document_title(); ?></title>
 	<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo('charset'); ?>" />
 	<meta name="viewport" content="width=960,maximum-scale=1.0" />
@@ -81,4 +81,3 @@ hybrid_doctype(); ?>
 		</div><!-- #header-container -->
 		
 		<div id="container">
-	

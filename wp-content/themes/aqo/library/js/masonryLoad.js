@@ -1,12 +1,12 @@
 var $allElm = "";
 $(document).ready(function() {
-	initiateMasonry();
 	$allElm = $('#grid div.box'); // set allElm variable
-
-	// Check if site is accessed correctly through the hashes (for index pages).
-	// If not, redirect to home and set hash route.
-	if ($('body.home').length != 0) {
-		
+	
+	//if the grid is present do masonry
+	if($allElm.length != 0){		
+		// Check if site is accessed correctly through the hashes (for index pages). If not, redirect to home and set hash route.		
+		if ($('body.home').length == 0) { goToTopDir();}
+			
 		// Initialize splash screen by getting all items - filter if hash is set
 		if (getRoute() == '') {
 			setRoute('all');
@@ -14,6 +14,7 @@ $(document).ready(function() {
 			prepareMasonry();
 		}
 
+		//change hash on click
 		jQuery('a.gridButton').click(function() {
 			var category = $(this).attr("href");	
 			category = category.replace(/\//g,"-");
@@ -24,23 +25,7 @@ $(document).ready(function() {
 		// Bind to route/url hash change
 		$(window).hashchange(function() {
 			prepareMasonry();
-		});
-		
-	//if the client is located in a subdirectory we want to redirect him to the same path but with hashes	
-	} else {
-		// Set the relative home url variable for the site (front page)
-		var path = window.location.pathname;		
-		var posOfSlash = path.length-1;
-		//remove the very last character if it is a slash (/)
-		if(path.charAt(posOfSlash)=="/"){ path = path.substr(0,posOfSlash);}
-		
-		//find the last directory
-		posOfLastSlash = path.lastIndexOf('/');
-		var lastDir = path.substr(posOfLastSlash+1);
-		
-		//make new path with hashes
-		var pathHashed = path.substr(0, posOfLastSlash+1)+"#"+lastDir;		
-		window.location.assign(pathHashed);
+		});		
 	}
 });
 
@@ -76,9 +61,8 @@ function prepareMasonry() {
 			counter++;
 			// make changes!
 			if ($elmToBeRemoved.length == counter) {
-				jQuery('#grid').append($newElm);
-				
-				initiateMasonry($newElm);				
+				jQuery('#grid').append($newElm);				
+				doMasonry($newElm);				
 				jQuery('#grid div.box').fadeIn("slow");
 			}
 		});
@@ -87,13 +71,31 @@ function prepareMasonry() {
 	} else {
 		var $newElm = $allElm.not($previousElm);
 		// make changes!
-		jQuery('#grid').append($newElm);
+		jQuery('#grid').append($newElm);		
+		doMasonry($newElm);
 		jQuery('#grid div.box').fadeIn("slow");
-		initiateMasonry($newElm);
 	}
 }
 
-function initiateMasonry() {
+//go one level op until we are at "home" 
+function goToTopDir(){
+	// Set the relative home url variable for the site (front page)
+	var path = window.location.pathname;		
+	var posOfSlash = path.length-1;
+	//remove the very last character if it is a slash (/)
+	if(path.charAt(posOfSlash)=="/"){ path = path.substr(0,posOfSlash);}
+	
+	//find the last directory
+	posOfLastSlash = path.lastIndexOf('/');
+	var lastDir = path.substr(posOfLastSlash+1);
+	
+	//make new path with hashes
+	var pathHashed = path.substr(0, posOfLastSlash+1)+"#"+lastDir;		
+	window.location.assign(pathHashed);		
+}
+
+//do masonry effect
+function doMasonry() {
 	jQuery('#grid').masonry({
 		columnWidth : 40,
 		animate : true,
@@ -104,20 +106,6 @@ function initiateMasonry() {
 			queue : false
 		}
 	});	
-}
-
-function appendMasonry($boxes){
-	  jQuery('#grid')
-	    // append new elements
-	    .append( $boxes )
-	    // arrange new elements
-	    .masonry( { appendedContent: $boxes } ,
-	      // using a callback to style new elements
-	      function() { 
-	        $(this).css({background: '#222', color: '#EEE' });
-	      }    
-	    );
-	
 }
 
 // Call to set a new route hash value
