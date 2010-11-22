@@ -46,7 +46,6 @@ hybrid_doctype(); ?>
 						<img src="<?php echo CHILD_THEME_URI . '/library/images/logo.png'; ?>" alt="A Question Of" />
 					</a>
 				</div>
-			
 				<ul class="grid-menu">
 					
 					<li>

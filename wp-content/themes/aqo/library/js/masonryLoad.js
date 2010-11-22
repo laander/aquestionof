@@ -1,8 +1,7 @@
 var base = $("base").attr("href");
-var $allElm = "";
 $(document).ready(function() {
 	$allElm = $('#grid div.box'); // set allElm variable
-	
+	$allElm.hide(); //hide prelimenary	
 	
 	//if the grid is present do masonry
 	if($allElm.length != 0){		
@@ -17,7 +16,7 @@ $(document).ready(function() {
 		}
 		
 		//change hash on click
-		jQuery('a.gridButton').click(function() {
+		$('a.gridButton').click(function() {
 			var category = $(this).attr("href");	
 			category = category.replace(/\//g,"-");
 			setRoute(category);
@@ -28,9 +27,11 @@ $(document).ready(function() {
 		$(window).hashchange(function() {
 			prepareMasonry();
 		});		
+		
+	//the grid is not present	
 	}else{		
 		//change hash on click
-		jQuery('a.gridButton').click(function() {
+		$('a.gridButton').click(function() {
 			var category = $(this).attr("href");
 			category = category.replace(/\//g,"-");		
 			var url = base + "#"+category;			
@@ -42,53 +43,58 @@ $(document).ready(function() {
 
 function prepareMasonry() {
 	var category = getRoute();
-	// jQuery("#status").html("id: "+category+"<br>");
-	// jQuery("#status").append("All: "+$allElm.size()+"<br>");
+	// $("#status").html("id: "+category+"<br>");
+	// $("#status").append("All: "+$allElm.size()+"<br>");
 
 	// previous elements
-	var $previousElm = jQuery('#grid div.box');
-	// jQuery("#status").append("Prev: "+$previousElm.size()+"<br>");
+	var $previousElm = $('#grid div.box');
+	// $("#status").append("Prev: "+$previousElm.size()+"<br>");
 
 	if (category != "all") {
 		// remove elements which are not chosen from previous
 		var $removeElm = $previousElm.not("div.box." + category);
-		// jQuery("#status").append("Remove: "+$removeElm.size()+"<br>");
+		// $("#status").append("Remove: "+$removeElm.size()+"<br>");
 
 		// previous elements which are to be kept
 		var $keptElm = $previousElm.filter("div.box." + category);
-		// jQuery("#status").append("Kept: "+$keptElm.size()+"<br>");
+		// $("#status").append("Kept: "+$keptElm.size()+"<br>");
 
 		// get new elements - select all elm that have the corresponding
 		// category and deselect all that are already there (from previous)
 		var $newElm = $allElm.filter("div.box." + category).not($keptElm);
-		// jQuery("#status").append("new: "+$newElm.size()+"<br>");
+		// $("#status").append("new: "+$newElm.size()+"<br>");
 
 		// make changes: remove elements from previous view
 		var counter = 0;
-		var $elmToBeRemoved = jQuery('#grid div.box').filter($removeElm);
+		var $elmToBeRemoved = $('#grid div.box').filter($removeElm);					
+	// get all elements not in previous view
+	}else{
+		$elmToBeRemoved = $([]); //create empty jQuery object
+		var $newElm = $allElm.not($previousElm);
+	}	
+		
+	//check if there are any elements to remove
+	if($elmToBeRemoved.size()>0){		
 		$elmToBeRemoved.fadeOut("slow", function() {
-			jQuery(this).remove();
+			$(this).remove();
 
 			counter++;
 			// make changes!
 			if ($elmToBeRemoved.length == counter) {
-				jQuery('#grid').append($newElm);				
+				$('#grid').append($newElm);				
 				doMasonry($newElm);				
-				jQuery('#grid div.box').fadeIn("slow");
+				$('#grid div.box').fadeIn("slow");
 			}
-		});
-		
-	// get all elements not in previous view
-	} else {
-		var $newElm = $allElm.not($previousElm);
+		});		
+	}else{		
 		// make changes!
-		jQuery('#grid').append($newElm);		
+		$('#grid').append($newElm);		
 		doMasonry($newElm);
-		jQuery('#grid div.box').fadeIn("slow");
+		$('#grid div.box').fadeIn("slow");		
 	}
 }
 
-//go one level op until we are at "home" 
+//use hashes instead of static pages
 function goToTopDir(){
 	// get the full path
 	var path = window.location.pathname;		
@@ -109,7 +115,7 @@ function goToTopDir(){
 
 //do masonry effect
 function doMasonry() {
-	jQuery('#grid').masonry({
+	$('#grid').masonry({
 		columnWidth : 40,
 		animate : true,
 		itemSelector : '.box',
