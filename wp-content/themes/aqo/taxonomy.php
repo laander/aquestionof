@@ -11,4 +11,14 @@
  * @subpackage Template
  */
 
-include('fetch-taxonomy.php'); ?>
+get_header(); ?>
+
+	<div id="content" class="hfeed content">	
+
+		<div id="grid">
+			<?php include('fetch-taxonomy.php'); ?>
+		</div>
+			
+	</div><!-- .content .hfeed -->
+
+<?php get_footer(); ?>

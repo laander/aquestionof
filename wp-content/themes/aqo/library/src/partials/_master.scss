@@ -113,8 +113,8 @@ body {
 				//min-height: 306px;
 				position: absolute;				
 				font-weight: bold;
-				background-color: gray;
-				margin-bottom: $grid-margin;
+				background-color: #fff;
+				//margin-bottom: $grid-margin;
 				overflow: hidden;
 				//border-top: 1px solid gray;
 				-moz-border-radius: 2px;
@@ -135,32 +135,32 @@ body {
 					//margin: auto auto; 
 					}
 				
-			.col1 { @include column(1); }
+			.col1 { width: $grid-columnwidth * 1; }
 			//.col1 img { max-width: $grid-columnwidth - $grid-margin; height: auto; }
 			
-			.col2 { @include column(2); }
+			.col2 { width: $grid-columnwidth * 2; }
 			//.col2 img { max-width: $grid-columnwidth * 2 - $grid-margin; height: auto; }
 						
-			.col3 { @include column(3); }
+			.col3 { width: $grid-columnwidth * 3; }
 			//.col3 img { max-width: $grid-columnwidth * 3 - $grid-margin; height: auto; }
 						
-			.col4 { @include column(4); }
+			.col4 { width: $grid-columnwidth * 4; }
 			//.col4 img { max-width: $grid-columnwidth * 4 - $grid-margin; height: auto; }
 						
-			.col5 { @include column(5); }
+			.col5 { width: $grid-columnwidth * 5; }
 			//.col5 img { max-width: $grid-columnwidth * 5 - $grid-margin; height: auto; }
 			
-			.col6 { @include column(6); }
+			.col6 { width: $grid-columnwidth * 6; }
 			//.col6 img { max-width: $grid-columnwidth * 6 - $grid-margin; height: auto; }
 						
-			.col7 { @include column(7); }
+			.col7 { width: $grid-columnwidth * 7; }
 			//.col7 img { max-width: $grid-columnwidth * 7 - $grid-margin; min-height: auto; }
 						
-			.col8 { @include column(8); }
-			.col9 { @include column(9); }			
-			.col10 { @include column(10); }
-			.col11 { @include column(11); }
-			.col12 { @include column(12); }
+			.col8 { width: $grid-columnwidth * 8; }
+			.col9 { width: $grid-columnwidth * 9; }			
+			.col10 { width: $grid-columnwidth * 10; }
+			.col11 { width: $grid-columnwidth * 11; }
+			.col12 { width: $grid-columnwidth * 12; }
 
 			.row1 { height: $grid-columnwidth; }
 			.row2 { height: $grid-columnwidth * 2; }
