@@ -79,22 +79,35 @@ function prepareMasonry(){
 		var $newElm = $allElm.filter("div.box."+category).not($keptElm);  			
 		//jQuery("#status").append("new: "+$newElm.size()+"<br>");	
 		
-		//make changes: remove elements from previous view 
-		jQuery('#grid div.box').filter($removeElm).fadeOut().remove();
+		
+		//make changes: remove elements from previous view
+		var $elmToBeRemoved = jQuery('#grid div.box').filter($removeElm);	
+		var counter = 0;
+		$elmToBeRemoved.fadeOut("slow", function() { 
+			counter++;
+			jQuery(this).remove();			
+			
+			//make changes!
+			if($elmToBeRemoved.length==counter){
+				jQuery('#grid').append($newElm);
+				jQuery('#grid div.box').fadeIn("slow");
+				bindMasonry();			
+			}
+			
+		});
 	}else{
 		//get all elements not in previous view
 		var $newElm = $allElm.not($previousElm);
 		//jQuery("#status").append("new: "+$newElm.size()+"<br>");
+		
+		//make changes!
+		jQuery('#grid').append($newElm);
+		jQuery('#grid div.box').fadeIn("slow");
+		bindMasonry();		
 	}
-	
-	//make changes!
-	jQuery('#grid').append($newElm);
-	jQuery('#grid div.box').fadeIn("slow");
-	bindMasonry();
 }
 
 function bindMasonry(){	
-
 	jQuery('#grid').masonry({
 		  columnWidth: 40, 
 		  animate: true,
