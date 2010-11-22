@@ -51,10 +51,12 @@
 		// Add the current post to items array
 		$items[] = '
 			<div id="post-' . $post->ID . '" class="box col' . $item_width . ' row' . $item_height . ' ' . $post_cat . '">
-				<div class="post-title">
-					<a href="' . get_permalink($post->ID) . '">' . get_the_title() . '</a>
-				</div>
-				'.  get_the_post_thumbnail( $post->ID, 'large' ) .'
+				<a href="' . get_permalink($post->ID) . '">
+					<div class="post-title">
+						' . get_the_title() . '
+					</div>
+					'.  get_the_post_thumbnail( $post->ID, 'large' ) .'
+				</a>
 			</div>' . "\n";
 			
 	endwhile; endif;

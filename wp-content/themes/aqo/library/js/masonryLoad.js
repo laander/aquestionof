@@ -8,18 +8,24 @@ var loadingIcon = "#loader";
 var gridColumnWidth = 40;
 
 // SCRIPT
+var elmBusy = false;
+
 $(document).ready(function() { // To be run when DOM is loaded
 
 	$allElm = $(gridElementSpecific); // Get all elements from DOM and set allElm variable
 	$allElm.hide(); // Hide html elements prelimenary 
 	$(gridElement).css('position', 'absolute'); //boxes elements absolutely
 	
-	$(gridElement).hover(
-			function(){
-				$(gridElementSpecific).not(this).addClass("faded");
-			},function(){
-				$(gridElementSpecific).not(this).removeClass("faded");
-			});
+	// Fade other elements when one is hovered
+	$(gridElement).live('mouseover mouseout', function(event) {
+		if(elmBusy == false) {
+			if (event.type == 'mouseover') {
+				$(gridElementSpecific).not(this).stop(true, false).fadeTo(400, 0.6);
+			} else {
+				$(gridElementSpecific).not(this).stop(true, false).fadeTo(600, 1);
+		  	}
+		}
+	});
 	
 	// If the grid is present (#grid has elements), do masonry
 	if ($allElm.length != 0) {
@@ -68,6 +74,7 @@ $(document).ready(function() { // To be run when DOM is loaded
 // Performs pre-masonry actions before the effect is run by adding/removing necessary elements
 function prepareMasonry() {
 	$(loadingIcon).fadeIn("fast"); // Show the loading icon
+	elmBusy = true;
 
 	var category = getHash();
 	// $("#status").html("id: "+category+"<br>");
@@ -98,7 +105,7 @@ function prepareMasonry() {
 		// $("#status").append("new: "+$newElm.size()+"<br>");
 
 		// make changes: remove elements from previous view
-		var counter = 0;
+		var counterRemoved = 0;
 		var $elmToBeRemoved = $(gridElementSpecific).filter($removeElm);					
 	}	
 		
@@ -106,12 +113,18 @@ function prepareMasonry() {
 	if($elmToBeRemoved.size() > 0){		
 		$elmToBeRemoved.fadeOut("slow", function() {
 			$(this).remove();
-			counter++;
+			counterRemoved++;
 			// Append new items and do masonry
-			if ($elmToBeRemoved.length == counter) {
+			if ($elmToBeRemoved.length == counterRemoved) {
 				$(gridContainer).append($newElm);				
 				doMasonry($newElm);				
-				$(gridElementSpecific).fadeIn("slow");
+				var counterElm = 0;
+				$(gridElementSpecific).fadeIn("slow", function() {
+					counterElm++;		
+					if ($(gridElementSpecific).length == counterElm) {
+						elmBusy = false;
+					}			
+				});
 			}
 		});
 		
@@ -120,7 +133,13 @@ function prepareMasonry() {
 		// Append new items and do masonry	
 		$(gridContainer).append($newElm);		
 		doMasonry($newElm);
-		$(gridElementSpecific).fadeIn("slow");		
+		var counterElm = 0;		
+		$(gridElementSpecific).fadeIn("slow", function() {
+			counterElm++;		
+			if ($(gridElementSpecific).length == counterElm) {
+				elmBusy = false;
+			}			
+		});		
 	}
 }
 
@@ -133,7 +152,7 @@ function doMasonry() {
 		animationOptions : {
 			duration : 750,
 			easing : 'swing',
-			queue : false
+			queue : true
 		}
 	}, function(){
 		$(loadingIcon).fadeOut("fast");
@@ -143,6 +162,7 @@ function doMasonry() {
 	if($(gridElementSpecific).size()==0){
 		$(loadingIcon).fadeOut("fast");
 	}
+		
 }
 
 // Call to set a new route hash value
