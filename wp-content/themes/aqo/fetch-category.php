@@ -10,7 +10,6 @@
 
 <?php
 	// Loop through WP posts
-	query_posts(array('post_type' => 'post', 'posts_per_page' => -1));			
 	if ( have_posts() ) : while ( have_posts() ) : the_post();
 		
 		// Get post categories and save to html-friendly string for class

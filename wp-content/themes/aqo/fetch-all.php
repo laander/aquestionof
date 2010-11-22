@@ -44,7 +44,7 @@
 		// Get width/height custom field for the post box, defaults to standard values if not specified
 		$custom_fields = get_post_custom($post->ID);
 		if (isset($custom_fields['width'])) { $item_width = $custom_fields['width'][0]; }
-		else { $item_width = 5; }
+		else { $item_width = 6; }
 		if (isset($custom_fields['height'])) { $item_height = $custom_fields['height'][0]; }
 		else { $item_height = 6; }
 	

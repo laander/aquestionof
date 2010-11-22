@@ -1,151 +1,165 @@
-var base = $("base").attr("href");
-$(document).ready(function() {
-	$allElm = $('#grid div.box'); // set allElm variable
-	$allElm.hide(); //hide prelimenary	
+// SETTINGS
+var base = $("base").attr("href"); // Base site url from WP html head
+var gridContainer = "#grid";
+var gridElement = "div.box";
+var gridElementSpecific = gridContainer + " " + gridElement;
+var menuGridButton = "a.gridButton";
+var loadingIcon = "#loader";
+var gridColumnWidth = 40;
+
+// SCRIPT
+$(document).ready(function() { // To be run when page is loaded
+
+	$allElm = $(gridElementSpecific); // Get all elements from DOM and set allElm variable
+	$allElm.hide(); // Hide html elements prelimenary 
 	
-	//if the grid is present do masonry
-	if($allElm.length != 0){		
+	// If the grid is present (#grid has elements), do masonry
+	if ($allElm.length != 0) {
+	
 		// Check if site is accessed correctly through the hashes (for index pages). If not, redirect to home and set hash route.
 		if ($('body.home').length == 0) { 
-			goToTopDir();
-		// Initialize splash screen by getting all items - filter if hash is set
-		}else if (getRoute() == '') {
-			setRoute('all');
+			var newUrl = hashizeUrl(window.location.href);
+			setUrl(newUrl);
+			
+		// If no hash is set, initialize splash screen with all items
+		} else if (getHash() == '') {
+			setHash('all');
+		
+		// Page is ready for masonry
 		} else {			
 			prepareMasonry();
 		}
 		
-		//change hash on click
+		// Change hash on click
 		$('a.gridButton').click(function() {
 			var category = $(this).attr("href");	
 			category = category.replace(/\//g,"-");
-			setRoute(category);
+			setHash(category);
 			return false;
 		});			
 
-		// do masonry on hash change
+		// Watch for hash change and do masonry when changed
 		$(window).hashchange(function() {
 			prepareMasonry();
 		});		
 		
-	//the grid is not present	
-	}else{		
-		//change hash on click
+	// The grid is not present, wait for clicks
+	} else {
+			
+		// Change hash on click
 		$('a.gridButton').click(function() {
 			var category = $(this).attr("href");
 			category = category.replace(/\//g,"-");		
-			var url = base + "#"+category;			
+			var url = base + "#" + category;			
 			setUrl(url);
 			return false;
 		});						
 	}
 });
 
+// Performs pre-masonry actions before the effect is run by adding/removing necessary elements
 function prepareMasonry() {
-	$("#loader").fadeIn("fast");
-	var category = getRoute();
+	$(loadingIcon).fadeIn("fast"); // Show the loading icon
+
+	var category = getHash();
 	// $("#status").html("id: "+category+"<br>");
 	// $("#status").append("All: "+$allElm.size()+"<br>");
 
 	// previous elements
-	var $previousElm = $('#grid div.box');
+	var $previousElm = $(gridElementSpecific);
 	// $("#status").append("Prev: "+$previousElm.size()+"<br>");
-
-	if (category != "all") {
+	
+	// If hash is set to show all
+	if (category == "all") {
+		$elmToBeRemoved = $([]); //create empty jQuery object
+		var $newElm = $allElm.not($previousElm);
+	
+	// If hash is set to show categories
+	} else {	
 		// remove elements which are not chosen from previous
-		var $removeElm = $previousElm.not("div.box." + category);
+		var $removeElm = $previousElm.not(gridElement + "." + category);
 		// $("#status").append("Remove: "+$removeElm.size()+"<br>");
 
 		// previous elements which are to be kept
-		var $keptElm = $previousElm.filter("div.box." + category);
+		var $keptElm = $previousElm.filter(gridElement + "." + category);
 		// $("#status").append("Kept: "+$keptElm.size()+"<br>");
 
 		// get new elements - select all elm that have the corresponding
 		// category and deselect all that are already there (from previous)
-		var $newElm = $allElm.filter("div.box." + category).not($keptElm);
+		var $newElm = $allElm.filter(gridElement + "." + category).not($keptElm);
 		// $("#status").append("new: "+$newElm.size()+"<br>");
 
 		// make changes: remove elements from previous view
 		var counter = 0;
-		var $elmToBeRemoved = $('#grid div.box').filter($removeElm);					
-	// get all elements not in previous view
-	}else{
-		$elmToBeRemoved = $([]); //create empty jQuery object
-		var $newElm = $allElm.not($previousElm);
+		var $elmToBeRemoved = $(gridElementSpecific).filter($removeElm);					
 	}	
 		
-	//check if there are any elements to remove
-	if($elmToBeRemoved.size()>0){		
+	// Check if there are any elements to remove
+	if($elmToBeRemoved.size() > 0){		
 		$elmToBeRemoved.fadeOut("slow", function() {
 			$(this).remove();
-
 			counter++;
-			// make changes!
+			// Append new items and do masonry
 			if ($elmToBeRemoved.length == counter) {
-				$('#grid').append($newElm);				
+				$(gridContainer).append($newElm);				
 				doMasonry($newElm);				
-				$('#grid div.box').fadeIn("slow");
+				$(gridElementSpecific).fadeIn("slow");
 			}
-		});		
-	}else{		
-		// make changes!
-		$('#grid').append($newElm);		
+		});
+		
+	// No elements to remove (e.g. going from subcat to topcat)
+	} else {
+		// Append new items and do masonry	
+		$(gridContainer).append($newElm);		
 		doMasonry($newElm);
-		$('#grid div.box').fadeIn("slow");		
+		$(gridElementSpecific).fadeIn("slow");		
 	}
 }
 
-//use hashes instead of static pages
-function goToTopDir(){
-	// get the full path
-	var path = window.location.pathname;		
-	var posOfSlash = path.length-1;
-	
-	//remove the very last character if it is a slash (/)
-	if(path.charAt(posOfSlash)=="/"){ path = path.substr(0,posOfSlash);}
-	
-	//find the category
-	var posOfCat = path.lastIndexOf('/category/');
-	var category = path.substr(posOfCat+1);
-	category = category.replace(/\//g,"-");	
-	
-	//make new path with hashes
-	var pathHashed = path.substr(0, posOfCat+1)+"#"+category;		
-	window.location.assign(pathHashed);		
-}
-
-//do masonry effect
+// Do masonry effect
 function doMasonry() {	
-	$('#grid').masonry({
-		columnWidth : 40,
+	$(gridContainer).masonry({
+		columnWidth : gridColumnWidth,
 		animate : true,
-		itemSelector : '.box',
+		itemSelector : gridElement,
 		animationOptions : {
 			duration : 750,
 			easing : 'swing',
 			queue : false
 		}
 	}, function(){
-		$("#loader").fadeOut("fast");
+		$(loadingIcon).fadeOut("fast");
 	});	
 	
 	//if there are no boxes we wont get a callback above
-	if($('#grid div.box').size()==0){
-		$("#loader").fadeOut("fast");
+	if($(gridElementSpecific).size()==0){
+		$(loadingIcon).fadeOut("fast");
 	}
 }
 
 // Call to set a new route hash value
-function setRoute(routeHash) {
+function setHash(routeHash) {
 	window.location.hash = routeHash;
 }
 
 // Returns the current hash value, i.e. current page to load
-function getRoute() {
+function getHash() {
 	var routeHash = window.location.hash;
 	return routeHash.substring(1);
 }
 
+// Set the location to a specified full url
 function setUrl(url) {
 	window.location = url;
+}
+
+// Gets a direct long url (typically to a cat or subcat) and hashize it from the base url
+// e.g. http://aquestionof.net/category/media/campaigns > http://aquestionof.net/#category-media-campaigns
+function hashizeUrl(url) {
+	
+	var currentUrl = url.replace(/\/$/,""); // Replaces the trailing slash if exists so it doesnt cause trouble when hashing
+	var category = currentUrl.replace(base,"").replace(/\//g,"-"); // Make url relative and turn slashes to dashes			
+	var url = base + "#" + category; // Create new url with hash
+
+	return url;
 }
