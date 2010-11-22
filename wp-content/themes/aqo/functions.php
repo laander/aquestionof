@@ -25,36 +25,15 @@ function load_jquery() {
 add_action( 'hybrid_init', 'build_taxanomies', 1 );
 function build_taxanomies() {
 	register_taxonomy(
-		'about',
+		'priority',
 		'post',
 		array(
 			'hierarchical' => true,
-			'label' => 'About',
+			'label' => 'Priority',
 			'query_var' => true,
 			'rewrite' => true
 		)
-	);
-	register_taxonomy(
-		'media',
-		'post',
-		array(
-			'hierarchical' => true,
-			'label' => 'Media',
-			'query_var' => true,
-			'rewrite' => true
-		)
-	);
-	register_taxonomy(
-		'creatives',
-		'post',
-		array(
-			'hierarchical' => true,
-			'label' => 'Creatives',
-			'query_var' => true,
-			'rewrite' => true
-		)
-	);
-	
+	);	
 }
 
 // Add a site logo in the hybrid site title hook

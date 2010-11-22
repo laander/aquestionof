@@ -11,11 +11,11 @@ RewriteRule . /konscript/aquestionof/index.php [L]
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase /konscript/aquestionof/
+RewriteBase /aquestionof/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /konscript/aquestionof/index.php [L]
+RewriteRule . /aquestionof/index.php [L]
 </IfModule>
 
 # END WordPress

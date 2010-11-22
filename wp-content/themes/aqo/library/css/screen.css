@@ -1624,7 +1624,7 @@ ul.grid-menu li a {
 }
 /* line 110, ../src/partials/_master.scss */
 #grid .box {
-  position: relative;
+  position: absolute;
   font-weight: bold;
   background-color: gray;
   margin-bottom: 10px;
