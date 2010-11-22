@@ -8,7 +8,7 @@ var loadingIcon = "#loader";
 var gridColumnWidth = 40;
 
 // SCRIPT
-$(document).ready(function() { // To be run when page is loaded
+$(document).ready(function() { // To be run when DOM is loaded
 
 	$allElm = $(gridElementSpecific); // Get all elements from DOM and set allElm variable
 	$allElm.hide(); // Hide html elements prelimenary 
