@@ -22,7 +22,7 @@ $(document).ready(function() {
 			return false;
 		});
 
-		// Bind to route/url hash change
+		// do masonry on hash change
 		$(window).hashchange(function() {
 			prepareMasonry();
 		});		
@@ -79,18 +79,20 @@ function prepareMasonry() {
 
 //go one level op until we are at "home" 
 function goToTopDir(){
-	// Set the relative home url variable for the site (front page)
+	// get the full path
 	var path = window.location.pathname;		
 	var posOfSlash = path.length-1;
+	
 	//remove the very last character if it is a slash (/)
 	if(path.charAt(posOfSlash)=="/"){ path = path.substr(0,posOfSlash);}
 	
-	//find the last directory
-	posOfLastSlash = path.lastIndexOf('/');
-	var lastDir = path.substr(posOfLastSlash+1);
+	//find the category
+	var posOfCat = path.lastIndexOf('/category/');
+	var category = path.substr(posOfCat+1);
+	category = category.replace(/\//g,"-");	
 	
 	//make new path with hashes
-	var pathHashed = path.substr(0, posOfLastSlash+1)+"#"+lastDir;		
+	var pathHashed = path.substr(0, posOfCat+1)+"#"+category;		
 	window.location.assign(pathHashed);		
 }
 
