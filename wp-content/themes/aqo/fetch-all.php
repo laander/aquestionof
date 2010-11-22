@@ -6,7 +6,7 @@
  * @subpackage Template
  */
 
-//get_header(); ?>
+get_header(); ?>
 		
 	<?php 
 	// Retrieve product items from OC and save to unserialized array
@@ -60,4 +60,4 @@
 	}
 	?>
 	
-<?php //get_footer(); ?>
+<?php get_footer(); ?>
