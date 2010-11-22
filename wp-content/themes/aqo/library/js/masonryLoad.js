@@ -9,7 +9,7 @@ $(document).ready(function() {
 		
 		// Initialize splash screen by getting all items - filter if hash is set
 		if (getRoute() == '') {
-			setRoute('fetch-all');
+			setRoute('all');
 		} else {			
 			prepareMasonry();
 		}
@@ -17,7 +17,7 @@ $(document).ready(function() {
 		jQuery('a.gridButton').click(function() {
 			var category = $(this).attr("href");
 			// supercategory: category/about => about -- subcategory: about/contact => about/contact		
-			category = (category.substring(0, 9) == "category/") ? "cat_" + category.substr(9) : category.replace("/", "-");
+			category = category.replace(/\//g, "-");
 			setRoute(category);
 			return false;
 		});
@@ -54,7 +54,7 @@ function prepareMasonry() {
 	var $previousElm = jQuery('#grid div.box');
 	// jQuery("#status").append("Prev: "+$previousElm.size()+"<br>");
 
-	if (category != "fetch-all") {
+	if (category != "all") {
 		// remove elements which are not chosen from previous
 		var $removeElm = $previousElm.not("div.box." + category);
 		// jQuery("#status").append("Remove: "+$removeElm.size()+"<br>");
