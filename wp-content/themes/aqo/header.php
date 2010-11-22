@@ -32,7 +32,6 @@ hybrid_doctype(); ?>
 	<link type="text/css" href="<?php // echo CHILD_THEME_URI.'/library/js/quicksand/quicksand.css'; ?>" rel="stylesheet" media="screen" />
 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/screen.js'; ?>"></script>
-
 </head>
 
 <body class="<?php hybrid_body_class(); ?>">

@@ -12,8 +12,14 @@ $(document).ready(function() { // To be run when DOM is loaded
 
 	$allElm = $(gridElementSpecific); // Get all elements from DOM and set allElm variable
 	$allElm.hide(); // Hide html elements prelimenary 
+	$(gridElement).css('position', 'absolute'); //boxes elements absolutely
 	
-	$(gridElement).css('position', 'absolute');
+	$(gridElement).hover(
+			function(){
+				$(gridElementSpecific).not(this).addClass("faded");
+			},function(){
+				$(gridElementSpecific).not(this).removeClass("faded");
+			});
 	
 	// If the grid is present (#grid has elements), do masonry
 	if ($allElm.length != 0) {
