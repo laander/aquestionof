@@ -4,8 +4,7 @@ $(document).ready(function() {
 
 	// Check if site is accessed correctly through the hashes (for index pages).
 	// If not, redirect to home and set hash route.
-	var isSiteHome = $('body.home');
-	if (isSiteHome.length != 0) {
+	if ($('body.home').length != 0) {
 		
 		// Initialize splash screen by getting all items - filter if hash is set
 		if (getRoute() == '') {
@@ -15,9 +14,8 @@ $(document).ready(function() {
 		}
 
 		jQuery('a.gridButton').click(function() {
-			var category = $(this).attr("href");
-			// supercategory: category/about => about -- subcategory: about/contact => about/contact		
-			category = (category.substring(0, 9) == "category/") ? "cat_" + category.substr(9) : category.replace("/", "-");
+			var category = $(this).attr("href");	
+			category = category.replace(/\//g,"-");
 			setRoute(category);
 			return false;
 		});
@@ -77,9 +75,11 @@ function prepareMasonry() {
 			counter++;
 			// make changes!
 			if ($elmToBeRemoved.length == counter) {
-				jQuery('#grid').append($newElm);
+				//jQuery('#grid').append($newElm);
+				
+				appendMasonry($newElm);
+				
 				jQuery('#grid div.box').fadeIn("slow");
-				bindMasonry();
 			}
 		});
 		
@@ -87,13 +87,13 @@ function prepareMasonry() {
 	} else {
 		var $newElm = $allElm.not($previousElm);
 		// make changes!
-		jQuery('#grid').append($newElm);
+		//jQuery('#grid').append($newElm);
 		jQuery('#grid div.box').fadeIn("slow");
-		bindMasonry();
+		appendMasonry($newElm);
 	}
 }
 
-function bindMasonry() {
+function initiateMasonry() {
 	jQuery('#grid').masonry({
 		columnWidth : 40,
 		animate : true,
@@ -103,7 +103,21 @@ function bindMasonry() {
 			easing : 'swing',
 			queue : false
 		}
-	});
+	});	
+}
+
+function appendMasonry($boxes){
+	  jQuery('#grid')
+	    // append new elements
+	    .append( $boxes )
+	    // arrange new elements
+	    .masonry( { appendedContent: $boxes } ,
+	      // using a callback to style new elements
+	      function() { 
+	        $(this).css({background: '#222', color: '#EEE' });
+	      }    
+	    );
+	
 }
 
 // Call to set a new route hash value
