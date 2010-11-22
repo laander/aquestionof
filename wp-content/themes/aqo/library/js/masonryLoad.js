@@ -1,31 +1,42 @@
+var base = $("base").attr("href");
 var $allElm = "";
 $(document).ready(function() {
 	$allElm = $('#grid div.box'); // set allElm variable
 	
+	
 	//if the grid is present do masonry
 	if($allElm.length != 0){		
-		// Check if site is accessed correctly through the hashes (for index pages). If not, redirect to home and set hash route.		
-		if ($('body.home').length == 0) { goToTopDir();}
-			
+		// Check if site is accessed correctly through the hashes (for index pages). If not, redirect to home and set hash route.
+		if ($('body.home').length == 0) { 
+			goToTopDir();
 		// Initialize splash screen by getting all items - filter if hash is set
-		if (getRoute() == '') {
+		}else if (getRoute() == '') {
 			setRoute('all');
 		} else {			
 			prepareMasonry();
 		}
-
+		
 		//change hash on click
 		jQuery('a.gridButton').click(function() {
 			var category = $(this).attr("href");	
 			category = category.replace(/\//g,"-");
 			setRoute(category);
 			return false;
-		});
+		});			
 
 		// do masonry on hash change
 		$(window).hashchange(function() {
 			prepareMasonry();
 		});		
+	}else{		
+		//change hash on click
+		jQuery('a.gridButton').click(function() {
+			var category = $(this).attr("href");
+			category = category.replace(/\//g,"-");		
+			var url = base + "#"+category;			
+			setUrl(url);
+			return false;
+		});						
 	}
 });
 
@@ -119,4 +130,8 @@ function setRoute(routeHash) {
 function getRoute() {
 	var routeHash = window.location.hash;
 	return routeHash.substring(1);
+}
+
+function setUrl(url) {
+	window.location = url;
 }
