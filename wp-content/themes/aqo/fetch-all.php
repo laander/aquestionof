@@ -31,7 +31,7 @@ get_header(); ?>
 		$post_cat = "";
 		$delimiter = "";
 		foreach($post_categories as $category) { 
-		    $post_cat .= $delimiter . "cat_" . $category->category_nicename;
+		    $post_cat .= $delimiter . "category_" . $category->category_nicename;
 		    $delimiter = " ";
 		} 
 		

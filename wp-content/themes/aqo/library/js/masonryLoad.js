@@ -1,5 +1,6 @@
 var $allElm = "";
 $(document).ready(function() {
+	initiateMasonry();
 	$allElm = $('#grid div.box'); // set allElm variable
 
 	// Check if site is accessed correctly through the hashes (for index pages).
@@ -77,8 +78,7 @@ function prepareMasonry() {
 			if ($elmToBeRemoved.length == counter) {
 				//jQuery('#grid').append($newElm);
 				
-				appendMasonry($newElm);
-				
+				initiateMasonry($newElm);				
 				jQuery('#grid div.box').fadeIn("slow");
 			}
 		});
@@ -89,7 +89,7 @@ function prepareMasonry() {
 		// make changes!
 		//jQuery('#grid').append($newElm);
 		jQuery('#grid div.box').fadeIn("slow");
-		appendMasonry($newElm);
+		initiateMasonry($newElm);
 	}
 }
 
