@@ -6,7 +6,7 @@
  * @subpackage Template
  */
 
-//get_header(); ?>
+get_header(); ?>
 		
 	<?php 	
 	$products_url = 'http://' . $_SERVER['HTTP_HOST'] . '/aquestionof/shop/index.php?route=product/all&type=array'; 
@@ -58,4 +58,4 @@ foreach((get_the_category()) as $category) {
 	}
 	?>
 	
-<?php //get_footer(); ?>
+<?php get_footer(); ?>
