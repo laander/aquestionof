@@ -1626,8 +1626,7 @@ ul.grid-menu li a {
 #grid .box {
   position: absolute;
   font-weight: bold;
-  background-color: gray;
-  margin-bottom: 10px;
+  background-color: #fff;
   overflow: hidden;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
@@ -1646,135 +1645,51 @@ ul.grid-menu li a {
 }
 /* line 138, ../src/partials/_master.scss */
 #grid .col1 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 30px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col1 {
-  overflow-x: hidden;
+  width: 40px;
 }
 /* line 141, ../src/partials/_master.scss */
 #grid .col2 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 70px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col2 {
-  overflow-x: hidden;
+  width: 80px;
 }
 /* line 144, ../src/partials/_master.scss */
 #grid .col3 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 110px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col3 {
-  overflow-x: hidden;
+  width: 120px;
 }
 /* line 147, ../src/partials/_master.scss */
 #grid .col4 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 150px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col4 {
-  overflow-x: hidden;
+  width: 160px;
 }
 /* line 150, ../src/partials/_master.scss */
 #grid .col5 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 190px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col5 {
-  overflow-x: hidden;
+  width: 200px;
 }
 /* line 153, ../src/partials/_master.scss */
 #grid .col6 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 230px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col6 {
-  overflow-x: hidden;
+  width: 240px;
 }
 /* line 156, ../src/partials/_master.scss */
 #grid .col7 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 270px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col7 {
-  overflow-x: hidden;
+  width: 280px;
 }
 /* line 159, ../src/partials/_master.scss */
 #grid .col8 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 310px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col8 {
-  overflow-x: hidden;
+  width: 320px;
 }
 /* line 160, ../src/partials/_master.scss */
 #grid .col9 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 350px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col9 {
-  overflow-x: hidden;
+  width: 360px;
 }
 /* line 161, ../src/partials/_master.scss */
 #grid .col10 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 390px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col10 {
-  overflow-x: hidden;
+  width: 400px;
 }
 /* line 162, ../src/partials/_master.scss */
 #grid .col11 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 430px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col11 {
-  overflow-x: hidden;
+  width: 440px;
 }
 /* line 163, ../src/partials/_master.scss */
 #grid .col12 {
-  display: inline;
-  float: left;
-  margin-right: 10px;
-  width: 470px;
-}
-/* line 138, ../../../../../../../.gem/ruby/1.8/gems/compass-0.10.2/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
-* html #grid .col12 {
-  overflow-x: hidden;
+  width: 480px;
 }
 /* line 165, ../src/partials/_master.scss */
 #grid .row1 {

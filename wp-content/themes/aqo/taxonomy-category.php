@@ -10,4 +10,14 @@
  * @subpackage Template
  */
 
-include('fetch-category.php'); ?>
+get_header(); ?>
+
+	<div id="content" class="hfeed content">	
+
+		<div id="grid">
+			<?php include('fetch-category.php'); ?>
+		</div>
+			
+	</div><!-- .content .hfeed -->
+
+<?php get_footer(); ?>

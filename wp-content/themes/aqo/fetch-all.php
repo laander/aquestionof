@@ -6,9 +6,9 @@
  * @subpackage Template
  */
 
-get_header(); ?>
+//get_header(); ?>
 		
-	<?php 
+<?php 
 	// Retrieve product items from OC and save to unserialized array
 	// Fetch content with CURL
 	$products_url = 'http://' . $_SERVER['HTTP_HOST'] . '/aquestionof/shop/index.php?route=product/all&type=array'; 
@@ -63,6 +63,6 @@ get_header(); ?>
 	foreach ($items as $item) {
 		echo $item;
 	}
-	?>
+?>
 	
-<?php get_footer(); ?>
+<?php //get_footer(); ?>
