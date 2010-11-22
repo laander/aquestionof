@@ -45,8 +45,10 @@
 	endwhile; endif;
 	
 	// Echo items to page
-	foreach ($items as $item) {
-		echo $item;
+	if (!empty($items)) {	
+		foreach ($items as $item) {
+			echo $item;
+		}
 	}
 ?>
 

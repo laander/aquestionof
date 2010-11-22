@@ -13,6 +13,8 @@ $(document).ready(function() { // To be run when page is loaded
 	$allElm = $(gridElementSpecific); // Get all elements from DOM and set allElm variable
 	$allElm.hide(); // Hide html elements prelimenary 
 	
+	$(gridElement).css('position', 'absolute');
+	
 	// If the grid is present (#grid has elements), do masonry
 	if ($allElm.length != 0) {
 	

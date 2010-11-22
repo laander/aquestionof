@@ -61,8 +61,10 @@
 	
 	// Shuffle the OC and WP items and echo to page
 	shuffle($items);
-	foreach ($items as $item) {
-		echo $item;
+	if (!empty($items)) {	
+		foreach ($items as $item) {
+			echo $item;
+		}
 	}
 ?>
 	
