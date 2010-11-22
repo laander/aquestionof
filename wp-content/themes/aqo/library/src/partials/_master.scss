@@ -135,6 +135,13 @@ body {
 				.box img {
 					//margin: auto auto; 
 					}
+					
+			.faded {
+				filter:alpha(opacity=50);
+				-moz-opacity:0.5;
+				-khtml-opacity: 0.5;
+				opacity: 0.5;			
+			}
 				
 			.col1 { width: $grid-columnwidth * 1; }
 			//.col1 img { max-width: $grid-columnwidth - $grid-margin; height: auto; }
