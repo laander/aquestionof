@@ -14,12 +14,17 @@ $(document).ready(function() { // To be run when DOM is loaded
 	$allElm.hide(); // Hide html elements prelimenary 
 	$(gridElement).css('position', 'absolute'); //boxes elements absolutely
 	
+	/*
 	$(gridElement).hover(
 			function(){
-				$(gridElementSpecific).not(this).addClass("faded");
+				var $fadeIn = $(gridElementSpecific).not(this).fadeTo(300, 1, function(){
+					$fadeIn.fadeTo(300, 0.5);
+					alert("as");
+				});
 			},function(){
-				$(gridElementSpecific).not(this).removeClass("faded");
+				var $fadeOut = $(gridElementSpecific).not(this).fadeTo(100, 1).stop();
 			});
+	*/
 	
 	// If the grid is present (#grid has elements), do masonry
 	if ($allElm.length != 0) {
