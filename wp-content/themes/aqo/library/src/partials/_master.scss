@@ -121,7 +121,7 @@ body {
 				-moz-border-radius: 2px;
 				-webkit-border-radius: 2px; }				
 				
-				.box .post-title a,
+				.box .post-title,
 				.box .product-title {
 					position: absolute;
 					padding: 5px;
@@ -131,38 +131,39 @@ body {
 					width: 100%;
 					color: $color-secondary;
 					opacity: 0.7; }
-					
-				.box img {
-					//margin: auto auto; 
-					}
-				
-			.col1 { width: $grid-columnwidth * 1; }
-			//.col1 img { max-width: $grid-columnwidth - $grid-margin; height: auto; }
-			
-			.col2 { width: $grid-columnwidth * 2; }
-			//.col2 img { max-width: $grid-columnwidth * 2 - $grid-margin; height: auto; }
-						
-			.col3 { width: $grid-columnwidth * 3; }
-			//.col3 img { max-width: $grid-columnwidth * 3 - $grid-margin; height: auto; }
-						
-			.col4 { width: $grid-columnwidth * 4; }
-			//.col4 img { max-width: $grid-columnwidth * 4 - $grid-margin; height: auto; }
-						
-			.col5 { width: $grid-columnwidth * 5; }
-			//.col5 img { max-width: $grid-columnwidth * 5 - $grid-margin; height: auto; }
-			
-			.col6 { width: $grid-columnwidth * 6; }
-			//.col6 img { max-width: $grid-columnwidth * 6 - $grid-margin; height: auto; }
-						
-			.col7 { width: $grid-columnwidth * 7; }
-			//.col7 img { max-width: $grid-columnwidth * 7 - $grid-margin; min-height: auto; }
-						
+								
+/*			
+			// Option 1: Elements all tight together, no space/margin			
+			.col1 { width: $grid-columnwidth * 1; }			
+			.col2 { width: $grid-columnwidth * 2; }						
+			.col3 { width: $grid-columnwidth * 3; }						
+			.col4 { width: $grid-columnwidth * 4; }						
+			.col5 { width: $grid-columnwidth * 5; }			
+			.col6 { width: $grid-columnwidth * 6; }						
+			.col7 { width: $grid-columnwidth * 7; }						
 			.col8 { width: $grid-columnwidth * 8; }
 			.col9 { width: $grid-columnwidth * 9; }			
 			.col10 { width: $grid-columnwidth * 10; }
 			.col11 { width: $grid-columnwidth * 11; }
 			.col12 { width: $grid-columnwidth * 12; }
-
+*/
+			
+			// Option 2: Standard 10px grid spacing/margin between elements
+			.col1 { @include column(1); }			
+			.col2 { @include column(2); }						
+			.col3 { @include column(3); }						
+			.col4 { @include column(4); }						
+			.col5 { @include column(5); }			
+			.col6 { @include column(6); }						
+			.col7 { @include column(7); }						
+			.col8 { @include column(8); }
+			.col9 { @include column(9); }			
+			.col10 { @include column(10); }
+			.col11 { @include column(11); }
+			.col12 { @include column(12); }
+			.box { margin-bottom: $grid-margin; }
+			
+			// Element heights in grid
 			.row1 { height: $grid-columnwidth; }
 			.row2 { height: $grid-columnwidth * 2; }
 			.row3 { height: $grid-columnwidth * 3; }
@@ -175,13 +176,15 @@ body {
 			.row10 { height: $grid-columnwidth * 10; }
 			.row11 { height: $grid-columnwidth * 11; }
 			.row12 { height: $grid-columnwidth * 12; }																		
-			
-			//.col1 img { max-width: 80px; }
-			//.col2 img { max-width: 180px; }
-			//.col3 img { max-width: 280px; }
-			//.col4 img { max-width: 380px; }
-			//.col5 img { max-width: 480px; }
-							
+
+			//.col1 img { max-width: $grid-columnwidth - $grid-margin; height: auto; }
+			//.col2 img { max-width: $grid-columnwidth * 2 - $grid-margin; height: auto; }
+			//.col3 img { max-width: $grid-columnwidth * 3 - $grid-margin; height: auto; }
+			//.col4 img { max-width: $grid-columnwidth * 4 - $grid-margin; height: auto; }
+			//.col5 img { max-width: $grid-columnwidth * 5 - $grid-margin; height: auto; }
+			//.col6 img { max-width: $grid-columnwidth * 6 - $grid-margin; height: auto; }
+			//.col7 img { max-width: $grid-columnwidth * 7 - $grid-margin; height: auto; }
+										
 			}	
 
 /**

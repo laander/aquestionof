@@ -11,7 +11,12 @@ get_header(); ?>
 	<div id="content" class="hfeed content">	
 
 		<div id="grid">
-			<?php include("fetch-all.php");?>
+		<?php 
+		sleep(1);
+		for($i=0; $i<10; $i++){ 
+			 include("fetch-all.php");
+		} 
+		?>
 		</div>
 			
 	</div><!-- .content .hfeed -->

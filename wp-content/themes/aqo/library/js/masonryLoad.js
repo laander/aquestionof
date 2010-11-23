@@ -5,26 +5,28 @@ var gridElement = "div.box";
 var gridElementSpecific = gridContainer + " " + gridElement;
 var menuGridButton = "a.gridButton";
 var loadingIcon = "#loader";
-var gridColumnWidth = 40;
+var gridColumnWidth = 80;
 
 // SCRIPT
+var elmBusy = false;
+
 $(document).ready(function() { // To be run when DOM is loaded
 
 	$allElm = $(gridElementSpecific); // Get all elements from DOM and set allElm variable
 	$allElm.hide(); // Hide html elements prelimenary 
-	$(gridElement).css('position', 'absolute'); //boxes elements absolutely
+	$allElm.css('position', 'absolute'); //positions elements absolutely
 	
-	/*
-	$(gridElement).hover(
-			function(){
-				var $fadeIn = $(gridElementSpecific).not(this).fadeTo(300, 1, function(){
-					$fadeIn.fadeTo(300, 0.5);
-					alert("as");
-				});
-			},function(){
-				var $fadeOut = $(gridElementSpecific).not(this).fadeTo(100, 1).stop();
-			});
-	*/
+	// Fade other elements when one is hovered
+	$allElm.live('mouseover mouseout', function(event) {
+		if(elmBusy == false) {
+			if (event.type == 'mouseover') {
+				$(gridElementSpecific).not(this).stop(true, false).fadeTo(200, 0.6);
+			} else {
+				$(gridElementSpecific).not(this).stop(true, false).fadeTo(300, 1);
+		  	}
+		}
+	});
+
 	
 	// If the grid is present (#grid has elements), do masonry
 	if ($allElm.length != 0) {
@@ -73,6 +75,7 @@ $(document).ready(function() { // To be run when DOM is loaded
 // Performs pre-masonry actions before the effect is run by adding/removing necessary elements
 function prepareMasonry() {
 	$(loadingIcon).fadeIn("fast"); // Show the loading icon
+	elmBusy = true;
 
 	var category = getHash();
 	// $("#status").html("id: "+category+"<br>");
@@ -84,39 +87,38 @@ function prepareMasonry() {
 	
 	// If hash is set to show all
 	if (category == "all") {
-		$elmToBeRemoved = $([]); //create empty jQuery object
+		var $elmToBeRemoved = $([]); //create empty jQuery object
 		var $newElm = $allElm.not($previousElm);
 	
 	// If hash is set to show categories
 	} else {	
 		// remove elements which are not chosen from previous
-		var $removeElm = $previousElm.not(gridElement + "." + category);
+		var $matchedElm = $(gridElement + "." + category);
+		var $removeElm = $previousElm.not($matchedElm);
 		// $("#status").append("Remove: "+$removeElm.size()+"<br>");
 
 		// previous elements which are to be kept
-		var $keptElm = $previousElm.filter(gridElement + "." + category);
+		var $keptElm = $previousElm.filter($matchedElm);
 		// $("#status").append("Kept: "+$keptElm.size()+"<br>");
 
 		// get new elements - select all elm that have the corresponding
 		// category and deselect all that are already there (from previous)
 		var $newElm = $allElm.filter(gridElement + "." + category).not($keptElm);
 		// $("#status").append("new: "+$newElm.size()+"<br>");
-
-		// make changes: remove elements from previous view
-		var counter = 0;
-		var $elmToBeRemoved = $(gridElementSpecific).filter($removeElm);					
+		var $elmToBeRemoved = $previousElm.filter($removeElm);	
 	}	
 		
 	// Check if there are any elements to remove
 	if($elmToBeRemoved.size() > 0){		
+		var counterRemoved = 0;				
 		$elmToBeRemoved.fadeOut("slow", function() {
 			$(this).remove();
-			counter++;
+			counterRemoved++;
 			// Append new items and do masonry
-			if ($elmToBeRemoved.length == counter) {
+			if ($elmToBeRemoved.length == counterRemoved) {
 				$(gridContainer).append($newElm);				
-				doMasonry($newElm);				
-				$(gridElementSpecific).fadeIn("slow");
+				doMasonry($newElm);								
+				fadeInElm($(gridElementSpecific));
 			}
 		});
 		
@@ -125,8 +127,20 @@ function prepareMasonry() {
 		// Append new items and do masonry	
 		$(gridContainer).append($newElm);		
 		doMasonry($newElm);
-		$(gridElementSpecific).fadeIn("slow");		
+		fadeInElm($(gridElementSpecific));	
 	}
+}
+
+//set
+function fadeInElm($elm){
+	var counterElm = 0;
+	$elm.fadeIn("slow", function() {
+		counterElm++;		
+		if ($elm.length == counterElm) {
+			$(loadingIcon).fadeOut("fast");
+			elmBusy = false;
+		}			
+	});
 }
 
 // Do masonry effect
@@ -138,16 +152,14 @@ function doMasonry() {
 		animationOptions : {
 			duration : 750,
 			easing : 'swing',
-			queue : false
+			queue : true
 		}
-	}, function(){
-		$(loadingIcon).fadeOut("fast");
 	});	
 	
 	//if there are no boxes we wont get a callback above
 	if($(gridElementSpecific).size()==0){
 		$(loadingIcon).fadeOut("fast");
-	}
+	}		
 }
 
 // Call to set a new route hash value

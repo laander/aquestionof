@@ -22,15 +22,10 @@ hybrid_doctype(); ?>
 
 	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/screen.css'; ?>" rel="stylesheet" media="screen" />
 	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/print.css'; ?>" rel="stylesheet" media="print" />
-	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/masonry.css'; ?>" rel="stylesheet" media="print" />
 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/onhashchange.min.js'; ?>"></script> 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.masonry.min.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/masonryLoad.js'; ?>"></script>
-
-
-	<link type="text/css" href="<?php // echo CHILD_THEME_URI.'/library/js/quicksand/quicksand.css'; ?>" rel="stylesheet" media="screen" />
-
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/screen.js'; ?>"></script>
 </head>
 
