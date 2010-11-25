@@ -32,45 +32,16 @@ hybrid_doctype(); ?>
 <body class="<?php hybrid_body_class(); ?>">
 	
 	<div id="body-container">
-
+		
+		<img id="loader" style="display:none;" src="<?php echo CHILD_THEME_URI . '/library/images/loader.gif'; ?>"/>
+		
 		<div id="header-container">
 			<div id="header">				
 				<div id="site-title">
 					<a class="gridButton" href="all">
 						<img src="<?php echo CHILD_THEME_URI . '/library/images/logo.png'; ?>" alt="A Question Of" />
 					</a>
-					<img id="loader" style="display:none;" src="<?php echo CHILD_THEME_URI . '/library/images/loader.gif'; ?>"/>
-				</div>
-				<ul class="grid-menu">
-					
-					<li>
-						<a class="gridButton" href="category/about">ABOUT:</a>
-						<a class="gridButton" href="category/about/contact">Contact</a>
-						<a class="gridButton" href="category/about/social-responsibility">Social Responsibility</a>
-						<a class="gridButton" href="category/about/who-we-are">Who We Are</a>					
-					</li>
-					
-					<li>
-						<a class="gridButton" href="category/media">MEDIA:</a>
-						<a class="gridButton" href="category/media/campaigns">Campaigns</a>
-						<a class="gridButton" href="category/media/press">Press</a>
-						<a class="gridButton" href="category/media/social">Social</a>					
-					</li>
-
-					<li>
-						<a class="gridButton" href="category/creatives">CREATIVES:</a>
-						<a class="gridButton" href="category/creatives/creative-team">Creative Team</a>
-						<a class="gridButton" href="category/creatives/join-us">Join Us</a>					
-					</li>
-					
-					<li>
-						<a class="gridButton" href="shop/index.php?route=product/all" id="cat_store">STORE:</a>
-						<a class="gridButton" href="shop/index.php?route=product/category&path=20">Men</a>
-						<a class="gridButton" href="shop/index.php?route=product/category&path=18">Women</a>					
-					</li>
-				
-				</ul>
-										
+				</div>										
 			</div><!-- #header -->
 		</div><!-- #header-container -->
 		

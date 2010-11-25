@@ -5,7 +5,7 @@ var gridElement = "div.box";
 var gridElementSpecific = gridContainer + " " + gridElement;
 var menuGridButton = "a.gridButton";
 var loadingIcon = "#loader";
-var gridColumnWidth = 80;
+var gridColumnWidth = 40;
 
 // SCRIPT
 var elmBusy = false;
@@ -20,9 +20,9 @@ $(document).ready(function() { // To be run when DOM is loaded
 	$allElm.live('mouseover mouseout', function(event) {
 		if(elmBusy == false) {
 			if (event.type == 'mouseover') {
-				$(gridElementSpecific).not(this).stop(true, false).fadeTo(200, 0.6);
+				$(gridElementSpecific).not(this).stop(true, false).fadeTo(500, 0.8);
 			} else {
-				$(gridElementSpecific).not(this).stop(true, false).fadeTo(300, 1);
+				$(gridElementSpecific).not(this).stop(true, false).fadeTo(700, 1);
 		  	}
 		}
 	});
@@ -149,6 +149,7 @@ function doMasonry() {
 		columnWidth : gridColumnWidth,
 		animate : true,
 		itemSelector : gridElement,
+		resizeable: true,
 		animationOptions : {
 			duration : 750,
 			easing : 'swing',
