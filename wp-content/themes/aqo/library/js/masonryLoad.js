@@ -9,20 +9,25 @@ var gridColumnWidth = 40;
 
 // SCRIPT
 var elmBusy = false;
-
 $(document).ready(function() { // To be run when DOM is loaded
 
 	$allElm = $(gridElementSpecific); // Get all elements from DOM and set allElm variable
 	$allElm.hide(); // Hide html elements prelimenary 
-	$allElm.css('position', 'absolute'); //positions elements absolutely
+	$allElm.css('position', 'absolute'); // Positions elements absolutely
 	
 	// Fade other elements when one is hovered
+	var timeoutFader;
 	$allElm.live('mouseover mouseout', function(event) {
 		if(elmBusy == false) {
 			if (event.type == 'mouseover') {
-				$(gridElementSpecific).not(this).stop(true, false).fadeTo(500, 0.8);
+				window.clearTimeout(timeoutFader);
+				$(this).stop(true, false).fadeTo(500, 1);
+				$(gridElementSpecific).not(this).stop(true, false).fadeTo(500, 0.7);
 			} else {
-				$(gridElementSpecific).not(this).stop(true, false).fadeTo(700, 1);
+				timeoutFader = window.setTimeout(function () {
+					$(gridElementSpecific).not(this).stop(true, false).fadeTo(800, 1);
+				}, 400);
+				
 		  	}
 		}
 	});
@@ -116,7 +121,7 @@ function prepareMasonry() {
 			counterRemoved++;
 			// Append new items and do masonry
 			if ($elmToBeRemoved.length == counterRemoved) {
-				$(gridContainer).append($newElm);				
+				$(gridContainer).prepend($newElm);				
 				doMasonry($newElm);								
 				fadeInElm($(gridElementSpecific));
 			}
@@ -125,13 +130,13 @@ function prepareMasonry() {
 	// No elements to remove (e.g. going from subcat to topcat)
 	} else {
 		// Append new items and do masonry	
-		$(gridContainer).append($newElm);		
+		$(gridContainer).prepend($newElm);		
 		doMasonry($newElm);
 		fadeInElm($(gridElementSpecific));	
 	}
 }
 
-//set
+// Fades in elements and removes the loader icon when done
 function fadeInElm($elm){
 	var counterElm = 0;
 	$elm.fadeIn("slow", function() {

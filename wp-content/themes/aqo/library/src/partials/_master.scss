@@ -73,7 +73,7 @@ body {
 
 #loader {
 	position: absolute; 
-	left: 20px;
+	left: 30px;
 	top: 32px; }
 
 #header-container {
@@ -96,15 +96,15 @@ body {
 	top: 100px;
 	width: 100%; }
 	
-	#content { }
+	#content {
+		padding-left: 150px;
+		padding-right: 50px; }
 	
 		#grid {
 			//@include column($grid-columns, true);
 			//width: $grid-totalwidth + $grid-margin;
 			margin: 0;
-			padding: 0; 
-			padding-left: 150px;
-			padding-right: 100px;			
+			padding: 0;
 			
 			.box {
 				//@include column(6);

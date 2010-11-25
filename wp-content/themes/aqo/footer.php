@@ -43,7 +43,7 @@
 				</ul>
 				
 				<div class="fb-like">
-					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FAQUESTIONOF&amp;layout=standard&amp;show_faces=true&amp;width=100&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=200" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:200px;" allowTransparency="true"></iframe>							</div>				
+					<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FAQUESTIONOF&amp;layout=box_count&amp;show_faces=true&amp;width=100&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=200" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:200px;" allowTransparency="true"></iframe>							</div>				
 							
 			</div>
 		</div>		

@@ -1545,7 +1545,7 @@ ul#primary-menu a.subcat {
 /* line 74, ../src/partials/_master.scss */
 #loader {
   position: absolute;
-  left: 20px;
+  left: 30px;
   top: 32px;
 }
 
@@ -1573,12 +1573,16 @@ ul#primary-menu a.subcat {
   width: 100%;
 }
 
-/* line 101, ../src/partials/_master.scss */
+/* line 99, ../src/partials/_master.scss */
+#content {
+  padding-left: 150px;
+  padding-right: 50px;
+}
+
+/* line 103, ../src/partials/_master.scss */
 #grid {
   margin: 0;
   padding: 0;
-  padding-left: 150px;
-  padding-right: 150px;
   /*			
   			// Option 1: Elements all tight together, no space/margin			
   			.col1 { width: $grid-columnwidth * 1; }			
