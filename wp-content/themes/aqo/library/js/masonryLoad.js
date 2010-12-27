@@ -14,7 +14,8 @@ $(document).ready(function() { // To be run when DOM is loaded
 	$allElm = $(gridElementSpecific); // Get all elements from DOM and set allElm variable
 	$allElm.hide(); // Hide html elements prelimenary 
 	$allElm.css('position', 'absolute'); // Positions elements absolutely
-	
+
+/*	
 	// Fade other elements when one is hovered
 	var timeoutFader;
 	$allElm.live('mouseover mouseout', function(event) {
@@ -31,7 +32,20 @@ $(document).ready(function() { // To be run when DOM is loaded
 		  	}
 		}
 	});
+*/
 
+/*	
+	// Fade other elements when one is hovered
+	$allElm.live('mouseover mouseout', function(event) {
+		if(elmBusy == false) {
+			if (event.type == 'mouseover') {
+				$(this).find(".meta").stop(true, false).fadeTo(500, 0.5);
+			} else {
+				$(this).find(".meta").stop(true, false).fadeTo(500, 1);
+		  	}
+		}
+	});
+*/
 	
 	// If the grid is present (#grid has elements), do masonry
 	if ($allElm.length != 0) {

@@ -43,19 +43,21 @@
 		
 		// Get width/height custom field for the post box, defaults to standard values if not specified
 		$custom_fields = get_post_custom($post->ID);
-		if (isset($custom_fields['width'])) { $item_width = $custom_fields['width'][0]; }
+		if (isset($custom_fields['width'])) { $item_width = $custom_fields['width'][0] * 6; }
 		else { $item_width = 6; }
-		if (isset($custom_fields['height'])) { $item_height = $custom_fields['height'][0]; }
-		else { $item_height = 6; }
+		if (isset($custom_fields['height'])) { $item_height = $custom_fields['height'][0] * 4; }
+		else { $item_height = 4; }
 	
 		// Add the current post to items array
 		$items[] = '
 			<div id="post-' . $post->ID . '" class="box col' . $item_width . ' row' . $item_height . ' ' . $post_cat . '">
 				<a href="' . get_permalink($post->ID) . '">
-					<div class="post-title">
-						' . get_the_title() . '
-					</div>
 					'.  get_the_post_thumbnail( $post->ID, 'large' ) .'
+					<div class="meta">
+						<div class="post-title">
+							' . get_the_title() . '
+						</div>
+					</div>
 				</a>
 			</div>' . "\n";
 			
