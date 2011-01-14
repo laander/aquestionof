@@ -10,7 +10,7 @@ Preferably PHP5 and MySQL on an Apache server with mod_rewrite enabled.
 
 *Installation:*
 1. Download/fork/fetch the full repository from GitHub
-2. Import MySQL databased for WP and OC using: aquestionof-oc.sql + aquestionof-wp.sql
+2. Import MySQL databased for WP and OC using: db-schema-oc.default.sql + db-schema-wp.default.sql
 3. Change the following value in OC DB to reflect current site URL
 	Table: setting
 	Entry: config_url
