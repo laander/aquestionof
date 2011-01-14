@@ -22,6 +22,9 @@ body {
 
 	/* Wrapper for everything inside of the body */
 	#body-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 20px;
 		//@include container; 
 		}	
 
@@ -35,52 +38,93 @@ body {
 	top: 37px; }
 
 #header-container {
-	height: 135px;
+	height: 185px;
 	width: 100%;
 	overflow: hidden; }	
 
 	#header {
-		margin: 0 50px; }			
+		//margin: 0 50px;
+	}
 
 		#site-title { 
+			float: left;
 			margin-top: 40px; }
+			
+		#site-title a img {
+			width: $grid-columnwidth * 12 - $grid-margin; }
 
 		ul#primary-menu {
-			margin: 5px 0 0 -5px;
+			clear: left;
+			float: left;
+			margin: 0 0 0 -7px;
 			padding: 0;
+			overflow: hidden;
 			
-			li {
+			> li {
 				position: relative;
 				float: left;
-				overflow: hidden; 
-				margin: 0 0 0 0;
+				margin: 0;
 				padding: 0;
-				list-style: none; }
+				list-style: none;
+				overflow: hidden; }
 			
-				li a {
-					margin: 0 0 0 5px; // 0 6px 0 0
+				> li a.topcat {
+					position: relative;
 					float: left;
-					text-decoration: none; }
-				
-				a.topcat { 
-					font-size: 19px;
+					margin: 0 0 0 7px; // 0 6px 0 0
+					text-decoration: none;
+					font-size: 26px;
 					font-weight: bold;
 					font-style: italic; }
-					
-				a.subcat {
-					display: none;
-					color: gray;
-					font-size: 19px;
-					font-weight: bold;					
-					font-style: italic;
-					text-transform: uppercase; }
-							
+																
 			li.current-menu-item {}
 			
 		}
 		
+		ul.primary-menu-sub {
+			display: none;
+			position: relative;
+			float: left;
+			margin: 0;
+			padding: 0;
+			white-space: nowrap;
+			
+			> li {
+				display: inline;
+				margin: 0 0 0 5px;
+				padding: 0;
+				list-style: none;
+				overflow: hidden; }
+				
+				> li a.subcat {
+					margin: 0;
+					color: gray;
+					text-decoration: none;				
+					font-size: 26px;
+					font-weight: bold;					
+					font-style: italic;
+					text-transform: uppercase; }
+		}
+		
+		.shopping-bag {
+			margin: 40px 10px 0 0;
+			float: right;
+			height: 69px;
+			text-align: right; }
+		
+			.shopping-bag .shopping {
+				float: right;
+				font-size: 17px;
+				clear: both; }
+
+			.shopping-bag .items {
+				float: right;
+				font-size: 33px;
+				clear: both; }
+		
 		.fb-like {
-			display: none; }
+			margin: 13px 10px 0 0;
+			float: right; }
 
 
 /**
@@ -91,8 +135,9 @@ body {
 	width: 100%; }
 	
 	#content {
-		margin: 0 50px;
-		border-top: 3px #000 solid; }
+		//margin: 0 50px;
+		//border-top: 3px #000 solid;
+		}
 	
 		#grid {
 			//@include column($grid-columns, true);

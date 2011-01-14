@@ -124,9 +124,9 @@ class ControllerProductAll extends Controller {
            			'price'   => $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax'))),
 					'special' => $special,
 					'href'    => $this->model_tool_seo_url->rewrite((HTTP_SERVER . 'index.php?route=product/product' . $url . '&product_id=' . $result['product_id'])),
-					'add'     => $add
-					//, 'category_id'     => $result['category_id']
-       			);
+					'add'     => $add, 
+					//'category'=> $result['category_id']
+       			);       			
         	}
 
 			if (!$this->config->get('config_customer_price')) {

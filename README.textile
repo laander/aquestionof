@@ -1,0 +1,23 @@
+Version: 0.2.1
+
+New A Question Of site/shop relaunch, built on Wordpress and OpenCart.
+
+*Contributors:*
+S¿ren Louv-Jansen and Lasse Boisen Andersen perform as both core developers and coordinators.
+
+*Requirements:*
+Preferably PHP5 and MySQL on an Apache server with mod_rewrite enabled.
+
+*Installation:*
+1. Download/fork/fetch the full repository from GitHub
+2. Import MySQL databased for WP and OC using: aquestionof-oc.sql + aquestionof-wp.sql
+3. Change the following value in OC DB to reflect current site URL
+	Table: setting
+	Entry: config_url
+4. Change the following the WP DB with new URLs
+	Table: wp-options
+	Entry: siteurl
+	Entry: home
+4. Change configuration settings for OC in config.php and admin/config.php (if needed)
+5. Change configuration settings for WP in wp-config.php
+6. Update the .htaccess manually for WP with the correct URL or go to wp-admin and re-update the permalinks settings

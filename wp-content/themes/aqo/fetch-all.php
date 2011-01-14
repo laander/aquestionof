@@ -11,7 +11,7 @@
 <?php 
 	// Retrieve product items from OC and save to unserialized array
 	// Fetch content with CURL
-	$products_url = 'http://' . $_SERVER['HTTP_HOST'] . '/aquestionof/shop/index.php?route=product/all&type=array'; 
+	$products_url = site_url() . '/shop/index.php?route=product/all&type=array'; 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $products_url); 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -62,6 +62,13 @@
 			</div>' . "\n";
 			
 	endwhile; endif;
+	
+	$items[] = '
+			<div id="post-fbbox" class="box col6 row8" style="background-color: #000">
+				<a href="#">
+					<iframe id="f1614db9d8" name="f619b271" scrolling="no" style="border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; border-width: initial; border-color: initial; overflow-x: hidden; overflow-y: hidden; height: 390px; width: 230px; " class="fb_ltr" src="http://www.facebook.com/plugins/likebox.php?api_key=113869198637480&amp;channel=http%3A%2F%2Fstatic.ak.fbcdn.net%2Fconnect%2Fxd_proxy.php%23cb%3Df148b6f924%26origin%3Dhttp%253A%252F%252Fdevelopers.facebook.com%252Ff19c251008%26relation%3Dparent.parent%26transport%3Dpostmessage&amp;colorscheme=dark&amp;header=false&amp;height=390&amp;href=http%3A%2F%2Ffacebook.com%2Faquestionof&amp;locale=en_US&amp;sdk=joey&amp;show_faces=false&amp;stream=true&amp;width=230"></iframe>
+				</a>
+			</div>' . "\n";
 	
 	// Shuffle the OC and WP items and echo to page
 	shuffle($items);
