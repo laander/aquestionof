@@ -24,7 +24,12 @@ $(document).ready(function() { // To be run when DOM is loaded
 	
 		$current = $(this).next("ul.primary-menu-sub");
 		$current.animate({width: "show", opacity: 1}, {queue: false, duration: 1000});
-		$("ul.primary-menu-sub").not($current).animate({width: "hide", opacity: 0}, {queue: false, duration: 1000});
+		$("ul.primary-menu-sub").not($current).animate(
+			{width: "1", opacity: 0}, 
+			{queue: false, duration: 1000, complete: function() {
+				$(this).removeAttr('style')
+			}
+		});
 	
 /*	
 		//$("a.subcat").hide();
