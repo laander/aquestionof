@@ -6,46 +6,14 @@ var gridElementSpecific = gridContainer + " " + gridElement;
 var menuGridButton = "a.gridButton";
 var loadingIcon = "#loader";
 var gridColumnWidth = 40;
-
-// SCRIPT
 var elmBusy = false;
-$(document).ready(function() { // To be run when DOM is loaded
+
+// To be run first!!! Will initiate the effect and keep track of changes etc.
+function initMasonryEffect() {
 
 	$allElm = $(gridElementSpecific); // Get all elements from DOM and set allElm variable
 	$allElm.hide(); // Hide html elements prelimenary 
 	$allElm.css('position', 'absolute'); // Positions elements absolutely
-
-/*	
-	// Fade other elements when one is hovered
-	var timeoutFader;
-	$allElm.live('mouseover mouseout', function(event) {
-		if(elmBusy == false) {
-			if (event.type == 'mouseover') {
-				window.clearTimeout(timeoutFader);
-				$(this).stop(true, false).fadeTo(500, 1);
-				$(gridElementSpecific).not(this).stop(true, false).fadeTo(500, 0.7);
-			} else {
-				timeoutFader = window.setTimeout(function () {
-					$(gridElementSpecific).not(this).stop(true, false).fadeTo(800, 1);
-				}, 400);
-				
-		  	}
-		}
-	});
-*/
-
-/*	
-	// Fade other elements when one is hovered
-	$allElm.live('mouseover mouseout', function(event) {
-		if(elmBusy == false) {
-			if (event.type == 'mouseover') {
-				$(this).find(".meta").stop(true, false).fadeTo(500, 0.5);
-			} else {
-				$(this).find(".meta").stop(true, false).fadeTo(500, 1);
-		  	}
-		}
-	});
-*/
 	
 	// If the grid is present (#grid has elements), do masonry
 	if ($allElm.length != 0) {
@@ -89,7 +57,8 @@ $(document).ready(function() { // To be run when DOM is loaded
 			return false;
 		});						
 	}
-});
+
+}
 
 // Performs pre-masonry actions before the effect is run by adding/removing necessary elements
 function prepareMasonry() {

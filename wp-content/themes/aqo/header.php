@@ -16,19 +16,19 @@ hybrid_doctype(); ?>
 	<link rel="shortcut icon" type="image/ico" href="<?php echo CHILD_THEME_URI.'/library/images/favicon.ico'; ?>" />
 	<link rel="apple-touch-icon" href="<?php echo IMAGES . '/apple-touch-icon.png'; ?>" />
 
+	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/screen.css'; ?>" rel="stylesheet" media="screen" />
+	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/print.css'; ?>" rel="stylesheet" media="print" />
+
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery-1.4.4.min.js'; ?>"></script>
 	<?php hybrid_head(); // Hybrid head hook ?>
 	<?php wp_head(); // WP head hook ?>
 
-	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/screen.css'; ?>" rel="stylesheet" media="screen" />
-	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/print.css'; ?>" rel="stylesheet" media="print" />
-
-	<script type="text/javascript" src="http://cufon.shoqolate.com/js/cufon-yui.js"></script>
-	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/DIN_1451_Std_400.font.js'; ?>"></script>	
+	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.cufon/cufon-yui.js'; ?>"></script>	
+	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.cufon/DIN_1451_Std_400.font.js'; ?>"></script>	
+	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.masonry/onhashchange.min.js'; ?>"></script> 
+	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.masonry/jquery.masonry.min.js'; ?>"></script>
 	
-	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/onhashchange.min.js'; ?>"></script> 
-	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.masonry.min.js'; ?>"></script>
-	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/masonryLoad.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/masonry_init.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/screen.js'; ?>"></script>
 		
 </head>
@@ -49,8 +49,8 @@ hybrid_doctype(); ?>
 				</div>	
 				
 				<div class="shopping-bag">
-					<span class="shopping">SHOPPING BAG</span>
-					<span class="items">0 ITEMS</span>
+					<span class="shopping"><a href="<?php echo site_url() . '/shop/index.php?route=checkout/cart'; ?>">SHOPPING BAG</a></span>
+					<span class="items">0</span>
 				</div>
 				
 				<ul id="primary-menu">

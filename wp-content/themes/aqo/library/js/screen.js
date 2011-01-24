@@ -1,25 +1,22 @@
-$(document).ready(function() { // To be run when DOM is loaded
+// To be run when DOM is loaded. Initializes all effects and behaviours
+$(document).ready(function() {
 
-/*
-	// Make the specified div 'follow' when scrolling
-    var $sidebar   = $("#bar-container"),
-        $window    = $(window),
-        offset     = $sidebar.offset(),
-        topPadding = 15;
+	applyCufon();
+	masonryGridSetup();
+	springloadedMenuEffect();
+	outputCartFromOC();
 
-    $window.scroll(function() {
-        if ($window.scrollTop() > offset.top) {
-            $sidebar.stop().animate({
-                marginTop: $window.scrollTop() - offset.top + topPadding
-            }, 700);
-        } else {
-            $sidebar.stop().animate({
-                marginTop: 0
-            }, 700);
-        }
-    });	
-*/
-	//$("a.subcat").css({width: 0})
+});
+
+// Initiate the masonry grid effect
+function masonryGridSetup() {
+
+	initMasonryEffect();
+
+}
+
+// Run the necessary jQuery for the top menu
+function springloadedMenuEffect() {
 	$("a.topcat, #site-title a").click(function() {
 	
 		$current = $(this).next("ul.primary-menu-sub");
@@ -30,31 +27,24 @@ $(document).ready(function() { // To be run when DOM is loaded
 				$(this).removeAttr('style')
 			}
 		});
-	
-/*	
-		//$("a.subcat").hide();
-		var elementWidth = [];
-		var containerWidth = 0;
-		$element = $(this).parent().find("a.subcat");
-		
-		$("a.subcat").not($element).animate({width: "hide", opacity: 0}, {queue: false, duration: 1000});
-		
-		$element.each(function(index) {
-			//elementWidth[index] = $(this).width();
-			$element.css("white-space", "nowrap");		
-			$element.animate({width: "show", opacity: 1}, {queue: false, duration: 1000});
-		});		
-		//alert(elementWidth);
-		//width = $element.width();
-		//$element.show();
-		//$element.animate({width: auto});
-*/		
-		
+	});		
+}
+
+// Get cart from OpenCart in JSON, write to page and run cufon on resulting text
+function outputCartFromOC() {
+	$.ajax({
+		url: '/aqo/shop/index.php?route=custom/cart',
+		success: function(data) {
+			var json = jQuery.parseJSON(data);
+			$(".shopping-bag .items").html(json.numberOfItems);
+			Cufon.replace('.shopping-bag');
+	  }
 	});
+}
 
-});
-
-Cufon.replace('#primary-menu li a.topcat');
-Cufon.replace('#primary-menu li a.subcat');
-Cufon.replace('.shopping-bag');
-
+// Will apply custom font with cufon for supplied texts
+function applyCufon() {
+	Cufon.replace('#primary-menu li a.topcat');
+	Cufon.replace('#primary-menu li a.subcat');
+	$('body').addClass('cufoned');
+}

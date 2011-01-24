@@ -10,7 +10,21 @@
 // add_action( 'action_hook_name','custom_function_name' );
 // add_filter( 'filter_hook_name', 'custom_function_name' );
 
-/* Load newest jQuery distribution */
+// Retrieve product items from OC in JSON and return as PHP Object
+function get_all_products() {
+
+	$products_url = site_url() . '/shop/index.php?route=custom/products'; 
+
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $products_url); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	$products_json = curl_exec($ch);
+	curl_close($ch);
+	
+	return json_decode($products_json);
+}
+
+// Load newest jQuery distribution
 add_filter( 'hybrid_head', 'load_jquery', 10, 1 );
 function load_jquery() {
 	
