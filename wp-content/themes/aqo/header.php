@@ -23,12 +23,13 @@ hybrid_doctype(); ?>
 	<?php hybrid_head(); // Hybrid head hook ?>
 	<?php wp_head(); // WP head hook ?>
 
+	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.fontavailable-1.1.min.js'; ?>"></script>	
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.cufon/cufon-yui.js'; ?>"></script>	
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.cufon/DIN_1451_Std_400.font.js'; ?>"></script>	
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.masonry/onhashchange.min.js'; ?>"></script> 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.masonry/jquery.masonry.min.js'; ?>"></script>
 	
-	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/masonry_init.js'; ?>"></script>
+	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/masonry-grid.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/screen.js'; ?>"></script>
 		
 </head>
@@ -37,9 +38,10 @@ hybrid_doctype(); ?>
 	
 	<div id="body-container">
 		
-		<img id="loader" style="display:none;" src="<?php echo CHILD_THEME_URI . '/library/images/loader.gif'; ?>"/>
-		
 		<div id="header-container">
+
+			<img id="loader" style="display:none;" src="<?php echo CHILD_THEME_URI . '/library/images/loader.gif'; ?>"/>		
+		
 			<div id="header">
 						
 				<div id="site-title">
@@ -49,8 +51,10 @@ hybrid_doctype(); ?>
 				</div>	
 				
 				<div class="shopping-bag">
-					<span class="shopping"><a href="<?php echo site_url() . '/shop/index.php?route=checkout/cart'; ?>">SHOPPING BAG</a></span>
-					<span class="items">0</span>
+					<span class="text">
+						<a href="<?php echo site_url() . '/shop/index.php?route=checkout/cart'; ?>">SHOPPING BAG</a>
+					</span>
+					<span class="items"></span>
 				</div>
 				
 				<ul id="primary-menu">

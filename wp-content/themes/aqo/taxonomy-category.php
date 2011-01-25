@@ -14,9 +14,7 @@ get_header(); ?>
 
 	<div id="content" class="hfeed content">	
 
-		<div id="grid">
-			<?php include('fetch-category.php'); ?>
-		</div>
+		<?php include('masonry-grid.php'); ?>
 			
 	</div><!-- .content .hfeed -->
 

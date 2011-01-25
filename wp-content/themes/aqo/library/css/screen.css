@@ -93,7 +93,7 @@ a img {
 ************************************************/
 @font-face {
   font-family: DIN;
-  src: url("../js/jquery.cufon/DINEngschriftStd.otf");
+  src: url("../misc/DINEngschriftStd.otf");
 }
 
 /**
@@ -1497,31 +1497,32 @@ body .removed {
 * Header (logo)
 ************************************************/
 /* line 37, ../src/partials/_master.scss */
-#loader {
-  position: absolute;
-  right: 50px;
-  top: 37px;
-}
-
-/* line 42, ../src/partials/_master.scss */
 #header-container {
+  position: relative;
   height: 185px;
   width: 100%;
   overflow: hidden;
 }
 
-/* line 51, ../src/partials/_master.scss */
+/* line 43, ../src/partials/_master.scss */
+#loader {
+  position: absolute;
+  left: 500px;
+  top: 60px;
+}
+
+/* line 52, ../src/partials/_master.scss */
 #site-title {
   float: left;
   margin-top: 40px;
 }
 
-/* line 55, ../src/partials/_master.scss */
+/* line 56, ../src/partials/_master.scss */
 #site-title a img {
   width: 470px;
 }
 
-/* line 58, ../src/partials/_master.scss */
+/* line 59, ../src/partials/_master.scss */
 ul#primary-menu {
   float: left;
   clear: left;
@@ -1530,7 +1531,7 @@ ul#primary-menu {
   padding: 0;
   overflow: hidden;
 }
-/* line 66, ../src/partials/_master.scss */
+/* line 67, ../src/partials/_master.scss */
 ul#primary-menu > li {
   position: relative;
   float: left;
@@ -1539,17 +1540,18 @@ ul#primary-menu > li {
   list-style: none;
   overflow: hidden;
 }
-/* line 74, ../src/partials/_master.scss */
+/* line 75, ../src/partials/_master.scss */
 ul#primary-menu > li a.topcat {
   position: relative;
   float: left;
   margin: 0 0 0 7px;
   text-decoration: none;
-  font-size: 18px;
+  font-family: DIN;
+  font-size: 26px;
   text-transform: uppercase;
 }
 
-/* line 87, ../src/partials/_master.scss */
+/* line 89, ../src/partials/_master.scss */
 ul.primary-menu-sub {
   display: none;
   position: relative;
@@ -1558,7 +1560,7 @@ ul.primary-menu-sub {
   padding: 0;
   white-space: nowrap;
 }
-/* line 95, ../src/partials/_master.scss */
+/* line 97, ../src/partials/_master.scss */
 ul.primary-menu-sub > li {
   display: inline;
   margin: 0 0 0 5px;
@@ -1566,22 +1568,17 @@ ul.primary-menu-sub > li {
   list-style: none;
   overflow: hidden;
 }
-/* line 102, ../src/partials/_master.scss */
+/* line 104, ../src/partials/_master.scss */
 ul.primary-menu-sub > li a.subcat {
   margin: 0;
   color: gray;
   text-decoration: none;
-  font-size: 18px;
+  font-family: DIN;
+  font-size: 26px;
   text-transform: uppercase;
 }
 
-/* line 111, ../src/partials/_master.scss */
-.cufoned ul#primary-menu > li a.topcat,
-.cufoned ul.primary-menu-sub > li a.subcat {
-  font-size: 26px;
-}
-
-/* line 115, ../src/partials/_master.scss */
+/* line 113, ../src/partials/_master.scss */
 .shopping-bag {
   margin: 40px 10px 0 0;
   float: right;
@@ -1589,32 +1586,28 @@ ul.primary-menu-sub > li a.subcat {
   text-align: right;
 }
 
-/* line 121, ../src/partials/_master.scss */
-.shopping-bag .shopping a {
+/* line 119, ../src/partials/_master.scss */
+.shopping-bag .text {
   float: right;
   clear: both;
-  font-size: 15px;
+}
+
+/* line 123, ../src/partials/_master.scss */
+.shopping-bag .text a {
+  font-size: 26px;
+  font-family: DIN;
   text-decoration: none;
 }
 
-/* line 126, ../src/partials/_master.scss */
-.cufoned .shopping-bag .shopping a {
-  font-size: 26px;
-}
-
-/* line 129, ../src/partials/_master.scss */
+/* line 128, ../src/partials/_master.scss */
 .shopping-bag .items {
   float: right;
-  font-size: 26px;
+  font-family: DIN;
+  font-size: 33px;
   clear: both;
 }
 
-/* line 133, ../src/partials/_master.scss */
-.cufoned .shopping-bag .items {
-  font-size: 33px;
-}
-
-/* line 136, ../src/partials/_master.scss */
+/* line 134, ../src/partials/_master.scss */
 .fb-like {
   margin: 13px 10px 0 0;
   float: right;
@@ -1623,40 +1616,76 @@ ul.primary-menu-sub > li a.subcat {
 /**
 * Main content area
 ************************************************/
-/* line 145, ../src/partials/_master.scss */
+/* line 142, ../src/partials/_master.scss */
 #content-container {
   width: 100%;
 }
 
-/* line 152, ../src/partials/_master.scss */
-.hentry h1 {
-  font-size: 20px;
-}
-/* line 154, ../src/partials/_master.scss */
+/* line 149, ../src/partials/_master.scss */
 .hentry .featured-image {
   display: inline;
   float: left;
   margin-right: 10px;
-  width: 230px;
+  width: 310px;
   overflow: hidden;
 }
 /* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .hentry .featured-image {
   overflow-x: hidden;
 }
-/* line 160, ../src/partials/_master.scss */
+/* line 153, ../src/partials/_master.scss */
+.hentry .entry-content {
+  margin-left: 330px;
+  *zoom: 1;
+}
+/* line 22, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.hentry .entry-content:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+/* line 157, ../src/partials/_master.scss */
+.hentry .entry-content h1 {
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 26px;
+  font-family: DIN;
+}
+/* line 163, ../src/partials/_master.scss */
+.hentry .related-post-title {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+  float: right;
+  margin-bottom: 15px;
+  font-size: 26px;
+  font-family: DIN;
+  text-transform: uppercase;
+  line-height: 1;
+}
+/* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .hentry .related-post-title {
+  overflow-x: hidden;
+}
+/* line 172, ../src/partials/_master.scss */
 .hentry .related-post {
   display: inline;
   float: left;
   margin-right: 10px;
   width: 230px;
   float: right;
+  clear: right;
+  margin-left: 20px;
 }
 /* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .hentry .related-post {
   overflow-x: hidden;
 }
-/* line 164, ../src/partials/_master.scss */
+/* line 178, ../src/partials/_master.scss */
 .hentry .related-product {
   display: inline;
   float: left;
@@ -1664,19 +1693,20 @@ ul.primary-menu-sub > li a.subcat {
   width: 230px;
   float: right;
   clear: right;
+  margin-left: 40px;
 }
 /* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .hentry .related-product {
   overflow-x: hidden;
 }
 
-/* line 171, ../src/partials/_master.scss */
+/* line 186, ../src/partials/_master.scss */
 #grid {
   margin: 0;
   padding: 0;
 }
 
-/* line 177, ../src/partials/_master.scss */
+/* line 192, ../src/partials/_master.scss */
 .box {
   position: relative;
   float: left;
@@ -1685,7 +1715,7 @@ ul.primary-menu-sub > li a.subcat {
   margin-bottom: 10px;
 }
 
-/* line 184, ../src/partials/_master.scss */
+/* line 199, ../src/partials/_master.scss */
 .box .meta {
   position: absolute;
   bottom: 0;
@@ -1696,7 +1726,7 @@ ul.primary-menu-sub > li a.subcat {
   color: #fff;
 }
 
-/* line 194, ../src/partials/_master.scss */
+/* line 209, ../src/partials/_master.scss */
 .box .post-title,
 .box .product-title {
   position: relative;
@@ -1704,14 +1734,14 @@ ul.primary-menu-sub > li a.subcat {
   margin: 7px 7px 7px 10px;
 }
 
-/* line 199, ../src/partials/_master.scss */
+/* line 214, ../src/partials/_master.scss */
 .product-price {
   position: relative;
   float: right;
   margin: 7px 10px 7px 7px;
 }
 
-/* line 204, ../src/partials/_master.scss */
+/* line 219, ../src/partials/_master.scss */
 .box a {
   color: black;
   text-decoration: none;
@@ -1719,7 +1749,7 @@ ul.primary-menu-sub > li a.subcat {
   font-weight: normal;
 }
 
-/* line 211, ../src/partials/_master.scss */
+/* line 226, ../src/partials/_master.scss */
 .col1 {
   display: inline;
   float: left;
@@ -1731,7 +1761,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 212, ../src/partials/_master.scss */
+/* line 227, ../src/partials/_master.scss */
 .col2 {
   display: inline;
   float: left;
@@ -1743,7 +1773,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 213, ../src/partials/_master.scss */
+/* line 228, ../src/partials/_master.scss */
 .col3 {
   display: inline;
   float: left;
@@ -1755,7 +1785,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 214, ../src/partials/_master.scss */
+/* line 229, ../src/partials/_master.scss */
 .col4 {
   display: inline;
   float: left;
@@ -1767,7 +1797,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 215, ../src/partials/_master.scss */
+/* line 230, ../src/partials/_master.scss */
 .col5 {
   display: inline;
   float: left;
@@ -1779,7 +1809,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 216, ../src/partials/_master.scss */
+/* line 231, ../src/partials/_master.scss */
 .col6 {
   display: inline;
   float: left;
@@ -1791,7 +1821,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 217, ../src/partials/_master.scss */
+/* line 232, ../src/partials/_master.scss */
 .col7 {
   display: inline;
   float: left;
@@ -1803,7 +1833,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 218, ../src/partials/_master.scss */
+/* line 233, ../src/partials/_master.scss */
 .col8 {
   display: inline;
   float: left;
@@ -1815,7 +1845,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 219, ../src/partials/_master.scss */
+/* line 234, ../src/partials/_master.scss */
 .col9 {
   display: inline;
   float: left;
@@ -1827,7 +1857,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 220, ../src/partials/_master.scss */
+/* line 235, ../src/partials/_master.scss */
 .col10 {
   display: inline;
   float: left;
@@ -1839,7 +1869,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 221, ../src/partials/_master.scss */
+/* line 236, ../src/partials/_master.scss */
 .col11 {
   display: inline;
   float: left;
@@ -1851,7 +1881,7 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 222, ../src/partials/_master.scss */
+/* line 237, ../src/partials/_master.scss */
 .col12 {
   display: inline;
   float: left;
@@ -1863,133 +1893,133 @@ ul.primary-menu-sub > li a.subcat {
   overflow-x: hidden;
 }
 
-/* line 225, ../src/partials/_master.scss */
+/* line 240, ../src/partials/_master.scss */
 .row1 {
   height: 40px;
 }
 
-/* line 226, ../src/partials/_master.scss */
+/* line 241, ../src/partials/_master.scss */
 .row2 {
   height: 90px;
 }
 
-/* line 227, ../src/partials/_master.scss */
+/* line 242, ../src/partials/_master.scss */
 .row3 {
   height: 140px;
 }
 
-/* line 228, ../src/partials/_master.scss */
+/* line 243, ../src/partials/_master.scss */
 .row4 {
   height: 190px;
 }
 
-/* line 229, ../src/partials/_master.scss */
+/* line 244, ../src/partials/_master.scss */
 .row5 {
   height: 240px;
 }
 
-/* line 230, ../src/partials/_master.scss */
+/* line 245, ../src/partials/_master.scss */
 .row6 {
   height: 290px;
 }
 
-/* line 231, ../src/partials/_master.scss */
+/* line 246, ../src/partials/_master.scss */
 .row7 {
   height: 340px;
 }
 
-/* line 232, ../src/partials/_master.scss */
+/* line 247, ../src/partials/_master.scss */
 .row8 {
   height: 390px;
 }
 
-/* line 233, ../src/partials/_master.scss */
+/* line 248, ../src/partials/_master.scss */
 .row9 {
   height: 440px;
 }
 
-/* line 234, ../src/partials/_master.scss */
+/* line 249, ../src/partials/_master.scss */
 .row10 {
   height: 490px;
 }
 
-/* line 235, ../src/partials/_master.scss */
+/* line 250, ../src/partials/_master.scss */
 .row11 {
   height: 540px;
 }
 
-/* line 236, ../src/partials/_master.scss */
+/* line 251, ../src/partials/_master.scss */
 .row12 {
   height: 590px;
 }
 
-/* line 238, ../src/partials/_master.scss */
+/* line 253, ../src/partials/_master.scss */
 .row1 img {
   height: 40px;
   width: auto;
 }
 
-/* line 239, ../src/partials/_master.scss */
+/* line 254, ../src/partials/_master.scss */
 .row2 img {
   height: 90px;
   width: auto;
 }
 
-/* line 240, ../src/partials/_master.scss */
+/* line 255, ../src/partials/_master.scss */
 .row3 img {
   height: 140px;
   width: auto;
 }
 
-/* line 241, ../src/partials/_master.scss */
+/* line 256, ../src/partials/_master.scss */
 .row4 img {
   height: 190px;
   width: auto;
 }
 
-/* line 242, ../src/partials/_master.scss */
+/* line 257, ../src/partials/_master.scss */
 .row5 img {
   height: 240px;
   width: auto;
 }
 
-/* line 243, ../src/partials/_master.scss */
+/* line 258, ../src/partials/_master.scss */
 .row6 img {
   height: 290px;
   width: auto;
 }
 
-/* line 244, ../src/partials/_master.scss */
+/* line 259, ../src/partials/_master.scss */
 .row7 img {
   height: 340px;
   width: auto;
 }
 
-/* line 245, ../src/partials/_master.scss */
+/* line 260, ../src/partials/_master.scss */
 .row8 img {
   height: 390px;
   width: auto;
 }
 
-/* line 246, ../src/partials/_master.scss */
+/* line 261, ../src/partials/_master.scss */
 .row9 img {
   height: 440px;
   width: auto;
 }
 
-/* line 247, ../src/partials/_master.scss */
+/* line 262, ../src/partials/_master.scss */
 .row10 img {
   height: 490px;
   width: auto;
 }
 
-/* line 248, ../src/partials/_master.scss */
+/* line 263, ../src/partials/_master.scss */
 .row11 img {
   height: 540px;
   width: auto;
 }
 
-/* line 249, ../src/partials/_master.scss */
+/* line 264, ../src/partials/_master.scss */
 .row12 img {
   height: 590px;
   width: auto;
@@ -1999,7 +2029,7 @@ ul.primary-menu-sub > li a.subcat {
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 255, ../src/partials/_master.scss */
+/* line 270, ../src/partials/_master.scss */
 #footer-container {
   padding-top: 20px;
   clear: both;
@@ -2007,13 +2037,18 @@ ul.primary-menu-sub > li a.subcat {
 
 /* Subsidiary widget section */
 /* Footer section */
-/* line 266, ../src/partials/_master.scss */
+/* line 281, ../src/partials/_master.scss */
 #footer {
   text-align: right;
 }
 
 /* Footer extra */
-/* line 273, ../src/partials/_master.scss */
+/* line 285, ../src/partials/_master.scss */
+#footer .meta {
+  margin-bottom: 10px;
+}
+
+/* line 288, ../src/partials/_master.scss */
 #footer .cards {
   margin-bottom: 10px;
 }

@@ -16,7 +16,9 @@
 	
 			<div id="footer">
 
-				<?php hybrid_footer(); // Hybrid footer hook ?>
+				<?php // hybrid_footer(); // Hybrid footer hook ?>
+				
+				<div class="meta">A QUESTION OF © All rights reserved, P: +45 31 322 322, E-mail: info@aquestionof.dk</div>
 				
 				<div class="cards">
 					<img src="<?php echo CHILD_THEME_URI . '/library/images/cards/visa.gif'; ?>" alt="Visa" />

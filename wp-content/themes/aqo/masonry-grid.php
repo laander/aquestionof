@@ -1,15 +1,12 @@
 <?php
 /**
- * Template Name: Custom Frontpage
+ * Masonry Grid
  *
- * @package Hybrid
- * @subpackage Template
+ * Will initialize the grid with all products and posts
  */
-
-get_header(); ?>
-
-	<div id="content" class="hfeed content">	
-		<div id="grid">
+ ?>
+ 
+	<div id="grid">
 
 		<?php
 			// Get all products from OC (see functions.php)
@@ -89,7 +86,4 @@ get_header(); ?>
 			}
 		?>
 		
-		</div>
-	</div><!-- .content .hfeed -->
-
-<?php get_footer(); ?>
+	</div>

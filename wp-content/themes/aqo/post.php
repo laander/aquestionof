@@ -25,7 +25,7 @@ get_header(); ?>
 					<?php the_post_thumbnail( $post->ID, 'large' ); ?>
 				</div>
 				
-				<div class="entry-content row8">
+				<div class="entry-content">
 					
 					<?php $custom_fields = get_post_custom($post->ID); ?>
 
@@ -41,6 +41,7 @@ get_header(); ?>
 							else { $item_height = 4; }
 							
 							$related_post = '
+								<div class="related-post-title">Related</div>
 								<div class="related-post box row' . $item_height . '">
 									<a href="' . get_permalink($related_post->ID) . '">
 										'.  get_the_post_thumbnail($related_post->ID, 'large') .'
@@ -58,9 +59,7 @@ get_header(); ?>
 					
 					<?php // Related Products box
 						if (isset($custom_fields['related-product'])) { ?>
-							<div class="related-product box row4">
-								Related Product Goes Here!
-							</div>
+							<div class="related-product box"></div>
 					<?php } ?>
 													
 					<h1><?php the_title(); ?></h1>

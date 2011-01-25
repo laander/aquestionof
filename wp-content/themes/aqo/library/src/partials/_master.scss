@@ -34,15 +34,16 @@ body {
 * Header (logo)
 ************************************************/
 
-#loader {
-	position: absolute; 
-	right: 50px;
-	top: 37px; }
-
 #header-container {
+	position: relative;
 	height: 185px;
 	width: 100%;
 	overflow: hidden; }	
+
+	#loader {
+		position: absolute; 
+		left: 500px;
+		top: 60px; }
 
 	#header {
 		//margin: 0 50px;
@@ -76,7 +77,8 @@ body {
 					float: left;
 					margin: 0 0 0 7px; // 0 6px 0 0
 					text-decoration: none;
-					font-size: 18px;
+					font-family: DIN;
+					font-size: 26px;
 					text-transform: uppercase; }
 				
 																
@@ -102,41 +104,36 @@ body {
 				> li a.subcat {
 					margin: 0;
 					color: gray;
-					text-decoration: none;				
-					font-size: 18px;
+					text-decoration: none;
+					font-family: DIN;									
+					font-size: 26px;
 					text-transform: uppercase; }
 		}
-		
-		.cufoned ul#primary-menu > li a.topcat,
-		.cufoned ul.primary-menu-sub > li a.subcat {
-			font-size: 26px;		
-		}		
-		
+				
 		.shopping-bag {
 			margin: 40px 10px 0 0;
 			float: right;
 			height: 69px;
 			text-align: right; }
 		
-			.shopping-bag .shopping a {
+			.shopping-bag .text {
 				float: right;
-				clear: both;				
-				font-size: 15px;
-				text-decoration: none; }	
-			.cufoned .shopping-bag .shopping a {
-				font-size: 26px; }
+				clear: both; }
+				 
+				.shopping-bag .text a {						
+					font-size: 26px;
+					font-family: DIN;					
+					text-decoration: none; }	
 
 			.shopping-bag .items {
 				float: right;
-				font-size: 26px;
+				font-family: DIN;				
+				font-size: 33px;
 				clear: both; }
-			.cufoned .shopping-bag .items {
-				font-size: 33px; }
 		
 		.fb-like {
 			margin: 13px 10px 0 0;
 			float: right; }
-
 
 /**
 * Main content area
@@ -149,22 +146,40 @@ body {
 		
 		.hentry {
 		
-			h1 { font-size: 20px; }
-		
 			.featured-image {
-				@include column(6);
+				@include column(8);
 				overflow: hidden; }
 				
-			.entry-content {}
+			.entry-content {
+				margin-left: $grid-columnwidth * 8 + $grid-margin * 1;
+				@include pie-clearfix(); }
 				
+				.entry-content h1 {
+					margin-bottom: 15px;
+					text-transform: uppercase;
+					font-size: 26px;
+					font-family: DIN; }
+			
+			.related-post-title {
+				@include column(6);			
+				float: right;
+				margin-bottom: 15px;				
+				font-size: 26px;
+				font-family: DIN;
+				text-transform: uppercase;
+				line-height: 1; }
+								
 			.related-post {
 				@include column(6);
-				float: right; }
+				float: right;
+				clear: right;
+				margin-left: $grid-margin * 2; }
 			
 			.related-product {
 				@include column(6);		
 				float: right;
-				clear: right; }
+				clear: right;
+				margin-left: $grid-columnwidth;}
 		
 		}
 	
@@ -267,8 +282,8 @@ body {
 		text-align: right; }
 
 		/* Footer extra */
-		#footer .copyright {}
-		#footer .credit {}
+		#footer .meta {
+			margin-bottom: 10px; }
 		
 		#footer .cards {
 			margin-bottom: 10px; }

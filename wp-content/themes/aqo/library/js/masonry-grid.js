@@ -1,5 +1,4 @@
 // SETTINGS
-var base = $("base").attr("href"); // Base site url from WP html head
 var gridContainer = "#grid";
 var gridElement = "div.box";
 var gridElementSpecific = gridContainer + " " + gridElement;
