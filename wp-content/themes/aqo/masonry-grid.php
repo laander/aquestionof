@@ -14,7 +14,7 @@
 			// Loop through all items and save to  array
 			foreach($products_decoded as $product) {
 				$items[] = '
-					<div id="product-' . $product->id . '" class="box col6 row6 category-shop">
+					<div id="product-' . $product->id . '" class="box col6 row8 category-shop">
 						<a href="' . $product->href . '">
 							<img src="' . $product->thumb . '" width="230" height="320" alt="" />
 							<div class="meta">

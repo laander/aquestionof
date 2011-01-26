@@ -1,4 +1,4 @@
-/**
+	/**
  * Master (partial)
  * The default template for any page
  *
@@ -261,7 +261,9 @@ body {
 			.row9 img { height: $grid-columnwidth * 9 + $grid-margin * 8; width: auto; }
 			.row10 img { height: $grid-columnwidth * 10 + $grid-margin * 9; width: auto; }						
 			.row11 img { height: $grid-columnwidth * 11 + $grid-margin * 10; width: auto; }
-			.row12 img { height: $grid-columnwidth * 12 + $grid-margin * 11; width: auto; }			
+			.row12 img { height: $grid-columnwidth * 12 + $grid-margin * 11; width: auto; }
+			
+			.category-shop img { height: auto; width: auto; }	
 /**
 * Footer
 ************************************************/

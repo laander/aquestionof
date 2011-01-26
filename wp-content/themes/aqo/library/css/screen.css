@@ -187,7 +187,7 @@ form textarea {
 /* WP Captions [caption] */
 /* Gallery [gallery] */
 /* Avatars */
-/**
+	/**
  * Master (partial)
  * The default template for any page
  *
@@ -2025,11 +2025,17 @@ ul.primary-menu-sub > li a.subcat {
   width: auto;
 }
 
+/* line 266, ../src/partials/_master.scss */
+.category-shop img {
+  height: auto;
+  width: auto;
+}
+
 /**
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 270, ../src/partials/_master.scss */
+/* line 272, ../src/partials/_master.scss */
 #footer-container {
   padding-top: 20px;
   clear: both;
@@ -2037,18 +2043,18 @@ ul.primary-menu-sub > li a.subcat {
 
 /* Subsidiary widget section */
 /* Footer section */
-/* line 281, ../src/partials/_master.scss */
+/* line 283, ../src/partials/_master.scss */
 #footer {
   text-align: right;
 }
 
 /* Footer extra */
-/* line 285, ../src/partials/_master.scss */
+/* line 287, ../src/partials/_master.scss */
 #footer .meta {
   margin-bottom: 10px;
 }
 
-/* line 288, ../src/partials/_master.scss */
+/* line 290, ../src/partials/_master.scss */
 #footer .cards {
   margin-bottom: 10px;
 }
