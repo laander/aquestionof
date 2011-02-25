@@ -6,6 +6,8 @@
  * @subpackage Template
  */
 
+header("Expires: Wed, 9 Feb 2011 00:00:00 GMT");
+
 hybrid_doctype(); ?>
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes( 'xhtml' ); ?>>
 <head profile="<?php hybrid_profile_uri(); ?>">	
@@ -20,6 +22,7 @@ hybrid_doctype(); ?>
 	<link type="text/css" href="<?php echo CHILD_THEME_URI.'/library/css/print.css'; ?>" rel="stylesheet" media="print" />
 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery-1.4.4.min.js'; ?>"></script>
+
 	<?php hybrid_head(); // Hybrid head hook ?>
 	<?php wp_head(); // WP head hook ?>
 
@@ -28,13 +31,21 @@ hybrid_doctype(); ?>
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.cufon/DIN_1451_Std_400.font.js'; ?>"></script>	
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.masonry/onhashchange.min.js'; ?>"></script> 
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/jquery.masonry/jquery.masonry.min.js'; ?>"></script>
-	
-	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/masonry-grid.js'; ?>"></script>
+	<script type="text/javascript" src="<?php // echo CHILD_THEME_URI . '/library/js/masonry-grid.js'; ?>"></script>
 	<script type="text/javascript" src="<?php echo CHILD_THEME_URI . '/library/js/screen.js'; ?>"></script>
 		
 </head>
 
 <body class="<?php hybrid_body_class(); ?>">
+	
+<!--	
+	<div id="initializing">
+		<div class="dim"></div>
+		<div class="overlay">
+			<img src="<?php echo CHILD_THEME_URI . '/library/images/logo-overlay.png'; ?>" alt="A Question Of" />
+		</div>
+	</div>
+-->
 	
 	<div id="body-container">
 		
@@ -51,10 +62,15 @@ hybrid_doctype(); ?>
 				</div>	
 				
 				<div class="shopping-bag">
+<!--
 					<span class="text">
 						<a href="<?php echo site_url() . '/shop/index.php?route=checkout/cart'; ?>">SHOPPING BAG</a>
 					</span>
 					<span class="items"></span>
+-->
+					<span class="text">
+						<a href="http://www.aquestionofshop.com">SHOP</a>
+					</span>
 				</div>
 				
 				<ul id="primary-menu">
@@ -94,6 +110,12 @@ hybrid_doctype(); ?>
 					</li>
 					
 					<li>
+						<a class="topcat" href="http://www.aquestionofshop.com" id="cat_store">/ SHOP</a>
+						<a class="gridButton topcat" href="#">/</a>						
+					</li>
+										
+<!--
+					<li>
 						<a class="gridButton topcat" href="category/shop" id="cat_store">/ SHOP</a>
 						<ul class="primary-menu-sub">
 							<li><a class="gridButton subcat" href="shop/index.php?route=product/category&path=20">/ Female</a></li>
@@ -102,7 +124,7 @@ hybrid_doctype(); ?>
 						</ul>
 						<a class="gridButton topcat" href="category/about">/</a>						
 					</li>
-				
+-->				
 				</ul>
 								
 				<div class="fb-like">

@@ -21,8 +21,12 @@ get_header(); ?>
 
 				<?php //hybrid_before_entry(); // Before entry hook ?>
 				
-				<div class="featured-image row8">
-					<?php the_post_thumbnail( $post->ID, 'large' ); ?>
+				<div class="featured-image">
+					<?php if (class_exists('MultiPostThumbnails') && MultiPostThumbnails::has_post_thumbnail('post', 'secondary-image')) {
+						MultiPostThumbnails::the_post_thumbnail('post', 'secondary-image', NULL, 'post-secondary-image-thumbnail');					
+					} else {
+						the_post_thumbnail( $post->ID, 'large' );
+					} ?>
 				</div>
 				
 				<div class="entry-content">

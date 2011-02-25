@@ -24,6 +24,20 @@ function get_all_products() {
 	return json_decode($products_json);
 }
 
+// Create new multiple post thumbnails for the posts
+multiple_post_thumbnail();
+function multiple_post_thumbnail() {
+	if (class_exists('MultiPostThumbnails')) {
+		$thumb = new MultiPostThumbnails(array(
+			'label' => 'Sidebar Image',
+			'id' => 'secondary-image',
+			'post_type' => 'post'
+			)
+		);
+		add_image_size('post-secondary-image-thumbnail', 230, 390);
+	}
+}
+
 // Load newest jQuery distribution
 add_filter( 'hybrid_head', 'load_jquery', 10, 1 );
 function load_jquery() {
@@ -36,6 +50,7 @@ function load_jquery() {
 	
 }
 
+// Register the priority taxonomy
 add_action( 'hybrid_init', 'build_taxanomies', 1 );
 function build_taxanomies() {
 	register_taxonomy(
