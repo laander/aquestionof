@@ -91,15 +91,16 @@ function wpsc_pagination($totalpages = '', $per_page = '', $current_page = '', $
 			$totalpages = $wp_query->max_num_pages;	
 	}
 	if(empty($per_page))	
-		$per_page = get_option('wpsc_products_per_page');
+		$per_page = (int)get_option('wpsc_products_per_page');
 
-	$current_page = get_query_var('paged');	
+	$current_page = absint( get_query_var('paged') );	
 	if($current_page == 0)
 		$current_page = 1;
 
 	if(empty($page_link))
 		$page_link = wpsc_a_page_url();
 		
+	//if there is no pagination	
 	if(!get_option('permalink_structure')) {
 		$category = '?';
 		if(isset($wpsc_query->query_vars['wpsc_product_category']))
@@ -128,56 +129,116 @@ function wpsc_pagination($totalpages = '', $per_page = '', $current_page = '', $
 	// Pagination Prefix
 	$output = __('Pages: ','wpsc');
 	
-	// Should we show the FIRST PAGE link?
-	if($current_page > 1)
-		$output .= "<a href=\"". $page_link . $additional_links . "\" title=\"" . __('First Page', 'wpsc') . "\">" . __('&laquo; First', 'wpsc') . "</a>";
-
-	// Should we show the PREVIOUS PAGE link?
-	if($current_page > 2) {
-		$previous_page = $current_page - 1;	
-		$output .= " <a href=\"". $page_link .$separator. $previous_page . $additional_links . "\" title=\"" . __('Previous Page', 'wpsc') . "\">" . __('&lt; Previous', 'wpsc') . "</a>";
-	}
-	$i =$current_page - $num_paged_links;
-	$count = 1;
-	if($i <= 0) $i =1;
-	while($i < $current_page){
-		if($count <= $num_paged_links){
-			if($count == 1)
-				$output .= " <a href=\"". $page_link . $additional_links . "\" title=\"" . sprintf( __('Page %s', 'wpsc'), $i ) . " \">".$i."</a>";
+	if(get_option('permalink_structure')){
+		// Should we show the FIRST PAGE link?
+		if($current_page > 1)
+			$output .= "<a href=\"". esc_url( $page_link . $additional_links ) . "\" title=\"" . __('First Page', 'wpsc') . "\">" . __('&laquo; First', 'wpsc') . "</a>";
+	
+		// Should we show the PREVIOUS PAGE link?
+		if($current_page > 1) {
+			$previous_page = $current_page - 1;
+			if( $previous_page == 1 )
+				$output .= " <a href=\"". esc_url( $page_link . $additional_links ) . "\" title=\"" . __('Previous Page', 'wpsc') . "\">" . __('&lt; Previous', 'wpsc') . "</a>";
 			else
-				$output .= " <a href=\"". $page_link .$separator. $i . $additional_links . "\" title=\"" . sprintf( __('Page %s', 'wpsc'), $i ) . " \">".$i."</a>";
+				$output .= " <a href=\"". esc_url( $page_link .$separator. $previous_page . $additional_links ) . "\" title=\"" . __('Previous Page', 'wpsc') . "\">" . __('&lt; Previous', 'wpsc') . "</a>";
 		}
-		$i++;
-		$count++;
-	}
-	// Current Page Number	
-	if($current_page > 0)
-		$output .= "<span class='current'>$current_page</span>";
-
-	//Links after Current Page
-	$i = $current_page + $num_paged_links;
-	$count = 1;
-
-	if($current_page < $totalpages){
-		while(($i) > $current_page){
-	
-			if($count < $num_paged_links && ($count+$current_page) <= $totalpages){
-					$output .= " <a href=\"". $page_link .$separator. ($count+$current_page) .$additional_links . "\" title=\"" . sprintf( __('Page %s', 'wpsc'), ($count+$current_page) ) . "\">".($count+$current_page)."</a>";		
-			$i++;
-			}else{
-			break;
+		$i =$current_page - $num_paged_links;
+		$count = 1;
+		if($i <= 0) $i =1;
+		while($i < $current_page){
+			if($count <= $num_paged_links){
+				if($count == 1)
+					$output .= " <a href=\"". esc_url( $page_link . $additional_links ) . "\" title=\"" . sprintf( __('Page %s', 'wpsc'), $i ) . " \">".$i."</a>";
+				else
+					$output .= " <a href=\"". esc_url( $page_link .$separator. $i . $additional_links ) . "\" title=\"" . sprintf( __('Page %s', 'wpsc'), $i ) . " \">".$i."</a>";
 			}
-			$count ++;
+			$i++;
+			$count++;
 		}
-	}
+		// Current Page Number	
+		if($current_page > 0)
+			$output .= "<span class='current'>$current_page</span>";
 	
-	if($current_page < $totalpages) {
-		$next_page = $current_page + 1;
-		$output .= "<a href=\"". $page_link  .$separator. $next_page . $additional_links . "\" title=\"" . __('Next Page', 'wpsc') . "\">" . __('Next &gt;', 'wpsc') . "</a>";
-	}
-	// Should we show the LAST PAGE link?
-	if($current_page < $totalpages) {
-		$output .= "<a href=\"". $page_link  .$separator. $totalpages . $additional_links . "\" title=\"" . __('Last Page', 'wpsc') . "\">" . __('Last &raquo;', 'wpsc') . "</a>";
+		//Links after Current Page
+		$i = $current_page + $num_paged_links;
+		$count = 1;
+	
+		if($current_page < $totalpages){
+			while(($i) > $current_page){
+		
+				if($count < $num_paged_links && ($count+$current_page) <= $totalpages){
+						$output .= " <a href=\"". esc_url( $page_link .$separator. ($count+$current_page) .$additional_links ) . "\" title=\"" . sprintf( __('Page %s', 'wpsc'), ($count+$current_page) ) . "\">".($count+$current_page)."</a>";		
+				$i++;
+				}else{
+				break;
+				}
+				$count ++;
+			}
+		}
+		
+		if($current_page < $totalpages) {
+			$next_page = $current_page + 1;
+			$output .= "<a href=\"". esc_url( $page_link  .$separator. $next_page . $additional_links ) . "\" title=\"" . __('Next Page', 'wpsc') . "\">" . __('Next &gt;', 'wpsc') . "</a>";
+		}
+		// Should we show the LAST PAGE link?
+		if($current_page < $totalpages) {
+			$output .= "<a href=\"". esc_url( $page_link  .$separator. $totalpages . $additional_links ) . "\" title=\"" . __('Last Page', 'wpsc') . "\">" . __('Last &raquo;', 'wpsc') . "</a>";
+		}
+	} else {
+		// Should we show the FIRST PAGE link?
+		if($current_page > 1)
+			$output .= "<a href=\"". remove_query_arg('paged' ) . "\" title=\"" . __('First Page', 'wpsc') . "\">" . __('&laquo; First', 'wpsc') . "</a>";
+
+		// Should we show the PREVIOUS PAGE link?
+		if($current_page > 1) {
+			$previous_page = $current_page - 1;	
+			if( $previous_page == 1 )
+				$output .= " <a href=\"". remove_query_arg( 'paged' ) . $additional_links . "\" title=\"" . __('Previous Page', 'wpsc') . "\">" . __('&lt; Previous', 'wpsc') . "</a>";
+			else
+				$output .= " <a href=\"". add_query_arg( 'paged', ($current_page - 1) ) . $additional_links . "\" title=\"" . __('Previous Page', 'wpsc') . "\">" . __('&lt; Previous', 'wpsc') . "</a>";
+		}
+		$i =$current_page - $num_paged_links;
+		$count = 1;
+		if($i <= 0) $i =1;
+		while($i < $current_page){
+			if($count <= $num_paged_links){
+				if($i == 1)
+					$output .= " <a href=\"". remove_query_arg('paged' ) . "\" title=\"" . sprintf( __('Page %s', 'wpsc'), $i ) . " \">".$i."</a>";
+				else
+					$output .= " <a href=\"". add_query_arg('paged', $i ) . "\" title=\"" . sprintf( __('Page %s', 'wpsc'), $i ) . " \">".$i."</a>";
+			}
+			$i++;
+			$count++;
+		}
+		// Current Page Number	
+		if($current_page > 0)
+			$output .= "<span class='current'>$current_page</span>";
+	
+		//Links after Current Page
+		$i = $current_page + $num_paged_links;
+		$count = 1;
+	
+		if($current_page < $totalpages){
+			while(($i) > $current_page){
+		
+				if($count < $num_paged_links && ($count+$current_page) <= $totalpages){
+						$output .= " <a href=\"". add_query_arg( 'paged', ($count+$current_page) ) . "\" title=\"" . sprintf( __('Page %s', 'wpsc'), ($count+$current_page) ) . "\">".($count+$current_page)."</a>";		
+				$i++;
+				}else{
+				break;
+				}
+				$count ++;
+			}
+		}
+		
+		if($current_page < $totalpages) {
+			$next_page = $current_page + 1;
+			$output .= "<a href=\"". add_query_arg( 'paged', $next_page ) . "\" title=\"" . __('Next Page', 'wpsc') . "\">" . __('Next &gt;', 'wpsc') . "</a>";
+		}
+		// Should we show the LAST PAGE link?
+		if($current_page < $totalpages) {
+			$output .= "<a href=\"". add_query_arg( 'paged', $totalpages ) . "\" title=\"" . __('Last Page', 'wpsc') . "\">" . __('Last &raquo;', 'wpsc') . "</a>";
+		}
 	}
 	// Return the output.
 	echo $output;
@@ -293,7 +354,7 @@ function wpsc_product_variation_price_available($product_id){
 			`p`.`post_type`= "wpsc-product"
 			AND
 			`p`.`post_parent` = ' . $product_id . '
-			AND
+			AND 
 			`pm`.`meta_key` = "_wpsc_price"
 			AND 
 			`p`.`ID` IN (
@@ -397,8 +458,10 @@ function wpsc_display_categories() {
 		// if we have no categories, and no search, show the group list
 		if ( is_numeric( get_option( 'wpsc_default_category' ) ) || (isset( $product_id ) && is_numeric( $product_id )) || (isset( $_GET['product_search'] ) && $_GET['product_search'] != '') )
 			$output = true;
-
-		if ( (get_option( 'wpsc_default_category' ) == 'all+list') || (get_option( 'wpsc_default_category' ) == 'list') )
+		if ( (get_option( 'wpsc_default_category' ) == 'all+list'))
+			$output = true;
+	
+		if (get_option( 'wpsc_default_category' ) == 'list' && (!isset($wp_query->query_vars['wpsc_product_category']) || !isset($wp_query->query_vars['product_tag']) && get_option('wpsc_display_categories'))) 
 			$output = true;
 
 	}
@@ -407,6 +470,7 @@ function wpsc_display_categories() {
 		$output = false;
 	if ( get_option( 'wpsc_display_categories' ))
 		$output = true;
+
 	return $output;
 }
 
@@ -512,24 +576,10 @@ function wpsc_current_category_name() {
  * @return string - the class of the selected category
  */
 function wpsc_category_transition() {
-	global $wpdb, $wp_query, $wpsc_query;
-	$current_category_id = null;
-	$previous_category_id = null;
-	$current_product_index = (int)$wp_query->current_post;
-	$previous_product_index = ((int)$wp_query->current_post - 1);
-
-	if ( $previous_product_index >= 0 && isset($wp_query->posts[$previous_product_index]->term_id))
-		$previous_category_id = $wp_query->posts[$previous_product_index]->term_id;
-	else
-		$previous_category_id = 0;
-
-	if(isset($wp_query->post->term_id))
-		$current_category_id = $wp_query->post->term_id;
-	if (( $current_category_id != $previous_category_id )&& $previous_category_id != null)
-		return true;
-	else
-		return false;
-
+	//removed because it was not working in 3.8 RC2 see first changest after
+	//http://plugins.trac.wordpress.org/changeset/357529/wp-e-commerce/
+	return false;
+	
 }
 /**
  * wpsc show fb like function, check whether to show facebook like
@@ -628,7 +678,7 @@ function wpsc_the_product_title() {
  * @return string - the product description
  */
 function wpsc_the_product_description() {
-	$content = get_the_content( 'Read the rest of this entry &raquo;' );
+	$content = get_the_content( __( 'Read the rest of this entry &raquo;', 'wpsc' ) );
 	return wpautop($content,1);
 }
 
@@ -668,7 +718,7 @@ function wpsc_product_external_link( $id = null ) {
 	$product_meta = get_post_meta( $id, '_wpsc_product_metadata', true );
 	if ( isset( $product_meta['external_link'] ) ) {
 		$external_link = $product_meta['external_link'];
-		return $external_link;
+		return esc_url( $external_link );
 	}
 }
 
@@ -691,7 +741,7 @@ function wpsc_product_external_link_text( $id = null, $default = null ) {
 	if ( isset( $product_meta['external_link_text'] ) && !empty( $product_meta['external_link_text'] ) ) {
 		$external_link_text = $product_meta['external_link_text'];
 	}
-	return $external_link_text;
+	return esc_html( $external_link_text );
 }
 
 /**
@@ -708,7 +758,7 @@ function wpsc_product_external_link_target( $id = null, $external_link_target = 
 	if ( isset( $product_meta['external_link_target'] ) && !empty( $product_meta['external_link_target'] ) ) {
 		$external_link_target = $product_meta['external_link_target'];
 	}
-	return $external_link_target;
+	return esc_attr( $external_link_target );
 }
 
 /**
@@ -723,7 +773,7 @@ function wpsc_product_sku( $id = null ) {
 
 	$product_sku = get_post_meta( $id, '_wpsc_sku', true );
 
-	return $product_sku;
+	return esc_attr( $product_sku );
 }
 
 /**
@@ -862,7 +912,7 @@ function wpsc_product_remaining_stock( $id = null ) {
 
 	if ( is_numeric( $is_limited_stock ) ) {
 		$product_stock = get_post_meta( $id, '_wpsc_stock', true );
-		return $product_stock;
+		return absint( $product_stock );
 	} else {
 		return null;
 	}
@@ -968,7 +1018,7 @@ function wpsc_product_postage_and_packaging() {
 		$id = get_the_ID();
 
 	$product_meta = get_post_meta( $id, '_wpsc_product_metadata', true );
-	if ( is_array( $product_meta['shipping'] ) &&  1 != $product_meta['no_shipping'])
+	if ( isset(  $product_meta['shipping'] ) && is_array( $product_meta['shipping'] ) &&  1 != $product_meta['no_shipping'])
 		return wpsc_currency_display( $product_meta['shipping']['local'] );
 	else
 		return wpsc_currency_display( 0 );
@@ -982,7 +1032,7 @@ function wpsc_product_postage_and_packaging() {
  */
 function wpsc_product_normal_price($forRSS = false) {
 	global $wpsc_query, $wpdb, $wpsc_variations;
-	if ( count( $wpsc_variations->first_variations ) > 0 ) {
+	if ( is_object($wpsc_variations) && count( $wpsc_variations->first_variations ) > 0 ) {
 		//select the variation ID with lovest price
 		$product_id = $wpdb->get_var('SELECT `posts`.`id` FROM ' . $wpdb->posts . ' `posts` JOIN ' . $wpdb->postmeta . ' `postmeta` ON `posts`.`id` = `postmeta`.`post_id` WHERE `posts`.`post_parent` = ' . get_the_ID() . ' AND `posts`.`post_type` = "wpsc-product" AND `posts`.`post_status` = "inherit" AND `postmeta`.`meta_key`="_wpsc_price" ORDER BY (`postmeta`.`meta_value`)+0 ASC LIMIT 1');
 		$from = ' from ';
@@ -1186,7 +1236,7 @@ function wpsc_product_comments() {
 
 		if ( (get_option( 'wpsc_comments_which_products' ) == 1 && $enable_for_product == '') || $enable_for_product == 'yes' ) {
 			$output = "<script>
-				var idcomments_acct = '" . get_option( 'wpsc_intense_debate_account_id' ) . "';
+				var idcomments_acct = '" . esc_js( get_option( 'wpsc_intense_debate_account_id' ) ) . "';
 				var idcomments_post_id = 'product_" . $wpsc_query->product['id'] . "';
 				var idcomments_post_url = encodeURIComponent('" . wpsc_product_url( $wpsc_query->product['id'], null, false ) . "');
 				</script>
@@ -1204,7 +1254,7 @@ function wpsc_product_comments() {
  */
 function wpsc_have_custom_meta() {
 	global $wpsc_custom_meta;
-	return $wpsc_custom_meta->have_custom_meta();
+	return esc_html( $wpsc_custom_meta->have_custom_meta() );
 }
 
 /**
@@ -1213,7 +1263,7 @@ function wpsc_have_custom_meta() {
  */
 function wpsc_the_custom_meta() {
 	global $wpsc_custom_meta;
-	return $wpsc_custom_meta->the_custom_meta();
+	return esc_html( $wpsc_custom_meta->the_custom_meta() );
 }
 
 /**
@@ -1222,7 +1272,7 @@ function wpsc_the_custom_meta() {
  */
 function wpsc_custom_meta_name() {
 	global $wpsc_custom_meta;
-	return $wpsc_custom_meta->custom_meta_values['meta_key'];
+	return esc_html( $wpsc_custom_meta->custom_meta_values['meta_key'] );
 }
 
 /**
@@ -1231,7 +1281,7 @@ function wpsc_custom_meta_name() {
  */
 function wpsc_custom_meta_value() {
 	global $wpsc_custom_meta;
-	return $wpsc_custom_meta->custom_meta_values['meta_value'];
+	return esc_html( $wpsc_custom_meta->custom_meta_values['meta_value'] );
 }
 
 /**

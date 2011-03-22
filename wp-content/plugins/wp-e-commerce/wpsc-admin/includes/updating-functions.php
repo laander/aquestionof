@@ -13,7 +13,7 @@
  * @return void
  */
 function wpsc_convert_category_groups() {
-	global $wpdb, $wp_rewrite, $user_ID;
+	global $wpdb, $user_ID;
 
 	//if they're updating from 3.6, and they've got categories with no group, let's fix that problem, eh?
  	$categorisation_groups = $wpdb->get_results("SELECT * FROM `".WPSC_TABLE_CATEGORISATION_GROUPS."` WHERE `active` IN ('1')");
@@ -58,7 +58,7 @@ _get_term_hierarchy('wpsc_product_category');
  * @return void
  */
 function wpsc_convert_categories($new_parent_category, $group_id, $old_parent_category = 0) {
-	global $wpdb, $wp_rewrite, $user_ID;
+	global $wpdb, $user_ID;
 	
 	if($old_parent_category > 0) {
 		$categorisation = $wpdb->get_results("SELECT * FROM `".WPSC_TABLE_PRODUCT_CATEGORIES."` WHERE `active` IN ('1') AND `group_id` IN ('{$group_id}') AND `category_parent` IN ('{$old_parent_category}')");
@@ -109,7 +109,7 @@ function wpsc_convert_categories($new_parent_category, $group_id, $old_parent_ca
 }
 
 function wpsc_convert_variation_sets() {
-	global $wpdb, $wp_rewrite, $user_ID;
+	global $wpdb, $user_ID;
 	$variation_sets = $wpdb->get_results("SELECT * FROM `".WPSC_TABLE_PRODUCT_VARIATIONS."`");
 	
 	foreach((array)$variation_sets as $variation_set) {
@@ -153,7 +153,7 @@ function wpsc_convert_variation_sets() {
  * @return void
  */
 function wpsc_convert_products_to_posts() {
-  global $wpdb, $wp_rewrite, $user_ID;
+  global $wpdb, $user_ID;
   // Select all products
   
 	$product_data = $wpdb->get_results("SELECT `".WPSC_TABLE_PRODUCT_LIST."`. * , `".WPSC_TABLE_PRODUCT_ORDER."`.order FROM `".WPSC_TABLE_PRODUCT_LIST."` LEFT JOIN `".WPSC_TABLE_PRODUCT_ORDER."` ON `".WPSC_TABLE_PRODUCT_LIST."`.id = `".WPSC_TABLE_PRODUCT_ORDER."`.product_id WHERE `".WPSC_TABLE_PRODUCT_LIST."`.`active` IN ( '1' )
@@ -161,7 +161,7 @@ GROUP BY ".WPSC_TABLE_PRODUCT_LIST.".id", ARRAY_A);
 	foreach((array)$product_data as $product) {
 		$post_id = (int)$wpdb->get_var($wpdb->prepare( "SELECT `post_id` FROM `{$wpdb->postmeta}` WHERE meta_key = %s AND `meta_value` = %d LIMIT 1", '_wpsc_original_id', $product['id'] ));
 		
-		$sku = get_product_meta($product['id'], 'sku', true);
+		$sku = old_get_product_meta($product['id'], 'sku', true);
 
 		if($post_id == 0) {
 			$post_status = "publish";
@@ -228,7 +228,7 @@ GROUP BY ".WPSC_TABLE_PRODUCT_LIST.".id", ARRAY_A);
 		$post_data['_wpsc_product_metadata']['is_stock_limited'] = (int)(bool)$product['quantity_limited'];
 		
 		// Product Weight
-		$post_data['_wpsc_product_metadata']['weight'] = wpsc_convert_weight($product['weight'], $product['weight_unit'], "pound");
+		$post_data['_wpsc_product_metadata']['weight'] = wpsc_convert_weight($product['weight'], $product['weight_unit'], "pound", true);
 		$post_data['_wpsc_product_metadata']['weight_unit'] = $product['weight_unit'];
 		$post_data['_wpsc_product_metadata']['display_weight_as'] = $product['weight_unit'];
 		
@@ -371,7 +371,7 @@ function wpsc_convert_variation_combinations() {
 
 		// select the variation set associations
 		$variation_set_associations = $wpdb->get_col("SELECT `variation_id` FROM ".WPSC_TABLE_VARIATION_ASSOC." WHERE `associated_id` = '{$original_id}'");
-
+		//echo '$variation_set_associations<pre>'.print_r($variation_set_associations,1).'</pre>';
 		// select the variation associations if the count of variation sets is greater than zero
 		if(($original_id > 0) && (count($variation_set_associations) > 0)) {
 			$variation_associations = $wpdb->get_col("SELECT `value_id` FROM ".WPSC_TABLE_VARIATION_VALUES_ASSOC." WHERE `product_id` = '{$original_id}' AND `variation_id` IN(".implode(", ", $variation_set_associations).") AND `visible` IN ('1')");
@@ -379,7 +379,7 @@ function wpsc_convert_variation_combinations() {
 			// otherwise, we have no active variations, skip to the next product
 			continue;
 		}
-		
+	
 		foreach($variation_set_associations as $variation_set_id) {
 			$base_product_terms[] = wpsc_get_meta($variation_set_id, 'variation_set_id', 'wpsc_variation_set');
 		}
@@ -414,22 +414,23 @@ function wpsc_convert_variation_combinations() {
 			$product_values = $child_product_template;
 			
 			// select all values this "product" is associated with, then loop through them, getting the term id of the variation using the value ID
-			$variation_associations = $wpdb->get_results("SELECT * FROM ".WPSC_TABLE_VARIATION_COMBINATIONS." WHERE `priceandstock_id` = '{$variation_item->id}'");
-			foreach((array)$variation_associations as $association) {
+			$variation_associations_combinations = $wpdb->get_results("SELECT * FROM ".WPSC_TABLE_VARIATION_COMBINATIONS." WHERE `priceandstock_id` = '{$variation_item->id}'");
+			foreach((array)$variation_associations_combinations as $association) {
 				$variation_id = (int)wpsc_get_meta($association->value_id, 'variation_id', 'wpsc_variation');
 				// discard any values that are null, as they break the selecting of the terms
-				if($variation_id > 0) {
+				if($variation_id > 0 && in_array($association->value_id, $variation_associations) ) {
 					$variation_ids[] = $variation_id;
 				}
 			} 
 			
 			// if we have more than zero remaining terms, get the term data, then loop through it to convert it to a more useful set of arrays.
-			if(count($variation_ids) > 0) {
+			if(count($variation_ids) > 0 && ( count($variation_set_associations) == count($variation_ids) ) ) {
 				$combination_terms = get_terms('wpsc-variation', array(
 					'hide_empty' => 0,
 					'include' => implode(",", $variation_ids),
 					'orderby' => 'parent',
 				));
+
 				foreach($combination_terms as $term) {
 					$term_data['ids'][] = $term->term_id;
 					$term_data['slugs'][] = $term->slug;
@@ -459,7 +460,7 @@ function wpsc_convert_variation_combinations() {
 				$post_data['_wpsc_original_variation_id'] = (float)$variation_item->id;
 			
 				// Product Weight
-				$post_data['_wpsc_product_metadata']['weight'] = wpsc_convert_weight($variation_item->weight, $variation_item->weight_unit, "pound");
+				$post_data['_wpsc_product_metadata']['weight'] = wpsc_convert_weight($variation_item->weight, $variation_item->weight_unit, "pound", true);
 				$post_data['_wpsc_product_metadata']['display_weight_as'] = $variation_item->weight_unit;
 				$post_data['_wpsc_product_metadata']['weight_unit'] = $variation_item->weight_unit;
  	
@@ -529,7 +530,7 @@ function wpsc_update_files() {
 		
 		$file_id = wpsc_get_meta($product_file->id, '_new_file_id', 'wpsc_files');
 		
-		if($file_id == null) {
+		if($file_id == null && count($variation_post_ids) == 0) {
 			$file_data = $attachment_template;
 			$file_data['post_parent'] = $product_post_id;
 			$new_file_id = wp_insert_post($file_data);
@@ -587,5 +588,31 @@ function wpsc_update_database() {
 		$add_fields = $wpdb->query($wpdb->prepare("ALTER TABLE ".WPSC_TABLE_PURCHASE_LOGS." ADD wpec_taxes_rate decimal(11,2)"));
 	}	
 }
+/*
+ * The Old Get Product Meta for 3.7 Tables used in converting Products to Posts
+ */
 
+function old_get_product_meta($product_id, $key, $single = false) {
+  global $wpdb, $post_meta_cache, $blog_id;  
+  $product_id = (int)$product_id;
+  if($product_id > 0) {
+    $meta_id = $wpdb->get_var("SELECT `id` FROM `".WPSC_TABLE_PRODUCTMETA."` WHERE `meta_key` IN('$key') AND `product_id` = '$product_id' LIMIT 1");
+    //exit($meta_id);
+    if(is_numeric($meta_id) && ($meta_id > 0)) {      
+      if($single != false) {
+        $meta_values = maybe_unserialize($wpdb->get_var("SELECT `meta_value` FROM `".WPSC_TABLE_PRODUCTMETA."` WHERE `meta_key` IN('$key') AND `product_id` = '$product_id' LIMIT 1"));
+			} else {
+        $meta_values = $wpdb->get_col("SELECT `meta_value` FROM `".WPSC_TABLE_PRODUCTMETA."` WHERE `meta_key` IN('$key') AND `product_id` = '$product_id'");
+				$meta_values = array_map('maybe_unserialize', $meta_values);
+			}
+		}
+	} else {
+    $meta_values = false;
+	}
+	if (is_array($meta_values) && (count($meta_values) == 1)) {
+		return array_pop($meta_values);
+	} else {
+		return $meta_values;
+	}
+}
 ?>

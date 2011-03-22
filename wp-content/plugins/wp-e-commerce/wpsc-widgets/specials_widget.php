@@ -38,7 +38,7 @@ class WP_Widget_Product_Specials extends WP_Widget {
 		extract( $args );
 		
 		echo $before_widget;
-		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Product Specials' ) : $instance['title'] );
+		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Product Specials', 'wpsc' ) : $instance['title'] );
 		if ( $title )
 			echo $before_title . $title . $after_title;
 
@@ -92,7 +92,7 @@ class WP_Widget_Product_Specials extends WP_Widget {
 		
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:' ); ?></label>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'wpsc' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
@@ -169,7 +169,7 @@ function wpsc_specials( $args = null, $instance ) {
 						</a>
 				<?php else: ?>
 							<a href="<?php echo wpsc_the_product_permalink(); ?>">
-							<img class="no-image" id="product_image_<?php echo wpsc_the_product_id(); ?>" alt="No Image" title="<?php echo wpsc_the_product_title(); ?>" src="<?php echo WPSC_URL; ?>/wpsc-theme/wpsc-images/noimage.png" width="<?php echo get_option('product_image_width'); ?>" height="<?php echo get_option('product_image_height'); ?>" />
+							<img class="no-image" id="product_image_<?php echo wpsc_the_product_id(); ?>" alt="No Image" title="<?php echo wpsc_the_product_title(); ?>" src="<?php echo WPSC_URL; ?>/wpsc-theme/wpsc-images/noimage.png" width="<?php esc_attr_e( get_option('product_image_width') ); ?>" height="<?php esc_attr_e( get_option('product_image_height') ); ?>" />
 							</a>
 				<?php endif; ?>
 				<br />

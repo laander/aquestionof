@@ -47,27 +47,27 @@ function wpsc_display_settings_page() { ?>
 		<?php
 			switch ( $page ) {
 				case 'checkout' :
-					require_once( 'includes/settings-pages/checkout.php' );
+					require_once( WPSC_FILE_PATH . '/wpsc-admin/includes/settings-pages/checkout.php' );
 					wpsc_options_checkout();
 					break;
 
 				case 'gateway' :
-					require_once( 'includes/settings-pages/gateway.php' );
+					require_once( WPSC_FILE_PATH . '/wpsc-admin/includes/settings-pages/gateway.php' );
 					wpsc_options_gateway();
 					break;
 
 				case 'shipping' :
-					require_once( 'includes/settings-pages/shipping.php' );
+					require_once( WPSC_FILE_PATH . '/wpsc-admin/includes/settings-pages/shipping.php' );
 					wpsc_options_shipping();
 					break;
 
 				case 'admin' :
-					require_once( 'includes/settings-pages/admin.php' );
+					require_once( WPSC_FILE_PATH . '/wpsc-admin/includes/settings-pages/admin.php' );
 					wpsc_options_admin();
 					break;
 
 				case 'presentation'  :
-					require_once( 'includes/settings-pages/presentation.php' );
+					require_once( WPSC_FILE_PATH . '/wpsc-admin/includes/settings-pages/presentation.php' );
 					wpsc_options_presentation();
 					break;
 
@@ -76,18 +76,18 @@ function wpsc_display_settings_page() { ?>
 					break;
 
 				case 'marketing' :
-					require_once( 'includes/settings-pages/marketing.php' );
+					require_once( WPSC_FILE_PATH . '/wpsc-admin/includes/settings-pages/marketing.php' );
 					wpsc_options_marketing();
 					break;
 
 				case 'import' :
-					require_once( 'includes/settings-pages/import.php' );
+					require_once( WPSC_FILE_PATH . '/wpsc-admin/includes/settings-pages/import.php' );
 					wpsc_options_import();
 					break;
 
 				case 'general' :
 				default :
-					require_once( 'includes/settings-pages/general.php' );
+					require_once( WPSC_FILE_PATH . '/wpsc-admin/includes/settings-pages/general.php' );
 					wpsc_options_general();
 					break;
 			}
@@ -106,15 +106,15 @@ function wpsc_display_settings_page() { ?>
 
 function wpsc_settings_tabs() {
 	$_default_tabs = array(
-		'general'      => __( 'General', 'wpsc' ),
-		'presentation' => __( 'Presentation', 'wpsc' ),
-		'admin'        => __( 'Admin', 'wpsc' ),
-		'taxes'        => __( 'Taxes', 'wpsc' ),
-		'shipping'     => __( 'Shipping', 'wpsc' ),
-		'gateway'      => __( 'Payments', 'wpsc' ),
-		'checkout'     => __( 'Checkout', 'wpsc' ),
-		'marketing'    => __( 'Marketing', 'wpsc' ),
-		'import'       => __( 'Import', 'wpsc' )
+		'general'      => _x( 'General', 'General settings tab in Settings->Store page', 'wpsc' ),
+		'presentation' => _x( 'Presentation', 'Presentation settings tab in Settings->Store page', 'wpsc' ),
+		'admin'        => _x( 'Admin', 'Admin settings tab in Settings->Store page', 'wpsc' ),
+		'taxes'        => _x( 'Taxes', 'Taxes settings tab in Settings->Store page', 'wpsc' ),
+		'shipping'     => _x( 'Shipping', 'Shipping settings tab in Settings->Store page', 'wpsc' ),
+		'gateway'      => _x( 'Payments', 'Payments settings tab in Settings->Store page', 'wpsc' ),
+		'checkout'     => _x( 'Checkout', 'Checkout settings tab in Settings->Store page', 'wpsc' ),
+		'marketing'    => _x( 'Marketing', 'Marketing settings tab in Settings->Store page', 'wpsc' ),
+		'import'       => _x( 'Import', 'Import settings tab in Settings->Store page', 'wpsc' )
 	);
 
 	return apply_filters( 'wpsc_settings_tabs', $_default_tabs );
@@ -221,7 +221,7 @@ function wpsc_get_payment_form( $paymentname ,$selected_gateway_data='') {
 		$output ='';
 		$output .="<tr>
 					  <td style='border-top: none;'>
-					  ".__("Display Name")."
+					  ".__("Display Name", 'wpsc')."
 					  </td>
 					  <td style='border-top: none;'>";
 
@@ -251,7 +251,7 @@ function wpsc_get_payment_form( $paymentname ,$selected_gateway_data='') {
 		}
 
 		$output .="<input type='text' name='user_defined_name[".$paymentname."]' value='". $display_name ."' /><br />
-					<span class='small description'>".__('The text that people see when making a purchase')."</span>
+					<span class='small description'>".__('The text that people see when making a purchase', 'wpsc')."</span>
 					</td>
 					</tr>";
 		$payment_forms = $form["form"]();
@@ -273,22 +273,22 @@ function wpsc_settings_page_update_notification() {
 		<?php
 
 		if ( isset( $_GET['updated'] ) && (int)$_GET['updated'] ) {
-			printf( _n( ' Setting options updated.', ' %s Settings options updated.', $_GET['updated'] ), number_format_i18n( $_GET['updated'] ) );
+			printf( _n( '%s Setting options updated.', ' %s Settings options updated.', $_GET['updated'] ), absint( $_GET['updated'] ) );
 			unset( $_GET['updated'] );
 			$message = true;
 		}
 		if ( isset( $_GET['deleted'] ) && (int)$_GET['deleted'] ) {
-			printf( _n( '%s Setting option deleted.', '%s Setting option deleted.', $_GET['deleted'] ), number_format_i18n( $_GET['deleted'] ) );
+			printf( _n( '%s Setting option deleted.', '%s Setting option deleted.', $_GET['deleted'] ), absint( $_GET['deleted'] ) );
 			unset( $_GET['deleted'] );
 			$message = true;
 		}
 		if ( isset( $_GET['shipadd'] ) && (int)$_GET['shipadd'] ) {
-			printf( _n( ' Shipping option updated.', ' Shipping option updated.', $_GET['shipadd'] ), number_format_i18n( $_GET['shipadd'] ) );
+			printf( _n( '%s Shipping option updated.', '%s Shipping option updated.', $_GET['shipadd'] ), absint( $_GET['shipadd'] ) );
 			unset( $_GET['shipadd'] );
 			$message = true;
 		}
 		if ( isset( $_GET['added'] ) && (int)$_GET['added'] ) {
-			printf( _n( '%s Checkout field added.', '%s Checkout fields added.', $_GET['added'] ), number_format_i18n( $_GET['added'] ) );
+			printf( _n( '%s Checkout field added.', '%s Checkout fields added.', $_GET['added'] ), absint( $_GET['added'] ) );
 			unset( $_GET['added'] );
 			$message = true;
 		}

@@ -272,10 +272,9 @@ add_action( 'rdf_item', 'wpsc_add_product_price_to_rss' );
  * The meat of this whole operation, this is where we register our post types
  *
  * @global array $wpsc_page_titles
- * @global object $wp_rewrite
  */
 function wpsc_register_post_types() {
-	global $wpsc_page_titles, $wp_rewrite;
+	global $wpsc_page_titles;
         $labels = array(
             'name' => _x( 'Products', 'post type name', 'wpsc' ),
             'singular_name' => _x( 'Product', 'post type singular name', 'wpsc' ),
@@ -330,7 +329,7 @@ function wpsc_register_post_types() {
 		'hierarchical' => false,
 		'labels' => $labels,
 		'rewrite' => array(
-			'slug' => '/tagged',
+			'slug' => '/' . sanitize_title_with_dashes( _x( 'tagged', 'slug, part of url', 'wpsc' ) ),
 			'with_front' => false )
 	) );
 
@@ -364,7 +363,7 @@ function wpsc_register_post_types() {
 		'parent_item_colon' => __( 'Parent Variations:', 'wpsc' ),
 		'edit_item' => __( 'Edit Variation', 'wpsc' ),
 		'update_item' => __( 'Update Variation', 'wpsc' ),
-		'add_new_item' => __( 'Add New Variation', 'wpsc' ),
+		'add_new_item' => __( 'Add New Variation/Set', 'wpsc' ),
 		'new_item_name' => __( 'New Variation Name', 'wpsc' ),
 	);
 
@@ -415,14 +414,32 @@ add_action( 'shutdown', 'wpsc_serialize_shopping_cart' );
  * wpsc_start_the_query
  */
 function wpsc_start_the_query() {
-	global $wp_query, $wpsc_query, $wpsc_query_vars;
-	if ( null == $wpsc_query ) {
+	global $wpsc_page_titles, $wp_query, $wpsc_query, $wpsc_query_vars;
+	$is_404 = false;
+	if(isset($wp_query->query_vars['term']) && in_array($wp_query->query_vars['term'], $wpsc_page_titles)){
+		$wp_query = new WP_Query( 'pagename='.$wpsc_page_titles['products'].'/'.$wp_query->query_vars['term'] );
 
+	}elseif ( null == $wpsc_query ) {
+		if( ( $wp_query->is_404 && !empty($wp_query->query_vars['paged']) ) || (isset( $wp_query->query['pagename']) && strpos( $wp_query->query['pagename'] , $wpsc_page_titles['products'] ) !== false ) && !isset($wp_query->post)){
+			//what was this for?
+			global $post;
+			$is_404 = true;
+			if( !isset( $wp_query->query_vars['wpsc_product_category'] ) )
+				$wp_query = new WP_Query('post_type=wpsc-product&name='.$wp_query->query_vars['name']);
+
+			if(isset($wp_query->post->ID))
+				$post = $wp_query->post;
+			else
+				$wpsc_query_vars['wpsc_product_category'] = $wp_query->query_vars['name'];
+		}
 		if ( count( $wpsc_query_vars ) <= 1 ) {
 			$wpsc_query_vars = array(
+				'post_status' => 'publish, locked, private',
 				'post_parent' => 0,
 				'order'       => apply_filters('wpsc_product_order','ASC')
 			);
+			if($wp_query->query_vars['preview'])
+				$wpsc_query_vars['post_status'] = 'any';	
 			
 			if( isset( $_GET['product_order'] ) )
 				$wpsc_query_vars['order'] = $_GET['product_order'];
@@ -443,11 +460,14 @@ function wpsc_start_the_query() {
 			}
 			if(1 == get_option('use_pagination')){
 				$wpsc_query_vars['nopaging'] = false;
+
 				$wpsc_query_vars['posts_per_page'] = get_option('wpsc_products_per_page');
 				$wpsc_query_vars['paged'] = get_query_var('paged');
-				if(empty($wpsc_query_vars['paged']))
+				if(isset($wpsc_query_vars['paged']) && empty($wpsc_query_vars['paged'])){
 					$wpsc_query_vars['paged'] = get_query_var('page');						
-
+								
+				}
+				
 			}
 			$orderby = get_option( 'wpsc_sort_by' );
 			if( isset( $_GET['product_order'] ) )
@@ -465,6 +485,8 @@ function wpsc_start_the_query() {
 
 				//This only works in WP 3.0.
 				case "price":
+					add_filter( 'posts_join', 'wpsc_add_meta_table' );
+					add_filter( 'posts_where', 'wpsc_add_meta_table_where' );
 					$wpsc_query_vars["meta_key"] = '_wpsc_price';
 					$wpsc_query_vars["orderby"] = 'meta_value_num';
 					break;
@@ -475,24 +497,35 @@ function wpsc_start_the_query() {
 			}
 		
 			add_filter( 'pre_get_posts', 'wpsc_generate_product_query', 11 );
+
 			$wpsc_query = new WP_Query( $wpsc_query_vars );
 			//for 3.1 :| 
 			if(empty($wpsc_query->posts) && isset($wpsc_query->tax_query) && isset($wp_query->query_vars['wpsc_product_category'])){
 				$wpsc_query_vars = array();
 				$wpsc_query_vars['wpsc_product_category'] = $wp_query->query_vars['wpsc_product_category'];
 				if(1 == get_option('use_pagination')){
-					$wpsc_query_vars['nopaging'] = false;
 					$wpsc_query_vars['posts_per_page'] = get_option('wpsc_products_per_page');
 					$wpsc_query_vars['paged'] = get_query_var('paged');
 					if(empty($wpsc_query_vars['paged']))
 						$wpsc_query_vars['paged'] = get_query_var('page');						
 				}
 				$wpsc_query = new WP_Query( $wpsc_query_vars );				
+				
+				
 			}
 		}
 	}
-	if($wp_query->is_404 && $wpsc_query->post_count > 0  )
-		$wp_query = $wpsc_query;
+
+	if(  $is_404 || ( ( isset($wpsc_query->post_count) && $wpsc_query->post_count == 0 ) && isset($wpsc_query_vars['wpsc_product_category'] )  )){
+
+		$args = array_merge($wp_query->query, array('posts_per_page' => get_option('wpsc_products_per_page')));
+		$wp_query = new WP_Query($args);
+
+		if( empty( $wp_query->posts ) ){
+			$product_page_id = wpec_get_the_post_id_by_shortcode('[productspage]');
+			$wp_query = new WP_Query( 'page_id='.$product_page_id);
+		}
+	}
 	if ( isset( $wp_query->post->ID ) )
 		$post_id = $wp_query->post->ID;
 	else
@@ -502,6 +535,28 @@ function wpsc_start_the_query() {
 		$_SESSION['wpsc_has_been_to_checkout'] = true;
 }
 add_action( 'template_redirect', 'wpsc_start_the_query', 8 );
+
+/**
+ * add meta table where section for ordering by price
+ *
+ */
+function wpsc_add_meta_table_where($where){
+	global $wpdb;
+
+	remove_filter( 'posts_where', 'wpsc_add_meta_table_where' );
+			
+	return $where . ' AND ' . $wpdb->postmeta . '.meta_key = "_wpsc_price"';
+}
+
+/**
+ * add meta table join section for ordering by price
+ *
+ */
+function wpsc_add_meta_table($join){
+	global $wpdb;
+	remove_filter( 'posts_join', 'wpsc_add_meta_table' );
+	return $join . ' JOIN ' . $wpdb->postmeta . ' ON ' . $wpdb->posts. '.ID = ' . $wpdb->postmeta . '.post_id';
+}
 
 /**
  * wpsc_taxonomy_rewrite_rules function.
@@ -761,10 +816,10 @@ class wpsc_products_by_category {
 
 
 		// Category stuff for nice URLs
-		if ( ('' != $q['wpsc_product_category']) && !$query->is_singular ) {
+		if ( !empty( $q['wpsc_product_category'] ) && !$query->is_singular ) {
 			$q['taxonomy'] = 'wpsc_product_category';
 			$q['term'] = $q['wpsc_product_category'];
-
+			$in_cats = '';
 			$join = " INNER JOIN $wpdb->term_relationships
 				ON ($wpdb->posts.ID = $wpdb->term_relationships.object_id)
 			INNER JOIN $wpdb->term_taxonomy
@@ -772,23 +827,38 @@ class wpsc_products_by_category {
 			";
 			if(isset($q['meta_key']))
 				$join .= " INNER JOIN $wpdb->postmeta ON ($wpdb->posts.ID = $wpdb->postmeta.post_id) ";
+		
 			$whichcat = " AND $wpdb->term_taxonomy.taxonomy = '{$q['taxonomy']}' ";
 
 			$term_data = get_term_by( 'slug', $q['term'], $q['taxonomy'] );
-			$in_cats = array( $term_data->term_id );
-			if('0' != get_option('show_subcatsprods_in_cat')){
+
+			if( is_object( $term_data ) )
+				$in_cats = array( $term_data->term_id );
+
+			if('0' != get_option('show_subcatsprods_in_cat') && is_object($term_data)){
 				$term_children_data = get_term_children( $term_data->term_id, $q['taxonomy'] );
 				$in_cats = array_reverse( array_merge( $in_cats, $term_children_data ) );
 			}
-			$in_cats = "'" . implode( "', '", $in_cats ) . "'";
-			$whichcat .= "AND $wpdb->term_taxonomy.term_id IN ($in_cats)";
+			if( is_array( $in_cats ) ){
+				$in_cats = "'" . implode( "', '", $in_cats ) . "'";
+				$whichcat .= "AND $wpdb->term_taxonomy.term_id IN ($in_cats)";
+			}
+			$whichcat .= " AND $wpdb->posts.post_status IN ('publish', 'locked', 'private') ";
+			
 			$groupby = "{$wpdb->posts}.ID";
 
 			$this->sql_components['join']     = $join;
-			$this->sql_components['where']    = $whichcat;
 			$this->sql_components['fields']   = "{$wpdb->posts}.*, {$wpdb->term_taxonomy}.term_id";
-			$this->sql_components['order_by'] = "{$wpdb->term_taxonomy}.term_id";
 			$this->sql_components['group_by'] = $groupby;
+	
+			//what about ordering by price
+			if(isset($q['meta_key']) && '_wpsc_price' == $q['meta_key']){
+				$whichcat .= " AND $wpdb->postmeta.meta_key = '_wpsc_price'";	
+			}else{
+
+				$this->sql_components['order_by'] = "{$wpdb->term_taxonomy}.term_id";
+			}
+			$this->sql_components['where']    = $whichcat;		
 			add_filter( 'posts_join', array( &$this, 'join_sql' ) );
 			add_filter( 'posts_where', array( &$this, 'where_sql' ) );
 			add_filter( 'posts_fields', array( &$this, 'fields_sql' ) );
@@ -1128,7 +1198,4 @@ if ( is_ssl() ) {
 	add_filter( 'option_transact_url',      'wpsc_add_https_to_page_url_options' );
 	add_filter( 'option_user_account_url',  'wpsc_add_https_to_page_url_options' );
 }
-
-
-
 ?>

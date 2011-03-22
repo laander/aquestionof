@@ -85,7 +85,7 @@ endif;
          <tr class="wpsc_coupon_row wpsc_coupon_error_row"><td><?php _e('Coupon is not valid.', 'wpsc'); ?></td></tr>
       <?php endif; ?>
       <tr class="wpsc_coupon_row">
-         <td colspan="2"><?php _e('Enter coupon code'); ?> :</td>
+         <td colspan="2"><?php _e('Enter coupon code', 'wpsc'); ?> :</td>
          <td  colspan="4" class="coupon_code">
             <form  method="post" action="<?php echo get_option('shopping_cart_url'); ?>">
                <input type="text" name="coupon_num" id="coupon_num" value="<?php echo $wpsc_cart->coupons_name; ?>" />
@@ -218,17 +218,17 @@ endif;
 	<?php endif; ?>
 
 	<?php if ( wpsc_show_user_login_form() && !is_user_logged_in() ): ?>
-			<p><?php _e('You must sign in or register with us to continue with your purchase');?></p>
+			<p><?php _e('You must sign in or register with us to continue with your purchase', 'wpsc');?></p>
 			<div class="wpsc_registration_form">
 				
 				<fieldset class='wpsc_registration_form'>
-					<h2><?php _e( 'Sign in' ); ?></h2>
+					<h2><?php _e( 'Sign in', 'wpsc' ); ?></h2>
 					
 					<?php
 					$args = array( 'remember' => false );
 					wp_login_form( $args );
 					?>
-					<div class="wpsc_signup_text"><?php _e('If you have bought from us before please sign in here to purchase');?></div>
+					<div class="wpsc_signup_text"><?php _e('If you have bought from us before please sign in here to purchase', 'wpsc');?></div>
 				</fieldset>
 			</div>
 	<?php endif; ?>	
@@ -247,18 +247,18 @@ endif;
 		<div class="wpsc_registration_form">
 			
 	        <fieldset class='wpsc_registration_form wpsc_right_registration'>
-	        	<h2><?php _e('Join up now');?></h2>
+	        	<h2><?php _e('Join up now', 'wpsc');?></h2>
 	      
-				<label><?php _e('Username'); ?>:</label>
+				<label><?php _e('Username', 'wpsc'); ?>:</label>
 				<input type="text" name="log" id="log" value="" size="20"/><br/>
 				
-				<label><?php _e('Password'); ?>:</label>
+				<label><?php _e('Password', 'wpsc'); ?>:</label>
 				<input type="password" name="pwd" id="pwd" value="" size="20" /><br />
 				
-				<label><?php _e('E-mail'); ?>:</label>
+				<label><?php _e('E-mail', 'wpsc'); ?>:</label>
 	            <input type="text" name="user_email" id="user_email" value="<?php echo attribute_escape(stripslashes($user_email)); ?>" size="20" /><br />
 	            
-	            <div class="wpsc_signup_text"><?php _e('Signing up is free and easy! please fill out your details your registration will happen automatically as you checkout. Don\'t forget to use your details to login with next time!');?></div>
+	            <div class="wpsc_signup_text"><?php _e('Signing up is free and easy! please fill out your details your registration will happen automatically as you checkout. Don\'t forget to use your details to login with next time!', 'wpsc');?></div>
 	        </fieldset>
 	        
         </div>
@@ -301,10 +301,9 @@ endif;
                   	$_SESSION['shippingSameBilling'] = true;
                   elseif(isset($_POST['submit']) && !isset($_POST['shippingSameBilling']))
                   	$_SESSION['shippingSameBilling'] = false;
-                  	
-                  	
-                  	if($_SESSION['shippingSameBilling'])
-                  	$checked = 'checked="checked"';
+
+                  	if($_SESSION['shippingSameBilling'] == 'true')
+                  		$checked = 'checked="checked"';
                    ?>
 					<label for='shippingSameBilling'><?php _e('Same as billing address:','wpsc'); ?></label>
 					<input type='checkbox' value='true' name='shippingSameBilling' id='shippingSameBilling' <?php echo $checked; ?> />
@@ -441,9 +440,7 @@ endif;
       <?php if(wpsc_has_tnc()) : ?>
          <tr>
             <td colspan='2'>
-                <input type='checkbox' value='yes' name='agree' /> <?php _e('I agree to The ', 'wpsc');?>
-                <a class='thickbox' target='_blank' href='<?php
-         echo site_url("?termsandconds=true&amp;width=360&amp;height=400'"); ?>' class='termsandconds'> <?php _e('Terms and Conditions', 'wpsc');?></a>
+                <label for="agree"><input id="agree" type='checkbox' value='yes' name='agree' /> <?php printf(__("I agree to The <a class='thickbox' target='_blank' href='%s' class='termsandconds'>Terms and Conditions</a>", "wpsc"), site_url("?termsandconds=true&amp;width=360&amp;height=400'")); ?></label>
                </td>
          </tr>
       <?php endif; ?>
@@ -459,7 +456,7 @@ endif;
 	
 	      <tr class="total_price total_shipping">
 	         <td class='wpsc_totals'>
-	            <?php _e('Total Shipping', 'wpsc'); ?>
+	            <?php _e('Total Shipping', 'wpsc'); ?>:
 	         </td>
 	         <td class='wpsc_totals'>
 	            <span id="checkout_shipping" class="pricedisplay checkout-shipping"><?php echo wpsc_cart_shipping(); ?></span>
@@ -470,7 +467,7 @@ endif;
      <?php if(wpsc_uses_coupons() && (wpsc_coupon_amount(false) > 0)): ?>
       <tr class="total_price">
          <td class='wpsc_totals'>
-            <?php _e('Discount', 'wpsc'); ?>
+            <?php _e('Discount', 'wpsc'); ?>:
          </td>
          <td class='wpsc_totals'>
             <span id="coupons_amount" class="pricedisplay"><?php echo wpsc_coupon_amount(); ?></span>

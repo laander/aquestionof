@@ -49,8 +49,8 @@ function wpsc_options_import() {
 								<br />
 								</td><td>
 									<select name='post_status'>
-										<option value='publish'>Publish</option>
-										<option value='draft'>Draft</option>
+										<option value='publish'><?php _e('Publish', 'wpsc'); ?></option>
+										<option value='draft'><?php _e('Draft', 'wpsc'); ?></option>
 									</select>
 								</td></tr>
 							</table>
@@ -61,7 +61,7 @@ function wpsc_options_import() {
 				foreach ( (array)$data1 as $key => $datum ) {
 ?>
 					<div style='width:100%;' class='postbox'>
-						<h3 class='hndle'>Column (<?php echo $key + 1; ?>)</h3>
+						<h3 class='hndle'><?php printf(__('Column (%s)', 'wpsc'), ($key + 1)); ?></h3>
 						<div class='inside'>
 							<table>
 								<tr><td style='width:80%;'>
@@ -75,15 +75,15 @@ function wpsc_options_import() {
 							</td><td>
 								<select  name='value_name[]'>
 									<!-- /* 		These are the current fields that can be imported with products, to add additional fields add more <option> to this dorpdown list */ -->
-									<option value='name'>Product Name</option>
-									<option value='description'>Description</option>
-									<option value='additional_description'>Additional Description</option>
-									<option value='price'>Price</option>
-									<option value='sku'>SKU</option>
-									<option value='weight'>Weight</option>
-									<option value='weight_unit'>Weight Unit</option>
-									<option value='quantity'>Stock Quantity</option>
-									<option value='quantity_limited'>Stock Quantity Limit</option>
+									<option value='name'><?php _e('Product Name', 'wpsc'); ?></option>
+									<option value='description'><?php _e('Description', 'wpsc'); ?></option>
+									<option value='additional_description'><?php _e('Additional Description', 'wpsc'); ?></option>
+									<option value='price'><?php _e('Price', 'wpsc'); ?></option>
+									<option value='sku'><?php _e('SKU', 'wpsc'); ?></option>
+									<option value='weight'><?php _e('Weight', 'wpsc'); ?></option>
+									<option value='weight_unit'><?php _e('Weight Unit', 'wpsc'); ?></option>
+									<option value='quantity'><?php _e('Stock Quantity', 'wpsc'); ?></option>
+									<option value='quantity_limited'><?php _e('Stock Quantity Limit', 'wpsc'); ?></option>
 								</select>
 							</td></tr>
 					</table>
@@ -102,7 +102,7 @@ function wpsc_options_import() {
 		</div>
 <?php
 		} else {
-			echo "<br /><br />There was an error while uploading your csv file.";
+			echo "<br /><br />" . __('There was an error while uploading your csv file.', 'wpsc');
 		}
 	}
 	if ( isset( $_POST['csv_action'] ) && ('import' == $_POST['csv_action']) ) {
@@ -111,9 +111,8 @@ function wpsc_options_import() {
 		$column_data = $_POST['column'];
 		$value_data = $_POST['value_name'];
 		
-		if ($_POST['post_status'] == 'publish')
-			$status = '1';
-				
+		$status = esc_attr($_POST['post_status']);
+		
 		$name = array( );
 		foreach ( $value_data as $key => $value ) {
 
@@ -123,47 +122,45 @@ function wpsc_options_import() {
 
 		for ( $i = 0; $i < $num; $i++ ) {
 			$product_columns = array(
-				'post_title' => $cvs_data2['name'][$i],
-				'content' => $cvs_data2['description'][$i],
-				'additional_description' => $cvs_data2['additional_description'][$i],
-				'price' => str_replace( '$', '', $cvs_data2['price'][$i] ),
-				'weight' => $cvs_data2['weight'][$i],
-				'weight_unit' => $cvs_data2['weight_unit'][$i],
+				'post_title' => esc_attr( $cvs_data2['name'][$i] ),
+				'content' => esc_attr( $cvs_data2['description'][$i] ),
+				'additional_description' => esc_attr( $cvs_data2['additional_description'][$i] ),
+				'price' => esc_attr( str_replace( '$', '', $cvs_data2['price'][$i] ) ),
+				'weight' => esc_attr( $cvs_data2['weight'][$i] ),
+				'weight_unit' => esc_attr( $cvs_data2['weight_unit'][$i] ),
 				'pnp' => null,
 				'international_pnp' => null,
 				'file' => null,
 				'image' => '0',
-				'quantity_limited' => $cvs_data2['quantity_limited'][$i],
-				'quantity' => $cvs_data2['quantity'][$i],
+				'quantity_limited' => esc_attr( $cvs_data2['quantity_limited'][$i] ),
+				'quantity' => esc_attr( $cvs_data2['quantity'][$i] ),
 				'special' => null,
 				'special_price' => null,
 				'display_frontpage' => null,
 				'notax' => null,
-				'publish' => $status,
 				'active' => null,
 				'donation' => null,
 				'no_shipping' => null,
 				'thumbnail_image' => null,
 				'thumbnail_state' => null,
-				'category' => array(
-					esc_html__( $_POST['category'] )
-				
-				),
 				'meta' => array(
-					'_wpsc_price' => str_replace( '$', '', $cvs_data2['price'][$i] ),
-					'_wpsc_sku' => $cvs_data2['sku'][$i],
-					'_wpsc_stock' => $cvs_data2['quantity'][$i],
-					'_wpsc_limited_stock' => $cvs_data2['quantity_limited'][$i],
+					'_wpsc_price' => esc_attr( str_replace( '$', '', $cvs_data2['price'][$i] ) ),
+					'_wpsc_sku' => esc_attr( $cvs_data2['sku'][$i] ),
+					'_wpsc_stock' => esc_attr( $cvs_data2['quantity'][$i] ),
+					'_wpsc_limited_stock' => esc_attr( $cvs_data2['quantity_limited'][$i] ),
 					'_wpsc_product_metadata' => array(
-						'weight' => $cvs_data2['weight'][$i],
-						'weight_unit' => $cvs_data2['weight_unit'][$i],
+						'weight' => esc_attr( $cvs_data2['weight'][$i] ),
+						'weight_unit' => esc_attr( $cvs_data2['weight_unit'][$i] ),
 					)
 				)
 			);
 			$product_columns = wpsc_sanitise_product_forms( $product_columns );
-			wpsc_insert_product( $product_columns );
+			// status needs to be set here because wpsc_sanitise_product_forms overwrites it :/
+			$product_columns['post_status'] = $status;
+			$product_id = wpsc_insert_product( $product_columns );
+			wp_set_object_terms( $product_id , array( (int)$_POST['category'] ) , 'wpsc_product_category' );
 		}
-		echo "<br /><br />Success, your <a href='".admin_url('edit.php?post_type=wpsc-product')."'>products</a> have been upload.";
+		echo "<br /><br />". sprintf(__("Success, your <a href='%s'>products</a> have been upload.", "wpsc"), admin_url('edit.php?post_type=wpsc-product'));
 	}
 ?>
 		</div>

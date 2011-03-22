@@ -81,7 +81,8 @@ function wpsc_add_to_cart() {
 		if ( $parameters['quantity'] <= 0 ) {
 			$cart_messages[] = __( 'Sorry, but you cannot add zero items to your cart', 'wpsc' );
 		} else if ( $wpsc_cart->get_remaining_quantity( $product_id, $parameters['variation_values'], $parameters['quantity'] ) > 0 ) {
-			$cart_messages[] = sprintf( __( 'Sorry, but there are only %s of this item in stock.', 'wpsc' ), $wpsc_cart->get_remaining_quantity( $product_id, $parameters['variation_values'], $parameters['quantity'] ) );
+			$quantity = $wpsc_cart->get_remaining_quantity( $product_id, $parameters['variation_values'], $parameters['quantity'] );
+			$cart_messages[] = sprintf( _n( 'Sorry, but there is only %s of this item in stock.', 'Sorry, but there are only %s of this item in stock.', $quantity, 'wpsc' ), $quantity );
 		} else {
 			$cart_messages[] = sprintf( __( 'Sorry, but the item "%s" is out of stock.', 'wpsc' ), $product->post_title	);
 		}
@@ -352,8 +353,14 @@ function wpsc_update_shipping_price() {
 	$quote_shipping_method = $_POST['key1'];
 	$quote_shipping_option = $_POST['key'];
 	$wpsc_cart->update_shipping( $quote_shipping_method, $quote_shipping_option );
-	echo "jQuery('.pricedisplay.checkout-shipping').html('" . wpsc_cart_shipping() . "');\n\r";
-	echo "jQuery('.pricedisplay.checkout-total').html('" . wpsc_cart_total() . "');\n\r";
+	echo "
+	if(jQuery('.pricedisplay.checkout-shipping .pricedisplay')){
+		jQuery('.pricedisplay.checkout-shipping > .pricedisplay:first').html(\"" . wpsc_cart_shipping() . "\");
+		jQuery('.shoppingcart .pricedisplay.checkout-shipping > .pricedisplay:first').html(\"" . wpsc_cart_shipping() . "\");
+	} else
+		jQuery('.pricedisplay.checkout-shipping').html(\"" . wpsc_cart_shipping() . "\");
+	";
+	echo "jQuery('.pricedisplay.checkout-total').html(\"" . wpsc_cart_total() . "\");\n\r";
 	exit();
 }
 
@@ -500,6 +507,9 @@ if ( isset( $_REQUEST['wpsc_action'] ) && ($_REQUEST['wpsc_action'] == 'cart_htm
  */
 function wpsc_submit_checkout() {
 	global $wpdb, $wpsc_cart, $user_ID, $nzshpcrt_gateways, $wpsc_shipping_modules, $wpsc_gateways;
+	$num_items = 0;
+	$use_shipping = 0;
+	$disregard_shipping = 0;
 	$_SESSION['wpsc_checkout_misc_error_messages'] = array( );
 	$wpsc_checkout = new wpsc_checkout();
 	$selected_gateways = get_option( 'custom_gateway_options' );
@@ -507,10 +517,7 @@ function wpsc_submit_checkout() {
 	$options = get_option( 'custom_shipping_options' );
 	$form_validity = $wpsc_checkout->validate_forms();
 	extract( $form_validity ); // extracts $is_valid and $error_messages
-	if ( get_option( 'do_not_use_shipping' ) == 0 && ($wpsc_cart->selected_shipping_method == null || $wpsc_cart->selected_shipping_option == null) ) {
-		$_SESSION['wpsc_checkout_misc_error_messages'][] = __( 'You must select a shipping method, otherwise we cannot process your order.', 'wpsc' );
-		$is_valid = false;
-	}
+
 	if ( $_POST['agree'] != 'yes' ) {
 		$_SESSION['wpsc_checkout_misc_error_messages'][] = __( 'Please agree to the terms and conditions, otherwise we cannot process your order.', 'wpsc' );
 		$is_valid = false;
@@ -544,11 +551,13 @@ function wpsc_submit_checkout() {
 	else
 		$is_valid = false;
 	
-	if ( (get_option( 'do_not_use_shipping' ) != 1) && (in_array( 'ups', (array)$options )) && $_SESSION['wpsc_zipcode'] == '' ) {
-		if ( $num_items != $disregard_shipping ) {
-			$_SESSION['categoryAndShippingCountryConflict'] = __( 'Please enter a Zipcode and click calculate to proceed' );
+	if ( get_option( 'do_not_use_shipping' ) == 0 && ($wpsc_cart->selected_shipping_method == null || $wpsc_cart->selected_shipping_option == null) && ( $num_items != $disregard_shipping ) ) {
+		$_SESSION['wpsc_checkout_misc_error_messages'][] = __( 'You must select a shipping method, otherwise we cannot process your order.', 'wpsc' );
+		$is_valid = false;
+	}
+	if ( (get_option( 'do_not_use_shipping' ) != 1) && (in_array( 'ups', (array)$options )) && $_SESSION['wpsc_zipcode'] == '' && ( $num_items != $disregard_shipping ) ) {
+			$_SESSION['categoryAndShippingCountryConflict'] = __( 'Please enter a Zipcode and click calculate to proceed', 'wpsc' );
 			$is_valid = false;
-		}
 	}
 	if ( $is_valid == true ) {
 		$_SESSION['categoryAndShippingCountryConflict'] = '';
@@ -613,7 +622,8 @@ function wpsc_submit_checkout() {
 		$wpsc_cart->submit_stock_claims( $purchase_log_id );
 		if ( get_option( 'wpsc_also_bought' ) == 1 )
 			wpsc_populate_also_bought_list();
-
+		if( !isset( $our_user_id ) && isset( $user_ID ))
+			$our_user_id = $user_ID;
 		$wpsc_cart->log_id = $purchase_log_id; 
 		do_action( 'wpsc_submit_checkout', array( "purchase_log_id" => $purchase_log_id, "our_user_id" => $our_user_id ) );
 		if ( get_option( 'permalink_structure' ) != '' )
@@ -647,10 +657,6 @@ function wpsc_submit_checkout() {
 // execute on POST and GET
 if ( isset( $_REQUEST['wpsc_action'] ) && ($_REQUEST['wpsc_action'] == 'submit_checkout') ) {
 	add_action( 'init', 'wpsc_submit_checkout' );
-}
-
-if ( isset( $_REQUEST['wpsc_action'] ) && ($_REQUEST['wpsc_action'] == 'gateway_notification') ) {
-	add_action( 'init', 'wpsc_gateway_notification' );
 }
 
 function wpsc_product_rss() {
@@ -747,6 +753,7 @@ function wpsc_change_tax() {
 
 	$tax = $wpsc_cart->calculate_total_tax();
 	$total = wpsc_cart_total();
+	$total_input = wpsc_cart_total(false);
 	if($wpsc_cart->coupons_amount >= wpsc_cart_total() && !empty($wpsc_cart->coupons_amount)){
 		$total = 0;
 	}
@@ -775,7 +782,7 @@ function wpsc_change_tax() {
 
 
 	foreach ( $wpsc_cart->cart_items as $key => $cart_item ) {
-		echo "jQuery('#shipping_$key').html(\"" . $wpsc_cart->process_as_currency( $cart_item->shipping ) . "\");\n\r";
+		echo "jQuery('#shipping_$key').html(\"" . wpsc_currency_display( $cart_item->shipping ) . "\");\n\r";
 	}
 
 	echo "jQuery('#checkout_shipping').html(\"" . wpsc_cart_shipping() . "\");\n\r";
@@ -857,7 +864,8 @@ function wpsc_change_tax() {
 		echo "jQuery(\"tr.total_tax\").hide();\n\r";
 	}
 	echo "jQuery('#checkout_tax').html(\"<span class='pricedisplay'>" . wpsc_cart_tax() . "</span>\");\n\r";
-	echo "jQuery('#checkout_total').html(\"<span class='pricedisplay'>{$total}</span><input id='shopping_cart_total_price' type='hidden' value='{$total}' />\");\n\r";
+	echo "jQuery('#checkout_total').html(\"{$total}<input id='shopping_cart_total_price' type='hidden' value='{$total_input}' />\");\n\r";
+	echo "if(jQuery(\"#shippingSameBilling\").is(\":checked\")) wpsc_shipping_same_as_billing();";
 	exit();
 }
 
@@ -944,8 +952,7 @@ function wpsc_scale_image() {
 add_action( 'init', 'wpsc_scale_image' );
 
 function wpsc_download_file() {
-	global $wpdb, $user_level, $wp_rewrite;
-	get_currentuserinfo();
+	global $wpdb;
 
 	if ( isset( $_GET['downloadid'] ) ) {
 		// strip out anything that isnt 'a' to 'z' or '0' to '9'
@@ -966,7 +973,7 @@ function wpsc_download_file() {
 				), array( 'id' => $download_data['id'] ) );
 			} else if ( $ip_number != $download_data['ip_number'] ) {
 				// if the IP number is set but does not match, fail here.
-				exit( _e( 'This download is no longer valid, Please contact the site administrator for more information.' ) );
+				exit( _e( 'This download is no longer valid, Please contact the site administrator for more information.', 'wpsc' ) );
 			}
 		}
 
@@ -983,7 +990,7 @@ function wpsc_download_file() {
 		}
 			
 		if ( $file_data == null ) {
-			exit( _e( 'This download is no longer valid, Please contact the site administrator for more information.' ) );
+			exit( _e( 'This download is no longer valid, Please contact the site administrator for more information.', 'wpsc' ) );
 		}
 
 		if ( $download_data != null ) {
@@ -1056,10 +1063,16 @@ function wpsc_download_file() {
 				exit();
 			}
 		} else {
-			exit( _e( 'This download is no longer valid, Please contact the site administrator for more information.' ) );
+			exit( _e( 'This download is no longer valid, Please contact the site administrator for more information.', 'wpsc' ) );
 		}
 	}
 }
 
 add_action( 'init', 'wpsc_download_file' );
+
+function wpsc_shipping_same_as_billing(){
+	$_SESSION['shippingSameBilling'] = $_POST['wpsc_shipping_same_as_billing'];
+}
+
+add_action('wp_ajax_wpsc_shipping_same_as_billing', 'wpsc_shipping_same_as_billing');
 ?>

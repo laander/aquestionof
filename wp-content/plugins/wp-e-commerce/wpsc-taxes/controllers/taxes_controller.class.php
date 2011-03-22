@@ -104,11 +104,16 @@ class wpec_taxes_controller {
     * @param: tax_percentage - the percentage you wish to use to calculate the tax
     * @return: calculated price
     * */
-   function wpec_taxes_calculate_tax( $price, $tax_percentage ) {
+   function wpec_taxes_calculate_tax( $price, $tax_percentage, $exclusive = true ) {
       $returnable = 0;
 
       if ( !empty( $tax_percentage ) ) {
-         $returnable = $price * ($tax_percentage / 100);
+      	if($exclusive)
+			$returnable = $price * ($tax_percentage / 100);
+		else{
+			$returnable = ($price / (100 + $tax_percentage) ) * $tax_percentage;
+		}
+			
       }// if
 
       return $returnable;
@@ -155,7 +160,6 @@ class wpec_taxes_controller {
    function wpec_taxes_calculate_included_tax( $cart_item ) {
       global $wpsc_cart;
       $returnable = false;
-      
       //do not calculate tax for this item if it is not taxable
       if(!isset($cart_item->meta[0]['wpec_taxes_taxable']))
       {
@@ -169,7 +173,7 @@ class wpec_taxes_controller {
             //get the taxable price - unit price multiplied by qty
             $taxable_price = $cart_item->unit_price * $cart_item->quantity;
 
-            $returnable = array( 'tax' => $this->wpec_taxes_calculate_tax( $taxable_price, $tax_rate ), 'rate' => $tax_rate );
+            $returnable = array( 'tax' => $this->wpec_taxes_calculate_tax( $taxable_price, $tax_rate, false ), 'rate' => $tax_rate );
          }// if
       }// if
 
@@ -293,6 +297,7 @@ class wpec_taxes_controller {
     * @return: string containing html select menu
     * */
    function wpec_taxes_display_tax_bands( $input_settings=array( ), $custom_tax_band=false ) {
+   	  $returnable = '';
       //if taxes are included and not disabled continue else notify customer
       if ( $this->wpec_taxes_isincluded() && $this->wpec_taxes->wpec_taxes_get_enabled() ) {
          //retrieve the bands and add the disabled value
@@ -304,7 +309,7 @@ class wpec_taxes_controller {
             $default_select_settings = array(
                'id' => 'wpec_taxes_band',
                'name' => 'wpec_taxes_band',
-               'label' => __( 'Custom Tax Band' )
+               'label' => __( 'Custom Tax Band', 'wpsc' )
             );
             $band_select_settings = wp_parse_args( $input_settings, $default_select_settings );
 
@@ -405,7 +410,7 @@ class wpec_taxes_controller {
          }elseif($key == 'value'){
             $setting = stripslashes($setting);
          }
-         $returnable .= $key.'="'.$setting.'"';
+         $returnable .= $key.'="'. esc_attr( $setting ) .'"';
       }// foreach
       //close the input
       $returnable .= ' />';
@@ -434,7 +439,7 @@ class wpec_taxes_controller {
    function wpec_taxes_build_select_options( $input_array, $option_value, $option_text, $option_selected=false, $select_settings='' ) {
       $returnable = '';
       $options = '';
-//       exit($option_value.'Now an <pre>'.print_r($input_array,1).'</pre>'.$option_selected);
+	if( empty($input_array)) return;
       foreach ( $input_array as $value ) {
          //if the selected value exists in the input array skip it and continue processing
          if ( is_array( $value ) ) {
@@ -516,7 +521,7 @@ class wpec_taxes_controller {
             'id' => "band-name-{$key}",
             'name' => "wpsc_options[wpec_taxes_{$type}][{$key}][name]",
             'class' => 'taxes-band',
-            'label' => __( 'Name' )
+            'label' => __( 'Name', 'wpsc' )
          );
 			$bands_hidden_index = array(
 				'type' => 'hidden',
@@ -530,7 +535,7 @@ class wpec_taxes_controller {
             'id' => "shipping-{$key}",
             'name' => "wpsc_options[wpec_taxes_{$type}][{$key}][shipping]",
             'class' => "taxes-{$type}",
-            'label' => __( 'Apply to Shipping' )
+            'label' => __( 'Apply to Shipping', 'wpsc'  )
          );
       }// if
 

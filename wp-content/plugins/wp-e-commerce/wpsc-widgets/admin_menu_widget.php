@@ -13,7 +13,6 @@ class WP_Widget_Admin_Menu extends WP_Widget {
 	 * Widget Constuctor
 	 */
 	function WP_Widget_Admin_Menu() {
-
 		$widget_ops = array(
 			'classname'   => 'widget_wpsc_admin_menu',
 			'description' => __( 'Admin Menu Widget', 'wpsc' )
@@ -39,7 +38,7 @@ class WP_Widget_Admin_Menu extends WP_Widget {
 	
 		if ( current_user_can( 'manage_options' ) ) {
 			echo $before_widget;
-			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Admin Menu' ) : $instance['title'] );
+			$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Admin Menu', 'wpsc' ) : $instance['title'] );
 			if ( $title ) {
 				echo $before_title . $title . $after_title;
 			}
@@ -60,7 +59,7 @@ class WP_Widget_Admin_Menu extends WP_Widget {
 	function update( $new_instance, $old_instance ) {
 	
 		$instance = $old_instance;
-		$instance['title']  = strip_tags( $new_instance['title'] );
+		$instance['title']  = esc_attr( strip_tags( $new_instance['title'] ) );
 
 		return $instance;
 		
@@ -83,7 +82,7 @@ class WP_Widget_Admin_Menu extends WP_Widget {
 		
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:' ); ?></label>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'wpsc' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<?php

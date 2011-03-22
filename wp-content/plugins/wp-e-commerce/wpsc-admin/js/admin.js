@@ -374,7 +374,7 @@ jQuery(document).ready(function(){
 			post_values = "category_id="+category_id+"&"+product_order;
 			jQuery.post( 'index.php?wpsc_admin_action=save_product_order', post_values, function(returned_data) { });
 		},
-		items: 'tr',
+		items: 'tbody tr',
 		axis: 'y',
 		containment: 'table.widefat tbody',
 		placeholder: 'product-placeholder',
@@ -509,6 +509,7 @@ jQuery(document).ready(function(){
 	jQuery('a.add_new_form_set').livequery(function(){
 		jQuery(this).click( function() {
 			jQuery(".add_new_form_set_forms").toggle();
+			return false;
 		});
 	});
 
@@ -795,8 +796,7 @@ jQuery(document).ready(function(){
 	});
 
 	// Form change tracking code.
-	jQuery('form.wpsc_form_track :input, form.wpsc_form_track :radio, form.wpsc_form_track :checkbox')
-	.live('change', function() {
+	jQuery('form.wpsc_form_track input, form.wpsc_form_track textarea').live('change', function() {
 		jQuery(this).parents('form.wpsc_form_track:first').addClass('wpsc_form_changed');
 	});
 
@@ -974,12 +974,11 @@ function add_form_field() {
 	new_element_contents += "<td class='mandatorycol' style='text-align: center;'><input type='checkbox' name='new_form_mandatory["+new_element_number+"]' value='1' /></td>\n\r";
 	new_element_contents += "<td><a class='image_link' href='#' onclick='return remove_new_form_field(\""+new_element_id+"\");'><img src='" + WPSC_CORE_IMAGES_URL + "/trash.gif' alt='"+TXT_WPSC_DELETE+"' title='"+TXT_WPSC_DELETE+"' /></a></td>\n\r";
 	// new_element_contents += "</tr>";
-
-	new_element = document.createElement('tr');
-	new_element.id = new_element_id;
-	document.getElementById("wpsc_checkout_list_body").appendChild(new_element);
-	document.getElementById(new_element_id).innerHTML = new_element_contents;
-	jQuery('#'+new_element_id).addClass('checkout_form_field');
+        
+        var new_element = jQuery('<tr id="'+new_element_id+'" />');
+	jQuery(new_element).html(new_element_contents);
+	jQuery("tbody#wpsc_checkout_list_body").append(new_element);
+	jQuery(new_element).addClass('checkout_form_field');
 	return false;
 }
 
@@ -1047,18 +1046,11 @@ function hideelement1(id, item_value) {
 
 function toggle_display_options(state) {
 	switch(state) {
-		case 'list':
-			document.getElementById('grid_view_options').style.display = 'none';
-			document.getElementById('list_view_options').style.display = 'block';
-			break;
-
 		case 'grid':
-			document.getElementById('list_view_options').style.display = 'none';
 			document.getElementById('grid_view_options').style.display = 'block';
 			break;
 
 		default:
-			document.getElementById('list_view_options').style.display = 'none';
 			document.getElementById('grid_view_options').style.display = 'none';
 			break;
 	}

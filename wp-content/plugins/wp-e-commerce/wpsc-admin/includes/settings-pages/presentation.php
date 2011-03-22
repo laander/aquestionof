@@ -75,7 +75,7 @@ function wpsc_theme_presentation_page_metabox(){
 					if ( isset( $_SESSION['wpsc_themes_backup'] ) && ($_SESSION['wpsc_themes_backup'] == true) ) {
 					?>
 						<div class="updated fade below-h2" id="message" style="background-color: rgb(255, 251, 204);">
-							<p><?php _e( "Thanks, you have made a succesful backup of your theme.  It is located at the URL below.  Please note each backup you create will replace your previous backups." ); ?></p>
+							<p><?php _e( "Thanks, you have made a succesful backup of your theme.  It is located at the URL below.  Please note each backup you create will replace your previous backups.", 'wpsc' ); ?></p>
 							<p>URL: <?php echo "/" . str_replace( ABSPATH, "", WPSC_THEME_BACKUP_DIR ); ?></p>
 						</div>
 					<?php
@@ -105,8 +105,8 @@ If you want to change the look of your site, select the files you want to edit f
 						if(false !== array_search($file, (array)$themes_location))
 							$selected = 'checked="checked"';
 						?>
-						<li><input type='checkbox' id='<?php echo $id; ?>' <?php echo $selected; ?> value='<?php echo $file ?>' name='wpsc_templates_to_port[]' />
-						<label for='<?php echo $id; ?>'><?php echo $file; ?></label></li>
+						<li><input type='checkbox' id='<?php echo $id; ?>' <?php echo $selected; ?> value='<?php esc_attr_e( $file ); ?>' name='wpsc_templates_to_port[]' />
+						<label for='<?php echo $id; ?>'><?php esc_attr_e( $file ); ?></label></li>
 				<?php }	 ?>
 				 </ul>
 				 <p>
@@ -151,36 +151,28 @@ If you want to change the look of your site, select the files you want to edit f
 function options_categorylist() {
 	global $wpdb;
 
-	$current_default = get_option( 'wpsc_default_category' );
+	$current_default = esc_attr( get_option( 'wpsc_default_category' ) );
 	$group_data      = get_terms( 'wpsc_product_category', 'hide_empty=0&parent=0' );
 	$categorylist    = "<select name='wpsc_options[wpsc_default_category]'>";
 
-	if ( get_option( 'wpsc_default_category' ) == 'all' )
+	if ( $current_default == 'all' )
 		$selected = "selected='selected'";
 	else
 		$selected = '';
 
 	$categorylist .= "<option value='all' " . $selected . " >" . __( 'Show All Products', 'wpsc' ) . "</option>";
 
-	if ( get_option( 'wpsc_default_category' ) == 'list' )
+	if ( $current_default == 'list' )
 		$selected = "selected='selected'";
 	else
 		$selected = '';
 
 	$categorylist .= "<option value='list' " . $selected . " >" . __( 'Show list of product categories', 'wpsc' ) . "</option>";
-/*
 
-	if ( get_option( 'wpsc_default_category' ) == 'all+list' )
-		$selected = "selected='selected'";
-	else
-		$selected = '';
-
-	$categorylist .= "<option value='all+list' " . $selected . " >" . __( 'Show all products + list', 'wpsc' ) . "</option>";
-*/
 	$categorylist .= "<optgroup label='Product Categories'>";
 	foreach ( $group_data as $group ) {
 		$selected = "";
-		if ( get_option( 'wpsc_default_category' ) == $group->term_id )
+		if ( $current_default == $group->term_id )
 			$selected = "selected='selected'";
 		else
 			$selected = "";
@@ -189,7 +181,7 @@ function options_categorylist() {
 		$category_data = get_terms( 'wpsc_product_category', 'hide_empty=0&parent=' . $group->term_id );
 		if ( $category_data != null ) {
 			foreach ( $category_data as $category ) {
-				if ( get_option( 'wpsc_default_category' ) == $category->term_id )
+				if ( $current_default == $category->term_id )
 					$selected = "selected='selected'";
 				else
 					$selected = "";
@@ -308,11 +300,10 @@ function wpsc_options_presentation() {
 					<?php
 					$list_view_quantity_value1 = '';
 					$list_view_quantity_value2 = '';
- 					if ( get_option( 'list_view_quantity' ) == 1 )
-                                                 $list_view_quantity_value1 = 'checked="checked"';
-                                         else
-                                                 $list_view_quantity_value2 = 'checked="checked"';
-                                        
+					if ( get_option( 'list_view_quantity' ) == 1 )
+						$list_view_quantity_value1 = 'checked="checked"';
+					else
+						$list_view_quantity_value2 = 'checked="checked"';                
 					?>
 					<th score="row">
 						<?php _e('Show Stock Availability','wpsc'); ?>
@@ -512,7 +503,7 @@ function wpsc_options_presentation() {
 							echo "style='display:none;'";
 						} ?>>
 
-									<input type='text'  name='wpsc_options[grid_number_per_row]' id='grid_number_per_row' size='1' value='<?php echo get_option( 'grid_number_per_row' ); ?>' />
+									<input type='text'  name='wpsc_options[grid_number_per_row]' id='grid_number_per_row' size='1' value='<?php esc_attr_e( get_option( 'grid_number_per_row' ) ); ?>' />
 									<label for='grid_number_per_row'><?php _e( 'Products Per Row', 'wpsc' ); ?></label><br />
 
 									<input type='hidden' value='0' name='wpsc_options[show_images_only]' />
@@ -538,14 +529,11 @@ function wpsc_options_presentation() {
 							</td>
 						</tr>
 					<?php
-						if(get_option('wpsc_display_categories')){
+						$selected1 = $selected2 = '';
+						if(get_option('wpsc_display_categories'))
 							$selected1 = 'checked="checked"';
-							$selected2 = '';
-						}else{
-							$selected1 = '';
+						else
 							$selected2 = 'checked="checked"';						
-						}
-							
 					?>
 				<tr>
 					<th scope="row"><?php _e('Show list of categories','wpsc'); ?></th>
@@ -992,8 +980,8 @@ function wpsc_options_presentation() {
 					<tr>
 						<th scope="row"><?php _e( 'Default Product Thumbnail Size', 'wpsc' ); ?>:</th>
 						<td>
-							<?php _e( 'Width', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[product_image_width]' class='wpsc_prod_thumb_option' value='<?php echo get_option( 'product_image_width' ); ?>' />
-							<?php _e( 'Height', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[product_image_height]' class='wpsc_prod_thumb_option' value='<?php echo get_option( 'product_image_height' ); ?>' />
+							<?php _e( 'Width', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[product_image_width]' class='wpsc_prod_thumb_option' value='<?php esc_attr_e( get_option( 'product_image_width' ) ); ?>' />
+							<?php _e( 'Height', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[product_image_height]' class='wpsc_prod_thumb_option' value='<?php esc_attr_e( get_option( 'product_image_height' ) ); ?>' />
 
 						</td>
 					</tr>
@@ -1002,8 +990,8 @@ function wpsc_options_presentation() {
 							<?php _e( 'Default Product Group Thumbnail Size', 'wpsc' ); ?>:
 						</th>
 						<td>
-							 <?php _e( 'Width', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[category_image_width]' value='<?php echo get_option( 'category_image_width' ); ?>' />
-							<?php _e( 'Height', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[category_image_height]' value='<?php echo get_option( 'category_image_height' ); ?>' />
+							 <?php _e( 'Width', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[category_image_width]' value='<?php esc_attr_e( get_option( 'category_image_width' ) ); ?>' />
+							<?php _e( 'Height', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[category_image_height]' value='<?php esc_attr_e( get_option( 'category_image_height' ) ); ?>' />
 						</td>
 					</tr>
 					<tr>
@@ -1011,8 +999,8 @@ function wpsc_options_presentation() {
 					<?php _e( 'Single Product Image Size', 'wpsc' ); ?>:
 						</th>
 						<td>
-						<?php _e( 'Width', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[single_view_image_width]' value='<?php echo get_option( 'single_view_image_width' ); ?>' />
-						<?php _e( 'Height', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[single_view_image_height]' value='<?php echo get_option( 'single_view_image_height' ); ?>' /> 
+						<?php _e( 'Width', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[single_view_image_width]' value='<?php esc_attr_e( get_option( 'single_view_image_width' ) ); ?>' />
+						<?php _e( 'Height', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[single_view_image_height]' value='<?php esc_attr_e( get_option( 'single_view_image_height' ) ); ?>' /> 
 						</td>
 					</tr>
 					<tr>
@@ -1031,7 +1019,7 @@ function wpsc_options_presentation() {
 									break;
 							}
 ?>
-									<?php _e( "Crop Thumbnails" ); ?>:
+									<?php _e( "Crop Thumbnails", 'wpsc' ); ?>:
 								</th>
 								<td>
 											<input type='radio' value='1' name='wpsc_options[wpsc_crop_thumbnails]' id='wpsc_crop_thumbnails1' <?php echo $crop1; ?> /> <label for='crop1'><?php _e( 'Yes', 'wpsc' ); ?></label> &nbsp;
@@ -1132,11 +1120,11 @@ function wpsc_options_presentation() {
 
 							<tr>
 								<th scope="row">
-									<?php _e( "Gallery Thumbnail Image Size" ); ?>:
+									<?php _e( "Gallery Thumbnail Image Size", 'wpsc' ); ?>:
 								</th>
 								<td>
-									<?php _e( 'Height', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[wpsc_gallery_image_height]' value='<?php echo get_option( 'wpsc_gallery_image_height' ); ?>' />
-									<?php _e( 'Width', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[wpsc_gallery_image_width]' value='<?php echo get_option( 'wpsc_gallery_image_width' ); ?>' /> <br />
+									<?php _e( 'Width', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[wpsc_gallery_image_width]' value='<?php esc_attr_e( get_option( 'wpsc_gallery_image_width' ) ); ?>' /> 
+									<?php _e( 'Height', 'wpsc' ); ?>:<input type='text' size='6' name='wpsc_options[wpsc_gallery_image_height]' value='<?php esc_attr_e( get_option( 'wpsc_gallery_image_height' ) ); ?>' /><br />
 
 								</td>
 							</tr>
@@ -1227,8 +1215,8 @@ function wpsc_options_presentation() {
 					<input onclick='jQuery("#wpsc_enable_comments,.wpsc_comments_details").hide()' type='radio' value='0' name='wpsc_options[wpsc_enable_comments]' id='wpsc_enable_comments2' <?php echo $enable_comments2; ?> /> <label for='wpsc_enable_comments1'><?php _e( 'No', 'wpsc' ); ?></label><br />
 					<div id='wpsc_enable_comments' <?php echo $intense_debate_account_id_display_state; ?> >
 						<?php _e( 'IntenseDebate Account ID', 'wpsc' ); ?>:<br/>
-						<input type='text' size='30' name='wpsc_options[wpsc_intense_debate_account_id]' value='<?php echo get_option( 'wpsc_intense_debate_account_id' ); ?>' /><br/>
-						<small><a href='http://intensedebate.com/sitekey/' title='Help finding the Account ID'><?php _e( 'Help on finding the Account ID' ); ?></a></small>
+						<input type='text' size='30' name='wpsc_options[wpsc_intense_debate_account_id]' value='<?php esc_attr_e( get_option( 'wpsc_intense_debate_account_id' ) ); ?>' /><br/>
+						<small><a href='http://intensedebate.com/sitekey/' title='Help finding the Account ID'><?php _e( 'Help on finding the Account ID', 'wpsc' ); ?></a></small>
 					</div>
 				</td>
 			</tr>
@@ -1244,10 +1232,10 @@ function wpsc_options_presentation() {
 					<div class='wpsc_comments_details' <?php echo $intense_debate_account_id_display_state ?> >
 									<input type='radio' value='1' name='wpsc_options[wpsc_comments_which_products]' id='wpsc_comments_which_products1' <?php if ( get_option( 'wpsc_comments_which_products' ) == 1 || !get_option( 'wpsc_comments_which_products' ) ) {
 				echo "checked='checked'";
-			} ?> /><label for='wpsc_comments_which_products1'>All Products</label>&nbsp;
+			} ?> /><label for='wpsc_comments_which_products1'><?php _e( 'All Products', 'wpsc' ); ?></label>&nbsp;
 									<input type='radio' value='2' name='wpsc_options[wpsc_comments_which_products]' id='wpsc_comments_which_products2' <?php if ( get_option( 'wpsc_comments_which_products' ) == 2 ) {
 				echo "checked='checked'";
-			} ?> /><label for='wpsc_comments_which_products2'>Per Product</label>&nbsp;
+			} ?> /><label for='wpsc_comments_which_products2'><?php _e( 'Per Product', 'wpsc' ); ?></label>&nbsp;
 						<br />
 					</div>
 				</td>

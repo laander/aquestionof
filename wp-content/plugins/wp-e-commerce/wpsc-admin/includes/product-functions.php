@@ -41,12 +41,14 @@ function wpsc_product_has_children($id){
 * @return nothing
 */
 function wpsc_admin_submit_product( $post_ID, $post ) {
-	
-    global $current_screen, $wpdb;
+	global $current_screen, $wpdb;
 
 	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || $current_screen->id != 'wpsc-product' )
-            return $post_ID;
-	
+		return $post_ID;
+
+	if ( empty( $_POST['meta'] ) )
+		return $post_ID;
+
     //Type-casting ( not so much sanitization, which would be good to do )
     $post_data = $_POST;
     $product_id = $post_ID;
@@ -54,13 +56,16 @@ function wpsc_admin_submit_product( $post_ID, $post ) {
     $post_meta['meta'] = (array)$_POST['meta'];
 	$post_data['meta']['_wpsc_price'] = abs((float)str_replace( ',','',$post_data['meta']['_wpsc_price'] ));
 	$post_data['meta']['_wpsc_special_price'] = abs((float)str_replace( ',','',$post_data['meta']['_wpsc_special_price'] ));
-	$post_data['meta']['_wpsc_sku'] = $post_data['meta']['_wpsc_sku'];
-	if (!isset($post_data['meta']['_wpsc_is_donation'])) $post_data['meta']['_wpsc_is_donation'] = '';
-	$post_data['meta']['_wpsc_is_donation'] = (int)(bool)$post_data['meta']['_wpsc_is_donation'];
-	$post_data['meta']['_wpsc_stock'] = (int)$post_data['meta']['_wpsc_stock'];
-	if (!isset($post_data['meta']['_wpsc_limited_stock'])) $post_data['meta']['_wpsc_limited_stock'] = '';
-	if((bool)$post_data['meta']['_wpsc_limited_stock'] != true) {
-	  $post_data['meta']['_wpsc_stock'] = false;
+	if($post_data['meta']['_wpsc_sku'] == __('N/A', 'wpsc'))
+		$post_data['meta']['_wpsc_sku'] = '';
+	if(isset($post_data['meta']['_wpsc_is_donation']))
+		$post_data['meta']['_wpsc_is_donation'] = 1;
+	else
+		$post_data['meta']['_wpsc_is_donation'] = 0;
+	if (!isset($post_data['meta']['_wpsc_limited_stock'])){
+		$post_data['meta']['_wpsc_stock'] = false;
+	}else {
+		$post_data['meta']['_wpsc_stock'] = (int)$post_data['meta']['_wpsc_stock'];
 	}
 	unset($post_data['meta']['_wpsc_limited_stock']);
 	if(!isset($post_data['meta']['_wpsc_product_metadata']['unpublish_when_none_left'])) $post_data['meta']['_wpsc_product_metadata']['unpublish_when_none_left'] = '';
@@ -77,7 +82,7 @@ function wpsc_admin_submit_product( $post_ID, $post ) {
 	if(!isset($post_data['meta']['_wpsc_product_metadata']['display_weight_as'])) $post_data['meta']['_wpsc_product_metadata']['display_weight_as'] = '';
         if(!isset($post_data['meta']['_wpsc_product_metadata']['display_weight_as'])) $post_data['meta']['_wpsc_product_metadata']['display_weight_as'] = '';
 	
-	$weight = wpsc_convert_weight($post_data['meta']['_wpsc_product_metadata']['weight'], $post_data['meta']['_wpsc_product_metadata']['weight_unit'], "pound");
+	$weight = wpsc_convert_weight($post_data['meta']['_wpsc_product_metadata']['weight'], $post_data['meta']['_wpsc_product_metadata']['weight_unit'], "pound", true);
 	$post_data['meta']['_wpsc_product_metadata']['weight'] = (float)$weight;
         $post_data['meta']['_wpsc_product_metadata']['display_weight_as'] = $post_data['meta']['_wpsc_product_metadata']['weight_unit'];
 	
@@ -154,7 +159,12 @@ function wpsc_admin_submit_product( $post_ID, $post ) {
 		}
 	}
 	// if we succeed, we can do further editing (todo - if_wp_error)
-
+	
+	// if we have no categories selected, assign one.
+	if( isset( $post_data['tax_input']['wpsc_product_category'] ) && count( $post_data['tax_input']['wpsc_product_category'] ) == 1 && $post_data['tax_input']['wpsc_product_category'][0] == 0){
+		$post_data['tax_input']['wpsc_product_category'][1] = wpsc_add_product_category_default($product_id);
+	
+	}
 	// and the meta
 	wpsc_update_product_meta($product_id, $post_data['meta']);
 
@@ -184,6 +194,8 @@ function wpsc_admin_submit_product( $post_ID, $post ) {
 	}
 	return $product_id;
 }
+
+
 function wpsc_pre_update( $data , $postarr ) {
  	if ( (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) || $postarr["post_type"] != 'wpsc-product' )
         return $data;
@@ -198,7 +210,7 @@ function wpsc_pre_update( $data , $postarr ) {
 		$data['post_status'] = 'inherit';
 	}
 
-    if ( $postarr['meta']['_wpsc_product_metadata']['enable_comments'] == 0 || empty( $postarr['meta']['_wpsc_product_metadata']['enable_comments'] ) )
+    if ( !empty( $postarr['meta'] ) && ( $postarr['meta']['_wpsc_product_metadata']['enable_comments'] == 0 || empty( $postarr['meta']['_wpsc_product_metadata']['enable_comments'] ) ) )
         $data["comment_status"] = "closed";
     else
         $data["comment_status"] = "open";
@@ -212,6 +224,8 @@ function wpsc_pre_update( $data , $postarr ) {
 add_filter( 'wp_insert_post_data','wpsc_pre_update', 99, 2 );
 add_action( 'save_post', 'wpsc_admin_submit_product', 10, 2 );
 add_action( 'admin_notices', 'wpsc_admin_submit_notices' );
+
+
 function wpsc_admin_submit_notices() {
     global $current_screen, $post;
     
@@ -222,6 +236,17 @@ function wpsc_admin_submit_notices() {
     unset( $_SESSION['product_error_messages'] );
 }
  
+/**
+  * wpsc_add_product_category_default, if there is no category assigned assign first product category as default
+  *
+  * @since 3.8
+  * @param $product_id (int) the Post ID
+  * @return null
+  */ 
+function wpsc_add_product_category_default($product_id){
+	$terms = get_terms( 'wpsc_product_category', array( 'orderby' => 'id', 'hide_empty' => 0 ) );
+	wp_set_object_terms( $product_id , array( $terms[0]->slug ) , 'wpsc_product_category' );
+}
 /**
 * wpsc_sanitise_product_forms function 
 * 
@@ -283,7 +308,7 @@ function wpsc_sanitise_product_forms($post_data = null) {
 	if(!isset($post_data['meta']['_wpsc_product_metadata']['display_weight_as'])) $post_data['meta']['_wpsc_product_metadata']['display_weight_as'] = '';
     if(!isset($post_data['meta']['_wpsc_product_metadata']['display_weight_as'])) $post_data['meta']['_wpsc_product_metadata']['display_weight_as'] = '';
 	
-	$weight = wpsc_convert_weight($post_data['meta']['_wpsc_product_metadata']['weight'], $post_data['meta']['_wpsc_product_metadata']['weight_unit'], "pound");
+	$weight = wpsc_convert_weight($post_data['meta']['_wpsc_product_metadata']['weight'], $post_data['meta']['_wpsc_product_metadata']['weight_unit'], "pound", true);
 	$post_data['meta']['_wpsc_product_metadata']['weight'] = (float)$weight;
 	$post_data['meta']['_wpsc_product_metadata']['display_weight_as'] = $post_data['meta']['_wpsc_product_metadata']['weight_unit'];	
 	
@@ -410,7 +435,7 @@ function wpsc_insert_product($post_data, $wpsc_error = false) {
 		 }
 		if ($product_id == 0) {
 			if ( $wpsc_error ) {
-				return new WP_Error('db_update_error', __('Could not update product in the database'), $wpdb->last_error);
+				return new WP_Error('db_update_error', __( 'Could not update product in the database', 'wpsc' ), $wpdb->last_error);
 			} else {
 				return false;
 			}
@@ -427,7 +452,7 @@ function wpsc_insert_product($post_data, $wpsc_error = false) {
 		 }
 		if ($product_id == 0 ) {
 			if ( $wp_error ) {
-				return new WP_Error('db_insert_error', __('Could not insert product into the database'), $wpdb->last_error);
+				return new WP_Error('db_insert_error', __( 'Could not insert product into the database', 'wpsc' ), $wpdb->last_error);
 			} else {
 				return 0;
 			}
@@ -739,11 +764,7 @@ function wpsc_update_alt_product_currency($product_id, $newCurrency, $newPrice){
 function wpsc_update_product_meta($product_id, $product_meta) {
     if($product_meta != null) {
 		foreach((array)$product_meta as $key => $value) {
-		    if(get_post_meta($product_id, $key) != false) {
-		      update_post_meta($product_id, $key, $value);
-			} else {
-		      add_post_meta($product_id, $key, $value);
-			}
+			update_post_meta($product_id, $key, $value);
 		}
 	}
 }
@@ -765,24 +786,24 @@ function wpsc_ajax_toggle_publish() {
 */
 
 function wpsc_update_custom_meta($product_id, $post_data) {
-  global $wpdb;
+
     if($post_data['new_custom_meta'] != null) {
-      foreach((array)$post_data['new_custom_meta']['name'] as $key => $name) {
-			$value = $post_data['new_custom_meta']['value'][(int)$key];
-	        if(($name != '') && ($value != '')) {
-				add_post_meta($product_id, $name, $value);
-	        }
-		}
+	foreach((array)$post_data['new_custom_meta']['name'] as $key => $name) {
+	    $value = $post_data['new_custom_meta']['value'][(int)$key];
+	    if(($name != '') && ($value != '')) {
+		add_post_meta($product_id, $name, $value);
+	    }
 	}
+    }
 		
-	if (!isset($post_data['custom_meta'])) $post_data['custom_meta'] = '';
-	if($post_data['custom_meta'] != null) {
-		foreach((array)$post_data['custom_meta'] as $key => $values) {
-			if(($values['name'] != '') && ($values['value'] != '')) {
-        		update_post_meta($product_id, $name, $value);
-			}
-		}
-	}
+    if (!isset($post_data['custom_meta'])) $post_data['custom_meta'] = '';
+    if($post_data['custom_meta'] != null) {	    
+	    foreach((array)$post_data['custom_meta'] as $key => $values) {
+		    if(($values['name'] != '') && ($values['value'] != '')) {
+			    update_post_meta($product_id, $values['name'], $values['value']);
+		    }
+	    }
+    }
 }
 
  /**
@@ -929,6 +950,30 @@ function wpsc_item_reassign_file($product_id, $selected_files) {
 }
 
  /**
+ * wpsc_delete_preview_file 
+ *
+ * @param integer product ID
+ */
+ 
+function wpsc_delete_preview_file($product_id) {
+
+	$args = array(
+	'post_type' => 'wpsc-preview-file',
+	'post_parent' => $product_id,
+	'numberposts' => -1,
+	'post_status' => 'all'
+	);
+	
+	$preview_files = (array)get_posts( $args );
+	
+	foreach( $preview_files as $preview ) {
+		$preview_id = $preview->ID;
+		wp_delete_post($preview_id);
+	}
+	return true;
+}
+
+ /**
  * wpsc_item_add_preview_file function 
  *
  * @param integer product ID
@@ -936,6 +981,8 @@ function wpsc_item_reassign_file($product_id, $selected_files) {
  */
 function wpsc_item_add_preview_file($product_id, $preview_file) {
   global $wpdb;
+  
+  wpsc_delete_preview_file($product_id);
   
   add_filter('upload_dir', 'wpsc_modify_preview_directory');
 	$overrides = array('test_form'=>false);
@@ -976,8 +1023,6 @@ function wpsc_item_add_preview_file($product_id, $preview_file) {
 	remove_filter('upload_dir', 'wpsc_modify_upload_directory');
   	return $id;
   
-  
-  ///OLD CODE replaced 13/12/2010
 
 }
 

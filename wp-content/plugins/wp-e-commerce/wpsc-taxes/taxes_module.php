@@ -3,13 +3,15 @@
 /**
  * Load required files
  * */
-require_once 'models/taxes.class.php';
-require_once 'controllers/taxes_controller.class.php';
+require_once WPSC_FILE_PATH.'/wpsc-taxes/models/taxes.class.php';
+require_once WPSC_FILE_PATH.'/wpsc-taxes/controllers/taxes_controller.class.php';
 
-$version_identifier = WPSC_VERSION . "." . WPSC_MINOR_VERSION;
-
-//include required js file
-wp_enqueue_script( 'wp-e-commerce-taxes-functions', WPSC_URL . '/wpsc-taxes/view/js/taxes-functions.js', array( 'wp-e-commerce-admin' ), $version_identifier, false );
+function wpsc_include_taxes_js() {
+  $version_identifier = WPSC_VERSION . "." . WPSC_MINOR_VERSION;
+  //include required js file
+  wp_enqueue_script( 'wp-e-commerce-taxes-functions', WPSC_URL . '/wpsc-taxes/view/js/taxes-functions.js', array( 'wp-e-commerce-admin' ), $version_identifier, false );
+}
+add_action( 'admin_enqueue_scripts', 'wpsc_include_taxes_js' );
 
 /**
  * @description: wpec_taxes_settings_page - used by wpec to display the admin settings page.
@@ -92,6 +94,9 @@ function wpec_submit_taxes_options() {
 		//check the rates
 		if ( isset( $_POST['wpsc_options']['wpec_taxes_' . $taxes_type] ) ) {
 			foreach ( $_POST['wpsc_options']['wpec_taxes_' . $taxes_type] as $tax_rate ) {
+				if( !isset( $tax_rate['region_code'] ) )
+					$tax_rate['region_code'] = '';
+
 				//if there is no country then skip
 				if ( empty( $tax_rate['country_code'] ) ) {
 					continue;

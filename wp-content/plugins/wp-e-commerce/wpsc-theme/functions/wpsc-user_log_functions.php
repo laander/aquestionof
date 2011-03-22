@@ -348,6 +348,9 @@ function wpsc_user_details() {
 	$nzshpcrt_gateways = nzshpcrt_get_gateways();
 	$i = 0;
 	$subtotal = 0;
+
+        do_action( 'wpsc_pre_purchase_logs' );
+
 	foreach ( (array)$purchase_log as $purchase ) {
 		$status_state = "expand";
 		$status_style = "display:none;";
@@ -377,11 +380,11 @@ function wpsc_user_details() {
 		echo " </td>\n\r";
 
 		echo " <td>";
-
+		$country = get_option( 'country_form_field' );
 		if ( $purchase['shipping_country'] != '' ) {
 			$billing_country = $purchase['billing_country'];
 			$shipping_country = $purchase['shipping_country'];
-		} else {
+		} elseif ( !empty($country)) {
 			$country_sql = "SELECT * FROM `" . WPSC_TABLE_SUBMITED_FORM_DATA . "` WHERE `log_id` = '" . $purchase['id'] . "' AND `form_id` = '" . get_option( 'country_form_field' ) . "' LIMIT 1";
 			$country_data = $wpdb->get_results( $country_sql, ARRAY_A );
 			$billing_country = $country_data[0]['value'];
@@ -420,6 +423,8 @@ function wpsc_user_details() {
 		echo "  <strong class='form_group'>" . __( 'Order Status', 'wpsc' ) . ":</strong>\n\r";
 		echo $status_name . "<br /><br />";
 
+                do_action( 'wpsc_user_log_after_order_status', $purchase );
+                
 		//written by allen
 		$usps_id = get_option( 'usps_user_id' );
 		if ( $usps_id != null ) {
@@ -489,6 +494,7 @@ function wpsc_user_details() {
 
 			echo "</tr>";
 
+			$gsttotal = false;
 			$endtotal = $total_shipping = 0;
 			foreach ( (array)$cart_log as $cart_row ) {
 				$alternate = "";
@@ -498,15 +504,10 @@ function wpsc_user_details() {
 					$alternate = "class='alt'";
 
 				$variation_list = '';
-				/* $purch_data is not set..
-				if ( $purch_data[0]['shipping_country'] != '' ) {
-					$billing_country = $purch_data[0]['billing_country'];
-					$shipping_country = $purch_data[0]['shipping_country'];
-				} else { */
+				
 				$billing_country = !empty($country_data[0]['value']) ? $country_data[0]['value'] : '';
 				$shipping_country = !empty($country_data[0]['value']) ? $country_data[0]['value'] : '';
-				/*}*/
-
+				
 				$shipping = $cart_row['pnp'];
 				$total_shipping += $shipping;
 				echo "<tr $alternate>";
@@ -527,9 +528,8 @@ function wpsc_user_details() {
 
 				echo " <td>";
 				$gst = $cart_row['tax_charged'];
-				if($gst > 0)
-					$endtotal += $gst * $cart_row['quantity'];
-
+				if( $gst > 0)
+					$gsttotal += $gst;
 				echo wpsc_currency_display( $gst , array('display_as_html' => false) );
 				echo " </td>";
 
@@ -553,17 +553,26 @@ function wpsc_user_details() {
 			echo " </td>";
 
 			echo " <td>";
+			echo " <td>";
+			echo " </td>";
 			echo " </td>";
 
 			echo " <td>";
 			echo "<strong>" . __( 'Total Shipping', 'wpsc' ) . ":</strong><br />";
+			echo "<strong>" . __( 'Total Tax', 'wpsc' ) . ":</strong><br />";
 			echo "<strong>" . __( 'Final Total', 'wpsc' ) . ":</strong>";
 			echo " </td>";
 
 			echo " <td>";
 			$total_shipping += $purchase['base_shipping'];
 			$endtotal += $total_shipping;
+			$endtotal += $purchase['wpec_taxes_total'];
 			echo wpsc_currency_display( $total_shipping, array('display_as_html' => false)  ) . "<br />";
+			if ( $gsttotal ){ //if false then must be exclusive.. doesnt seem too reliable needs more testing
+				echo wpsc_currency_display( $gsttotal , array('display_as_html' => false) ). "<br />";
+			} else {
+				echo wpsc_currency_display( $purchase['wpec_taxes_total'] , array('display_as_html' => false) ). "<br />";
+			}
 			echo wpsc_currency_display( $endtotal , array('display_as_html' => false) );
 			echo " </td>";
 
@@ -605,7 +614,7 @@ function wpsc_user_details() {
 						 echo "  <tr><td>" . $form_field['name'] . ":</td><td>".$state ."</td></tr>";
 							break;
 						default:
-							echo "  <tr><td>" . $form_field['name'] . ":</td><td>" . $form_field['value'] . "</td></tr>";
+							echo "  <tr><td>" . $form_field['name'] . ":</td><td>" . esc_html( $form_field['value'] ) . "</td></tr>";
 
 					}
 				}

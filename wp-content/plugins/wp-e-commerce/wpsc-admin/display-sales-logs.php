@@ -46,14 +46,14 @@ function wpsc_display_sales_logs() {
          if(!isset($_REQUEST['purchaselog_id'])){
             $columns = array(
                'cb' => '<input type="checkbox" />',
-               'purchid' => 'Order ID',
-               'date' => 'Date / Time',
+               'purchid' => __( 'Order ID', 'wpsc' ),
+               'date' => __( 'Date / Time', 'wpsc' ),
                'name' => '',
-               'amount' => 'Amount',
-               'details' => 'Details',
-               'status' => 'Status',
-               'delete' => 'Delete',
-               'track' => 'Tracking ID'
+               'amount' => __( 'Amount', 'wpsc' ),
+               'details' => __( 'Details', 'wpsc' ),
+               'status' => __( 'Status', 'wpsc' ),
+               'delete' => __( 'Delete', 'wpsc' ),
+               'track' => __( 'Tracking ID', 'wpsc' )
             );
             register_column_headers('display-sales-list', $columns);
             ///// start of update message section //////
@@ -62,7 +62,7 @@ function wpsc_display_sales_logs() {
          if (isset($_GET['skipped']) || isset($_GET['updated']) || isset($_GET['deleted']) ||  isset($_GET['locked']) ) { ?>
          <div id="message" class="updated fade"><p>
          <?php if ( isset($_GET['updated']) && (int) $_GET['updated'] ) {
-            printf( _n( '%s Purchase Log updated.', '%s Purchase Logs updated.', $_GET['updated'] ), number_format_i18n( $_GET['updated'] ) );
+            printf( _n( '%s Purchase Log updated.', '%s Purchase Logs updated.', $_GET['updated'], 'wpsc' ), absint( $_GET['updated'] ) );
             unset($_GET['updated']);
          }
 
@@ -70,12 +70,12 @@ function wpsc_display_sales_logs() {
             unset($_GET['skipped']);
 
          if ( isset($_GET['locked']) && (int) $_GET['locked'] ) {
-            printf( _n( '%s product not updated, somebody is editing it.', '%s products not updated, somebody is editing them.', $_GET['locked'] ), number_format_i18n( $_GET['locked'] ) );
+            printf( _n( '%s product not updated, somebody is editing it.', '%s products not updated, somebody is editing them.', $_GET['locked'], 'wpsc' ), absint( $_GET['locked'] ) );
             unset($_GET['locked']);
          }
 
          if ( isset($_GET['deleted']) && (int) $_GET['deleted'] ) {
-            printf( _n( '%s Purchase Log deleted.', '%s Purchase Logs deleted.', $_GET['deleted'] ), number_format_i18n( $_GET['deleted'] ) );
+            printf( _n( '%s Purchase Log deleted.', '%s Purchase Logs deleted.', $_GET['deleted'], 'wpsc' ), absint( $_GET['deleted'] ) );
             unset($_GET['deleted']);
          }
          ?>
@@ -83,7 +83,7 @@ function wpsc_display_sales_logs() {
       <?php }
 
          if(get_option('wpsc_purchaselogs_fixed')== false || (wpsc_check_uniquenames()) ){ ?>
-            <div class='error' style='padding:8px;line-spacing:8px;'><span ><?php _e('When upgrading the WP e-Commerce Plugin from 3.6.* to 3.7 it is required that you associate your checkout form fields with the new Purchase Logs system. To do so please '); ?> <a href='<?php echo $fixpage; ?>'><?php _e('Click Here','wpsc'); ?></a></span></div>
+            <div class='error' style='padding:8px;line-spacing:8px;'><span ><?php printf( __('When upgrading the WP e-Commerce Plugin from 3.6.* to 3.7 it is required that you associate your checkout form fields with the new Purchase Logs system. To do so please <a href="%s">Click Here</a>', 'wpsc'), $fixpage); ?></span></div>
    <?php  }
       ///// end of update message section //////?>
       <div id='dashboard-widgets' style='min-width: 825px;'>
@@ -92,11 +92,9 @@ function wpsc_display_sales_logs() {
             <div id='dashboard-widgets-main-content-wpsc' class='has-sidebar-content'>
 
             <?php
-               if(function_exists('wpsc_right_now')) {
-                  echo wpsc_right_now();
-               }
-
-                  ?>
+				wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
+				do_meta_boxes('dashboard_page_wpsc-sales-logs', 'top', true);
+			?>
                </div><br />
                <div id='wpsc_purchlog_searchbox'>
                   <?php wpsc_purchaselogs_searchbox(); ?>
@@ -104,6 +102,9 @@ function wpsc_display_sales_logs() {
                   <?php wpsc_purchaselogs_displaylist(); ?>
 
          </div>
+         <script type="text/javascript">
+         	jQuery(document).ready(function(){postboxes.add_postbox_toggles(pagenow);});
+         </script>
       </div>
       <?php }else{ //NOT IN GENERIC PURCHASE LOG PAGE, IN DETAILS PAGE PER PURCHASE LOG
 
@@ -114,11 +115,11 @@ function wpsc_display_sales_logs() {
          <div id="message" class="updated fade"><p>
          <?php
             if ( isset($_GET['cleared']) && $_GET['cleared']==true ) {
-               printf( _n( 'Downloads for this log have been released.', 'Downloads for this log have been released.', $_GET['cleared'] ), $_GET['cleared']);
+               _e('Downloads for this log have been released.', 'wpsc' );
                unset($_GET['cleared']);
             }
             if ( isset($_GET['sent']) && (int) $_GET['sent'] ) {
-               printf( _n( 'Receipt has been resent ', 'Receipt has been resent ', $_GET['sent'] ),  $_GET['sent']  );
+               _e( 'Receipt has been resent ', 'wpsc' );
                unset($_GET['sent']);
             }
          ?> </p></div>
@@ -266,7 +267,7 @@ function wpsc_display_sales_logs() {
 
 <br /><br class='small' /><img src='<?php echo WPSC_CORE_IMAGES_URL; ?>/email_go.png' alt='email icon' />&ensp;<a href='<?php echo add_query_arg('email_buyer_id',$_GET['purchaselog_id']); ?>'><?php _e('Resend Receipt to Buyer', 'wpsc'); ?></a>
 
-<br /><br class='small' /><a class='submitdelete' title='<?php echo esc_attr(__('Delete this log')); ?>' href='<?php echo wp_nonce_url("admin.php?wpsc_admin_action=delete_purchlog&amp;purchlog_id=".$_GET['purchaselog_id'], 'delete_purchlog_' .$_GET['purchaselog_id']); ?>' onclick="if ( confirm(' <?php echo esc_js(sprintf( __("You are about to delete this log '%s'\n 'Cancel' to stop, 'OK' to delete.",'wpsc'),  wpsc_purchaselog_details_date() )) ?>') ) { return true;}return false;"><img src='<?php echo WPSC_CORE_IMAGES_URL . "/cross.png"; ?>' alt='delete icon' />               &nbsp;<?php _e('Remove this record', 'wpsc') ?></a>
+<br /><br class='small' /><a class='submitdelete' title='<?php echo esc_attr(__( 'Delete this log', 'wpsc' )); ?>' href='<?php echo wp_nonce_url("admin.php?wpsc_admin_action=delete_purchlog&amp;purchlog_id=".$_GET['purchaselog_id'], 'delete_purchlog_' .$_GET['purchaselog_id']); ?>' onclick="if ( confirm(' <?php echo esc_js(sprintf( __("You are about to delete this log '%s'\n 'Cancel' to stop, 'OK' to delete.",'wpsc'),  wpsc_purchaselog_details_date() )) ?>') ) { return true;}return false;"><img src='<?php echo WPSC_CORE_IMAGES_URL . "/cross.png"; ?>' alt='delete icon' />               &nbsp;<?php _e('Remove this record', 'wpsc') ?></a>
 
 <br /><br class='small' />&emsp;&ensp;    <a href='<?php echo $page_back ?>'><?php _e('Go Back', 'wpsc'); ?></a>
 <br /><br />
@@ -278,119 +279,23 @@ function wpsc_display_sales_logs() {
    <?php
 
  }
-
- function display_ecomm_admin_menu(){
-   ?>
-   <div class="meta-box-sortables ui-sortable" style="position: relative;">
-      <div class='postbox'>
-         <h3 class='hndle'><?php _e('e-Commerce Admin Menu', 'wpsc'); ?></h3>
-         <div class='inside'>
-            <a href='admin.php?page=wpsc-settings'><?php _e('Shop Settings', 'wpsc'); ?></a><br />
-            <a href='admin.php?page=wpsc-settings&amp;tab=gateway'><?php _e('Checkout Settings', 'wpsc'); ?></a><br />
-            <a href='admin.php?page=wpsc-settings&amp;tab=checkout'><?php _e('Checkout Settings', 'wpsc'); ?></a><br />
-         </div>
-      </div>
-   </div>
-   <?php
- }
- function display_ecomm_rss_feed(){
-   require_once (ABSPATH . WPINC . '/rss.php');
-      $rss = fetch_rss('http://www.instinct.co.nz/feed/');
-      if($rss != null) {
-         $rss->items = array_slice((array)$rss->items, 0, 5);
-         $current_hash = sha1(serialize($rss->items));
-         if((string)get_option('wpsc_ecom_news_hash') !== (string)$current_hash ) {
-            ?>
-            <div class='postbox'>
-               <h3 class='hndle'><?php _e('WP e-Commerce News', 'wpsc'); ?></h3>
-               <div class='inside'>
-               <ul class='ecom_dashboard'>
-               <?php
-               foreach($rss->items as $items) {
-                  echo "<li><a href='".$items['link']."'>".$items['title']."</a></li>";
-               }
-               ?>
-               </ul>
-               <?php
-               if (!IS_WP27)
-                echo "<a href='admin.php?page=<?php echo WPSC_DIR_NAME;?>/display-sales-log.php&#038;hide_news=true' id='close_news_box'>X</a>";
-               ?>
-               </div>
-            </div>
-            <?php
-         }
-    }
-
-    function wpsc_ordersummary(){
-    ?>
-      <div class='postbox'>
-      <h3 class='hndle'><?php _e('Order Summary', 'wpsc'); ?></h3>
-
-          <div class='inside'>
-      <div class='order_summary_subsection'>
-      <strong><?php _e('Current Month', 'wpsc'); ?></strong>
-      <p id='log_total_month'>
-<?php
-      $year = date("Y");
-      $month = date("m");
-      $start_timestamp = mktime(0, 0, 0, $month, 1, $year);
-      $end_timestamp = mktime(0, 0, 0, ($month+1), 0, $year);
-      echo wpsc_currency_display( admin_display_total_price( $start_timestamp,$end_timestamp ) );
-      echo " ".__('(accepted payments)', 'wpsc'); ?>
-      </p>
-      </div>
-      <div class='order_summary_subsection'>
-       <strong><?php _e('Total Income', 'wpsc'); ?></strong>
-         <p id='log_total_absolute'><?php echo wpsc_currency_display( admin_display_total_price() ); ?></p>
-      </div>
-
-      <div class='order_summary_subsection'>
-      <strong><?php _e('Subscribe to your orders', 'wpsc'); ?></strong>
-      <p>
-        <a class='product_log_rss' href='index.php?rss=true&amp;rss_key=key&amp;action=purchase_log'><img align='middle' src='<?php echo WPSC_CORE_IMAGES_URL; ?>/rss-icon.jpg' alt='' title='' />&nbsp;<span><?php _e('Subscribe to an RSS feed', 'wpsc'); ?></span></a> <?php _e('of your orders', 'wpsc'); ?>      </p>
-      </div>
-         <div class='order_summary_subsection'>
-      <strong><?php _e('Plugin News', 'wpsc'); ?></strong>
-      <p>
-      <?php _e('The <a href="http://instinct.co.nz/blogshop/products-page/" target="_blank">WP DropShop Module</a> is the latest and most cutting edge shopping cart available online. Coupled with Grid View then your site will be the talk of street! <br/><br/>The <a href="http://instinct.co.nz/blogshop/products-page/" target="_blank">GridView Module</a> is a visual module built to enhance the way your product page looks.<br/><br/><a href="http://www.instinct.co.nz/wp-campaign-monitor/100">WP Campaign Monitor</a> is an email newsletter tool built just for WP users who want to send campaigns, track the results and manage their subscribers. The latest version integrates with e-commerce lite meaning that you will be able to send buyers email newsletters and much more. ', 'wpsc'); ?>
-        <br /><br /><?php _e('This shop is powered by ', 'wpsc'); ?><a href='http://www.instinct.co.nz'>Instinct</a>
-      </p>
-      </div>
-    </div>
-    <?php
-    if(get_option('activation_state') != "true") {
-      ?>
-      <div class='gold-cart_pesterer'>
-        <div>
-        <img src='<?php echo WPSC_CORE_IMAGES_URL; ?>/gold-cart.png' alt='' title='' /><a href='http://www.instinct.co.nz/e-commerce/shop/'><?php _e('Upgrade to Gold', 'wpsc'); ?></a><?php _e(' and unleash more functionality into your shop.', 'wpsc'); ?>
-        </div>
-      </div>
-
-      <?php
-    }
-    ?>
-    </div>
-
-   <?php
-    }
-
- }
+    
  function wpsc_purchaselogs_displaylist(){
    global $purchlogs;
   ?>
    <form method='post' action=''>
      <div class='wpsc_purchaselogs_options'>
       <select id='purchlog_multiple_status_change' name='purchlog_multiple_status_change' class='purchlog_multiple_status_change'>
-         <option selected='selected' value='-1'><?php _e('Bulk Actions'); ?></option>
+         <option selected='selected' value='-1'><?php _e('Bulk Actions', 'wpsc'); ?></option>
          <?php while(wpsc_have_purch_items_statuses()) : wpsc_the_purch_status(); ?>
             <option value='<?php echo wpsc_the_purch_status_id(); ?>' >
                <?php echo wpsc_the_purch_status_name(); ?>
             </option>
          <?php endwhile; ?>
-         <option value="delete"><?php _e('Delete'); ?></option>
+         <option value="delete"><?php _e('Delete', 'wpsc'); ?></option>
       </select>
       <input type='hidden' value='purchlog_bulk_modify' name='wpsc_admin_action2' />
-      <input type="submit" value="<?php _e('Apply'); ?>" name="doaction" id="doaction" class="button-secondary action" />
+      <input type="submit" value="<?php _e('Apply', 'wpsc'); ?>" name="doaction" id="doaction" class="button-secondary action" />
       <?php /* View functions for purchlogs */?>
       <label for='view_purchlogs_by'><?php _e('View:'); ?></label>
 
@@ -413,8 +318,8 @@ function wpsc_display_sales_logs() {
         }
 
         ?>
-         <option value='all' <?php echo $date_is_selected['all']; ?>>All</option>
-            <option value='3mnths' <?php echo $date_is_selected['3mnths']; ?>>Three Months</option>
+         <option value='all' <?php echo $date_is_selected['all']; ?>><?php echo _x('All', 'all sales', 'wpsc'); ?></option>
+            <option value='3mnths' <?php echo $date_is_selected['3mnths']; ?>><?php _e('Three Months', 'wpsc'); ?></option>
          <?php  echo wpsc_purchlogs_getfirstdates(); ?>
       </select>
       <select id='view_purchlogs_by_status' name='view_purchlogs_by_status'>
@@ -438,13 +343,13 @@ function wpsc_display_sales_logs() {
          }else{
                $is_selected = '';
           } ?>
-         <option <?php echo $is_selected; ?> value='-1'>Status: All</option>
+         <option <?php echo $is_selected; ?> value='-1'><?php _e('Status: All', 'wpsc'); ?></option>
       </select>
       <input type='hidden' value='purchlog_filter_by' name='wpsc_admin_action' />
-      <input type="submit" value="<?php _e('Filter'); ?>" name="doaction2" id="doaction2" class="button-secondary action" />
+      <input type="submit" value="<?php _e('Filter', 'wpsc'); ?>" name="doaction2" id="doaction2" class="button-secondary action" />
    </div>
       <?php if( isset( $_POST['purchlogs_searchbox'] ) && wpsc_have_purch_items() == false ):  ?>
-   <div class="updated settings-error"><p><?php _e('There are no purchase logs for your selection, please try again.'); ?></p></div>
+   <div class="updated settings-error"><p><?php _e('There are no purchase logs for your selection, please try again.', 'wpsc'); ?></p></div>
       <?php endif;?>
       <table class="widefat page fixed" cellspacing="0">
          <thead>
@@ -461,7 +366,7 @@ function wpsc_display_sales_logs() {
          <?php get_purchaselogs_content(); ?>
          </tbody>
       </table>
-      <p><strong style='float:left' ><?php _e('Total:'); ?></strong> <?php echo wpsc_currency_display( wpsc_the_purch_total() ); ?></p>
+      <p><strong><?php _e('Total:', 'wpsc'); ?></strong> <?php echo wpsc_currency_display( wpsc_the_purch_total() ); ?></p>
 <?php
          if(!isset($purchlogs->current_start_timestamp) && !isset($purchlogs->current_end_timestamp)){
             $purchlogs->current_start_timestamp = $purchlogs->earliest_timestamp;
@@ -482,7 +387,7 @@ function wpsc_display_sales_logs() {
       $(document).ready(function(){
          $('#doaction, #doaction2').click(function(){
             if ( $('select[name^="purchlog_multiple_status_change"]').val() == 'delete' ) {
-               var m = '<?php echo esc_js(__("You are about to delete the selected purchase logs.\n  'Cancel' to stop, 'OK' to delete.")); ?>';
+               var m = '<?php echo esc_js(__("You are about to delete the selected purchase logs.\n  'Cancel' to stop, 'OK' to delete.", "wpsc")); ?>';
                return showNotice.warn(m);
             }
          });
@@ -506,7 +411,10 @@ function wpsc_display_sales_logs() {
       <td><?php echo wpsc_the_purch_item_date(); ?></td> <!--Date -->
       <td><?php echo wpsc_the_purch_item_name(); ?></td> <!--Name/email -->
       <td><?php echo wpsc_currency_display( wpsc_the_purch_item_price() ); ?></td><!-- Amount -->
-      <td><a href='<?php echo htmlentities(add_query_arg('purchaselog_id', wpsc_the_purch_item_id()), ENT_QUOTES, 'UTF-8') ; ?>'><?php echo wpsc_the_purch_item_details();?> Items</a></td><!-- Details -->
+      <td><a href='<?php echo htmlentities(add_query_arg('purchaselog_id', wpsc_the_purch_item_id()), ENT_QUOTES, 'UTF-8') ; ?>'><?php
+      $number_of_items = wpsc_the_purch_item_details();
+      printf( _n( '%s Item', '%s Items', $number_of_items, 'wpsc' ), $number_of_items );
+      ?></a></td><!-- Details -->
       <td>
       <?php if(!wpsc_purchlogs_is_google_checkout()){ ?>
          <select class='selector' name='<?php echo wpsc_the_purch_item_id(); ?>' title='<?php echo wpsc_the_purch_item_id(); ?>' >
@@ -518,7 +426,7 @@ function wpsc_display_sales_logs() {
          <a href='http://checkout.google.com/' rel=''><img class='google_checkout_logo' src='<?php echo WPSC_CORE_IMAGES_URL . "/checkout_logo.jpg"; ?>' alt='google checkout' /></a>
       <?php } ?>
       </td><!-- Status -->
-      <td><a class='submitdelete' title='<?php echo esc_attr(__('Delete this log')); ?>' href='<?php echo wp_nonce_url("admin.php?wpsc_admin_action=delete_purchlog&amp;purchlog_id=".wpsc_the_purch_item_id(), 'delete_purchlog_' . wpsc_the_purch_item_id()); ?>' onclick="if ( confirm(' <?php echo esc_js(sprintf( __("You are about to delete this log '%s'\n 'Cancel' to stop, 'OK' to delete."),  wpsc_the_purch_item_date() )) ?>') ) { return true;}return false;"><img class='wpsc_pushdown_img' src='<?php echo WPSC_CORE_IMAGES_URL . "/cross.png"; ?>' alt='delete icon' /></a></td><!-- Delete -->
+      <td><a class='submitdelete' title='<?php echo esc_attr(__('Delete this log', 'wpsc')); ?>' href='<?php echo wp_nonce_url("admin.php?wpsc_admin_action=delete_purchlog&amp;purchlog_id=".wpsc_the_purch_item_id(), 'delete_purchlog_' . wpsc_the_purch_item_id()); ?>' onclick="if ( confirm(' <?php echo esc_js(sprintf( __("You are about to delete this log '%s'\n 'Cancel' to stop, 'OK' to delete.", 'wpsc'),  wpsc_the_purch_item_date() )) ?>') ) { return true;}return false;"><img class='wpsc_pushdown_img' src='<?php echo WPSC_CORE_IMAGES_URL . "/cross.png"; ?>' alt='delete icon' /></a></td><!-- Delete -->
       <td>
          <a class='wpsc_show_trackingid' title='<?php echo wpsc_the_purch_item_id(); ?>' href=''><?php echo wpsc_display_tracking_id(); ?></a>
       </td>
@@ -533,7 +441,7 @@ function wpsc_display_sales_logs() {
          <input type='submit' name='submit' class='button' value='Add Tracking ID' />
       </td>
       <td colspan='4'>
-         <a href='' title='<?php echo wpsc_the_purch_item_id(); ?>' class='sendTrackingEmail'>Send Custom Message</a>
+         <a href='' title='<?php echo wpsc_the_purch_item_id(); ?>' class='sendTrackingEmail'><?php _e( 'Send Custom Message', 'wpsc' ); ?></a>
       </td>
    </tr>
 
@@ -545,7 +453,7 @@ function wpsc_display_sales_logs() {
    <form  action='' method='post'>
       <input type='hidden' name='wpsc_admin_action' value='purchlogs_search' />
       <input type='text' value='<?php if(isset($_POST['purchlogs_searchbox'])) echo $_POST['purchlogs_searchbox']; ?>' name='purchlogs_searchbox' id='purchlogs_searchbox' />
-      <input type="submit" value="<?php _e('Search Logs'); ?>"  class="button-secondary action" />
+      <input type="submit" value="<?php _e('Search Logs', 'wpsc'); ?>"  class="button-secondary action" />
    </form>
    <?php
  }
@@ -609,7 +517,7 @@ function wpsc_purchlogs_notes() {
             <input type="hidden" name="wpsc_purchlogs_update_notes_nonce" id="wpsc_purchlogs_update_notes_nonce" value="<?php echo wp_create_nonce( 'wpsc_purchlogs_update_notes' ); ?>" />
             <input type='hidden' name='purchlog_id' value='<?php echo $_GET['purchaselog_id']; ?>' />
             <p><textarea name="purchlog_notes" rows="3" wrap="virtual" id="purchlog_notes" style="width:100%;"><?php if ( isset($_POST['purchlog_notes']) ) { echo stripslashes($_POST['purchlog_notes']); } else { echo wpsc_display_purchlog_notes(); } ?></textarea></p>
-            <p><input class="button" type="submit" name="button" id="button" value="Update Notes" /></p>
+            <p><input class="button" type="submit" name="button" id="button" value="<?php _e( 'Update Notes', 'wpsc' ); ?>" /></p>
          </form>
       </div>
       </div>

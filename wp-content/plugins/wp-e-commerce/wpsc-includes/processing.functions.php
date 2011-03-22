@@ -29,12 +29,12 @@ function wpsc_currency_display( $price_in, $args = null ) {
 	if('' == get_option('wpsc_decimal_separator'))
 		$decimal_separator = '.';
 	else
-		$decimal_separator = get_option('wpsc_decimal_separator');
+		$decimal_separator = stripslashes( get_option('wpsc_decimal_separator') );
 
 	if('' == get_option('wpsc_thousands_separator'))
 		$thousands_separator = '.';
 	else
-		$thousands_separator = get_option('wpsc_thousands_separator');
+		$thousands_separator = stripslashes( get_option('wpsc_thousands_separator') );
 
 	// Format the price for output
 	$price_out = number_format( (double)$price_in, $decimals, $decimal_separator, $thousands_separator );
@@ -54,8 +54,8 @@ function wpsc_currency_display( $price_in, $args = null ) {
 	$currency_sign = '';
 	if ( $query['display_currency_symbol'] ) {
 		if ( !empty( $wpsc_currency_data['symbol'] ) ) {
-			if ( $query['display_as_html'] ) {
-				$currency_sign = html_entity_decode($wpsc_currency_data['symbol']);
+			if ( $query['display_as_html'] && !empty($wpsc_currency_data['symbol_html']) ) {
+				$currency_sign = $wpsc_currency_data['symbol_html'];
 			} else {
 				$currency_sign = $wpsc_currency_data['symbol'];
 			}
@@ -83,7 +83,7 @@ function wpsc_currency_display( $price_in, $args = null ) {
 		
 		case 3:
 		default:
-			$format_string = '%1$s %2$s %3$s';
+			$format_string = '%1$s %2$s%3$s';
 			break;
 	}
 	// Compile the output
@@ -119,7 +119,7 @@ function wpsc_decrement_claimed_stock($purchase_log_id) {
 		update_post_meta($product_id, '_wpsc_stock', $remaining_stock);
 		
 		$remaining_stock = $wpdb->get_row($sql_query, ARRAY_A);
-		if($remaining_stock == 0 && get_product_meta($product_id,'unpublish_oos',true) == 1){
+		if($remaining_stock == 0 && get_product_meta($product_id,'unpublish_when_none_left',true) == 1){
 			wp_mail(get_option('admin_email'), sprintf(__('%s is out of stock', 'wpsc'), $product->post_title), sprintf(__('Remaining stock of %s is 0. Product was unpublished.', 'wpsc'), $product->post_title) );
 			$wpdb->query("UPDATE `".$wpdb->posts."` SET `post_status` = 'draft' WHERE `ID` = '{$product_id}'");
 		}
@@ -173,32 +173,14 @@ function wpsc_get_mimetype($file, $check_reliability = false) {
 }
 
 function wpsc_convert_weights($weight, $unit) {
+	_deprecated_function( __FUNCTION__, '3.8', 'wpsc_convert_weight' );
 	if (is_array($weight)) {
 		$weight = $weight['weight'];
 	}
-	switch($unit) {		
-		case "kilogram":
-		$weight = $weight / 1000;
-		break;
-		
-		case "gram":
-		$weight = $weight;
-		break;
-	
-		case "once":
-		case "ounce":
-		$weight = ($weight / 453.59237) * 16;
-		break;
-		
-		case "pound":
-		default:
-		$weight = $weight / 453.59237;
-		break;
-	}
-	return $weight;
+	return wpsc_convert_weight( $weight, $unit, 'gram', true  );
 }
 
-function wpsc_convert_weight($in_weight, $in_unit, $out_unit = 'pound') {
+function wpsc_convert_weight($in_weight, $in_unit, $out_unit = 'pound', $raw = false) {
 	if (isset($weight) && is_array($weight)) {
 		$weight = $weight['weight'];
 	}
@@ -241,6 +223,8 @@ function wpsc_convert_weight($in_weight, $in_unit, $out_unit = 'pound') {
 		$weight = $intermediate_weight / 453.59237;
 		break;
 	}
+	if($raw)
+		return $weight;
 	return round($weight, 2);
 }
 

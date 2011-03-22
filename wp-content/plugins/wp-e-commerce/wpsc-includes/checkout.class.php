@@ -442,7 +442,7 @@ function wpsc_shipping_region_list( $selected_country, $selected_region, $shippi
 			if ( $selected_region == $region['id'] ) {
 				$selected = "selected='selected'";
 			}
-			$output .= "<option $selected value='{$region['id']}'>" . htmlspecialchars( $region['name'] ) . "</option>";
+			$output .= "<option $selected value='{$region['id']}'>" . esc_attr( htmlspecialchars( $region['name'] ) ). "</option>";
 		}
 		$output .= "";
 
@@ -465,10 +465,10 @@ function wpsc_shipping_country_list( $shippingdetails = false ) {
 	$selected_region = $_SESSION['wpsc_delivery_region'];
 
 	if ( empty( $selected_country ) )
-		$selected_country = get_option( 'base_country' );
+		$selected_country = esc_attr( get_option( 'base_country' ) );
 
 	if ( empty( $selected_region ) )
-		$selected_region = get_option( 'base_region' );
+		$selected_region = esc_attr( get_option( 'base_region' ) );
 		
 	$country_data = $wpdb->get_results( "SELECT * FROM `" . WPSC_TABLE_CURRENCY_LIST . "` WHERE `visible`= '1' ORDER BY `country` ASC", ARRAY_A );
 
@@ -478,7 +478,7 @@ function wpsc_shipping_country_list( $shippingdetails = false ) {
 			if ( $selected_country == $country['isocode'] ) {
 				$selected = "selected='selected'";
 			}
-			$output .= "<option value='" . $country['isocode'] . "' $selected>" . htmlspecialchars( $country['country'] ) . "</option>";
+			$output .= "<option value='" . $country['isocode'] . "' $selected>" . esc_attr(htmlspecialchars( $country['country'] ) ) . "</option>";
 
 	}
 
@@ -585,9 +585,9 @@ class wpsc_checkout {
 
 	function form_name() {
 		if ( $this->form_name_is_required() && ($this->checkout_item->type != 'heading') )
-			return stripslashes( $this->checkout_item->name ) . ' <span class="asterix">*</span> ';
+			return esc_html( stripslashes( $this->checkout_item->name ) ) . ' <span class="asterix">*</span> ';
 		else
-			return stripslashes( $this->checkout_item->name );
+			return esc_html( stripslashes( $this->checkout_item->name ) );
 	}
 
 	function form_name_is_required() {
@@ -630,19 +630,7 @@ class wpsc_checkout {
 			
 			$delivery_country_id = wpsc_get_country_form_id_by_type('delivery_country');
      		$billing_country_id = wpsc_get_country_form_id_by_type('country');
-			if(is_array($_SESSION['wpsc_checkout_saved_values']) && ($this->checkout_item->id == $delivery_country_id) || ($this->checkout_item->id == $billing_country_id)){
-				if( isset($_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id]) && is_array($_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id]) 
-					&& count($_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id]) > 1 ){
-/*
-			 		$_SESSION['wpsc_delivery_country'] = $_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id][0];
-				 	$_SESSION['wpsc_delivery_region'] = $_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id][1];
-*/
-			 	} elseif(isset($_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id]) &&  is_array($_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id])) {				
-/* 				 	$_SESSION['wpsc_delivery_country'] = $_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id][0]; */
-				}elseif(isset($_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id])){
-/* 					$_SESSION['wpsc_delivery_country'] = $_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id]; */
-				}
-     		}
+			
 		}
 		$saved_form_data = @htmlentities( stripslashes( (string)$_SESSION['wpsc_checkout_saved_values'][$this->checkout_item->id] ), ENT_QUOTES, 'UTF-8' );
 		$an_array = '';
@@ -663,7 +651,7 @@ class wpsc_checkout {
 				if ( $options != '' ) {
 					$i = mt_rand();
 					foreach ( $options as $label => $value ) {
-						$output .= "<input type='hidden' title='" . $this->checkout_item->unique_name . "' id='" . $this->form_element_id() . "' value='-1' name='collected_data[{$this->checkout_item->id}][" . $i . "]'/><input type='checkbox' title='" . $this->checkout_item->unique_name . "' id='" . $this->form_element_id() . "' value='" . $value . "' name='collected_data[{$this->checkout_item->id}][" . $i . "]'/> ";
+						$output .= "<input type='hidden' title='" . $this->checkout_item->unique_name . "' id='" . $this->form_element_id() . "' value='-1' name='collected_data[{$this->checkout_item->id}][" . $i . "]'/><input type='checkbox' title='" . $this->checkout_item->unique_name . "' id='" . $this->form_element_id() . "' value='" . esc_attr( $value ) . "' name='collected_data[{$this->checkout_item->id}][" . $i . "]'/> ";
 						$output .= "<label for='" . $this->form_element_id() . "'>" . $label . "</label>";
 					}
 				}
@@ -676,7 +664,7 @@ class wpsc_checkout {
 			case "delivery_country":
 				if ( wpsc_uses_shipping ( ) ) {
 					$country_name = $wpdb->get_var( "SELECT `country` FROM `" . WPSC_TABLE_CURRENCY_LIST . "` WHERE `isocode`='" . $_SESSION['wpsc_delivery_country'] . "' LIMIT 1" );
-					$output = "<input title='" . $this->checkout_item->unique_name . "' type='hidden' id='" . $this->form_element_id() . "' class='shipping_country' name='collected_data[{$this->checkout_item->id}]' value='" . $_SESSION['wpsc_delivery_country'] . "' size='4' /><span class='shipping_country_name'>" . $country_name . "</span> ";
+					$output = "<input title='" . $this->checkout_item->unique_name . "' type='hidden' id='" . $this->form_element_id() . "' class='shipping_country' name='collected_data[{$this->checkout_item->id}]' value='" . esc_attr( $_SESSION['wpsc_delivery_country'] ) . "' size='4' /><span class='shipping_country_name'>" . $country_name . "</span> ";
 				} else {
 					$checkoutfields = true;
 					$output = wpsc_country_region_list( $this->checkout_item->id, false, $_SESSION['wpsc_delivery_country'], $_SESSION['wpsc_delivery_region'], $this->form_element_id(), $checkoutfields );
@@ -688,8 +676,8 @@ class wpsc_checkout {
 					$output = "<select name='collected_data[{$this->checkout_item->id}]" . $an_array . "'>";
 					$output .= "<option value='-1'>Select an Option</option>";
 					foreach ( (array)$options as $label => $value ) {
-						$value = str_replace( ' ', '', $value );
-						$output .="<option value='" . $value . "'>" . $label . "</option>\n\r";
+						$value = esc_attr(str_replace( ' ', '', $value ) );
+						$output .="<option value='" . esc_attr( $value ) . "'>" . esc_html( $label ) . "</option>\n\r";
 					}
 					$output .="</select>";
 				}
@@ -699,7 +687,7 @@ class wpsc_checkout {
 				if ( $options != '' ) {
 					$i = mt_rand();
 					foreach ( (array)$options as $label => $value ) {
-						$output .= "<input type='radio' title='" . $this->checkout_item->unique_name . "' id='" . $this->form_element_id() . "'value='" . $value . "' name='collected_data[{$this->checkout_item->id}][" . $i . "]'/> ";
+						$output .= "<input type='radio' title='" . $this->checkout_item->unique_name . "' id='" . $this->form_element_id() . "'value='" . esc_attr( $value ) . "' name='collected_data[{$this->checkout_item->id}][" . $i . "]'/> ";
 						$output .= "<label for='" . $this->form_element_id() . "'>" . $label . "</label>";
 					}
 				}
@@ -812,16 +800,18 @@ class wpsc_checkout {
 				$our_user_id = '';
 			}
 		}
-		if ( $our_user_id < 1 ) {
+		if ( isset( $our_user_id ) && $our_user_id < 1 ) {
 			$our_user_id = $user_ID;
 		}
 		// check we have a user id
-		if ( $our_user_id > 0 ) {
+		if ( isset( $our_user_id ) && $our_user_id > 0 ) {
 			$user_ID = $our_user_id;
 		}
 		//Basic Form field validation for billing and shipping details
 		foreach ( $this->checkout_items as $form_data ) {
-			$value = $_POST['collected_data'][$form_data->id];
+			$value = '';
+			if( isset( $_POST['collected_data'][$form_data->id] ) )
+				$value = $_POST['collected_data'][$form_data->id];
 			$_SESSION['wpsc_checkout_saved_values'][$form_data->id] = $value;
 			$bad_input = false;
 			if ( ($form_data->mandatory == 1) || ($form_data->type == "coupon") ) {
@@ -851,7 +841,7 @@ class wpsc_checkout {
 						break;
 				}
 				if ( $bad_input === true ) {
-					$_SESSION['wpsc_checkout_error_messages'][$form_data->id] = sprintf(__( 'Please enter a valid %s.', 'wpsc' ), strtolower( $form_data->name ));
+					$_SESSION['wpsc_checkout_error_messages'][$form_data->id] = sprintf(__( 'Please enter a valid <span class="wpsc_error_msg_field_name">%s</span>.', 'wpsc' ), esc_attr($form_data->name) );
 					$_SESSION['wpsc_checkout_saved_values'][$form_data->id] = '';
 				}
 			}
@@ -875,10 +865,12 @@ class wpsc_checkout {
 		$count = $this->get_count_checkout_fields() + 1;
 		$i = 0;
 		foreach ( $this->checkout_items as $form_data ) {
-			$value = $_POST['collected_data'][$form_data->id];
-			if ( $value == '' ) {
+			$value = '';
+			if( isset( $_POST['collected_data'][$form_data->id] ) )
+				$value = $_POST['collected_data'][$form_data->id];
+			if ( empty( $value ) && isset( $form_data->value ) )
 				$value = $form_data->value;
-			}
+
 
 			if ( $form_data->type != 'heading' ) {
 				if ( is_array( $value ) && ($form_data->unique_name == 'billingcountry' || $form_data->unique_name == 'shippingcountry') ) {

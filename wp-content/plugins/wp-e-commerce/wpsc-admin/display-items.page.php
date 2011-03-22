@@ -117,13 +117,13 @@ function wpsc_additional_column_data( $column ) {
                     $src = wp_get_attachment_url( $attached_image->ID );
                  ?>
                     <div style='width:38px; height:38px; overflow:hidden;'>
-                        <img title='<?php _e( 'Drag to a new position' ); ?>' src='<?php echo $src; ?>' alt='<?php echo $title; ?>' width='38' height='38' />
+                        <img title='<?php _e( 'Drag to a new position', 'wpsc' ); ?>' src='<?php echo $src; ?>' alt='<?php echo $title; ?>' width='38' height='38' />
                     </div>
                 <?php
 		     } else {
 		      	$image_url = WPSC_CORE_IMAGES_URL . "/no-image-uploaded.gif";
                 ?>
-                      <img title='<?php _e( 'Drag to a new position' ); ?>' src='<?php echo $image_url; ?>' alt='<?php echo $title; ?>' width='38' height='38' />
+                      <img title='<?php _e( 'Drag to a new position', 'wpsc' ); ?>' src='<?php echo $image_url; ?>' alt='<?php echo $title; ?>' width='38' height='38' />
                 <?php
                      }
                 break;
@@ -174,7 +174,7 @@ function wpsc_additional_column_data( $column ) {
             case 'stock' :
                 $stock = get_post_meta( $post->ID, '_wpsc_stock', true );
                     if( $stock == '' )
-                        $stock = 'N/A';
+                        $stock = __('N/A', 'wpsc');
                     if( !$is_parent ) {
                         echo $stock;
                         echo '<div id="inline_' . $post->ID . '_stock" class="hidden">' . $stock . '</div>';
@@ -187,13 +187,6 @@ function wpsc_additional_column_data( $column ) {
 				$has_var = '1';
                 if( !$is_parent ) {
                   	echo wpsc_currency_display( $price );
-     	          	$args = array(
-						'display_currency_symbol' => false,
-						'display_decimal_point'   => true,
-						'display_currency_code'   => false,
-						'display_as_html'         => false
-						);
-                  	$price = wpsc_currency_display( $price, $args );
                     echo '<div id="inline_' . $post->ID . '_price" class="hidden">' . trim($price) . '</div>';
 	                 $has_var = '0';
                 }
@@ -213,7 +206,7 @@ function wpsc_additional_column_data( $column ) {
             case 'SKU' :
                 $sku = get_post_meta( $post->ID, '_wpsc_sku', true );
                     if( $sku == '' )
-                        $sku = 'N/A';
+                        $sku = __('N/A', 'wpsc');
 
                     echo $sku;
                     echo '<div id="inline_' . $post->ID . '_sku" class="hidden">' . $sku . '</div>';
@@ -265,22 +258,24 @@ function wpsc_column_sql_orderby( $orderby, $wp_query ) {
 
 	$wp_query->query = wp_parse_args( $wp_query->query );
 
-          switch ( $wp_query->query['orderby'] ) :
-            case 'stock' :
-                $orderby = "(SELECT meta_value FROM $wpdb->postmeta WHERE post_id = $wpdb->posts.ID AND meta_key = '_wpsc_stock') " . $wp_query->get('order');
-                break;
-            case 'price' :
-                $orderby = "(SELECT meta_value FROM $wpdb->postmeta WHERE post_id = $wpdb->posts.ID AND meta_key = '_wpsc_price') " . $wp_query->get('order');
-                break;
-            case 'sale_price' :
-                $orderby = "(SELECT meta_value FROM $wpdb->postmeta WHERE post_id = $wpdb->posts.ID AND meta_key = '_wpsc_special_price') " . $wp_query->get('order');
-                break;
-            case 'SKU' :
-                $orderby = "(SELECT meta_value FROM $wpdb->postmeta WHERE post_id = $wpdb->posts.ID AND meta_key = '_wpsc_sku') " . $wp_query->get('order');
-                break;
-        endswitch;
+        if( isset( $wp_query->query['orderby'] ) ) :
+            switch ( $wp_query->query['orderby'] ) :
+                case 'stock' :
+                    $orderby = "(SELECT meta_value FROM $wpdb->postmeta WHERE post_id = $wpdb->posts.ID AND meta_key = '_wpsc_stock') " . $wp_query->get('order');
+                    break;
+                case 'price' :
+                    $orderby = "(SELECT meta_value FROM $wpdb->postmeta WHERE post_id = $wpdb->posts.ID AND meta_key = '_wpsc_price') " . $wp_query->get('order');
+                    break;
+                case 'sale_price' :
+                    $orderby = "(SELECT meta_value FROM $wpdb->postmeta WHERE post_id = $wpdb->posts.ID AND meta_key = '_wpsc_special_price') " . $wp_query->get('order');
+                    break;
+                case 'SKU' :
+                    $orderby = "(SELECT meta_value FROM $wpdb->postmeta WHERE post_id = $wpdb->posts.ID AND meta_key = '_wpsc_sku') " . $wp_query->get('order');
+                    break;
+           endswitch;
+        endif;
         
-	return $orderby;
+    return $orderby;
 }
 function wpsc_cats_restrict_manage_posts() {
     global $typenow;
@@ -295,12 +290,11 @@ function wpsc_cats_restrict_manage_posts() {
             $tax_name = $tax_obj->labels->name;
             // retrieve array of term objects per taxonomy
             $terms = get_terms( $tax_slug );
-
             // output html for taxonomy dropdown filter
             echo "<select name='$tax_slug' id='$tax_slug' class='postform'>";
             echo "<option value=''>" . sprintf(_x('Show All %s', 'Show all [category name]', 'wpsc'), $tax_name) . "</option>";
             foreach ( $terms as $term ) 
-                echo '<option value='. $term->slug, $_GET[$tax_slug] == $term->slug ? ' selected="selected"' : '','>' . $term->name .' (' . $term->count .')</option>';
+                echo '<option value='. $term->slug, ( isset($_GET[$tax_slug]) && $_GET[$tax_slug] == $term->slug) ? ' selected="selected"' : '','>' . $term->name .' (' . $term->count .')</option>';
             echo "</select>";
         }
     }

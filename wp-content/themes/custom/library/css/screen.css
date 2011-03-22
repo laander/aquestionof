@@ -1489,8 +1489,89 @@ body .removed {
   color: white;
 }
 
+/* line 24, ../scss/partials/_master.scss */
+#masterbar-container {
+  width: 100%;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+}
+
+/* line 31, ../scss/partials/_master.scss */
+#masterbar {
+  max-width: 1200px;
+  min-width: 960px;
+  margin: 0 auto;
+  padding: 6px 20px;
+}
+
+/* line 38, ../scss/partials/_master.scss */
+#masterbar div,
+#masterbar div a {
+  color: #FFF;
+  font-family: DIN;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* line 45, ../scss/partials/_master.scss */
+#masterbar .master-freeshipping {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+}
+/* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #masterbar .master-freeshipping {
+  overflow-x: hidden;
+}
+
+/* line 48, ../scss/partials/_master.scss */
+#masterbar .master-email {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+  float: right;
+  text-align: right;
+}
+/* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #masterbar .master-email {
+  overflow-x: hidden;
+}
+
+/* line 53, ../scss/partials/_master.scss */
+#masterbar .master-customerservice {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+  float: right;
+  text-align: right;
+}
+/* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #masterbar .master-customerservice {
+  overflow-x: hidden;
+}
+
+/* line 58, ../scss/partials/_master.scss */
+#masterbar .master-shoppingbag {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+  float: right;
+  text-align: right;
+}
+/* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html #masterbar .master-shoppingbag {
+  overflow-x: hidden;
+}
+
 /* Wrapper for everything inside of the body */
-/* line 25, ../scss/partials/_master.scss */
+/* line 64, ../scss/partials/_master.scss */
 #body-container {
   max-width: 1200px;
   min-width: 960px;
@@ -1498,11 +1579,11 @@ body .removed {
   padding: 0 20px;
 }
 
-/* line 33, ../scss/partials/_master.scss */
+/* line 72, ../scss/partials/_master.scss */
 #initializing {
   display: none;
 }
-/* line 36, ../scss/partials/_master.scss */
+/* line 75, ../scss/partials/_master.scss */
 #initializing .dim {
   height: 100%;
   width: 100%;
@@ -1515,7 +1596,7 @@ body .removed {
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
 }
-/* line 46, ../scss/partials/_master.scss */
+/* line 85, ../scss/partials/_master.scss */
 #initializing .overlay {
   height: 100%;
   width: 100%;
@@ -1527,7 +1608,7 @@ body .removed {
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 }
-/* line 55, ../scss/partials/_master.scss */
+/* line 94, ../scss/partials/_master.scss */
 #initializing .overlay img {
   position: relative;
   width: auto;
@@ -1538,7 +1619,7 @@ body .removed {
 /**
 * Header (logo)
 ************************************************/
-/* line 67, ../scss/partials/_master.scss */
+/* line 106, ../scss/partials/_master.scss */
 #header-container {
   position: relative;
   height: 185px;
@@ -1546,25 +1627,25 @@ body .removed {
   overflow: hidden;
 }
 
-/* line 73, ../scss/partials/_master.scss */
+/* line 112, ../scss/partials/_master.scss */
 #loader {
   position: absolute;
   left: 500px;
   top: 60px;
 }
 
-/* line 80, ../scss/partials/_master.scss */
+/* line 119, ../scss/partials/_master.scss */
 #site-title {
   float: left;
   margin-top: 40px;
 }
 
-/* line 84, ../scss/partials/_master.scss */
+/* line 123, ../scss/partials/_master.scss */
 #site-title a img {
   width: 470px;
 }
 
-/* line 87, ../scss/partials/_master.scss */
+/* line 126, ../scss/partials/_master.scss */
 #site-title a h2 {
   text-indent: -119988px;
   overflow: hidden;
@@ -1572,7 +1653,7 @@ body .removed {
   display: none;
 }
 
-/* line 91, ../scss/partials/_master.scss */
+/* line 130, ../scss/partials/_master.scss */
 ul#primary-menu {
   float: left;
   clear: left;
@@ -1581,7 +1662,7 @@ ul#primary-menu {
   padding: 0;
   overflow: hidden;
 }
-/* line 99, ../scss/partials/_master.scss */
+/* line 138, ../scss/partials/_master.scss */
 ul#primary-menu > li {
   position: relative;
   float: left;
@@ -1590,7 +1671,7 @@ ul#primary-menu > li {
   list-style: none;
   overflow: hidden;
 }
-/* line 107, ../scss/partials/_master.scss */
+/* line 146, ../scss/partials/_master.scss */
 ul#primary-menu > li > a {
   position: relative;
   float: left;
@@ -1601,7 +1682,7 @@ ul#primary-menu > li > a {
   text-transform: uppercase;
 }
 
-/* line 121, ../scss/partials/_master.scss */
+/* line 160, ../scss/partials/_master.scss */
 ul.sub-menu {
   display: none;
   position: relative;
@@ -1611,13 +1692,13 @@ ul.sub-menu {
   white-space: nowrap;
   overflow: hidden;
 }
-/* line 130, ../scss/partials/_master.scss */
+/* line 169, ../scss/partials/_master.scss */
 ul.sub-menu ul.sub-menu.current {
   display: block;
   opacity: 1;
   width: auto;
 }
-/* line 135, ../scss/partials/_master.scss */
+/* line 174, ../scss/partials/_master.scss */
 ul.sub-menu > li {
   display: inline;
   margin: 0 0 0 5px;
@@ -1626,7 +1707,7 @@ ul.sub-menu > li {
   white-space: nowrap;
   overflow: hidden;
 }
-/* line 143, ../scss/partials/_master.scss */
+/* line 182, ../scss/partials/_master.scss */
 ul.sub-menu > li > a {
   margin: 0;
   color: gray;
@@ -1636,36 +1717,32 @@ ul.sub-menu > li > a {
   text-transform: uppercase;
 }
 
-/* line 152, ../scss/partials/_master.scss */
-.shopping-bag {
-  margin: 40px 10px 0 0;
+/* line 191, ../scss/partials/_master.scss */
+.shophere-button {
+  margin: 30px 10px 0 0;
   float: right;
-  height: 69px;
-  text-align: right;
+  height: 78px;
+  width: 78px;
+  text-align: center;
+  background-color: #000;
 }
 
-/* line 158, ../scss/partials/_master.scss */
-.shopping-bag .text {
+/* line 199, ../scss/partials/_master.scss */
+.shophere-button .text {
+  padding-top: 6px;
   float: right;
   clear: both;
 }
 
-/* line 162, ../scss/partials/_master.scss */
-.shopping-bag .text a {
-  font-size: 48px;
+/* line 204, ../scss/partials/_master.scss */
+.shophere-button .text a {
+  font-size: 24px;
   font-family: DIN;
   text-decoration: none;
+  color: #fff;
 }
 
-/* line 167, ../scss/partials/_master.scss */
-.shopping-bag .items {
-  float: right;
-  font-family: DIN;
-  font-size: 33px;
-  clear: both;
-}
-
-/* line 173, ../scss/partials/_master.scss */
+/* line 210, ../scss/partials/_master.scss */
 .fb-like {
   margin: 13px 10px 0 0;
   float: right;
@@ -1674,12 +1751,12 @@ ul.sub-menu > li > a {
 /**
 * Main content area
 ************************************************/
-/* line 181, ../scss/partials/_master.scss */
+/* line 218, ../scss/partials/_master.scss */
 #content-container {
   width: 100%;
 }
 
-/* line 188, ../scss/partials/_master.scss */
+/* line 225, ../scss/partials/_master.scss */
 .hentry .featured-image {
   display: inline;
   float: left;
@@ -1691,7 +1768,7 @@ ul.sub-menu > li > a {
 * html .hentry .featured-image {
   overflow-x: hidden;
 }
-/* line 192, ../scss/partials/_master.scss */
+/* line 229, ../scss/partials/_master.scss */
 .hentry .entry-content {
   *zoom: 1;
 }
@@ -1704,18 +1781,18 @@ ul.sub-menu > li > a {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 195, ../scss/partials/_master.scss */
+/* line 232, ../scss/partials/_master.scss */
 .hentry .entry-with-sidebar {
   margin-left: 250px;
 }
-/* line 198, ../scss/partials/_master.scss */
+/* line 235, ../scss/partials/_master.scss */
 .hentry .entry-content h1 {
   margin-bottom: 15px;
   text-transform: uppercase;
   font-size: 26px;
   font-family: DIN;
 }
-/* line 204, ../scss/partials/_master.scss */
+/* line 241, ../scss/partials/_master.scss */
 .hentry .related-post-title {
   display: inline;
   float: left;
@@ -1734,7 +1811,7 @@ ul.sub-menu > li > a {
 * html .hentry .related-post-title {
   overflow-x: hidden;
 }
-/* line 215, ../scss/partials/_master.scss */
+/* line 252, ../scss/partials/_master.scss */
 .hentry .related-post {
   display: inline;
   float: left;
@@ -1748,7 +1825,7 @@ ul.sub-menu > li > a {
 * html .hentry .related-post {
   overflow-x: hidden;
 }
-/* line 221, ../scss/partials/_master.scss */
+/* line 258, ../scss/partials/_master.scss */
 .hentry .related-product {
   display: inline;
   float: left;
@@ -1763,13 +1840,94 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 229, ../scss/partials/_master.scss */
+/* line 268, ../scss/partials/_master.scss */
+.single_product_display .imagecol {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 470px;
+  overflow: hidden;
+}
+/* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .single_product_display .imagecol {
+  overflow-x: hidden;
+}
+/* line 272, ../scss/partials/_master.scss */
+.single_product_display .productcol {
+  *zoom: 1;
+  margin-left: 490px;
+}
+/* line 22, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.single_product_display .productcol:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  overflow: hidden;
+  visibility: hidden;
+}
+/* line 276, ../scss/partials/_master.scss */
+.single_product_display .entry-content h1 {
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 26px;
+  font-family: DIN;
+}
+/* line 282, ../scss/partials/_master.scss */
+.single_product_display .related-post-title {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+  margin-top: 160px;
+  float: right;
+  margin-bottom: 15px;
+  font-size: 26px;
+  font-family: DIN;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-left: 20px;
+}
+/* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .single_product_display .related-post-title {
+  overflow-x: hidden;
+}
+/* line 293, ../scss/partials/_master.scss */
+.single_product_display .related-post {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+  float: right;
+  clear: right;
+  margin-left: 20px;
+}
+/* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .single_product_display .related-post {
+  overflow-x: hidden;
+}
+/* line 299, ../scss/partials/_master.scss */
+.single_product_display .related-product {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 230px;
+  float: right;
+  clear: right;
+  margin-left: 40px;
+}
+/* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
+* html .single_product_display .related-product {
+  overflow-x: hidden;
+}
+
+/* line 308, ../scss/partials/_master.scss */
 #grid {
   margin: 0;
   padding: 0;
 }
 
-/* line 235, ../scss/partials/_master.scss */
+/* line 314, ../scss/partials/_master.scss */
 .box {
   position: relative;
   float: left;
@@ -1778,7 +1936,7 @@ ul.sub-menu > li > a {
   margin-bottom: 10px;
 }
 
-/* line 242, ../scss/partials/_master.scss */
+/* line 321, ../scss/partials/_master.scss */
 .box .meta {
   position: absolute;
   bottom: 0;
@@ -1789,7 +1947,7 @@ ul.sub-menu > li > a {
   color: #fff;
 }
 
-/* line 252, ../scss/partials/_master.scss */
+/* line 331, ../scss/partials/_master.scss */
 .box .post-title,
 .box .product-title {
   position: relative;
@@ -1797,14 +1955,14 @@ ul.sub-menu > li > a {
   margin: 7px 7px 7px 10px;
 }
 
-/* line 257, ../scss/partials/_master.scss */
+/* line 336, ../scss/partials/_master.scss */
 .product-price {
   position: relative;
   float: right;
   margin: 7px 10px 7px 7px;
 }
 
-/* line 262, ../scss/partials/_master.scss */
+/* line 341, ../scss/partials/_master.scss */
 .box a {
   color: black;
   text-decoration: none;
@@ -1812,7 +1970,7 @@ ul.sub-menu > li > a {
   font-weight: normal;
 }
 
-/* line 269, ../scss/partials/_master.scss */
+/* line 348, ../scss/partials/_master.scss */
 .col1 {
   display: inline;
   float: left;
@@ -1824,7 +1982,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 270, ../scss/partials/_master.scss */
+/* line 349, ../scss/partials/_master.scss */
 .col2 {
   display: inline;
   float: left;
@@ -1836,7 +1994,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 271, ../scss/partials/_master.scss */
+/* line 350, ../scss/partials/_master.scss */
 .col3 {
   display: inline;
   float: left;
@@ -1848,7 +2006,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 272, ../scss/partials/_master.scss */
+/* line 351, ../scss/partials/_master.scss */
 .col4 {
   display: inline;
   float: left;
@@ -1860,7 +2018,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 273, ../scss/partials/_master.scss */
+/* line 352, ../scss/partials/_master.scss */
 .col5 {
   display: inline;
   float: left;
@@ -1872,7 +2030,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 274, ../scss/partials/_master.scss */
+/* line 353, ../scss/partials/_master.scss */
 .col6 {
   display: inline;
   float: left;
@@ -1884,7 +2042,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 275, ../scss/partials/_master.scss */
+/* line 354, ../scss/partials/_master.scss */
 .col7 {
   display: inline;
   float: left;
@@ -1896,7 +2054,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 276, ../scss/partials/_master.scss */
+/* line 355, ../scss/partials/_master.scss */
 .col8 {
   display: inline;
   float: left;
@@ -1908,7 +2066,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 277, ../scss/partials/_master.scss */
+/* line 356, ../scss/partials/_master.scss */
 .col9 {
   display: inline;
   float: left;
@@ -1920,7 +2078,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 278, ../scss/partials/_master.scss */
+/* line 357, ../scss/partials/_master.scss */
 .col10 {
   display: inline;
   float: left;
@@ -1932,7 +2090,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 279, ../scss/partials/_master.scss */
+/* line 358, ../scss/partials/_master.scss */
 .col11 {
   display: inline;
   float: left;
@@ -1944,7 +2102,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 280, ../scss/partials/_master.scss */
+/* line 359, ../scss/partials/_master.scss */
 .col12 {
   display: inline;
   float: left;
@@ -1956,138 +2114,138 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 283, ../scss/partials/_master.scss */
+/* line 362, ../scss/partials/_master.scss */
 .row1 {
   height: 40px;
 }
 
-/* line 284, ../scss/partials/_master.scss */
+/* line 363, ../scss/partials/_master.scss */
 .row2 {
   height: 90px;
 }
 
-/* line 285, ../scss/partials/_master.scss */
+/* line 364, ../scss/partials/_master.scss */
 .row3 {
   height: 140px;
 }
 
-/* line 286, ../scss/partials/_master.scss */
+/* line 365, ../scss/partials/_master.scss */
 .row4 {
   height: 190px;
 }
 
-/* line 287, ../scss/partials/_master.scss */
+/* line 366, ../scss/partials/_master.scss */
 .row5 {
   height: 240px;
 }
 
-/* line 288, ../scss/partials/_master.scss */
+/* line 367, ../scss/partials/_master.scss */
 .row6 {
   height: 290px;
 }
 
-/* line 289, ../scss/partials/_master.scss */
+/* line 368, ../scss/partials/_master.scss */
 .row7 {
   height: 340px;
 }
 
-/* line 290, ../scss/partials/_master.scss */
+/* line 369, ../scss/partials/_master.scss */
 .row8 {
   height: 390px;
 }
 
-/* line 291, ../scss/partials/_master.scss */
+/* line 370, ../scss/partials/_master.scss */
 .row9 {
   height: 440px;
 }
 
-/* line 292, ../scss/partials/_master.scss */
+/* line 371, ../scss/partials/_master.scss */
 .row10 {
   height: 490px;
 }
 
-/* line 293, ../scss/partials/_master.scss */
+/* line 372, ../scss/partials/_master.scss */
 .row11 {
   height: 540px;
 }
 
-/* line 294, ../scss/partials/_master.scss */
+/* line 373, ../scss/partials/_master.scss */
 .row12 {
   height: 590px;
 }
 
-/* line 297, ../scss/partials/_master.scss */
+/* line 376, ../scss/partials/_master.scss */
 .row1 img {
   height: 10px;
 }
 
-/* line 298, ../scss/partials/_master.scss */
+/* line 377, ../scss/partials/_master.scss */
 .row2 img {
   height: 60px;
   width: auto;
 }
 
-/* line 299, ../scss/partials/_master.scss */
+/* line 378, ../scss/partials/_master.scss */
 .row3 img {
   height: 110px;
   width: auto;
 }
 
-/* line 300, ../scss/partials/_master.scss */
+/* line 379, ../scss/partials/_master.scss */
 .row4 img {
   height: 160px;
   width: auto;
 }
 
-/* line 301, ../scss/partials/_master.scss */
+/* line 380, ../scss/partials/_master.scss */
 .row5 img {
   height: 210px;
   width: auto;
 }
 
-/* line 302, ../scss/partials/_master.scss */
+/* line 381, ../scss/partials/_master.scss */
 .row6 img {
   height: 260px;
   width: auto;
 }
 
-/* line 303, ../scss/partials/_master.scss */
+/* line 382, ../scss/partials/_master.scss */
 .row7 img {
   height: 310px;
   width: auto;
 }
 
-/* line 304, ../scss/partials/_master.scss */
+/* line 383, ../scss/partials/_master.scss */
 .row8 img {
   height: 360px;
   width: auto;
 }
 
-/* line 305, ../scss/partials/_master.scss */
+/* line 384, ../scss/partials/_master.scss */
 .row9 img {
   height: 410px;
   width: auto;
 }
 
-/* line 306, ../scss/partials/_master.scss */
+/* line 385, ../scss/partials/_master.scss */
 .row10 img {
   height: 460px;
   width: auto;
 }
 
-/* line 307, ../scss/partials/_master.scss */
+/* line 386, ../scss/partials/_master.scss */
 .row11 img {
   height: 510px;
   width: auto;
 }
 
-/* line 308, ../scss/partials/_master.scss */
+/* line 387, ../scss/partials/_master.scss */
 .row12 img {
   height: 560px;
   width: auto;
 }
 
-/* line 310, ../scss/partials/_master.scss */
+/* line 389, ../scss/partials/_master.scss */
 .shop-products img {
   height: auto;
   width: auto;
@@ -2097,7 +2255,7 @@ ul.sub-menu > li > a {
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 316, ../scss/partials/_master.scss */
+/* line 395, ../scss/partials/_master.scss */
 #footer-container {
   padding-top: 20px;
   clear: both;
@@ -2105,18 +2263,18 @@ ul.sub-menu > li > a {
 
 /* Subsidiary widget section */
 /* Footer section */
-/* line 327, ../scss/partials/_master.scss */
+/* line 406, ../scss/partials/_master.scss */
 #footer {
   text-align: right;
 }
 
 /* Footer extra */
-/* line 331, ../scss/partials/_master.scss */
+/* line 410, ../scss/partials/_master.scss */
 #footer .meta {
   margin-bottom: 10px;
 }
 
-/* line 334, ../scss/partials/_master.scss */
+/* line 413, ../scss/partials/_master.scss */
 #footer .cards {
   margin-bottom: 10px;
 }

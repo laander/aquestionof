@@ -37,7 +37,7 @@ if ( get_option( 'wpsc_version' ) < 3.8 || !get_option( 'wpsc_version' ) ) {
 	if ( $product_count > 0 ) {
 
 		function wpsc_display_update_notice() {
-			echo "<div id='wpsc-warning' class='error fade'><p><strong>" . __( 'WP e-Commerce is almost ready.' ) . "</strong> " . sprintf( __( 'You must <a href="%1$s">update your database</a> to import all of your products.' ), "admin.php?page=wpsc-update") . "</p></div>";
+			echo "<div id='wpsc-warning' class='error fade'><p><strong>" . __( 'WP e-Commerce is almost ready.', 'wpsc' ) . "</strong> " . sprintf( __( 'You must <a href="%1$s">update your database</a> to import all of your products.', 'wpsc' ), "admin.php?page=wpsc-update") . "</p></div>";
 		}
 
 		if ( isset( $_GET['page'] ) && $_GET['page'] != 'wpsc-update' )
@@ -70,7 +70,11 @@ function wpsc_display_update_page() { ?>
 			echo '<br />' . __('Updating Database...', 'wpsc');
 			wpsc_create_or_update_tables();
 			wpsc_update_database();
-			echo '<br /><br /><strong>' . __('WP e-Commerce updated successfully!', 'wpsc') . '</strong>';
+			echo '<br /><br /><strong>' . __('WP e-Commerce updated successfully!', 'wpsc') . '</strong><br />';
+			if( '' != get_option('permalink_structure')){ ?>
+				<em><?php printf(__('Note: It looks like you have custom permalinks, you will need to refresh your permalinks <a href="%s">here</a>','wpsc' ) , admin_url('options-permalink.php') ); ?></em>
+			<?php	
+			}
 			update_option('wpsc_version', 3.8);
 			update_option('wpsc_hide_update', true);
 		else:

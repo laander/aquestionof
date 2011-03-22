@@ -50,7 +50,8 @@ add_action( 'init', 'load_jquery' );
 function load_jquery() {
 	if( !is_admin()){
 	   wp_deregister_script('jquery'); 
-	   wp_register_script('jquery', (THEME_URI . '/library/js/jquery-1.4.4.min.js'), false, '1.4.4'); 
+	   //wp_register_script('jquery', (THEME_URI . '/library/js/jquery-1.4.4.min.js'), false, '1.4.4'); 
+	   wp_register_script('jquery', (THEME_URI . '/library/js/jquery-1.5.1.min.js'), false, '1.5.1'); 
 	   wp_enqueue_script('jquery');
 	}
 }
@@ -258,7 +259,7 @@ function masonry_grid($type = 'all') {
 			$items[] = '
 				<div id="product-' . $post->ID . '" class="box col6 row8 ' . $post_cat . '">
 					<a href="' . get_permalink($post->ID) . '" alt="' . get_the_title() . '">
-						<img src="' . wpsc_the_product_thumbnail(get_option('product_image_width'),get_option('product_image_height'),'','single') . '" />
+						<img src="' . wpsc_the_product_thumbnail(get_option('product_image_width','','default'),get_option('product_image_height'),'','default') . '" />
 						<div class="meta">
 							<div class="post-title">
 								' . get_the_title() . '

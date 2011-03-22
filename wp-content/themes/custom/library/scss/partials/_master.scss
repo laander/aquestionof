@@ -21,6 +21,45 @@ body {
 	color: $color-primary;
 	font-size: $typography-size-normal }
 
+	#masterbar-container {
+		width: 100%;
+		height: 30px;
+		margin: 0;
+		padding: 0;
+		background-color: #000; }
+		
+		#masterbar {
+			max-width: 1200px;
+			min-width: 960px;
+			margin: 0 auto;
+			padding: 6px 20px; }
+		
+			#masterbar div,
+			#masterbar div a {
+				color: #FFF;
+				font-family: DIN;									
+				font-size: 16px;
+				text-transform: uppercase;
+				text-decoration: none; }
+				
+			#masterbar .master-freeshipping {
+				@include column(6); }
+
+			#masterbar .master-email {
+				@include column(6);
+				float: right; 
+				text-align: right; }
+
+			#masterbar .master-customerservice {
+				@include column(6);
+				float: right;
+				text-align: right; }
+
+			#masterbar .master-shoppingbag {
+				@include column(6);
+				float: right;
+				text-align: right; }
+				
 	/* Wrapper for everything inside of the body */
 	#body-container {
 		max-width: 1200px;
@@ -149,26 +188,24 @@ body {
 					text-transform: uppercase; }
 		}
 				
-		.shopping-bag {
-			margin: 40px 10px 0 0;
+		.shophere-button {
+			margin: 30px 10px 0 0;
 			float: right;
-			height: 69px;
-			text-align: right; }
+			height: 78px;
+			width: 78px;
+			text-align: center;
+			background-color: #000; }
 		
-			.shopping-bag .text {
+			.shophere-button .text {
+				padding-top: 6px;
 				float: right;
 				clear: both; }
 				
-				.shopping-bag .text a {
-					font-size: 48px;
+				.shophere-button .text a {
+					font-size: 24px;
 					font-family: DIN;					
-					text-decoration: none; }
-
-			.shopping-bag .items {
-				float: right;
-				font-family: DIN;				
-				font-size: 33px;
-				clear: both; }
+					text-decoration: none;
+					color: #fff; }
 		
 		.fb-like {
 			margin: 13px 10px 0 0;
@@ -225,6 +262,48 @@ body {
 				margin-left: $grid-columnwidth;}
 		
 		}
+
+		.single_product_display {
+		
+			.imagecol {
+				@include column(12);
+				overflow: hidden; }
+				
+			.productcol {
+				@include pie-clearfix();
+				margin-left: $grid-columnwidth * 12 + $grid-margin * 1; }
+				
+				.entry-content h1 {
+					margin-bottom: 15px;
+					text-transform: uppercase;
+					font-size: 26px;
+					font-family: DIN; }
+			
+			.related-post-title {
+				@include column(6);
+				margin-top: 160px;			
+				float: right;
+				margin-bottom: 15px;				
+				font-size: 26px;
+				font-family: DIN;
+				text-transform: uppercase;
+				line-height: 1;
+				margin-left: $grid-margin * 2; }
+								
+			.related-post {
+				@include column(6);
+				float: right;
+				clear: right;
+				margin-left: $grid-margin * 2; }
+			
+			.related-product {
+				@include column(6);		
+				float: right;
+				clear: right;
+				margin-left: $grid-columnwidth;}
+		
+		}
+
 	
 		#grid {
 			//@include column($grid-columns, true);

@@ -54,7 +54,7 @@ function wpsc_transaction_theme() {
 			$cart_log_id = $wpdb->get_var( "SELECT `id` FROM `" . WPSC_TABLE_PURCHASE_LOGS . "` WHERE `sessionid`= " . $sessionid . " LIMIT 1" );
 			return transaction_results( $sessionid, true );
 		}else
-		_e( 'Sorry your transaction was not accepted.<br /><a href=' . get_option( "shopping_cart_url" ) . '>Click here to go back to checkout page.</a>' );
+		printf( __( 'Sorry your transaction was not accepted.<br /><a href="%1$s">Click here to go back to checkout page</a>.', 'wpsc' ), get_option( "shopping_cart_url" ) );
 	}
 	
 }
@@ -103,11 +103,13 @@ function transaction_results( $sessionid, $display_to_screen = true, $transactio
 			$message = __('The Transaction was successful', 'wpsc')."\r\n".$message;
 			$message_html = __('The Transaction was successful', 'wpsc')."<br />".$message_html;
 		}
-
+		$country = get_option( 'country_form_field' );
+		$billing_country = '';
+		$shipping_country = '';
 		if ( !empty($purchase_log['shipping_country']) ) {
 			$billing_country = $purchase_log['billing_country'];
 			$shipping_country = $purchase_log['shipping_country'];
-		} else {
+		} elseif (  !empty($country) ) {
 			$country = $wpdb->get_var( "SELECT `value` FROM `" . WPSC_TABLE_SUBMITED_FORM_DATA . "` WHERE `log_id`=" . $purchase_log['id'] . " AND `form_id` = '" . get_option( 'country_form_field' ) . "' LIMIT 1" );
 						
 			$billing_country = $country;
@@ -149,7 +151,8 @@ function transaction_results( $sessionid, $display_to_screen = true, $transactio
 					} else {
 						$order_status = $purchase_log['processed'];
 					}
-					$previous_download_ids[] = $download_data['id'];
+					if( isset( $download_data['id'] ) )
+						$previous_download_ids[] = $download_data['id'];
 				}
 
 				do_action( 'wpsc_confirm_checkout', $purchase_log['id'] );
@@ -254,7 +257,7 @@ function transaction_results( $sessionid, $display_to_screen = true, $transactio
 			$total_price_html.= sprintf(__( 'Total: %s
 ', 'wpsc' ), wpsc_currency_display( $total ) );
 			$report_id = sprintf(__("Purchase # %s
-"), $purchase_log['id']);
+", 'wpsc'), $purchase_log['id']);
 			
 			if ( isset( $_GET['ti'] ) ) {
 				$message.= "\n\r" . __( 'Your Transaction ID', 'wpsc' ) . ": " . $_GET['ti'];
