@@ -63,6 +63,15 @@ function nzshpcrt_shopping_basket( $input = null, $override_state = null ) {
 	return wpsc_shopping_cart( $input, $override_state );
 }
 
+
+/**
+ * Function show_cats_brands
+ * deprecated as we do not have brands anymore...
+ *
+ */
+function show_cats_brands($category_group = null , $display_method = null, $order_by = 'name', $image = null) {
+	_deprecated_function( __FUNCTION__, '3.8', 'wpsc_shopping_cart'); 
+}
 /**
  * Filter: wpsc-purchlogitem-links-start
  *
@@ -374,4 +383,59 @@ function wpsc_product_image_html( $image_name, $product_id ) {
 	return false;
 }
 
-?>
+function wpsc_delete_currency_layer() {
+	_deprecated_function( __FUNCTION__, '3.8');
+	return false;
+}
+
+function wpsc_akst_send_mail() {
+	_deprecated_function( __FUNCTION__, '3.8');
+	return false;
+}
+
+function wpsc_akst_hide_pop() {
+	_deprecated_function( __FUNCTION__, '3.8');
+	return false;
+}
+
+function wpsc_akst_page() {
+	_deprecated_function( __FUNCTION__, '3.8');
+	return false;
+}
+
+function wpsc_akst_share_link($action = 'print') {
+	_deprecated_function( __FUNCTION__, '3.8');
+	if($action == 'print')
+		echo '<div class="st_sharethis" displayText="ShareThis"></div>';
+	else
+		return '<div class="st_sharethis" displayText="ShareThis"></div>';
+	return false;
+}
+
+function wpsc_akst_share_form() {
+	_deprecated_function( __FUNCTION__, '3.8');
+	return false;
+}
+
+function wpsc_has_shipping_form() {
+	_deprecated_function( __FUNCTION__, '3.8');
+	return false;
+}
+
+/**
+ * wpsc_is_admin function.
+ *
+ * @access public
+ * @return void
+ * General use function for checking if user is on WPSC admin pages
+ */
+
+function wpsc_is_admin() {
+	_deprecated_function( __FUNCTION__, '3.8');
+    global $pagenow, $current_screen;
+
+        if( 'post.php' == $pagenow && 'wpsc-product' == $current_screen->post_type ) return true;
+
+    return false;
+    
+}

@@ -50,11 +50,11 @@ function wpsc_register_core_theme_files() {
 	wpsc_register_theme_file( 'wpsc-products_page.php' );
 	wpsc_register_theme_file( 'wpsc-shopping_cart_page.php' );
 	wpsc_register_theme_file( 'wpsc-transaction_results.php' );
-	wpsc_register_theme_file( 'wpsc-user_log.php' );
+	wpsc_register_theme_file( 'wpsc-user-log.php' );
 	wpsc_register_theme_file( 'wpsc-cart_widget.php' );
 	wpsc_register_theme_file( 'wpsc-featured_product.php' );
 	wpsc_register_theme_file( 'wpsc-category-list.php' );
-	
+	wpsc_register_theme_file( 'wpsc-category_widget.php' );	
 	// Let other plugins register their theme files
 	do_action( 'wpsc_register_core_theme_files' );
 }
@@ -614,12 +614,14 @@ function wpsc_enqueue_user_script_and_css() {
 
 		if ( is_ssl() )
 			$siteurl = str_replace( "http://", "https://", $siteurl );
-
+		if( get_option( 'wpsc_share_this' ) == 1 )
+			wp_enqueue_script( 'sharethis', 'http://w.sharethis.com/button/buttons.js', array(), false, true );
 		wp_enqueue_script( 'jQuery' );
 		wp_enqueue_script( 'wp-e-commerce',               WPSC_CORE_JS_URL	. '/wp-e-commerce.js',                 array( 'jquery' ), $version_identifier );
 		wp_enqueue_script( 'infieldlabel',               WPSC_CORE_JS_URL	. '/jquery.infieldlabel.min.js',                 array( 'jquery' ), $version_identifier );
 		wp_enqueue_script( 'wp-e-commerce-ajax-legacy',   WPSC_CORE_JS_URL	. '/ajax.js',                          false,             $version_identifier );
 		wp_enqueue_script( 'wp-e-commerce-dynamic',       $siteurl			. "/index.php?wpsc_user_dynamic_js=true", false,             $version_identifier );
+		wp_localize_script( 'wp-e-commerce-dynamic', 'wpsc_ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) ); 
 		wp_enqueue_script( 'livequery',                   WPSC_URL 			. '/wpsc-admin/js/jquery.livequery.js',   array( 'jquery' ), '1.0.3' );
 		wp_enqueue_script( 'jquery-rating',               WPSC_CORE_JS_URL 	. '/jquery.rating.js',                 array( 'jquery' ), $version_identifier );
 		wp_enqueue_script( 'wp-e-commerce-legacy',        WPSC_CORE_JS_URL 	. '/user.js',                          array( 'jquery' ), WPSC_VERSION . WPSC_MINOR_VERSION );

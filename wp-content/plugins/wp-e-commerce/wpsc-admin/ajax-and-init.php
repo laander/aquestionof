@@ -26,17 +26,6 @@ if ( isset( $_REQUEST['submit'] ) && ($_REQUEST['submit'] == 'Add Tracking ID') 
 	add_action( 'admin_init', 'wpsc_ajax_add_tracking' );
 }
 
-function wpsc_delete_currency_layer() {
-	global $wpdb;
-	$meta_key = 'currency[' . $_POST['currSymbol'] . ']';
-	$sql = "DELETE FROM `" . WPSC_TABLE_PRODUCTMETA . "` WHERE `meta_key`='" . $meta_key . "' LIMIT 1";
-	$wpdb->query( $sql );
-}
-
-if ( isset( $_REQUEST['wpsc_admin_action'] ) && ($_REQUEST['wpsc_admin_action'] == 'delete_currency_layer') ) {
-	add_action( 'admin_init', 'wpsc_delete_currency_layer' );
-}
-
 function wpsc_purchlog_email_trackid() {
 	global $wpdb;
 	$id = absint( $_POST['purchlog_id'] );
@@ -105,8 +94,8 @@ function wpsc_delete_file() {
 	$file_name = basename( $_GET['file_name'] );
 	check_admin_referer( 'delete_file_' . $file_name );
 
-
-	$product_id_to_delete = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = '$file_name' AND post_parent = '$product_id' AND post_type ='wpsc-product-file'" ) );
+	$sql = $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_parent = %d AND post_type ='wpsc-product-file'", $file_name, $product_id );
+	$product_id_to_delete = $wpdb->get_var( $sql );
 
 	wp_delete_post( $product_id_to_delete, true );
 
@@ -176,9 +165,6 @@ function wpsc_duplicate_this_dangit( $id ) {
 }
 
 function wpsc_duplicate_product_process( $post ) {
-	global $current_user;
-	wp_get_current_user();
-	$user_ID = $current_user->ID;
 
 	$new_post_date = $post->post_date;
 	$new_post_date_gmt = get_gmt_from_date( $new_post_date );
@@ -195,7 +181,6 @@ function wpsc_duplicate_product_process( $post ) {
 	$defaults = array(
 		'post_status' 			=> $post->post_status, 
 		'post_type' 			=> $new_post_type,
-		'post_author' 			=> $user_ID,
 		'ping_status' 			=> $ping_status, 
 		'post_parent' 			=> $post->post_parent,
 		'menu_order' 			=> $post->menu_order,
@@ -306,7 +291,7 @@ function wpsc_purchase_log_csv() {
 	global $wpdb, $wpsc_gateways;
 	get_currentuserinfo();
 	$count = 0;
-	if ( ($_GET['rss_key'] == 'key') && is_numeric( $_GET['start_timestamp'] ) && is_numeric( $_GET['end_timestamp'] ) && (current_user_can('edit_post')) ) {
+	if ( ($_GET['rss_key'] == 'key') && is_numeric( $_GET['start_timestamp'] ) && is_numeric( $_GET['end_timestamp'] ) && current_user_can( 'manage_options' ) ) {
 		$form_sql = "SELECT * FROM `" . WPSC_TABLE_CHECKOUT_FORMS . "` WHERE `active` = '1' AND `type` != 'heading' ORDER BY `checkout_order` DESC;";
 		$form_data = $wpdb->get_results( $form_sql, ARRAY_A );
 
@@ -405,7 +390,7 @@ function wpsc_admin_ajax() {
 	}
 
 	if ( ($_POST['remove_form_field'] == "true") && is_numeric( $_POST['form_id'] ) ) {
-		if ( current_user_can( 'level_7' ) ) {
+		if ( current_user_can( 'manage_options' ) ) {
 			$wpdb->query( $wpdb->prepare( "UPDATE `" . WPSC_TABLE_CHECKOUT_FORMS . "` SET `active` = '0' WHERE `id` = %d LIMIT 1 ;", $_POST['form_id'] ) );
 			exit( ' ' );
 		}
@@ -503,14 +488,10 @@ function wpsc_admin_sale_rss() {
 }
 
 function wpsc_display_invoice() {
-
-	global $body_id;
-
-	$body_id = 'wpsc-packing-slip';
 	$purchase_id = (int)$_GET['purchaselog_id'];
-	include_once(WPSC_FILE_PATH . "/wpsc-admin/admin-form-functions.php");
-	require_once(ABSPATH . 'wp-admin/includes/media.php');
-	wp_iframe( 'wpsc_packing_slip', $purchase_id );
+	add_action('wpsc_packing_slip', 'wpsc_packing_slip');
+	do_action('wpsc_before_packing_slip', $purchase_id);
+	do_action('wpsc_packing_slip', $purchase_id);
 	exit();
 }
 //other actions are here
@@ -648,15 +629,13 @@ function wpsc_purchlog_edit_status( $purchlog_id='', $purchlog_status='' ) {
 	$wpdb->query( "UPDATE `" . WPSC_TABLE_PURCHASE_LOGS . "` SET processed='{$purchlog_status}' WHERE id='{$purchlog_id}'" );
 	
 	wpsc_clear_stock_claims();
+	wpsc_decrement_claimed_stock($purchlog_id);
 	
-	if ( ($purchlog_id > $log_data['processed']) && ($log_data['processed'] <= 2) && $log_data['email_sent'] == 0 ) {
+	if ( $purchlog_status == 3 )
 		transaction_results($log_data['sessionid'],false,null);
-	}
 }
 
-if ( isset( $_REQUEST['wpsc_admin_action'] ) && ($_REQUEST['wpsc_admin_action'] == 'purchlog_edit_status') ) {
-	add_action( 'admin_init', 'wpsc_purchlog_edit_status' );
-}
+add_action( 'wp_ajax_purchlog_edit_status', 'wpsc_purchlog_edit_status' );
 
 function wpsc_save_product_order() {
 	global $wpdb;
@@ -1010,7 +989,7 @@ function wpsc_update_page_urls($auto = false) {
 	$changes_made = false;
 	foreach ( $wpsc_pageurl_option as $option_key => $page_string ) {
 		$post_id = $wpdb->get_var( "SELECT `ID` FROM `{$wpdb->posts}` WHERE `post_type` IN('page','post') AND `post_content` LIKE '%$page_string%' LIMIT 1" );
-		$the_new_link = get_permalink( $post_id );
+		$the_new_link = _get_page_link( $post_id );
 		if ( stristr( get_option( $option_key ), "https://" ) ) {
 			$the_new_link = str_replace( 'http://', "https://", $the_new_link );
 		}
@@ -1149,8 +1128,8 @@ function prod_upload() {
 	foreach ( $_POST["select_product_file"] as $selected_file ) {
 		// if we already use this file, there is no point doing anything more.
 
-
-		$file_post_data = $wpdb->get_row( "SELECT * FROM $wpdb->posts WHERE post_type = 'wpsc-product-file' AND post_title = '$selected_file'", ARRAY_A );
+		$sql = $wpdb->prepare( "SELECT * FROM $wpdb->posts WHERE post_type = 'wpsc-product-file' AND post_title = %s", $selected_file ); // TODO it's safer to select by post ID, in that case we will use get_posts()
+		$file_post_data = $wpdb->get_row( $sql, ARRAY_A );
 		$selected_file_path = WPSC_FILE_DIR . basename( $selected_file );
 
 		if ( isset( $attached_files_by_file[$selected_file] ) ) {

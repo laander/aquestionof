@@ -66,7 +66,8 @@ global $files, $separator, $purchase_log, $col_count, $products, $links; ?>
 								<td>
 					<?php
 						if ( $products[$i]['downloads'] > 0 )
-							echo "<a href = " . $links[$i] . ">" . $file['post_title'] . "</a>";
+						
+							echo "<a href = " . get_option('siteurl')."?downloadid=".$products[$i]['uniqueid'] . ">" . $file['post_title'] . "</a>";
 						else
 							echo $file['post_title'] . "";
 

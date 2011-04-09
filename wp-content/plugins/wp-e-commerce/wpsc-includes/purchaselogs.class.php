@@ -265,9 +265,8 @@ function wpsc_change_purchlog_view( $viewby, $status='' ) {
       $purchlogs->allpurchaselogs = $purchaselogs;
    } elseif ( $viewby == '3mnths' ) {
       $dates = $purchlogs->getdates();
-
       $dates = array_slice( $dates, 0, 3 );
-      $purchlogs->current_start_timestamp = $dates[2]['start'];
+      $purchlogs->current_start_timestamp = $dates[count($dates)-1]['start'];
       $purchlogs->current_end_timestamp = $dates[0]['end'];
       $newlogs = $purchlogs->get_purchlogs( $dates, $status );
       $_SESSION['newlogs'] = $newlogs;
@@ -641,7 +640,7 @@ class wpsc_purchaselogs {
                $dates = $this->getdates();
 
                $dates = array_slice( $dates, 0, 3 );
-               $this->current_start_timestamp = $dates[2]['start'];
+               $this->current_start_timestamp = $dates[count($dates)-1]['start'];
                $this->current_end_timestamp = $dates[0]['end'];
                $newlogs = $this->get_purchlogs( $dates, $status );
                $_SESSION['newlogs'] = $newlogs;
@@ -724,7 +723,8 @@ class wpsc_purchaselogs {
       $earliest_record = $wpdb->get_results( $earliest_record_sql, ARRAY_A );
 
       $this->current_timestamp = time();
-      $this->earliest_timestamp = $earliest_record[0]['date'];
+      //if there are no reccords set the date to now.
+      $this->earliest_timestamp = ($earliest_record[0]['date'])?$earliest_record[0]['date']:time();
 
       $this->current_year = date( "Y" );
       $this->earliest_year = date( "Y", $this->earliest_timestamp );

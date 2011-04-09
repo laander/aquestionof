@@ -110,7 +110,7 @@ th#delete{
 	width:60px;
 }
 th#status{
-	width:150px;
+	width:200px;
 }
 .google_checkout_logo{
 	padding-right:10px;
@@ -1751,6 +1751,8 @@ float: left;
 .wpsc_var_description{
 	margin:20px 0 0 20px !important;
 	color:red;
-	
-	
+}
+
+.ajax-loading {
+	visibility: hidden;
 }

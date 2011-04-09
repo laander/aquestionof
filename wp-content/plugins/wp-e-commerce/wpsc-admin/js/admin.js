@@ -203,15 +203,9 @@ jQuery(document).ready(function(){
 	//delete currency layer in admin product page
 	jQuery('a.wpsc_delete_currency_layer').livequery(function(){
 		jQuery(this).click(function(event){
-			var currencySymbol = jQuery(this).attr('rel');
 			jQuery(this).prev('input').val('');
 			jQuery(this).prev('select').val('');
-			jQuery(this).parent('.wpsc_additional_currency').hide();
-
-			post_values = "currSymbol="+currencySymbol;
-			jQuery.post('index.php?wpsc_admin_action=delete_currency_layer',post_values, function(returned_data){});
-			//alert(currencySymbol);
-
+			jQuery(this).parent('div:first').hide();
 			event.preventDefault();
 		});
 	});
@@ -289,7 +283,7 @@ jQuery(document).ready(function(){
             return false;
        }
 
-          jQuery('form#addtag, form#edittag').attr('enctype', 'multipart/form-data');
+          jQuery('.edit-tags-php form').attr('enctype', 'multipart/form-data').attr('encoding', 'multipart/form-data');
 
       }
 	//Added for inline editing capabilities
@@ -432,9 +426,13 @@ jQuery(document).ready(function(){
 	jQuery('.selector').change(function(){
 		purchlog_id = jQuery(this).attr('title');
 		purchlog_status = jQuery(this).val();
-		post_values = "purchlog_id="+purchlog_id+"&purchlog_status="+purchlog_status;
-		jQuery.post( 'index.php?ajax=true&wpsc_admin_action=purchlog_edit_status', post_values, function(returned_data) { });
-
+		post_values = "action=purchlog_edit_status&purchlog_id="+purchlog_id+"&purchlog_status="+purchlog_status;
+		var ajax_loading = jQuery(this).prev('.ajax-loading');
+		ajax_loading.css('visibility', 'visible');
+		jQuery.post( ajaxurl, post_values, function(returned_data) {
+			ajax_loading.css('visibility', 'hidden');
+		});
+		
 		if(purchlog_status == 4){
 			jQuery('tr.log'+purchlog_id).show();
 
@@ -444,7 +442,9 @@ jQuery(document).ready(function(){
 	jQuery('.sendTrackingEmail').click(function(event){
 		purchlog_id = jQuery(this).attr('title');
 		post_values = "purchlog_id="+purchlog_id;
-		jQuery.post( 'index.php?wpsc_admin_action=purchlog_email_trackid', post_values, function(returned_data) { });
+		var ajax_loader = jQuery(this).prev('.ajax-loading');
+		ajax_loader.css('visibility', 'visible');
+		jQuery.post( 'index.php?wpsc_admin_action=purchlog_email_trackid', post_values, function(returned_data) { ajax_loader.css('visibility', 'hidden'); });
 		event.preventDefault();
 	});
 

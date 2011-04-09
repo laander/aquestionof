@@ -9,24 +9,8 @@
  */
 
 
-/**
- * wpsc_is_admin function.
- *
- * @access public
- * @return void
- * General use function for checking if user is on WPSC admin pages
- */
-
 require_once(WPSC_FILE_PATH . '/wpsc-admin/includes/products.php');
 
-function wpsc_is_admin() {
-    global $pagenow, $current_screen;
-
-        if( 'post.php' == $pagenow && 'wpsc-product' == $current_screen->post_type ) return true;
-
-    return false;
-    
-}
 
 /**
  * wpsc_additional_column_names function.
@@ -95,7 +79,7 @@ function wpsc_additional_column_name_variations( $columns ){
  * 
  */
 function wpsc_additional_column_data( $column ) {
-    global $post, $wpdb;
+    global $post;
 
     $is_parent = ( bool )wpsc_product_has_children($post->ID);
         switch ( $column ) :
@@ -117,13 +101,13 @@ function wpsc_additional_column_data( $column ) {
                     $src = wp_get_attachment_url( $attached_image->ID );
                  ?>
                     <div style='width:38px; height:38px; overflow:hidden;'>
-                        <img title='<?php _e( 'Drag to a new position', 'wpsc' ); ?>' src='<?php echo $src; ?>' alt='<?php echo $title; ?>' width='38' height='38' />
+                        <img src='<?php echo $src; ?>' alt='<?php _e( 'Drag to a new position', 'wpsc' ); ?>' width='38' height='38' />
                     </div>
                 <?php
 		     } else {
 		      	$image_url = WPSC_CORE_IMAGES_URL . "/no-image-uploaded.gif";
                 ?>
-                      <img title='<?php _e( 'Drag to a new position', 'wpsc' ); ?>' src='<?php echo $image_url; ?>' alt='<?php echo $title; ?>' width='38' height='38' />
+                      <img src='<?php echo $image_url; ?>' alt='<?php _e( 'Drag to a new position', 'wpsc' ); ?>' width='38' height='38' />
                 <?php
                      }
                 break;
@@ -289,15 +273,23 @@ function wpsc_cats_restrict_manage_posts() {
             $tax_obj = get_taxonomy( $tax_slug );
             $tax_name = $tax_obj->labels->name;
             // retrieve array of term objects per taxonomy
-            $terms = get_terms( $tax_slug );
             // output html for taxonomy dropdown filter
             echo "<select name='$tax_slug' id='$tax_slug' class='postform'>";
             echo "<option value=''>" . sprintf(_x('Show All %s', 'Show all [category name]', 'wpsc'), $tax_name) . "</option>";
-            foreach ( $terms as $term ) 
-                echo '<option value='. $term->slug, ( isset($_GET[$tax_slug]) && $_GET[$tax_slug] == $term->slug) ? ' selected="selected"' : '','>' . $term->name .' (' . $term->count .')</option>';
+            wpsc_cats_restrict_manage_posts_print_terms($tax_slug);
             echo "</select>";
         }
     }
+}
+
+function wpsc_cats_restrict_manage_posts_print_terms($taxonomy, $parent = 0, $level = 0){
+	$prefix = str_repeat( '&nbsp;&nbsp;&nbsp;' , $level );
+	$terms = get_terms( $taxonomy, array( 'parent' => $parent ) );
+	if( !($terms instanceof WP_Error) && !empty($terms) )
+		foreach ( $terms as $term ){
+			echo '<option value='. $term->slug, ( isset($_GET[$term->taxonomy]) && $_GET[$term->taxonomy] == $term->slug) ? ' selected="selected"' : '','>' . $prefix . $term->name .' (' . $term->count .')</option>';
+			wpsc_cats_restrict_manage_posts_print_terms($taxonomy, $term->term_id, $level+1);
+		}
 }
 
 /**
@@ -334,7 +326,6 @@ add_filter( 'posts_orderby', 'wpsc_column_sql_orderby', 10, 2 );
  * @return void 
  */
 function wpsc_update_featured_products() {
-	global $wpdb;
 	$is_ajax = (int)(bool)$_POST['ajax'];
 	$product_id = absint( $_GET['product_id'] );
 	check_admin_referer( 'feature_product_' . $product_id );

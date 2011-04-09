@@ -38,7 +38,6 @@ function wpsc_a_page_url($page=null) {
 	$curpage = $wp_query->query_vars['paged'];
 	if($page != '')
 		$wp_query->query_vars['paged'] = $page;
-
 	if($wp_query->is_single === true) {
 		$wp_query->query_vars['paged'] = $curpage;
 		return wpsc_product_url($wp_query->post->ID);
@@ -66,7 +65,7 @@ function wpsc_a_page_url($page=null) {
  * @return 
  */
 function wpsc_pagination($totalpages = '', $per_page = '', $current_page = '', $page_link = '') {
-	global $wp_query,$wpsc_query;
+	global $wp_query;
 	$num_paged_links = 4; //amount of links to show on either side of current page
 	
 	$additional_links = '';
@@ -103,9 +102,9 @@ function wpsc_pagination($totalpages = '', $per_page = '', $current_page = '', $
 	//if there is no pagination	
 	if(!get_option('permalink_structure')) {
 		$category = '?';
-		if(isset($wpsc_query->query_vars['wpsc_product_category']))
+		if(isset($wp_query->query_vars['wpsc_product_category']))
 			$category = '?wpsc_product_category='.$wp_query->query_vars['wpsc_product_category'];
-		if(isset($wpsc_query->query_vars['wpsc_product_category']) && is_string($wpsc_query->query_vars['wpsc_product_category'])){
+		if(isset($wp_query->query_vars['wpsc_product_category']) && is_string($wp_query->query_vars['wpsc_product_category'])){
 
 			$page_link = get_option('blogurl').$category.'&amp;paged';
 		}else{
@@ -115,8 +114,8 @@ function wpsc_pagination($totalpages = '', $per_page = '', $current_page = '', $
 		$separator = '=';
 	}else{
 		// This will need changing when we get product categories sorted
-		if(isset($wpsc_query->query_vars['wpsc_product_category']))
-			$page_link = trailingslashit(get_option('product_list_url')).$wpsc_query->query_vars['wpsc_product_category'].'/';
+		if(isset($wp_query->query_vars['wpsc_product_category']))
+			$page_link = trailingslashit(get_option('product_list_url')).$wp_query->query_vars['wpsc_product_category'].'/';
 		else
 			$page_link = trailingslashit(get_option('product_list_url'));
 		
@@ -1345,7 +1344,7 @@ function wpsc_display_product_multicurrency() {
 				$currency_sign = $currency_data['code'];
 
 			if ( !empty( $currency_sign ) )
-				return '<span class="wpscsmall pricefloatright pricedisplay">' . $isocode . ' ' . wpsc_currency_display( $curr["meta_value"] ) . '</span><br />';
+				echo '<span class="wpscsmall pricefloatright pricedisplay">' . $isocode . ' ' . wpsc_currency_display( $curr["meta_value"] ) . '</span><br />';
 		}
 	}
 
@@ -1590,7 +1589,7 @@ function wpsc_page_url() {
  */
 function wpsc_product_count() {
 	global $wp_query;
-	return count($wp_query->post);
+	return count($wp_query->posts);
 }
 
 //The following code was removed from WP 3.8, present in 3.7 - Not sure why it was removed and not refactored. (JS)
@@ -1764,17 +1763,8 @@ function wpsc_you_save($args = null){
 	}
 }
 
-
-function wpsc_get_downloadable_files($product_id){
-	$args = array(
-		'post_type' => 'wpsc-product-file',
-		'post_parent' => $product_id,
-		'numberposts' => -1,
-		'post_status' => 'all',
-		
-	);
-
-	$attached_files = (array)get_posts( $args );
-	return $attached_files;
+function wpsc_get_downloadable_file($file_id){
+	return get_post( $file_id );
 }
+
 ?>

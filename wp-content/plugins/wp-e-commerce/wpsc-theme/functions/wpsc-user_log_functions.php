@@ -92,7 +92,7 @@ function validate_form_data() {
 							break;
 
 						default:
-							$bad_input_message .= __( 'Please enter a valid', 'wpsc' ) . " " . strtolower( $form_data['name'] ) . ".";
+							$bad_input_message .= sprintf(__( 'Please enter a valid <span class="wpsc_error_msg_field_name">%s</span>.', 'wpsc' ), esc_html($form_data['name']) );
 							break;
 					}
 					$bad_input_message .= "<br />";
@@ -240,8 +240,6 @@ function wpsc_display_form_fields() {
 					elseif( isset($shipping_form_field) )
 						echo "<br /><select name='collected_data[" . $shipping_form_field['id'] . "][1]'>" . nzshpcrt_region_list( $country_code, $meta_data[$shipping_form_field['id']] ) . "</select>";
 					break;
-					echo '<pre>'.print_r($shipping_form_field,1).'</pre>';
-						
 				case "email":
 					echo "<input type='text' value='" . $meta_data[$form_field['id']] . "' name='collected_data[" . $form_field['id'] . "]' />";
 					break;

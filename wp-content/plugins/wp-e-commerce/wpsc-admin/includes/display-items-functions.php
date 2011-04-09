@@ -161,7 +161,7 @@ function wpsc_price_control_forms() {
 			</select>
 			<?php _e( 'Price', 'wpsc' ); ?> :
 			<input type='text' class='text' size='8' name='newCurrPrice[]' value='0.00' style='display:inline' />
-			<a href='' class='deletelayer' rel='<?php echo $isocode; ?>'><img src='<?php echo WPSC_CORE_IMAGES_URL; ?>/cross.png' /></a>
+			<a href='' class='wpsc_delete_currency_layer'><img src='<?php echo WPSC_CORE_IMAGES_URL; ?>/cross.png' /></a>
 
 		</div> <!-- close new_layer -->
 <?php
@@ -676,7 +676,7 @@ function wpsc_product_advanced_forms() {
 		$product_meta['engraved'] = '';
 
 	if( !isset( $product_meta['can_have_uploaded_image'] ) )
-		$product_meta['can_have_uploaded_image	'] = '';
+		$product_meta['can_have_uploaded_image'] = '';
 
 ?>
 
@@ -714,11 +714,10 @@ function wpsc_product_advanced_forms() {
 		<tr>
 			<td class='itemfirstcol' colspan='2'><br /> <strong><?php _e( 'Merchant Notes:', 'wpsc' ); ?></strong><br />
 
-			<textarea cols='40' rows='3' name='meta[_wpsc_product_metadata][merchant_notes]' id='merchant_notes'>
-                            <?php if ( isset( $product_meta['merchant_notes'] ) )
-		echo stripslashes( trim( $product_meta['merchant_notes'] ) );
-?>
-                       </textarea>
+			<textarea cols='40' rows='3' name='meta[_wpsc_product_metadata][merchant_notes]' id='merchant_notes'><?php 
+				if ( isset( $product_meta['merchant_notes'] ) )
+				echo stripslashes( trim( $product_meta['merchant_notes'] ) );
+			?></textarea>
 			<small><?php _e( 'These notes are only available here.', 'wpsc' ); ?></small>
 		</td>
 	</tr>
@@ -970,7 +969,7 @@ function wpsc_filter_feature_image_text( $translation, $text, $domain ) {
 		$translations = &get_translations_for_domain( $domain );
 		return $translations->translate( 'The name is how it appears on your site. <br><div class="error"><strong>Please read this carefully before starting to work with variations:</strong><br />Variations in WP e-Commerce are divided into sets. For example set <strong>Color</strong> could have variations <strong>Red, Green,</strong> and <strong>Blue</strong>. To create a variation set simply enter the <strong>name</strong> and push Enter key on your keyboard or click <strong>Add New Variation/Set</strong> button in the bottom of this page. Then you will be able to select it from <strong>Variation set</strong> drop-down menu and add some variations to it. To add a new variation set just select <strong>None</strong> in <strong>Variation set</strong> drop-down menu.</div>', 'wpsc' );
 		//this will never happen, this is here only for gettex to pick up the translation
-		return __( 'The name is how it appears on your site. <br><div class="error"><strong>Please read this carefully before starting to work with variations:</strong><br />Variations in WP e-Commerce are divided into sets. For example set <strong>Color</strong> could have variations <strong>Red, Green,</strong> and <strong>Blue</strong>. To create a set simply enter <stron>Name</strong> and push Enter key on your keyboard or click <strong>Add New Variation/Set</strong> button in the bottom of this page. Now you can select the variation set that you\'ve just created from <strong>Variation set</strong> drop-down menu and add some variations to it.</div>', 'wpsc' );
+		return __( 'The name is how it appears on your site. <br><div class="error"><strong>Please read this carefully before starting to work with variations:</strong><br />Variations in WP e-Commerce are divided into sets. For example set <strong>Color</strong> could have variations <strong>Red, Green,</strong> and <strong>Blue</strong>. To create a set simply enter <strong>Name</strong> and push Enter key on your keyboard or click <strong>Add New Variation/Set</strong> button in the bottom of this page. Now you can select the variation set that you\'ve just created from <strong>Variation set</strong> drop-down menu and add some variations to it.</div>', 'wpsc' );
 	} 
 	
 	return $translation;
@@ -1280,9 +1279,16 @@ case 'sale_price' :
 </fieldset>
 <?php
 }
-// TODO: this causes problems with wiping prices for now 
-add_action( 'bulk_edit_custom_box', 'wpsc_quick_edit_boxes', 10 ); 
+
+/* 
+ * Remove bulk edit as it is broken,
+ * ToDo : Fix Bulk Edit for Products
+ */
+function wpsc_remove_bulk_edit($options){
+	unset($options['edit']);
+	return $options;
+}
 add_action( 'quick_edit_custom_box', 'wpsc_quick_edit_boxes', 10, 2 );
 add_action( 'save_post', 'wpsc_save_quickedit_box' );
-
+add_action( 'bulk_actions-edit-wpsc-product', 'wpsc_remove_bulk_edit');
 ?>

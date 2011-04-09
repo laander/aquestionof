@@ -1,13 +1,12 @@
 <?php
-
-/*
-  Plugin Name: WP e-Commerce
-  Plugin URI: http://getshopped.org/
-  Description: A plugin that provides a WordPress Shopping Cart. See also: <a href="http://getshopped.org" target="_blank">GetShopped.org</a> | <a href="http://getshopped.org/forums/" target="_blank">Support Forum</a> | <a href="http://getshopped.org/resources/docs/" target="_blank">Documentation</a>
-  Version: 3.8.RC.3
-  Author: Instinct Entertainment
-  Author URI: http://getshopped.org/
- */
+/**
+  * Plugin Name: WP e-Commerce
+  * Plugin URI: http://getshopped.org/
+  * Description: A plugin that provides a WordPress Shopping Cart. See also: <a href="http://getshopped.org" target="_blank">GetShopped.org</a> | <a href="http://getshopped.org/forums/" target="_blank">Support Forum</a> | <a href="http://docs.getshopped.org/" target="_blank">Documentation</a>
+  * Version: 3.8
+  * Author: Instinct Entertainment
+  * Author URI: http://getshopped.org/
+  **/
 
 /**
  * WP_eCommerce
@@ -55,6 +54,10 @@ class WP_eCommerce {
 		// Define the URL to the plugin folder
 		define( 'WPSC_FOLDER',    dirname( plugin_basename( __FILE__ ) ) );
 		define( 'WPSC_URL',       plugins_url( '', __FILE__ ) );
+		
+		//load text domain
+		if( !load_plugin_textdomain( 'wpsc', false, '../languages/' ) )
+			load_plugin_textdomain( 'wpsc', false, dirname( plugin_basename( __FILE__ ) ) . '/wpsc-languages/' );
 
 		// Finished starting
 		do_action( 'wpsc_started' );

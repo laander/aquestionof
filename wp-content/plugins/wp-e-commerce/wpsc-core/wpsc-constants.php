@@ -27,8 +27,8 @@ function wpsc_core_constants() {
 		define( 'WPSC_URL',       plugins_url( '', __FILE__ ) );
 	// Define Plugin version
 	define( 'WPSC_VERSION', '3.8' );
-	define( 'WPSC_MINOR_VERSION', ( '00000' . microtime( true ) ) );
-	define( 'WPSC_PRESENTABLE_VERSION', '3.8 RC3' );
+	define( 'WPSC_MINOR_VERSION', '367709' );
+	define( 'WPSC_PRESENTABLE_VERSION', '3.8' );
 
 	// Define Debug Variables for developers
 	define( 'WPSC_DEBUG', false );
@@ -310,5 +310,3 @@ function wpsc_core_setup_globals() {
 		include_once( WPSC_THEMES_PATH . $selected_theme . '/' . $selected_theme . '.php' );
 
 }
-
-?>

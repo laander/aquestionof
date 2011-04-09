@@ -72,13 +72,13 @@ function wpsc_query_vars_product_list($vars){
  * @return $value after changes...
  */
 function wpsc_set_screen_option($status, $option, $value){
-	if ($option == "edit_wpsc_product_per_page"){
-		$value = (int) $value;
-		if ( $value < 1 || $value > 999 )
-			return FALSE;
+	if( in_array($option, array ("edit_wpsc_variation_per_page","edit_wpsc_product_per_page" )) ){
+		if ( "edit_wpsc_variation_per_page" == $option ){	
+			global $user_ID;
+			update_user_option($user_ID,'edit_wpsc-variation_per_page',$value);
+		}	
 		return $value;
 	}
-	return $value;
 } 
 add_filter('set-screen-option', 'wpsc_set_screen_option', 99, 3);
 
@@ -141,7 +141,6 @@ function wpsc_show_update_link() {
  * or bypass the normal download system.
  */
 function wpsc_admin_pages() {
-	global $userdata, $show_update_page, $post_type, $typenow, $current_screen; // set in /wpsc-admin/display-update.page.php
 
 	// Code to enable or disable the debug page
 	if ( isset( $_GET['wpsc_activate_debug_page'] ) ) {
@@ -152,46 +151,40 @@ function wpsc_admin_pages() {
 			}
 	}
 
-	// Only add pages if the function exists to do so?
-	if ( function_exists( 'add_options_page' ) ) {
+	// Add to Dashboard
+	$page_hooks[] = $purchase_log_page = add_submenu_page( 'index.php', __( 'Store Sales', 'wpsc' ), __( 'Store Sales', 'wpsc' ), 'administrator', 'wpsc-sales-logs', 'wpsc_display_sales_logs' );
 
-		// Add to Dashboard
-		$page_hooks[] = $purchase_log_page = add_submenu_page( 'index.php', __( 'Store Sales', 'wpsc' ), __( 'Store Sales', 'wpsc' ), 'administrator', 'wpsc-sales-logs', 'wpsc_display_sales_logs' );
+	if ( wpsc_show_update_link() )
+		$page_hooks[] = add_submenu_page( 'index.php', __( 'Update Store', 'wpsc' ), __( 'Store Update', 'wpsc' ), 'administrator', 'wpsc-update', 'wpsc_display_update_page' );
 
-		if ( wpsc_show_update_link() )
-			$page_hooks[] = add_submenu_page( 'index.php', __( 'Update Store', 'wpsc' ), __( 'Store Update', 'wpsc' ), 'administrator', 'wpsc-update', 'wpsc_display_update_page' );
+	$page_hooks[] = add_submenu_page( 'index.php', __( 'Store Upgrades', 'wpsc' ), __( 'Store Upgrades', 'wpsc' ), 'administrator', 'wpsc-upgrades', 'wpsc_display_upgrades_page' );
 
-		$page_hooks[] = add_submenu_page( 'index.php', __( 'Store Upgrades', 'wpsc' ), __( 'Store Upgrades', 'wpsc' ), 'administrator', 'wpsc-upgrades', 'wpsc_display_upgrades_page' );
+	// Set the base page for Products
+	$products_page = 'edit.php?post_type=wpsc-product';
 
-		// Set the base page for Products
-		$products_page = 'edit.php?post_type=wpsc-product';
+	$page_hooks[] = $edit_coupons_page = add_submenu_page( $products_page , __( 'Coupons', 'wpsc' ), __( 'Coupons', 'wpsc' ), 'administrator', 'wpsc-edit-coupons', 'wpsc_display_coupons_page' );
 
-		$page_hooks[] = $edit_coupons_page = add_submenu_page( $products_page , __( 'Coupons', 'wpsc' ), __( 'Coupons', 'wpsc' ), 'administrator', 'wpsc-edit-coupons', 'wpsc_display_coupons_page' );
+	// Add Settings pages
+	$page_hooks[] = $edit_options_page = add_options_page( __( 'Store Settings', 'wpsc' ), __( 'Store', 'wpsc' ), 'administrator', 'wpsc-settings', 'wpsc_display_settings_page' );
+	add_action( 'admin_print_scripts-' . $edit_options_page , 'wpsc_print_admin_scripts' );
 
-		// Add Settings pages
-		$page_hooks[] = $edit_options_page = add_options_page( __( 'Store Settings', 'wpsc' ), __( 'Store', 'wpsc' ), 'administrator', 'wpsc-settings', 'wpsc_display_settings_page' );
-		add_action( 'admin_print_scripts-' . $edit_options_page , 'wpsc_print_admin_scripts' );
+	// Debug Page
+	if ( ( defined( 'WPSC_ADD_DEBUG_PAGE' ) && ( WPSC_ADD_DEBUG_PAGE == true ) ) || ( isset( $_SESSION['wpsc_activate_debug_page'] ) && ( true == $_SESSION['wpsc_activate_debug_page'] ) ) )
+		$page_hooks[] = add_options_page( __( 'Store Debug', 'wpsc' ), __( 'Store Debug', 'wpsc' ), 'administrator', 'wpsc-debug', 'wpsc_debug_page' );
 
-		// Debug Page
-		if ( ( defined( 'WPSC_ADD_DEBUG_PAGE' ) && ( WPSC_ADD_DEBUG_PAGE == true ) ) || ( isset( $_SESSION['wpsc_activate_debug_page'] ) && ( true == $_SESSION['wpsc_activate_debug_page'] ) ) )
-			$page_hooks[] = add_options_page( __( 'Store Debug', 'wpsc' ), __( 'Store Debug', 'wpsc' ), 'administrator', 'wpsc-debug', 'wpsc_debug_page' );
 
-		// Contextual help
-		if ( function_exists( 'add_contextual_help' ) ) {
-			$header = '<p><strong>' . __( 'For More Information', 'wpsc' ) . '</strong></p>';
+	$header = '<p><strong>' . __( 'For More Information', 'wpsc' ) . '</strong></p>';
 
-			add_contextual_help( 'toplevel_page_wpsc-sales-logs',        $header . __( "<a target='_blank' href='http://getshopped.org/resources/docs/building-your-store/sales/'>About the Sales Page</a>", 'wpsc' ) );
-			add_contextual_help( 'toplevel_page_wpsc-edit-products',     $header . __( "<a target='_blank' href='http://getshopped.org/resources/docs/building-your-store/products'>About the Products Page</a>", 'wpsc' ) );
-			add_contextual_help( 'products_page_wpsc-edit-groups',       $header . __( "<a target='_blank' href='http://getshopped.org/resources/docs/building-your-store/categories/'>About the Categories Page</a>", 'wpsc' ) );
-			add_contextual_help( 'products_page_edit-tags',              $header . __( "<a target='_blank' href='http://getshopped.org/resources/docs/building-your-store/variations/'>About the Variations Page</a>", 'wpsc' ) );
-			add_contextual_help( 'settings_page_wpsc-settings',          $header . __( "<a target='_blank' href='http://getshopped.org/resources/docs/store-settings/general/'>General Settings</a><br /> <a target='_blank' href='http://getshopped.org/resources/docs/store-settings/checkout/'>Checkout Options</a> <br />", 'wpsc' ) );
-			add_contextual_help( 'products_page_wpsc-edit-coupons',          $header .  __( "<a target='_blank' href='http://getshopped.org/resources/docs/building-your-store/marketing'>Marketing Options</a><br />", 'wpsc' ) );
-		}
+	add_contextual_help( 'toplevel_page_wpsc-sales-logs',        $header . __( "<a target='_blank' href='http://getshopped.org/resources/docs/building-your-store/sales/'>About the Sales Page</a>", 'wpsc' ) );
+	add_contextual_help( 'toplevel_page_wpsc-edit-products',     $header . __( "<a target='_blank' href='http://getshopped.org/resources/docs/building-your-store/products'>About the Products Page</a>", 'wpsc' ) );
+	add_contextual_help( 'products_page_wpsc-edit-groups',       $header . __( "<a target='_blank' href='http://getshopped.org/resources/docs/building-your-store/categories/'>About the Categories Page</a>", 'wpsc' ) );
+	add_contextual_help( 'products_page_edit-tags',              $header . __( "<a target='_blank' href='http://getshopped.org/resources/docs/building-your-store/variations/'>About the Variations Page</a>", 'wpsc' ) );
+	add_contextual_help( 'settings_page_wpsc-settings',          $header . __( "<a target='_blank' href='http://getshopped.org/resources/docs/store-settings/general/'>General Settings</a><br /> <a target='_blank' href='http://getshopped.org/resources/docs/store-settings/checkout/'>Checkout Options</a> <br />", 'wpsc' ) );
+	add_contextual_help( 'products_page_wpsc-edit-coupons',          $header .  __( "<a target='_blank' href='http://getshopped.org/resources/docs/building-your-store/marketing'>Marketing Options</a><br />", 'wpsc' ) );
 
-		$page_hooks = apply_filters( 'wpsc_additional_pages', $page_hooks, $products_page );
+	$page_hooks = apply_filters( 'wpsc_additional_pages', $page_hooks, $products_page );
 
-		do_action( 'wpsc_add_submenu' );
-	};
+	do_action( 'wpsc_add_submenu' );
 
 	// Include the javascript and CSS for this page
 	// This is so important that I can't even express it in one line
@@ -562,8 +555,6 @@ add_action( 'wpsc_admin_pre_activity', 'wpsc_admin_latest_activity' );
  */
 
 function wpsc_dashboard_widget_setup() {
-	global $current_user;
-
 	if ( is_admin() && current_user_can( 'manage_options' ) ) {
 		$version_identifier = WPSC_VERSION . "." . WPSC_MINOR_VERSION;
 		// Enqueue the styles and scripts necessary
@@ -613,7 +604,6 @@ function wpsc_dashboard_news() {
 }
 
 function wpsc_get_quarterly_summary() {
-	global $wpdb;
 	(int)$firstquarter = get_option( 'wpsc_first_quart' );
 	(int)$secondquarter = get_option( 'wpsc_second_quart' );
 	(int)$thirdquarter = get_option( 'wpsc_third_quart' );
@@ -714,9 +704,7 @@ function wpsc_quarterly_dashboard_widget() {
 
 
 function wpsc_dashboard_widget() {
-	global $current_user;
-	get_currentuserinfo();
-	if ( $current_user->user_level > 9 ) {
+	if ( current_user_can( 'manage_options' ) ) {
 		do_action( 'wpsc_admin_pre_activity' );
 		do_action( 'wpsc_admin_post_activity' );
 	}
@@ -829,8 +817,7 @@ function wpsc_fav_action( $actions ) {
 add_filter( 'favorite_actions', 'wpsc_fav_action' );
 
 function wpsc_print_admin_scripts() {
-	global $version_identifier;
-	wp_enqueue_script( 'wp-e-commerce-dynamic',       get_bloginfo( 'url' )   . "/index.php?wpsc_user_dynamic_js=true", false,             $version_identifier );
+	wp_enqueue_script( 'wp-e-commerce-dynamic',       get_bloginfo( 'url' )   . "/index.php?wpsc_user_dynamic_js=true" );
 }
 
 /**
@@ -862,8 +849,6 @@ function wpsc_ajax_ie_save() {
 		echo '({"error":"' . __( 'Error: you don\'t have required permissions to edit this product', 'wpsc' ) . '", "id": "'. $_POST['id'] .'"})';
 		die();
 	}
-
-	global $wpdb;
 
 	$product = array(
 		'ID' => $_POST['id'],
@@ -908,7 +893,6 @@ function wpsc_ajax_ie_save() {
 }
 
 function wpsc_add_meta_boxes(){
-	global $wp_current_screen_options;
 	add_meta_box( 'dashboard_right_now', __('Current Month', 'wpsc'), 'wpsc_right_now', 'dashboard_page_wpsc-sales-logs', 'top' );
 }
 

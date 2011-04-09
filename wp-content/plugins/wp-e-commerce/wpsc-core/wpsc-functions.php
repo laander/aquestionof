@@ -10,19 +10,6 @@
  * @since 3.8
  */
 
-/**
- * wpsc_core_load_textdomain()
- *
- * Load up the WPEC textdomain
- */
-function wpsc_core_load_textdomain() {
-	//if there is a translation file in wp-content/langauges then load it, else load from default location
-	//this is to alow users modify translations and don't loose modifications when upgrading
-	if( !load_plugin_textdomain( 'wpsc', false, '../languages/' ) )
-		load_plugin_textdomain( 'wpsc', false, dirname( plugin_basename( __FILE__ ) ) . '/../wpsc-languages/' );
-}
-add_action( 'plugins_loaded', 'wpsc_core_load_textdomain' );
-
 add_filter( 'intermediate_image_sizes_advanced', 'wpsc_intermediate_image_sizes_advanced', 10, 1 );
 
 function wpsc_intermediate_image_sizes_advanced($sizes){
@@ -250,12 +237,12 @@ function wpsc_core_load_shipping_modules() {
  * @since 3.7.6.1
  */
 function wpsc_update_notice() {
-	$info_title = __( 'Please Note', 'wpsc' );
-	$info_text = sprintf( __( 'Before upgrading you should check the <a %s>upgrade information</a> and changelog as you may need to make updates to your template files.', 'wpsc' ), 'href="http://getshopped.org/resources/docs/upgrades/staying-current/" target="_blank"' );
-	echo '<div style="border-top:1px solid #CCC; margin-top:3px; padding-top:3px; font-weight:normal;"><strong style="color:#CC0000">' . strip_tags( $info_title ) . '</strong>: ' . strip_tags( $info_text, '<br><a><strong><em><span>' ) . '</div>';
+	$info_title = __( 'Please backup your website before updating!', 'wpsc' );
+	$info_text =  __( 'Lots of things have changed in this version. Before updating please backup your database and files in case anything goes wrong.', 'wpsc' );
+	echo '<div style="border-top:1px solid #CCC; margin-top:3px; padding-top:3px; font-weight:normal;"><strong style="color:#CC0000">' . strip_tags( $info_title ) . '</strong> ' . strip_tags( $info_text, '<br><a><strong><em><span>' ) . '</div>';
 }
 if ( is_admin() )
-	add_action( 'in_plugin_update_message-' . plugin_basename( __FILE__ ), 'wpsc_update_notice' );
+	add_action( 'in_plugin_update_message-' . WPSC_DIR_NAME . '/wp-shopping-cart.php', 'wpsc_update_notice' );
 
 function wpsc_add_product_price_to_rss() {
 	global $post;
@@ -1156,8 +1143,8 @@ add_action( 'wp', 'wpsc_select_theme_functions', 10, 1 );
  * if the user is on a checkout page, force SSL if that option is so set
  */
 function wpsc_force_ssl() {
-	global $post;
-	if ( get_option( 'wpsc_force_ssl' ) && !is_ssl() && strpos( $post->post_content, '[shoppingcart]' ) !== FALSE ) {
+	global $wp_query;
+	if ( get_option( 'wpsc_force_ssl' ) && !is_ssl() && strpos( $wp_query->post->post_content, '[shoppingcart]' ) !== FALSE ) {
 		$sslurl = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 		header( 'Location: ' . $sslurl );
 		echo 'Redirecting';

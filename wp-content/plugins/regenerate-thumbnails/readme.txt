@@ -3,7 +3,7 @@ Contributors: Viper007Bond
 Donate link: http://www.viper007bond.com/donate/
 Tags: thumbnail, thumbnails
 Requires at least: 2.8
-Tested up to: 3.0
+Tested up to: 3.1
 Stable tag: trunk
 
 Allows you to regenerate your thumbnails after changing the thumbnail sizes.
@@ -12,7 +12,7 @@ Allows you to regenerate your thumbnails after changing the thumbnail sizes.
 
 Regenerate Thumbnails allows you to regenerate the thumbnails for your image attachments. This is very handy if you've changed any of your thumbnail dimensions (via Settings -> Media) after previously uploading images or have changed to a theme with different featured post image dimensions.
 
-You can either regenerate the thumbnails for all image uploads, individual image uploads, or specific multiple image uploads (WordPress 3.1+ only).
+You can either regenerate the thumbnails for all image uploads, individual image uploads, or specific multiple image uploads.
 
 See the [screenshots tab](http://wordpress.org/extend/plugins/regenerate-thumbnails/screenshots/) for more details.
 
@@ -27,9 +27,24 @@ See the [screenshots tab](http://wordpress.org/extend/plugins/regenerate-thumbna
 
 1. The plugin at work regenerating thumbnails
 2. You can resize single images by hovering over their row in the Media Library
-2. You can resize specific multiples images using the checkboxes and the "Bulk Actions" dropdown (WordPress 3.1+ only)
+2. You can resize specific multiples images using the checkboxes and the "Bulk Actions" dropdown
 
 == ChangeLog ==
+
+= Version 2.2.0 =
+
+* Changes to the Bulk Action functionality were made shortly before the release of WordPress 3.1 which broke the way I implemented the specific multiple image regeneration feature. This version adds to the Bulk Action menu using Javascript as that's the only way to do it currently.
+
+= Version 2.1.3 =
+
+* Move the `error_reporting()` call in the AJAX handler to the beginning so that we're more sure that no PHP errors are outputted. Some hosts disable usage of `set_time_limit()` and calling it was causing a PHP warning to be outputted.
+
+= Version 2.1.2 =
+
+* When regenerating all images, newest images are done first rather than the oldest.
+* Fixed a bug with regeneration error reporting in some browsers. Thanks to pete-sch for reporting the error.
+* Supress PHP errors in the AJAX handler to avoid sending an invalid JSON response. Thanks to pete-sch for reporting the error.
+* Better and more detailed error reporting for when `wp_generate_attachment_metadata()` fails.
 
 = Version 2.1.1 =
 

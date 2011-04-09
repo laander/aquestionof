@@ -121,13 +121,11 @@ function transaction_results( $sessionid, $display_to_screen = true, $transactio
 		$product_list = $product_list_html = $report_product_list = '';
 	
 		$cart = $wpdb->get_results( "SELECT * FROM `" . WPSC_TABLE_CART_CONTENTS . "` WHERE `purchaseid` = '{$purchase_log['id']}'" , ARRAY_A );
-		//echo '<pre>'.print_r($wpsc_cart,1).'</pre>';
 		if ( ($cart != null) && ($errorcode == 0) ) {
 			$total_shipping = '';
 			foreach ( $cart as $row ) {
 				$link = array( );
-				if ( $purchase_log['email_sent'] != 1 )
-					$wpdb->update(WPSC_TABLE_DOWNLOAD_STATUS, array('active' => '1'), array('cartid' => $row['id'], 'purchid'=>$purchase_log['id']) );
+				$wpdb->update(WPSC_TABLE_DOWNLOAD_STATUS, array('active' => '1'), array('cartid' => $row['id'], 'purchid'=>$purchase_log['id']) );
 				do_action( 'wpsc_transaction_result_cart_item', array( "purchase_id" => $purchase_log['id'], "cart_item" => $row, "purchase_log" => $purchase_log ) );
 
 				if ( $is_transaction ) {
@@ -252,7 +250,7 @@ function transaction_results( $sessionid, $display_to_screen = true, $transactio
 				$total_tax_html .= __('Total Tax', 'wpsc').': '. wpsc_currency_display( $purchase_log['wpec_taxes_total'] )."\n\r";
 				$total_tax .= __('Total Tax', 'wpsc').': '. wpsc_currency_display( $purchase_log['wpec_taxes_total'] , array( 'display_as_html' => false ) )."\n\r"; 		
 			}
-			$total_shipping_html.= sprintf(__( 'Total Shipping: %s
+			$total_shipping_html.= sprintf(__( '<hr>Total Shipping: %s
 ', 'wpsc' ), wpsc_currency_display( $total_shipping ));
 			$total_price_html.= sprintf(__( 'Total: %s
 ', 'wpsc' ), wpsc_currency_display( $total ) );
@@ -288,10 +286,10 @@ function transaction_results( $sessionid, $display_to_screen = true, $transactio
 			$message_html = str_replace( '%shop_name%', get_option( 'blogname' ), $message_html );
 			$message_html = str_replace( '%find_us%', $purchase_log['find_us'], $message_html );
 
-			if ( !empty($email) && ($purchase_log['email_sent'] != 1 || $resend_email) ) {
-				$wpdb->update(WPSC_TABLE_PURCHASE_LOGS, array('email_sent' => '1'), array('id' => $purchase_log['id']) );
+			if ( !empty($email) ) {
 				add_filter( 'wp_mail_from', 'wpsc_replace_reply_address', 0 );
 				add_filter( 'wp_mail_from_name', 'wpsc_replace_reply_name', 0 );
+				$message = apply_filters('wpsc_email_message', $message, $report_id, $product_list, $total_tax, $total_shipping_email, $total_price_email);
 
 				if ( !$is_transaction ) {
 	
@@ -348,8 +346,10 @@ function transaction_results( $sessionid, $display_to_screen = true, $transactio
 
 			//echo '======REPORT======<br />'.$report.'<br />';
 			//echo '======EMAIL======<br />'.$message.'<br />';
-			if ( (get_option( 'purch_log_email' ) != null) && ($purchase_log['email_sent'] != 1) )
+			if ( (get_option( 'purch_log_email' ) != null) && ($purchase_log['email_sent'] != 1) ){
 				wp_mail( get_option( 'purch_log_email' ), __( 'Purchase Report', 'wpsc' ), $report );
+				$wpdb->update(WPSC_TABLE_PURCHASE_LOGS, array('email_sent' => '1'), array('id' => $purchase_log['id']) );
+			}
 
 			/// Adjust stock and empty the cart
 			$wpsc_cart->submit_stock_claims( $purchase_log['id'] );
