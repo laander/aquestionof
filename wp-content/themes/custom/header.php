@@ -37,7 +37,7 @@
 			<div class="master-freeshipping">Free World Shipping</div>
 			<div class="master-shoppingbag"><a href="<?php echo get_option('shopping_cart_url'); ?>">Shopping Bag (<?php echo wpsc_cart_item_count(); ?>)</a></div>
 			<div class="master-customerservice">Customer Service +45 31 322 322</div>
-			<div class="master-email">E-mail: info@aquestionof.dk</div>			
+			<div class="master-email">E-mail: info@aquestionof.net</div>			
 		</div>
 	</div>
 	
