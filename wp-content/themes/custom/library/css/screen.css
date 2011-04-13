@@ -1724,17 +1724,23 @@ ul.sub-menu > li > a {
   height: 78px;
   width: 78px;
   text-align: center;
+  background-color: #e02060;
+}
+
+/* line 200, ../scss/partials/_master.scss */
+.wpsc .shophere-button,
+.singular-wpsc-product .shophere-button {
   background-color: #000;
 }
 
-/* line 199, ../scss/partials/_master.scss */
+/* line 203, ../scss/partials/_master.scss */
 .shophere-button .text {
   padding-top: 6px;
   float: right;
   clear: both;
 }
 
-/* line 204, ../scss/partials/_master.scss */
+/* line 208, ../scss/partials/_master.scss */
 .shophere-button .text a {
   font-size: 24px;
   font-family: DIN;
@@ -1742,7 +1748,7 @@ ul.sub-menu > li > a {
   color: #fff;
 }
 
-/* line 210, ../scss/partials/_master.scss */
+/* line 214, ../scss/partials/_master.scss */
 .fb-like {
   margin: 13px 10px 0 0;
   float: right;
@@ -1751,24 +1757,24 @@ ul.sub-menu > li > a {
 /**
 * Main content area
 ************************************************/
-/* line 218, ../scss/partials/_master.scss */
+/* line 222, ../scss/partials/_master.scss */
 #content-container {
   width: 100%;
 }
 
-/* line 225, ../scss/partials/_master.scss */
+/* line 229, ../scss/partials/_master.scss */
 .hentry .featured-image {
   display: inline;
   float: left;
   margin-right: 10px;
-  width: 230px;
+  width: 470px;
   overflow: hidden;
 }
 /* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .hentry .featured-image {
   overflow-x: hidden;
 }
-/* line 229, ../scss/partials/_master.scss */
+/* line 233, ../scss/partials/_master.scss */
 .hentry .entry-content {
   *zoom: 1;
 }
@@ -1781,18 +1787,18 @@ ul.sub-menu > li > a {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 232, ../scss/partials/_master.scss */
+/* line 236, ../scss/partials/_master.scss */
 .hentry .entry-with-sidebar {
-  margin-left: 250px;
+  margin-left: 490px;
 }
-/* line 235, ../scss/partials/_master.scss */
+/* line 239, ../scss/partials/_master.scss */
 .hentry .entry-content h1 {
   margin-bottom: 15px;
   text-transform: uppercase;
   font-size: 26px;
   font-family: DIN;
 }
-/* line 241, ../scss/partials/_master.scss */
+/* line 245, ../scss/partials/_master.scss */
 .hentry .related-post-title {
   display: inline;
   float: left;
@@ -1811,7 +1817,7 @@ ul.sub-menu > li > a {
 * html .hentry .related-post-title {
   overflow-x: hidden;
 }
-/* line 252, ../scss/partials/_master.scss */
+/* line 256, ../scss/partials/_master.scss */
 .hentry .related-post {
   display: inline;
   float: left;
@@ -1825,7 +1831,7 @@ ul.sub-menu > li > a {
 * html .hentry .related-post {
   overflow-x: hidden;
 }
-/* line 258, ../scss/partials/_master.scss */
+/* line 262, ../scss/partials/_master.scss */
 .hentry .related-product {
   display: inline;
   float: left;
@@ -1840,7 +1846,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 268, ../scss/partials/_master.scss */
+/* line 272, ../scss/partials/_master.scss */
 .single_product_display .imagecol {
   display: inline;
   float: left;
@@ -1852,7 +1858,7 @@ ul.sub-menu > li > a {
 * html .single_product_display .imagecol {
   overflow-x: hidden;
 }
-/* line 272, ../scss/partials/_master.scss */
+/* line 276, ../scss/partials/_master.scss */
 .single_product_display .productcol {
   *zoom: 1;
   margin-left: 490px;
@@ -1866,14 +1872,14 @@ ul.sub-menu > li > a {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 276, ../scss/partials/_master.scss */
+/* line 280, ../scss/partials/_master.scss */
 .single_product_display .entry-content h1 {
   margin-bottom: 15px;
   text-transform: uppercase;
   font-size: 26px;
   font-family: DIN;
 }
-/* line 282, ../scss/partials/_master.scss */
+/* line 286, ../scss/partials/_master.scss */
 .single_product_display .related-post-title {
   display: inline;
   float: left;
@@ -1892,7 +1898,7 @@ ul.sub-menu > li > a {
 * html .single_product_display .related-post-title {
   overflow-x: hidden;
 }
-/* line 293, ../scss/partials/_master.scss */
+/* line 297, ../scss/partials/_master.scss */
 .single_product_display .related-post {
   display: inline;
   float: left;
@@ -1906,7 +1912,7 @@ ul.sub-menu > li > a {
 * html .single_product_display .related-post {
   overflow-x: hidden;
 }
-/* line 299, ../scss/partials/_master.scss */
+/* line 303, ../scss/partials/_master.scss */
 .single_product_display .related-product {
   display: inline;
   float: left;
@@ -1921,13 +1927,13 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 308, ../scss/partials/_master.scss */
+/* line 312, ../scss/partials/_master.scss */
 #grid {
   margin: 0;
   padding: 0;
 }
 
-/* line 314, ../scss/partials/_master.scss */
+/* line 318, ../scss/partials/_master.scss */
 .box {
   position: relative;
   float: left;
@@ -1936,7 +1942,7 @@ ul.sub-menu > li > a {
   margin-bottom: 10px;
 }
 
-/* line 321, ../scss/partials/_master.scss */
+/* line 325, ../scss/partials/_master.scss */
 .box .meta {
   position: absolute;
   bottom: 0;
@@ -1947,7 +1953,7 @@ ul.sub-menu > li > a {
   color: #fff;
 }
 
-/* line 331, ../scss/partials/_master.scss */
+/* line 335, ../scss/partials/_master.scss */
 .box .post-title,
 .box .product-title {
   position: relative;
@@ -1955,14 +1961,14 @@ ul.sub-menu > li > a {
   margin: 7px 7px 7px 10px;
 }
 
-/* line 336, ../scss/partials/_master.scss */
+/* line 340, ../scss/partials/_master.scss */
 .product-price {
   position: relative;
   float: right;
   margin: 7px 10px 7px 7px;
 }
 
-/* line 341, ../scss/partials/_master.scss */
+/* line 345, ../scss/partials/_master.scss */
 .box a {
   color: black;
   text-decoration: none;
@@ -1970,7 +1976,7 @@ ul.sub-menu > li > a {
   font-weight: normal;
 }
 
-/* line 348, ../scss/partials/_master.scss */
+/* line 352, ../scss/partials/_master.scss */
 .col1 {
   display: inline;
   float: left;
@@ -1982,7 +1988,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 349, ../scss/partials/_master.scss */
+/* line 353, ../scss/partials/_master.scss */
 .col2 {
   display: inline;
   float: left;
@@ -1994,7 +2000,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 350, ../scss/partials/_master.scss */
+/* line 354, ../scss/partials/_master.scss */
 .col3 {
   display: inline;
   float: left;
@@ -2006,7 +2012,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 351, ../scss/partials/_master.scss */
+/* line 355, ../scss/partials/_master.scss */
 .col4 {
   display: inline;
   float: left;
@@ -2018,7 +2024,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 352, ../scss/partials/_master.scss */
+/* line 356, ../scss/partials/_master.scss */
 .col5 {
   display: inline;
   float: left;
@@ -2030,7 +2036,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 353, ../scss/partials/_master.scss */
+/* line 357, ../scss/partials/_master.scss */
 .col6 {
   display: inline;
   float: left;
@@ -2042,7 +2048,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 354, ../scss/partials/_master.scss */
+/* line 358, ../scss/partials/_master.scss */
 .col7 {
   display: inline;
   float: left;
@@ -2054,7 +2060,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 355, ../scss/partials/_master.scss */
+/* line 359, ../scss/partials/_master.scss */
 .col8 {
   display: inline;
   float: left;
@@ -2066,7 +2072,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 356, ../scss/partials/_master.scss */
+/* line 360, ../scss/partials/_master.scss */
 .col9 {
   display: inline;
   float: left;
@@ -2078,7 +2084,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 357, ../scss/partials/_master.scss */
+/* line 361, ../scss/partials/_master.scss */
 .col10 {
   display: inline;
   float: left;
@@ -2090,7 +2096,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 358, ../scss/partials/_master.scss */
+/* line 362, ../scss/partials/_master.scss */
 .col11 {
   display: inline;
   float: left;
@@ -2102,7 +2108,7 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 359, ../scss/partials/_master.scss */
+/* line 363, ../scss/partials/_master.scss */
 .col12 {
   display: inline;
   float: left;
@@ -2114,138 +2120,138 @@ ul.sub-menu > li > a {
   overflow-x: hidden;
 }
 
-/* line 362, ../scss/partials/_master.scss */
+/* line 366, ../scss/partials/_master.scss */
 .row1 {
   height: 40px;
 }
 
-/* line 363, ../scss/partials/_master.scss */
+/* line 367, ../scss/partials/_master.scss */
 .row2 {
   height: 90px;
 }
 
-/* line 364, ../scss/partials/_master.scss */
+/* line 368, ../scss/partials/_master.scss */
 .row3 {
   height: 140px;
 }
 
-/* line 365, ../scss/partials/_master.scss */
+/* line 369, ../scss/partials/_master.scss */
 .row4 {
   height: 190px;
 }
 
-/* line 366, ../scss/partials/_master.scss */
+/* line 370, ../scss/partials/_master.scss */
 .row5 {
   height: 240px;
 }
 
-/* line 367, ../scss/partials/_master.scss */
+/* line 371, ../scss/partials/_master.scss */
 .row6 {
   height: 290px;
 }
 
-/* line 368, ../scss/partials/_master.scss */
+/* line 372, ../scss/partials/_master.scss */
 .row7 {
   height: 340px;
 }
 
-/* line 369, ../scss/partials/_master.scss */
+/* line 373, ../scss/partials/_master.scss */
 .row8 {
   height: 390px;
 }
 
-/* line 370, ../scss/partials/_master.scss */
+/* line 374, ../scss/partials/_master.scss */
 .row9 {
   height: 440px;
 }
 
-/* line 371, ../scss/partials/_master.scss */
+/* line 375, ../scss/partials/_master.scss */
 .row10 {
   height: 490px;
 }
 
-/* line 372, ../scss/partials/_master.scss */
+/* line 376, ../scss/partials/_master.scss */
 .row11 {
   height: 540px;
 }
 
-/* line 373, ../scss/partials/_master.scss */
+/* line 377, ../scss/partials/_master.scss */
 .row12 {
   height: 590px;
 }
 
-/* line 376, ../scss/partials/_master.scss */
+/* line 380, ../scss/partials/_master.scss */
 .row1 img {
   height: 10px;
 }
 
-/* line 377, ../scss/partials/_master.scss */
+/* line 381, ../scss/partials/_master.scss */
 .row2 img {
   height: 60px;
   width: auto;
 }
 
-/* line 378, ../scss/partials/_master.scss */
+/* line 382, ../scss/partials/_master.scss */
 .row3 img {
   height: 110px;
   width: auto;
 }
 
-/* line 379, ../scss/partials/_master.scss */
+/* line 383, ../scss/partials/_master.scss */
 .row4 img {
   height: 160px;
   width: auto;
 }
 
-/* line 380, ../scss/partials/_master.scss */
+/* line 384, ../scss/partials/_master.scss */
 .row5 img {
   height: 210px;
   width: auto;
 }
 
-/* line 381, ../scss/partials/_master.scss */
+/* line 385, ../scss/partials/_master.scss */
 .row6 img {
   height: 260px;
   width: auto;
 }
 
-/* line 382, ../scss/partials/_master.scss */
+/* line 386, ../scss/partials/_master.scss */
 .row7 img {
   height: 310px;
   width: auto;
 }
 
-/* line 383, ../scss/partials/_master.scss */
+/* line 387, ../scss/partials/_master.scss */
 .row8 img {
   height: 360px;
   width: auto;
 }
 
-/* line 384, ../scss/partials/_master.scss */
+/* line 388, ../scss/partials/_master.scss */
 .row9 img {
   height: 410px;
   width: auto;
 }
 
-/* line 385, ../scss/partials/_master.scss */
+/* line 389, ../scss/partials/_master.scss */
 .row10 img {
   height: 460px;
   width: auto;
 }
 
-/* line 386, ../scss/partials/_master.scss */
+/* line 390, ../scss/partials/_master.scss */
 .row11 img {
   height: 510px;
   width: auto;
 }
 
-/* line 387, ../scss/partials/_master.scss */
+/* line 391, ../scss/partials/_master.scss */
 .row12 img {
   height: 560px;
   width: auto;
 }
 
-/* line 389, ../scss/partials/_master.scss */
+/* line 393, ../scss/partials/_master.scss */
 .shop-products img {
   height: auto;
   width: auto;
@@ -2255,7 +2261,7 @@ ul.sub-menu > li > a {
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 395, ../scss/partials/_master.scss */
+/* line 399, ../scss/partials/_master.scss */
 #footer-container {
   padding-top: 20px;
   clear: both;
@@ -2263,18 +2269,18 @@ ul.sub-menu > li > a {
 
 /* Subsidiary widget section */
 /* Footer section */
-/* line 406, ../scss/partials/_master.scss */
+/* line 410, ../scss/partials/_master.scss */
 #footer {
   text-align: right;
 }
 
 /* Footer extra */
-/* line 410, ../scss/partials/_master.scss */
+/* line 414, ../scss/partials/_master.scss */
 #footer .meta {
   margin-bottom: 10px;
 }
 
-/* line 413, ../scss/partials/_master.scss */
+/* line 417, ../scss/partials/_master.scss */
 #footer .cards {
   margin-bottom: 10px;
 }

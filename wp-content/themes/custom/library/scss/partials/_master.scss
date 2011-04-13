@@ -194,6 +194,10 @@ body {
 			height: 78px;
 			width: 78px;
 			text-align: center;
+			background-color: #e02060; }
+			
+		.wpsc .shophere-button, 
+		.singular-wpsc-product .shophere-button {
 			background-color: #000; }
 		
 			.shophere-button .text {
@@ -223,14 +227,14 @@ body {
 		.hentry {
 		
 			.featured-image {
-				@include column(6);
+				@include column(12);
 				overflow: hidden; }
 				
 			.entry-content {
 				@include pie-clearfix(); }
 				
 			.entry-with-sidebar {
-				margin-left: $grid-columnwidth * 6 + $grid-margin * 1; }
+				margin-left: $grid-columnwidth * 12 + $grid-margin * 1; }
 				
 				.entry-content h1 {
 					margin-bottom: 15px;

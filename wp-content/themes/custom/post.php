@@ -15,10 +15,11 @@ get_header(); ?>
 			<div id="post-<?php the_ID(); ?>" class="<?php hybrid_entry_class(); ?>">
 				
 				<div class="featured-image">
-					<?php if (class_exists('MultiPostThumbnails') && MultiPostThumbnails::has_post_thumbnail('post', 'secondary-image')) {
-						MultiPostThumbnails::the_post_thumbnail('post', 'secondary-image', NULL, 'post-secondary-image-thumbnail');					
+					<?php 
+					if (class_exists('MultiPostThumbnails') && MultiPostThumbnails::has_post_thumbnail('post', 'secondary-image')) {
+						MultiPostThumbnails::the_post_thumbnail('post', 'secondary-image', $post->ID, 'medium');	
 					} else {
-						the_post_thumbnail( $post->ID, 'large' );
+						the_post_thumbnail( 'medium' );
 					} ?>
 				</div>
 				
