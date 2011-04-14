@@ -239,6 +239,7 @@ function masonry_grid($type = 'all') {
 		query_posts( array(
 			'post_type' => 'wpsc-product',
 			'post_parent' => 0,
+			'posts_per_page' => 9999,
 			'order'       => apply_filters('wpsc_product_order','ASC')
 		));
 
