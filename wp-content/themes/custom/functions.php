@@ -273,6 +273,7 @@ function masonry_grid($type = 'all') {
 			    $post_cat .= $category->slug;
 			    $delimiter = " ";
 			}
+			$post_cat .= $delimiter . "category-shop";
 
 			// Add the current post to items array
 			$items[] = '

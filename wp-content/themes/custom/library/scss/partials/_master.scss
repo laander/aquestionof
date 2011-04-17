@@ -310,7 +310,36 @@ body {
 				margin-left: $grid-columnwidth;}
 		
 		}
-
+		
+		/* WPEC Fancy Notifications styling */
+		#fancy_notification{
+			margin-left: $grid-columnwidth * 12 + $grid-margin * 1;
+			display: none;
+			height: auto;
+			z-index: 9; }
+			
+			#fancy_notification #loading_animation{
+				display: none; }
+				
+			#fancy_notification #fancy_notification_content{
+				display: none;
+				width: 100%;
+				padding: 0;
+				height: auto;
+				text-align: left;
+				margin: 0 !important; }
+				
+				#fancy_notification #fancy_notification_content span{
+					margin: 0;
+					display: block;
+					color: #00c972;
+					font-weight: normal; }
+					
+				#fancy_notification #fancy_notification_content a{
+					display: block;
+					float: left;
+					margin-right: 6px;
+					margin-bottom: 3px; }		
 	
 		#grid {
 			//@include column($grid-columns, true);
