@@ -2365,11 +2365,37 @@ a.shophere-button .text {
   width: auto;
 }
 
+/* line 476, ../scss/partials/_master.scss */
+#post-mcbox {
+  background: url("../images/newsletter-text.png") no-repeat 25px right;
+  background-color: #000;
+}
+
+/* line 480, ../scss/partials/_master.scss */
+#post-mcbox form input {
+  float: left;
+  height: 21px;
+  padding: 4px;
+  margin: 0;
+  border: 0;
+}
+
+/* line 487, ../scss/partials/_master.scss */
+#post-mcbox form input.emailbutton {
+  float: left;
+  border: 0;
+  width: 77px;
+  height: 29px;
+  padding: 0;
+  margin: 0;
+  background: url("../images/newsletter-emailbutton.png") no-repeat top left;
+}
+
 /**
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 480, ../scss/partials/_master.scss */
+/* line 500, ../scss/partials/_master.scss */
 #footer-container {
   padding-top: 20px;
   clear: both;
@@ -2377,7 +2403,7 @@ a.shophere-button .text {
 
 /* Subsidiary widget section */
 /* Footer section */
-/* line 491, ../scss/partials/_master.scss */
+/* line 511, ../scss/partials/_master.scss */
 #footer {
   text-align: right;
   float: right;
@@ -2385,35 +2411,35 @@ a.shophere-button .text {
 }
 
 /* Footer extra */
-/* line 497, ../scss/partials/_master.scss */
+/* line 517, ../scss/partials/_master.scss */
 #footer .meta {
   margin-bottom: 10px;
 }
 
-/* line 500, ../scss/partials/_master.scss */
+/* line 520, ../scss/partials/_master.scss */
 #footer .quicklinks {
   float: right;
 }
 
-/* line 503, ../scss/partials/_master.scss */
+/* line 523, ../scss/partials/_master.scss */
 #footer .quicklinks ul {
   list-style-type: none;
   padding: 4px;
   margin: 0;
 }
 
-/* line 508, ../scss/partials/_master.scss */
+/* line 528, ../scss/partials/_master.scss */
 #footer .quicklinks li {
   margin-right: 10px;
   float: left;
 }
 
-/* line 512, ../scss/partials/_master.scss */
+/* line 532, ../scss/partials/_master.scss */
 #footer .quicklinks li a {
   margin-right: 10px;
 }
 
-/* line 515, ../scss/partials/_master.scss */
+/* line 535, ../scss/partials/_master.scss */
 #footer .cards {
   margin-bottom: 10px;
   float: right;

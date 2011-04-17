@@ -472,6 +472,26 @@ body {
 			.row12 img { height: $grid-columnwidth * 12 + $grid-margin * 11 - 30px; width: auto; }
 			
 			.shop-products img { height: auto; width: auto; }	
+			
+			#post-mcbox {
+				background: url('../images/newsletter-text.png') no-repeat 25px right;
+				background-color: #000; }
+				
+				#post-mcbox form input {
+					float: left;
+					height: 21px;
+					padding: 4px;
+					margin: 0;
+					border: 0; }
+			
+				#post-mcbox form input.emailbutton {
+					float: left;				
+					border: 0;
+					width: 77px;
+					height: 29px;
+					padding: 0;
+					margin: 0;
+				    background: url('../images/newsletter-emailbutton.png') no-repeat top left; }
 /**
 * Footer
 ************************************************/
