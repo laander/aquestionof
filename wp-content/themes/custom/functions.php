@@ -155,6 +155,7 @@ function masonry_grid($type = 'all') {
 
 	global $post;
 	$items = array();
+	$pri_items = array();
 
 /*
 	// Fetch products from OpenCart
@@ -197,6 +198,17 @@ function masonry_grid($type = 'all') {
 	// Get all posts from WP and loop through WP posts
 	if ( have_posts() ) : while ( have_posts() ) : the_post();
 	
+		// Get the post priority if any (featured or new)
+		$post_priority = get_the_terms($post->ID, 'priority');
+		$post_pri = "";
+		if(!empty($post_priority)){
+			foreach($post_priority as $priority) { 
+				if($priority->slug == "featured") {
+					$post_pri = "priority-featured";
+				}
+			}
+		}
+	
 		// Get post categories and save to html-friendly string for class
 		$post_categories = get_the_category();	
 		$post_cat = "";
@@ -217,10 +229,10 @@ function masonry_grid($type = 'all') {
 		else { $item_width = 6; }
 		if (isset($custom_fields['height'])) { $item_height = $custom_fields['height'][0] * 4; }
 		else { $item_height = 4; }
-	
+		
 		// Add the current post to items array
-		$items[] = '
-			<div id="post-' . $post->ID . '" class="box col' . $item_width . ' row' . $item_height . ' ' . $post_cat . '">
+		$temp_item = '
+			<div id="post-' . $post->ID . '" class="box col' . $item_width . ' row' . $item_height . ' ' . $post_cat . ' ' . $post_pri . '">
 				<a href="' . get_permalink($post->ID) . '" alt="' . get_the_title() . '">
 					'.  get_the_post_thumbnail( $post->ID, 'large' ) .'
 					<div class="meta">
@@ -230,6 +242,12 @@ function masonry_grid($type = 'all') {
 					</div>
 				</a>
 			</div>' . "\n";
+			
+		if ($post_pri != "") {
+			$pri_items[] = $temp_item;
+		} else {
+			$items[] = $temp_item;
+		}
 			
 	endwhile; endif;
 	
@@ -302,6 +320,7 @@ function masonry_grid($type = 'all') {
 
 	// Shuffle all items and return
 	shuffle($items);
+	$items = array_merge($pri_items, $items);
 	return $items;
 }
 
