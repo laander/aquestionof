@@ -18,6 +18,8 @@
 					<img src="<?php echo CHILD_THEME_URI . '/library/images/cards/master.gif'; ?>" alt="Master Card" title="Master Card" />		
 					<img src="<?php echo CHILD_THEME_URI . '/library/images/cards/maestro.gif'; ?>" alt="Maestro Card" title="Maestro Card" />
 				</div>
+
+				<div class="quicklinks"><?php wp_nav_menu(array('theme_location'  => 'footer', 'after' => '|')); ?></div>
 				
 			</div><!-- #footer -->
 		

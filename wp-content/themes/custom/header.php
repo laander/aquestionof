@@ -56,12 +56,10 @@
 					</a>
 				</div>	
 				
-				<div class="shophere-button">
-					<span class="text">
-						<a href="<?php echo get_bloginfo( 'wpurl' ); ?>/#shop-products">SHOP HERE</a>
-					</span>
-				</div>
-				
+				<a href="<?php echo get_bloginfo( 'wpurl' ); ?>/#category-shop" class="shophere-button">
+					<span class="text">SHOP HERE</span>
+				</a>
+
 				<?php wp_nav_menu(array(
 					'theme_location' => 'primary',
 					'container' => false,

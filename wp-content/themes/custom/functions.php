@@ -29,6 +29,8 @@ function custom_theme_setup() {
 	add_theme_support( 'automatic-feed-links' );
 	//add_custom_background();
 
+	register_nav_menu( 'footer', 'Quicklinks in the footer' );
+
 }
 
 // Create new multiple post thumbnails for the posts (requires the associated plugin)
@@ -285,7 +287,7 @@ function masonry_grid($type = 'all') {
 								' . get_the_title() . '
 							</div>
 							<div class="product-price">
-								' . wpsc_the_product_price() . '
+								' . wpsc_product_variation_price_available(get_the_ID()) . '
 							</div>							
 						</div>
 					</a>

@@ -191,28 +191,27 @@ body {
 					text-transform: uppercase; }
 		}
 				
-		.shophere-button {
+		a.shophere-button {
 			margin: 30px 10px 0 0;
 			float: right;
 			height: 78px;
 			width: 78px;
 			text-align: center;
+			text-decoration: none;
 			background-color: #e02060; }
 			
-		.wpsc .shophere-button, 
-		.singular-wpsc-product .shophere-button {
+		.wpsc a.shophere-button, 
+		.singular-wpsc-product a.shophere-button {
 			background-color: #000; }
 		
-			.shophere-button .text {
+			a.shophere-button .text {
 				padding-top: 6px;
 				float: right;
-				clear: both; }
-				
-				.shophere-button .text a {
-					font-size: 24px;
-					font-family: DIN;					
-					text-decoration: none;
-					color: #fff; }
+				clear: both;				
+				font-size: 24px;
+				font-family: DIN;					
+				text-decoration: none;
+				color: #fff; }
 		
 		.fb-like {
 			margin: 13px 10px 0 0;
@@ -440,11 +439,29 @@ body {
 
 	/* Footer section */
 	#footer {
-		text-align: right; }
+		text-align: right;
+		float: right;
+		clear: both; }
 
 		/* Footer extra */
 		#footer .meta {
 			margin-bottom: 10px; }
+
+		#footer .quicklinks {
+			float: right; }
+
+		#footer .quicklinks ul {
+			list-style-type: none;
+			padding: 4px;
+			margin: 0; }
+			
+			#footer .quicklinks li {
+				margin-right: 10px;
+				float: left; }
+
+				#footer .quicklinks li a {
+					margin-right: 10px; }
 		
 		#footer .cards {
-			margin-bottom: 10px; }
+			margin-bottom: 10px;
+			float: right; }
