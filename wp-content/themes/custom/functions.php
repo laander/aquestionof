@@ -306,9 +306,9 @@ function masonry_grid($type = 'all') {
 				
 		// Add Mailchimp newsletter signup form box
 		$items[] = '
-			<div id="post-mcbox" class="box col6 row2 category-updates category-updates-social" style="background-color: #000">
+			<div id="post-mcbox" class="box col6 row4 category-updates category-updates-social" style="background-color: #000">
 				<!-- Begin MailChimp Signup Form -->
-				<div id="mc_embed_signup" style="padding: 10px">
+				<div id="mc_embed_signup" style="padding: 10px; margin-top: 115px">
 					<div style="color: #fff; margin-bottom: 7px;">Sign up for our newsletter</div>
 					<form action="http://aquestionof.us1.list-manage.com/subscribe/post?u=4b158f023b1059770a5f4ff44&amp;id=b1ea1a5e55" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
 						<input type="text" value="E-mail address" name="EMAIL" style="width: 100px">
