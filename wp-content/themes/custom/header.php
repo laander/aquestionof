@@ -25,6 +25,7 @@
 		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/jquery.cufon/DIN_1451_Std_400.font.js'; ?>"></script>	
 		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/jquery.masonry/onhashchange.min.js'; ?>"></script> 
 		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/jquery.masonry/jquery.masonry.min.js'; ?>"></script>
+		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/jquery.nivo.slider.pack.js'; ?>"></script>
 		
 		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/screen.js'; ?>"></script>
 			

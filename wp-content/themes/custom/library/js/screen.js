@@ -16,8 +16,31 @@ jQuery.noConflict();
 		
 		// Fancy pancy springloaded menu effects	
 		springloadedMenuEffect();
+		
+		nivoProductImages()
 	
 	});
+	
+	// Make WPEC product pages feature a image gallery based on Nivo jQuery plugin
+	function nivoProductImages() {
+		$(window).load(function() {
+			var total = $('#nivo_product_images img').length;
+			var rand = Math.floor(Math.random()*total);
+			$('#nivo_product_images').nivoSlider({
+				effect: 'fade', //Specify sets like: 'fold,fade,sliceDown'
+				animSpeed: 600, //Slide transition speed
+				pauseTime: 6000,
+				directionNav: false, //Next and Prev
+				controlNav: true, //1,2,3...
+				pauseOnHover: false, //Stop animation while hovering
+				captionOpacity: 0, //Universal caption opacity
+				startSlide: 0, //Set starting Slide (0 index)
+				directionNavHide: true,
+				keyboardNav: true,
+				manualAdvance: false
+			});
+		});	
+	}
 	
 	// Run the necessary jQuery for the top menu
 	function springloadedMenuEffect() {
