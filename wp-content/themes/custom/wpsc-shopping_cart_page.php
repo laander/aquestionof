@@ -296,7 +296,7 @@ endif;
                <?php if(wpsc_is_shipping_details()):?>
                <tr class='same_as_shipping_row'>
                   <td colspan ='2'>
-                  <?php $checked = '';
+                  <?php $checked = 'checked="checked"';
                   if(isset($_POST['shippingSameBilling']) && $_POST['shippingSameBilling'])
                   	$_SESSION['shippingSameBilling'] = true;
                   elseif(isset($_POST['submit']) && !isset($_POST['shippingSameBilling']))
