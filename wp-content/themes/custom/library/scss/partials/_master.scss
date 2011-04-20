@@ -277,7 +277,8 @@ body {
 				
 			.productcol {
 				@include pie-clearfix();
-				margin-left: $grid-columnwidth * 12 + $grid-margin * 1; }
+				margin-left: $grid-columnwidth * 12 + $grid-margin * 1;
+				margin-right: $grid-margin; }
 				
 				.entry-content h1 {
 					margin-bottom: 15px;
@@ -345,10 +346,6 @@ body {
 			width: 470px;
 			height: 725px;
 			background: url('../images/loader.gif') no-repeat 50% 50%; }
-
-			#nivo_product_images a {
-			    border: 0;
-			    display: block; }
 			 		 
 			#nivo_product_images img {
 			    position: absolute;
@@ -359,20 +356,11 @@ body {
 			    display: none; }	
 
 			.nivo-directionNav {
-				display: none; }
-				
-			.nivo-controlNav {
-			    width: 470px;
-			    height: 40px;
-			    position: absolute;
-			    left: 40%; /* Manually position in centre. Not perfect */
+			    position: absolute;			
 			    bottom: 0;
-			    padding: 8px 0 0 0;
-			    z-index: 20; /* Make sure it is visible above the slides */ }			
-
-				.nivo-controlNav a {
-				    display: block;
-				    float: left;
+			    width: 100%; }
+			    
+			    .nivo-directionNav a {
 				    border: 0;
 					cursor: pointer;
 					background-color: #000;
@@ -380,15 +368,75 @@ body {
 					color: #fff;
 					width: 15px;
 					height: 15px;				    
-				    margin-right: 15px;
+				    margin-right: 0px;
 				    text-align: center;
 				    text-decoration: none; }
-				
-				.nivo-controlNav a:hover {
-					color: grey; }
 				    
-				.nivo-controlNav a.active {
-					text-decoration: underline; }
+				.nivo-directionNav a:hover {
+					color: grey; }				    
+			    
+			    .nivo-directionNav a.nivo-prevNav {
+				    display: block;
+			    	float: left; }
+
+			    .nivo-directionNav a.nivo-nextNav {
+				    display: block;
+			    	float: right; }
+		
+		.FB_like {
+			position: relative;
+			display: block;
+			margin-top: -22px;
+			margin-left: 40px;
+			width: 400px; }
+			
+		.wpsc_product_price {
+			font-size: 18px;
+			font-weight: bold; }
+		
+		.wpsc_buy_button_container {
+			float: left;
+			width: 50%; }
+			
+			.wpsc_buy_button_container input.wpsc_buy_button {
+				cursor: pointer;
+				float: left;
+				height: 60px;
+				padding: 10px;
+				background-color: #e02060;
+				width: 100%;
+				color: #fff;
+				border: 0;
+				margin-right: $grid-margin; }
+			.wpsc_loading_animation {
+				display: none;
+			}
+			
+		.wpsc_product-footer-notifications {
+			float: left; }		
+		
+		.wpsc_variation_forms {
+			float: right;
+			width: 48%;			
+			height: 58px; 
+			border: 1px solid #000; }
+			
+			.wpsc_variation_forms table tr td {
+				padding: 0; }
+
+			.wpsc_variation_forms table tr {
+				height: 30px; }
+
+			.wpsc_variation_forms table tr td.col1 {
+				padding: 7px 7px 7px 12px; }
+
+			.wpsc_variation_forms table tr td.col2 {}
+			
+		.product_description {
+			float: left;
+			padding: $grid-margin;
+			margin-top: $grid-margin;
+			border: 1px solid #000; }
 			
 		#grid {
 			//@include column($grid-columns, true);

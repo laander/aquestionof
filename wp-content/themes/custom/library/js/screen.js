@@ -30,14 +30,16 @@ jQuery.noConflict();
 				effect: 'fade', //Specify sets like: 'fold,fade,sliceDown'
 				animSpeed: 600, //Slide transition speed
 				pauseTime: 6000,
-				directionNav: false, //Next and Prev
-				controlNav: true, //1,2,3...
+				directionNav: true, //Next and Prev
+				controlNav: false, //1,2,3...
 				pauseOnHover: false, //Stop animation while hovering
 				captionOpacity: 0, //Universal caption opacity
 				startSlide: 0, //Set starting Slide (0 index)
-				directionNavHide: true,
+				directionNavHide: false,
 				keyboardNav: true,
-				manualAdvance: false
+				manualAdvance: false,
+	    	    prevText: '<', // Prev directionNav text
+    	    	nextText: '>', // Next directionNav text
 			});
 		});	
 	}
