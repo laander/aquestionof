@@ -2130,16 +2130,21 @@ a.shophere-button .text {
   position: relative;
   float: left;
   margin: 7px 7px 7px 10px;
+  max-width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-/* line 468, ../scss/partials/_master.scss */
+/* line 471, ../scss/partials/_master.scss */
 .product-price {
   position: relative;
   float: right;
   margin: 7px 10px 7px 7px;
+  background-color: #000;
+  z-index: 30;
 }
 
-/* line 473, ../scss/partials/_master.scss */
+/* line 478, ../scss/partials/_master.scss */
 .box a {
   color: black;
   text-decoration: none;
@@ -2147,7 +2152,7 @@ a.shophere-button .text {
   font-weight: normal;
 }
 
-/* line 480, ../scss/partials/_master.scss */
+/* line 485, ../scss/partials/_master.scss */
 .col1 {
   display: inline;
   float: left;
@@ -2159,7 +2164,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 481, ../scss/partials/_master.scss */
+/* line 486, ../scss/partials/_master.scss */
 .col2 {
   display: inline;
   float: left;
@@ -2171,7 +2176,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 482, ../scss/partials/_master.scss */
+/* line 487, ../scss/partials/_master.scss */
 .col3 {
   display: inline;
   float: left;
@@ -2183,7 +2188,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 483, ../scss/partials/_master.scss */
+/* line 488, ../scss/partials/_master.scss */
 .col4 {
   display: inline;
   float: left;
@@ -2195,7 +2200,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 484, ../scss/partials/_master.scss */
+/* line 489, ../scss/partials/_master.scss */
 .col5 {
   display: inline;
   float: left;
@@ -2207,7 +2212,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 485, ../scss/partials/_master.scss */
+/* line 490, ../scss/partials/_master.scss */
 .col6 {
   display: inline;
   float: left;
@@ -2219,7 +2224,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 486, ../scss/partials/_master.scss */
+/* line 491, ../scss/partials/_master.scss */
 .col7 {
   display: inline;
   float: left;
@@ -2231,7 +2236,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 487, ../scss/partials/_master.scss */
+/* line 492, ../scss/partials/_master.scss */
 .col8 {
   display: inline;
   float: left;
@@ -2243,7 +2248,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 488, ../scss/partials/_master.scss */
+/* line 493, ../scss/partials/_master.scss */
 .col9 {
   display: inline;
   float: left;
@@ -2255,7 +2260,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 489, ../scss/partials/_master.scss */
+/* line 494, ../scss/partials/_master.scss */
 .col10 {
   display: inline;
   float: left;
@@ -2267,7 +2272,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 490, ../scss/partials/_master.scss */
+/* line 495, ../scss/partials/_master.scss */
 .col11 {
   display: inline;
   float: left;
@@ -2279,7 +2284,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 491, ../scss/partials/_master.scss */
+/* line 496, ../scss/partials/_master.scss */
 .col12 {
   display: inline;
   float: left;
@@ -2291,150 +2296,150 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 494, ../scss/partials/_master.scss */
+/* line 499, ../scss/partials/_master.scss */
 .row1 {
   height: 40px;
 }
 
-/* line 495, ../scss/partials/_master.scss */
+/* line 500, ../scss/partials/_master.scss */
 .row2 {
   height: 90px;
 }
 
-/* line 496, ../scss/partials/_master.scss */
+/* line 501, ../scss/partials/_master.scss */
 .row3 {
   height: 140px;
 }
 
-/* line 497, ../scss/partials/_master.scss */
+/* line 502, ../scss/partials/_master.scss */
 .row4 {
   height: 190px;
 }
 
-/* line 498, ../scss/partials/_master.scss */
+/* line 503, ../scss/partials/_master.scss */
 .row5 {
   height: 240px;
 }
 
-/* line 499, ../scss/partials/_master.scss */
+/* line 504, ../scss/partials/_master.scss */
 .row6 {
   height: 290px;
 }
 
-/* line 500, ../scss/partials/_master.scss */
+/* line 505, ../scss/partials/_master.scss */
 .row7 {
   height: 340px;
 }
 
-/* line 501, ../scss/partials/_master.scss */
+/* line 506, ../scss/partials/_master.scss */
 .row8 {
   height: 390px;
 }
 
-/* line 502, ../scss/partials/_master.scss */
+/* line 507, ../scss/partials/_master.scss */
 .row9 {
   height: 440px;
 }
 
-/* line 503, ../scss/partials/_master.scss */
+/* line 508, ../scss/partials/_master.scss */
 .row10 {
   height: 490px;
 }
 
-/* line 504, ../scss/partials/_master.scss */
+/* line 509, ../scss/partials/_master.scss */
 .row11 {
   height: 540px;
 }
 
-/* line 505, ../scss/partials/_master.scss */
+/* line 510, ../scss/partials/_master.scss */
 .row12 {
   height: 590px;
 }
 
-/* line 508, ../scss/partials/_master.scss */
+/* line 513, ../scss/partials/_master.scss */
 .row1 img {
   height: 10px;
 }
 
-/* line 509, ../scss/partials/_master.scss */
+/* line 514, ../scss/partials/_master.scss */
 .row2 img {
   height: 60px;
   width: auto;
 }
 
-/* line 510, ../scss/partials/_master.scss */
+/* line 515, ../scss/partials/_master.scss */
 .row3 img {
   height: 110px;
   width: auto;
 }
 
-/* line 511, ../scss/partials/_master.scss */
+/* line 516, ../scss/partials/_master.scss */
 .row4 img {
   height: 160px;
   width: auto;
 }
 
-/* line 512, ../scss/partials/_master.scss */
+/* line 517, ../scss/partials/_master.scss */
 .row5 img {
   height: 210px;
   width: auto;
 }
 
-/* line 513, ../scss/partials/_master.scss */
+/* line 518, ../scss/partials/_master.scss */
 .row6 img {
   height: 260px;
   width: auto;
 }
 
-/* line 514, ../scss/partials/_master.scss */
+/* line 519, ../scss/partials/_master.scss */
 .row7 img {
   height: 310px;
   width: auto;
 }
 
-/* line 515, ../scss/partials/_master.scss */
+/* line 520, ../scss/partials/_master.scss */
 .row8 img {
   height: 360px;
   width: auto;
 }
 
-/* line 516, ../scss/partials/_master.scss */
+/* line 521, ../scss/partials/_master.scss */
 .row9 img {
   height: 410px;
   width: auto;
 }
 
-/* line 517, ../scss/partials/_master.scss */
+/* line 522, ../scss/partials/_master.scss */
 .row10 img {
   height: 460px;
   width: auto;
 }
 
-/* line 518, ../scss/partials/_master.scss */
+/* line 523, ../scss/partials/_master.scss */
 .row11 img {
   height: 510px;
   width: auto;
 }
 
-/* line 519, ../scss/partials/_master.scss */
+/* line 524, ../scss/partials/_master.scss */
 .row12 img {
   height: 560px;
   width: auto;
 }
 
-/* line 521, ../scss/partials/_master.scss */
+/* line 526, ../scss/partials/_master.scss */
 .shop-products img {
   height: auto;
   width: auto;
 }
 
-/* line 523, ../scss/partials/_master.scss */
+/* line 528, ../scss/partials/_master.scss */
 #post-mcbox {
   background: url("../images/newsletter-text.png") no-repeat 25px right;
   background-color: #000;
 }
 
-/* line 527, ../scss/partials/_master.scss */
+/* line 532, ../scss/partials/_master.scss */
 #post-mcbox form input {
   float: left;
   height: 21px;
@@ -2443,7 +2448,7 @@ a.shophere-button .text {
   border: 0;
 }
 
-/* line 534, ../scss/partials/_master.scss */
+/* line 539, ../scss/partials/_master.scss */
 #post-mcbox form input.emailbutton {
   float: left;
   border: 0;
@@ -2458,7 +2463,7 @@ a.shophere-button .text {
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 547, ../scss/partials/_master.scss */
+/* line 552, ../scss/partials/_master.scss */
 #footer-container {
   padding-top: 20px;
   clear: both;
@@ -2466,7 +2471,7 @@ a.shophere-button .text {
 
 /* Subsidiary widget section */
 /* Footer section */
-/* line 558, ../scss/partials/_master.scss */
+/* line 563, ../scss/partials/_master.scss */
 #footer {
   text-align: right;
   float: right;
@@ -2474,35 +2479,35 @@ a.shophere-button .text {
 }
 
 /* Footer extra */
-/* line 564, ../scss/partials/_master.scss */
+/* line 569, ../scss/partials/_master.scss */
 #footer .meta {
   margin-bottom: 10px;
 }
 
-/* line 567, ../scss/partials/_master.scss */
+/* line 572, ../scss/partials/_master.scss */
 #footer .quicklinks {
   float: right;
 }
 
-/* line 570, ../scss/partials/_master.scss */
+/* line 575, ../scss/partials/_master.scss */
 #footer .quicklinks ul {
   list-style-type: none;
   padding: 4px;
   margin: 0;
 }
 
-/* line 575, ../scss/partials/_master.scss */
+/* line 580, ../scss/partials/_master.scss */
 #footer .quicklinks li {
   margin-right: 10px;
   float: left;
 }
 
-/* line 579, ../scss/partials/_master.scss */
+/* line 584, ../scss/partials/_master.scss */
 #footer .quicklinks li a {
   margin-right: 10px;
 }
 
-/* line 582, ../scss/partials/_master.scss */
+/* line 587, ../scss/partials/_master.scss */
 #footer .cards {
   margin-bottom: 10px;
   float: right;
