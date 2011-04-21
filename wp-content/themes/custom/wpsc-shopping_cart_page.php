@@ -12,6 +12,9 @@ if(wpsc_cart_item_count() < 1) :
 endif;
 ?>
 <div id="checkout_page_container">
+<div class="entry-header">
+	<h1><?php the_title(); ?></h1>
+</div>
 <h3><?php _e('Please review your order', 'wpsc'); ?></h3>
 <table class="checkout_cart">
    <tr class="header">
@@ -21,6 +24,11 @@ endif;
       <th><?php _e('Total', 'wpsc'); ?></th>
         <th>&nbsp;</th>
    </tr>
+   
+	<tr class="wpsc_cart_seperatorrow">
+		<td colspan="6"></td>
+	</tr>   
+   
    <?php while (wpsc_have_cart_items()) : wpsc_the_cart_item(); ?>
       <?php
        $alt++;
@@ -98,7 +106,19 @@ endif;
 	      <td colspan="3" class="wpsc_total_amount_before_shipping"><?php echo wpsc_cart_total_widget(false,false,false);?></td>
       </tr>
    <?php endif; ?>
-   </table>
+   		
+   		<tr class="wpsc_cart_seperatorrow">
+   			<td colspan="6"></td>
+   		</tr>
+		
+		<tr class="wpsc_cart_totalprice">
+			<td colspan="3"></td>
+			<td colspan="1"><?php _e('Total Price', 'wpsc'); ?></td>
+			<td colspan="2"><span id="checkout_total" class="pricedisplay checkout-total wpsc_product_price"><?php echo wpsc_cart_total(); ?></span></td>
+		</tr>   
+   
+   </table>   
+   
    <!-- cart contents table close -->
   <?php if(wpsc_uses_shipping()): ?>
 	   <p class="wpsc_cost_before"></p>
@@ -296,7 +316,7 @@ endif;
                <?php if(wpsc_is_shipping_details()):?>
                <tr class='same_as_shipping_row'>
                   <td colspan ='2'>
-                  <?php $checked = 'checked="checked"';
+                  <?php $checked = '';
                   if(isset($_POST['shippingSameBilling']) && $_POST['shippingSameBilling'])
                   	$_SESSION['shippingSameBilling'] = true;
                   elseif(isset($_POST['submit']) && !isset($_POST['shippingSameBilling']))
@@ -348,19 +368,22 @@ endif;
             <?php
             }elseif( $wpsc_checkout->checkout_item->unique_name == 'billingemail'){ ?>
                <?php $email_markup =
-               "<div class='wpsc_email_address'>
-                  <p class='<?php echo wpsc_checkout_form_element_id(); ?>'>
-                     <label class='wpsc_email_address' for='" . wpsc_checkout_form_element_id() . "'>
-                     " . __('Enter your email address', 'wpsc') . "
-                     </label>
-                  <p class='wpsc_email_address_p'>
-                  <img src='https://secure.gravatar.com/avatar/empty?s=60&amp;d=mm' id='wpsc_checkout_gravatar' />
-                  " . wpsc_checkout_form_field();
-                  
-                   if(wpsc_the_checkout_item_error() != '')
-                      $email_markup .= "<p class='validation-error'>" . wpsc_the_checkout_item_error() . "</p>";
-               $email_markup .= "</div>";
-             }else{ ?>
+               "<table class='wpsc_checkout_table'>
+					<tbody>
+						<tr>
+							<td><h4>Provide us your e-mail address</h4></td>
+						</tr>
+						<tr>
+							<td class='" . wpsc_checkout_form_element_id() . "' style='width: 196px'><label class='wpsc_email_address' for='" . wpsc_checkout_form_element_id() . "'>
+                     " . __('E-mail', 'wpsc') . "</label></td>
+							<td>" . wpsc_checkout_form_field() . "</td>
+					</tbody>
+				</table>";
+                if(wpsc_the_checkout_item_error() != '') {
+                	$email_markup .= "<p class='validation-error'>" . wpsc_the_checkout_item_error() . "</p>";
+                }
+                   
+             } else { ?>
 			<tr>
                <td class='<?php echo wpsc_checkout_form_element_id(); ?>'>
                   <label for='<?php echo wpsc_checkout_form_element_id(); ?>'>
@@ -478,16 +501,6 @@ endif;
          </tr>
      <?php endif ?>
 
-
-
-   <tr class='total_price'>
-      <td class='wpsc_totals'>
-      <?php _e('Total Price', 'wpsc'); ?>:
-      </td>
-      <td class='wpsc_totals'>
-         <span id='checkout_total' class="pricedisplay checkout-total"><?php echo wpsc_cart_total(); ?></span>
-      </td>
-   </tr>
    </table>
 
 <!-- div for make purchase button -->

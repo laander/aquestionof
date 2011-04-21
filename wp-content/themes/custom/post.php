@@ -25,6 +25,9 @@ get_header(); ?>
 				
 				<div class="entry-content entry-with-sidebar">
 					
+					<div class="entry-header"><h1><?php the_title(); ?></h1></div>
+					<?php the_content(); ?>					
+					
 					<?php $custom_fields = get_post_custom($post->ID); ?>
 
 					<?php // Related Posts box						
@@ -39,16 +42,18 @@ get_header(); ?>
 							else { $item_height = 4; }
 							
 							$related_post = '
-								<div class="related-post-title">Related</div>
-								<div class="related-post box row' . $item_height . '">
-									<a href="' . get_permalink($related_post->ID) . '">
-										'.  get_the_post_thumbnail($related_post->ID, 'large') .'
-										<div class="meta">
-											<div class="post-title">
-												' . get_the_title($related_post->ID) . '
+								<div class="related-post-container">
+									<div class="related-post-title">Related</div>
+									<div class="related-post box row' . $item_height . '">
+										<a href="' . get_permalink($related_post->ID) . '">
+											'.  get_the_post_thumbnail($related_post->ID, 'large') .'
+											<div class="meta">
+												<div class="post-title">
+													' . get_the_title($related_post->ID) . '
+												</div>
 											</div>
-										</div>
-									</a>
+										</a>
+									</div>
 								</div>' . "\n";
 							echo $related_post;
 							$post = $tmp_post;						
@@ -60,9 +65,6 @@ get_header(); ?>
 							<div class="related-product box"></div>
 					<?php } ?>
 													
-					<h1><?php the_title(); ?></h1>
-					<?php the_content(); ?>
-
 				</div><!-- .entry-content -->
 
 			</div><!-- .hentry -->

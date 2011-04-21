@@ -17,9 +17,47 @@ jQuery.noConflict();
 		// Fancy pancy springloaded menu effects	
 		springloadedMenuEffect();
 		
-		nivoProductImages()
+		nivoProductImages();
+		
+		masterbarLinkBounce();
+		
+		addToCartEffect();
 	
 	});
+	
+	function addToCartEffect() {
+		$("form.product_form").submit(function() {
+			$('.master-shoppingbag a').html('Added to Shopping Bag!');
+			$('.wpsc_buy_button_container input').val('Added to Shopping Bag!');
+			bounceEffect('.master-shoppingbag a');
+			bounceEffect('.wpsc_buy_button_container input');			
+		});
+	}
+	
+	// Makes the masterbar links bounce when hovered
+	function masterbarLinkBounce() {
+		$("#masterbar a").hover(
+			function () {
+				bounceEffect(this);			
+			}, function () {}
+		);
+	
+	}
+	
+	function bounceEffect(element) {
+    	if ( !$(element).is(':animated') ) { 		  	
+	        $(element).css('position','relative');
+	        $(element).animate({'top': '-=3px'}, 50, function(){
+	            $(element).animate({'top': '+=6px'}, 100, function(){
+	                $(element).animate({'top': '-=6px'}, 100, function(){
+	                    $(element).animate({'top': '+=6px'}, 100, function(){
+	                        $(element).animate({'top': '-=3px'}, 50);
+	                    });
+	                });
+	            });
+	        });
+		}	
+	}
 	
 	// Make WPEC product pages feature a image gallery based on Nivo jQuery plugin
 	function nivoProductImages() {

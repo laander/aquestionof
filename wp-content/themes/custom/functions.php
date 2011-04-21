@@ -4,6 +4,8 @@
 require_once( trailingslashit( TEMPLATEPATH ) . 'hybrid-core/hybrid.php' );
 $theme = new Hybrid();
 
+remove_action('init', 'wp_admin_bar_init');
+
 /* Setup custom theme for Hybrid. */
 add_action( 'after_setup_theme', 'custom_theme_setup', 10 );
 function custom_theme_setup() {
@@ -12,6 +14,10 @@ function custom_theme_setup() {
 	add_theme_support( 'hybrid-core-seo' );
 	add_theme_support( 'hybrid-core-template-hierarchy' );
 	add_theme_support( 'hybrid-core-menus' );
+	add_theme_support( 'hybrid-core-theme-settings' ); // Enables settings page
+	if (is_admin()) {
+		require_once( trailingslashit( TEMPLATEPATH ) . 'functions-admin.php' );
+	}
 	//add_theme_support( 'hybrid-core-sidebars' );
 	//add_theme_support( 'hybrid-core-widgets' );
 	//add_theme_support( 'hybrid-core-shortcodes' );
@@ -30,6 +36,7 @@ function custom_theme_setup() {
 	//add_custom_background();
 
 	register_nav_menu( 'footer', 'Quicklinks in the footer' );
+	register_nav_menu( 'masterbar', 'Masterbar in the top' );
 
 }
 
@@ -361,6 +368,46 @@ function nivo_get_images($product_id = null, $size = 'medium', $limit = '0', $of
 			$i++;
 		} 
 	}
+}
+
+function hexDarker($hex,$factor = 30) {
+    $new_hex = '';
+    
+    $base['R'] = hexdec($hex{0}.$hex{1});
+    $base['G'] = hexdec($hex{2}.$hex{3});
+    $base['B'] = hexdec($hex{4}.$hex{5});
+    
+    foreach ($base as $k => $v) {
+        $amount = $v / 100;
+        $amount = round($amount * $factor);
+        $new_decimal = $v - $amount;
+
+        $new_hex_component = dechex($new_decimal);
+        if(strlen($new_hex_component) < 2)
+                { $new_hex_component = "0".$new_hex_component; }
+        $new_hex .= $new_hex_component;
+	}
+            
+    return $new_hex;        
+}
+
+function customColors() {
+	echo '
+		<style type="text/css">
+
+			.custom-color-1,
+			div.custom-color-1,
+			.wpsc_buy_button_container input.wpsc_buy_button {
+				background-color: ' . hybrid_get_setting( 'custom-color-1' ) . '; }
+				
+			.custom-color-2,
+			a.custom-color-2,
+			ul#masterbar-menu.custom-color-2 li a,
+			ul#primary-menu.custom-color-2 li a:hover,
+			.wpsc_buy_button_container input.wpsc_buy_button {
+				color: ' . hybrid_get_setting( 'custom-color-2' ) . '; }
+
+		</style>';
 }
 
 ?>
