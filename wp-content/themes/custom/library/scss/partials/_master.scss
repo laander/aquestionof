@@ -78,6 +78,9 @@ body {
 					text-transform: uppercase;
 					text-decoration: none;
 					font-weight: none; }
+					
+				a.master-shoppingbag-hide {
+					display: none; }
 				
 	/* Wrapper for everything inside of the body */
 	#body-container {
@@ -455,7 +458,7 @@ body {
 		form.wpsc_checkout_forms textarea {
 			height: auto; }
 
-		form.wpsc_checkout_forms asterix {
+		form.wpsc_checkout_forms .asterix {
 			color: red; }		
 			
 		#grid {

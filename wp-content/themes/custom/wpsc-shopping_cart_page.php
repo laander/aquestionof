@@ -115,7 +115,19 @@ endif;
 			<td colspan="3"></td>
 			<td colspan="1"><?php _e('Total Price', 'wpsc'); ?></td>
 			<td colspan="2"><span id="checkout_total" class="pricedisplay checkout-total wpsc_product_price"><?php echo wpsc_cart_total(); ?></span></td>
-		</tr>   
+		</tr>  	
+   <?php
+      $wpec_taxes_controller = new wpec_taxes_controller();
+      if($wpec_taxes_controller->wpec_taxes_isenabled()):
+   ?>
+		<tr class="total_price total_tax">
+            <td colspan="3"></td>
+            <td colspan="1"><?php echo wpsc_display_tax_label(true); ?></td>
+            <td colspan="2"><span id="checkout_tax" class="pricedisplay checkout-tax"><?php echo wpsc_cart_tax(); ?></span></td>
+         </tr>
+   <?php endif; ?>
+		
+		 
    
    </table>   
    
@@ -210,21 +222,6 @@ endif;
       </table>
    <?php endif;  ?>
 
-   <?php
-      $wpec_taxes_controller = new wpec_taxes_controller();
-      if($wpec_taxes_controller->wpec_taxes_isenabled()):
-   ?>
-      <table class="productcart">
-         <tr class="total_price total_tax">
-            <td colspan="3">
-               <?php echo wpsc_display_tax_label(true); ?>
-            </td>
-            <td colspan="2">
-               <span id="checkout_tax" class="pricedisplay checkout-tax"><?php echo wpsc_cart_tax(); ?></span>
-            </td>
-         </tr>
-      </table>
-   <?php endif; ?>
    <?php do_action('wpsc_before_form_of_shopping_cart'); ?>
                  
 	<?php if(!empty($_SESSION['wpsc_checkout_user_error_messages'])): ?>
@@ -464,9 +461,14 @@ endif;
       <?php if(wpsc_has_tnc()) : ?>
          <tr>
             <td colspan='2'>
-                <input type='checkbox' value='yes' name='agree' /> <?php _e('I agree to The ', 'wpsc');?>
-                <a class='thickbox' target='_blank' href='<?php
-         echo site_url("?termsandconds=true&amp;width=360&amp;height=400'"); ?>' class='termsandconds'> <?php _e('Terms and Conditions', 'wpsc');?></a>
+                <input type='checkbox' value='yes' name='agree' /> <?php _e('I agree to the ', 'wpsc');?>
+                <!--
+                	<a class='thickbox' target='_blank' href='<?php echo site_url("?termsandconds=true&amp;width=360&amp;height=400'"); ?>' class='termsandconds'> <?php _e('Terms and Conditions', 'wpsc');?></a>
+                -->
+                <a target='_blank' href='<?php
+         			// Changed to hardcoded page - not best practise but required for custom Terms & Conditions
+         			echo get_bloginfo( 'wpurl' ) . "/terms-conditions";
+         			?>' > <?php _e('Terms and Conditions', 'wpsc');?></a>         
                </td>
          </tr>
       <?php endif; ?>

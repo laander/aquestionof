@@ -39,11 +39,12 @@
 		<div id="masterbar">
 		
 			<div class="master-shoppingbag">
-				<?php if(wpsc_cart_item_count() == 0) { ?>
-					<a href="#category-shop" class="custom-color-2" class="custom-color-2">Go to shop!</a>
-				<?php } else { ?>
-					<a href="<?php echo get_option('shopping_cart_url'); ?>" class="custom-color-2">Shopping Bag ( <?php echo wpsc_cart_item_count(); ?> )</a>			
-				<?php } ?>
+				<?php 
+					$show_bag = false;
+					if (wpsc_cart_item_count() > 0) { $show_bag = true; }
+				?>
+				<a href="#category-shop" class="masterbar-goshop custom-color-2" <?php if ($show_bag == true) { echo 'style="display: none;"'; } ?>>Go shopping!</a>
+				<a href="<?php echo get_option('shopping_cart_url'); ?>" class="masterbar-shoppingbag custom-color-2" <?php if ($show_bag == false) { echo 'style="display: none;"'; } ?>>Shopping Bag ( <span><?php echo wpsc_cart_item_count(); ?></span> )</a>					
 			</div>
 		
 			<?php wp_nav_menu(array(

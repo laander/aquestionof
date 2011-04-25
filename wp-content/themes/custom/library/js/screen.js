@@ -15,35 +15,48 @@ jQuery.noConflict();
 		initMasonryEffect();
 		
 		// Fancy pancy springloaded menu effects	
-		springloadedMenuEffect();
+		primaryMenuEvents();
 		
 		nivoProductImages();
 		
-		masterbarLinkBounce();
+		masterbarLinkHoverEvent();
 		
-		addToCartEffect();
+		addToCartEvent();
 	
 	});
 	
-	function addToCartEffect() {
+	/**
+	 * When item is added to cart, it will show shopping bag with incremented count and bounce links
+	 */
+	function addToCartEvent() {
 		$("form.product_form").submit(function() {
-			$('.master-shoppingbag a').html('Added to Shopping Bag!');
+			
+			$(".masterbar-goshop").hide();
+			$(".masterbar-shoppingbag").show();
+			
+			var bagCount = parseInt($(".masterbar-shoppingbag span").html());
+			$(".masterbar-shoppingbag span").html(bagCount + 1);
+			bounceEffect('.masterbar-shoppingbag');
+						
 			$('.wpsc_buy_button_container input').val('Added to Shopping Bag!');
-			bounceEffect('.master-shoppingbag a');
 			bounceEffect('.wpsc_buy_button_container input');			
 		});
 	}
 	
-	// Makes the masterbar links bounce when hovered
-	function masterbarLinkBounce() {
+	/**
+	 * Makes the masterbar links bounce when hovered
+	 */
+	function masterbarLinkHoverEvent() {
 		$("#masterbar a").hover(
 			function () {
 				bounceEffect(this);			
 			}, function () {}
 		);
-	
 	}
 	
+	/**
+	 * Run a bounce effect on the supplied element
+	 */
 	function bounceEffect(element) {
     	if ( !$(element).is(':animated') ) { 		  	
 	        $(element).css('position','relative');
@@ -59,7 +72,9 @@ jQuery.noConflict();
 		}	
 	}
 	
-	// Make WPEC product pages feature a image gallery based on Nivo jQuery plugin
+	/**
+	 * Make WPEC product pages feature a image gallery based on Nivo jQuery plugin
+	 */
 	function nivoProductImages() {
 		$(window).load(function() {
 			var total = $('#nivo_product_images img').length;
@@ -82,51 +97,47 @@ jQuery.noConflict();
 		});	
 	}
 	
-	// Run the necessary jQuery for the top menu
-	function springloadedMenuEffect() {
+	
+	/**
+	 * Bind the primary menu effects to events
+	 */
+	function primaryMenuEvents() {
 		
 		// Only run on masonry-enabled grid pages
 		if ($('#grid').length != 0) {
-		
 			$("#primary-menu > li.menu-item-type-taxonomy > a, #site-title a").click(function() {
-				
-				// Only run if the clicked menu item is not already the current one
-				if ($(this).next("ul.sub-menu.current").length == 0) {
-					
-					// Collapse the previous current
-					$("ul.sub-menu.current").removeClass("current").animate(
-						{width: "1", opacity: 0}, 
-						{queue: false, duration: 1000, complete: function() {
-							$(this).removeAttr('style')
-						}
-					});
-					
-					// Expand the new current (that is clicked)
-					$current = $(this).next("ul.sub-menu");
-					$current.addClass("current").animate({width: "show", opacity: 1}, {queue: false, duration: 1000});
-				}
-				
+				primaryMenuEffect(this);
 			});	
-
 		}		
+	
+	}
+	
+	/**
+	 * Run the primary menu effect on the supplied item
+	 */
+	function primaryMenuEffect(activateMenuItem) {
+	
+		// Only run if the clicked menu item is not already the current one
+		if ($(activateMenuItem).next("ul.sub-menu.current").length == 0) {
 			
-	}
-	
-	// Get cart from OpenCart in JSON, write to page and run cufon on resulting text
-	function outputCartFromOC() {
-		$.ajax({
-			url: base + 'shop/index.php?route=custom/cart',
-			success: function(data) {
-				var json = jQuery.parseJSON(data);
-				$(".shopping-bag .items").html(json.numberOfItems);
-			    if(!$.fontAvailable('DIN')) {			
-					Cufon.replace('.shopping-bag .items');
+			// Collapse the previous current
+			$("ul.sub-menu.current").removeClass("current").animate(
+				{width: "1", opacity: 0}, 
+				{queue: false, duration: 1000, complete: function() {
+					$(this).removeAttr('style')
 				}
-		  }
-		});
-	}
+			});
+			
+			// Expand the new current (that is clicked)
+			$current = $(activateMenuItem).next("ul.sub-menu");
+			$current.addClass("current").animate({width: "show", opacity: 1}, {queue: false, duration: 1000});
+		}	
 	
-	// Will apply custom font with cufon for supplied texts
+	}
+			
+	/**
+	 * Will apply custom font with cufon for supplied texts
+	 */
 	function applyCufon() {
 	    if(!$.fontAvailable('DIN')) {
 			Cufon.replace('#primary-menu li a.topcat');
@@ -138,7 +149,13 @@ jQuery.noConflict();
 	    }
 	}
 	
-	// Masonry Grid Settings
+	/**
+	 * ------------------------------------------------------
+	 * Masonry Grid Effect
+	 * ------------------------------------------------------	 
+	 */
+	 
+	// Global settings
 	var gridContainer = "#grid";
 	var gridElement = "div.box";
 	var gridElementSpecific = gridContainer + " " + gridElement;
@@ -210,7 +227,13 @@ jQuery.noConflict();
 		$(loadingIcon).fadeIn("fast"); // Show the loading icon
 		elmBusy = true;
 	
+		// Get the current category and attempt to find the link in primary-menu that it should correspondingly open
 		var category = getHash();
+		var searchUrl = antiHashizeUrl(category, false, true);
+		var possibleMenuItem = '#primary-menu li a[href="' + searchUrl + '"]';
+		if($(possibleMenuItem).length != 0) {
+			primaryMenuEffect(possibleMenuItem);	
+		}
 	
 		// previous elements
 		var $previousElm = $(gridElementSpecific);
@@ -315,5 +338,25 @@ jQuery.noConflict();
 			return category; // Create new url with hash
 		}
 	}
+	
+	// If supplied by a hashed url (from hashizeUrl), it will attempt to convert it back to its static counterpart
+	function antiHashizeUrl(url, relative, trailingslash) {
+		if(!relative) { var relative = false }
+		
+		var currentUrl = url.replace(/\/$/,""); // Replaces the trailing slash if exists so it doesnt cause trouble when hashing
+		
+		if (trailingslash) {
+			currentUrl = url + "/";
+		}
+		
+		var category = currentUrl.replace(base,"").replace(/-/g,"/").replace(/#/g,""); // Make url relative and turn slashes to dashes			
+
+		if (!relative) {
+			return base + category; // Create new url with hash
+		} else {
+			return category; // Create new url with hash
+		}
+	}
+
 
 })(jQuery)

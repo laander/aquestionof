@@ -1584,8 +1584,13 @@ ul#masterbar-menu > li > ul {
   font-weight: none;
 }
 
+/* line 82, ../scss/partials/_master.scss */
+a.master-shoppingbag-hide {
+  display: none;
+}
+
 /* Wrapper for everything inside of the body */
-/* line 83, ../scss/partials/_master.scss */
+/* line 86, ../scss/partials/_master.scss */
 #body-container {
   max-width: 1200px;
   min-width: 960px;
@@ -1596,7 +1601,7 @@ ul#masterbar-menu > li > ul {
 /**
 * Header (logo)
 ************************************************/
-/* line 95, ../scss/partials/_master.scss */
+/* line 98, ../scss/partials/_master.scss */
 #header-container {
   position: relative;
   height: 185px;
@@ -1604,25 +1609,25 @@ ul#masterbar-menu > li > ul {
   overflow: hidden;
 }
 
-/* line 101, ../scss/partials/_master.scss */
+/* line 104, ../scss/partials/_master.scss */
 #loader {
   position: absolute;
   left: 500px;
   top: 60px;
 }
 
-/* line 108, ../scss/partials/_master.scss */
+/* line 111, ../scss/partials/_master.scss */
 #site-title {
   float: left;
   margin-top: 40px;
 }
 
-/* line 112, ../scss/partials/_master.scss */
+/* line 115, ../scss/partials/_master.scss */
 #site-title a img {
   width: 470px;
 }
 
-/* line 115, ../scss/partials/_master.scss */
+/* line 118, ../scss/partials/_master.scss */
 #site-title a h2 {
   text-indent: -119988px;
   overflow: hidden;
@@ -1630,7 +1635,7 @@ ul#masterbar-menu > li > ul {
   display: none;
 }
 
-/* line 119, ../scss/partials/_master.scss */
+/* line 122, ../scss/partials/_master.scss */
 ul#primary-menu {
   float: left;
   clear: left;
@@ -1639,7 +1644,7 @@ ul#primary-menu {
   padding: 0;
   overflow: hidden;
 }
-/* line 127, ../scss/partials/_master.scss */
+/* line 130, ../scss/partials/_master.scss */
 ul#primary-menu > li {
   position: relative;
   float: left;
@@ -1648,7 +1653,7 @@ ul#primary-menu > li {
   list-style: none;
   overflow: hidden;
 }
-/* line 135, ../scss/partials/_master.scss */
+/* line 138, ../scss/partials/_master.scss */
 ul#primary-menu > li > a {
   position: relative;
   float: left;
@@ -1659,7 +1664,7 @@ ul#primary-menu > li > a {
   text-transform: uppercase;
 }
 
-/* line 151, ../scss/partials/_master.scss */
+/* line 154, ../scss/partials/_master.scss */
 ul.sub-menu {
   display: none;
   position: relative;
@@ -1669,13 +1674,13 @@ ul.sub-menu {
   white-space: nowrap;
   overflow: hidden;
 }
-/* line 160, ../scss/partials/_master.scss */
+/* line 163, ../scss/partials/_master.scss */
 ul.sub-menu ul.sub-menu.current {
   display: block;
   opacity: 1;
   width: auto;
 }
-/* line 165, ../scss/partials/_master.scss */
+/* line 168, ../scss/partials/_master.scss */
 ul.sub-menu > li {
   display: inline;
   margin: 0 0 0 5px;
@@ -1684,7 +1689,7 @@ ul.sub-menu > li {
   white-space: nowrap;
   overflow: hidden;
 }
-/* line 173, ../scss/partials/_master.scss */
+/* line 176, ../scss/partials/_master.scss */
 ul.sub-menu > li > a {
   margin: 0;
   color: gray;
@@ -1694,7 +1699,7 @@ ul.sub-menu > li > a {
   text-transform: uppercase;
 }
 
-/* line 185, ../scss/partials/_master.scss */
+/* line 188, ../scss/partials/_master.scss */
 a.shophere-button {
   margin: 30px 10px 0 0;
   float: right;
@@ -1705,13 +1710,13 @@ a.shophere-button {
   background-color: #e02060;
 }
 
-/* line 195, ../scss/partials/_master.scss */
+/* line 198, ../scss/partials/_master.scss */
 .wpsc a.shophere-button,
 .singular-wpsc-product a.shophere-button {
   background-color: #000;
 }
 
-/* line 198, ../scss/partials/_master.scss */
+/* line 201, ../scss/partials/_master.scss */
 a.shophere-button .text {
   padding-top: 6px;
   float: right;
@@ -1725,12 +1730,12 @@ a.shophere-button .text {
 /**
 * Main content area
 ************************************************/
-/* line 211, ../scss/partials/_master.scss */
+/* line 214, ../scss/partials/_master.scss */
 #content-container {
   width: 100%;
 }
 
-/* line 218, ../scss/partials/_master.scss */
+/* line 221, ../scss/partials/_master.scss */
 .hentry .featured-image {
   display: inline;
   float: left;
@@ -1742,7 +1747,7 @@ a.shophere-button .text {
 * html .hentry .featured-image {
   overflow-x: hidden;
 }
-/* line 222, ../scss/partials/_master.scss */
+/* line 225, ../scss/partials/_master.scss */
 .hentry .entry-content {
   *zoom: 1;
 }
@@ -1755,17 +1760,17 @@ a.shophere-button .text {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 225, ../scss/partials/_master.scss */
+/* line 228, ../scss/partials/_master.scss */
 .hentry .entry-with-sidebar {
   margin-left: 490px;
 }
-/* line 228, ../scss/partials/_master.scss */
+/* line 231, ../scss/partials/_master.scss */
 .hentry .entry-content .entry-header {
   background-color: #000;
   height: 30px;
   margin-bottom: 15px;
 }
-/* line 233, ../scss/partials/_master.scss */
+/* line 236, ../scss/partials/_master.scss */
 .hentry .entry-content h1 {
   padding: 9px 6px 0 6px;
   color: #fff;
@@ -1773,12 +1778,12 @@ a.shophere-button .text {
   font-size: 20px;
   font-family: DIN;
 }
-/* line 240, ../scss/partials/_master.scss */
+/* line 243, ../scss/partials/_master.scss */
 .hentry .related-post-container {
   float: left;
   clear: both;
 }
-/* line 244, ../scss/partials/_master.scss */
+/* line 247, ../scss/partials/_master.scss */
 .hentry .related-post-title {
   display: inline;
   float: left;
@@ -1796,7 +1801,7 @@ a.shophere-button .text {
 * html .hentry .related-post-title {
   overflow-x: hidden;
 }
-/* line 254, ../scss/partials/_master.scss */
+/* line 257, ../scss/partials/_master.scss */
 .hentry .related-post {
   display: inline;
   float: left;
@@ -1809,7 +1814,7 @@ a.shophere-button .text {
 * html .hentry .related-post {
   overflow-x: hidden;
 }
-/* line 259, ../scss/partials/_master.scss */
+/* line 262, ../scss/partials/_master.scss */
 .hentry .related-product {
   display: inline;
   float: left;
@@ -1824,7 +1829,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 269, ../scss/partials/_master.scss */
+/* line 272, ../scss/partials/_master.scss */
 .single_product_display .imagecol {
   display: inline;
   float: left;
@@ -1836,7 +1841,7 @@ a.shophere-button .text {
 * html .single_product_display .imagecol {
   overflow-x: hidden;
 }
-/* line 273, ../scss/partials/_master.scss */
+/* line 276, ../scss/partials/_master.scss */
 .single_product_display .productcol {
   *zoom: 1;
   margin-left: 490px;
@@ -1851,14 +1856,14 @@ a.shophere-button .text {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 278, ../scss/partials/_master.scss */
+/* line 281, ../scss/partials/_master.scss */
 .single_product_display .entry-content h1 {
   margin-bottom: 15px;
   text-transform: uppercase;
   font-size: 26px;
   font-family: DIN;
 }
-/* line 284, ../scss/partials/_master.scss */
+/* line 287, ../scss/partials/_master.scss */
 .single_product_display .related-post-title {
   display: inline;
   float: left;
@@ -1877,7 +1882,7 @@ a.shophere-button .text {
 * html .single_product_display .related-post-title {
   overflow-x: hidden;
 }
-/* line 295, ../scss/partials/_master.scss */
+/* line 298, ../scss/partials/_master.scss */
 .single_product_display .related-post {
   display: inline;
   float: left;
@@ -1891,7 +1896,7 @@ a.shophere-button .text {
 * html .single_product_display .related-post {
   overflow-x: hidden;
 }
-/* line 301, ../scss/partials/_master.scss */
+/* line 304, ../scss/partials/_master.scss */
 .single_product_display .related-product {
   display: inline;
   float: left;
@@ -1907,7 +1912,7 @@ a.shophere-button .text {
 }
 
 /* WPEC Fancy Notifications styling */
-/* line 310, ../scss/partials/_master.scss */
+/* line 313, ../scss/partials/_master.scss */
 #fancy_notification {
   margin-left: 490px;
   display: none;
@@ -1915,12 +1920,12 @@ a.shophere-button .text {
   z-index: 9;
 }
 
-/* line 316, ../scss/partials/_master.scss */
+/* line 319, ../scss/partials/_master.scss */
 #fancy_notification #loading_animation {
   display: none;
 }
 
-/* line 319, ../scss/partials/_master.scss */
+/* line 322, ../scss/partials/_master.scss */
 #fancy_notification #fancy_notification_content {
   display: none;
   width: 100%;
@@ -1930,7 +1935,7 @@ a.shophere-button .text {
   margin: 0 !important;
 }
 
-/* line 327, ../scss/partials/_master.scss */
+/* line 330, ../scss/partials/_master.scss */
 #fancy_notification #fancy_notification_content span {
   margin: 0;
   display: block;
@@ -1938,7 +1943,7 @@ a.shophere-button .text {
   font-weight: normal;
 }
 
-/* line 333, ../scss/partials/_master.scss */
+/* line 336, ../scss/partials/_master.scss */
 #fancy_notification #fancy_notification_content a {
   display: block;
   float: left;
@@ -1946,7 +1951,7 @@ a.shophere-button .text {
   margin-bottom: 3px;
 }
 
-/* line 339, ../scss/partials/_master.scss */
+/* line 342, ../scss/partials/_master.scss */
 #nivo_product_images {
   position: relative;
   width: 470px;
@@ -1954,7 +1959,7 @@ a.shophere-button .text {
   background: url("../images/loader.gif") no-repeat 50% 50%;
 }
 
-/* line 345, ../scss/partials/_master.scss */
+/* line 348, ../scss/partials/_master.scss */
 #nivo_product_images img {
   position: absolute;
   top: 0px;
@@ -1964,7 +1969,7 @@ a.shophere-button .text {
   display: none;
 }
 
-/* line 353, ../scss/partials/_master.scss */
+/* line 356, ../scss/partials/_master.scss */
 .nivo-directionNav {
   position: absolute;
   height: 30px;
@@ -1973,7 +1978,7 @@ a.shophere-button .text {
   background-color: #000;
 }
 
-/* line 360, ../scss/partials/_master.scss */
+/* line 363, ../scss/partials/_master.scss */
 .nivo-directionNav a {
   border: 0;
   cursor: pointer;
@@ -1986,24 +1991,24 @@ a.shophere-button .text {
   text-decoration: none;
 }
 
-/* line 371, ../scss/partials/_master.scss */
+/* line 374, ../scss/partials/_master.scss */
 .nivo-directionNav a:hover {
   color: grey;
 }
 
-/* line 374, ../scss/partials/_master.scss */
+/* line 377, ../scss/partials/_master.scss */
 .nivo-directionNav a.nivo-prevNav {
   display: block;
   float: left;
 }
 
-/* line 378, ../scss/partials/_master.scss */
+/* line 381, ../scss/partials/_master.scss */
 .nivo-directionNav a.nivo-nextNav {
   display: block;
   float: right;
 }
 
-/* line 382, ../scss/partials/_master.scss */
+/* line 385, ../scss/partials/_master.scss */
 .FB_like {
   display: inline;
   float: left;
@@ -2019,7 +2024,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 389, ../scss/partials/_master.scss */
+/* line 392, ../scss/partials/_master.scss */
 .product_form {
   display: inline;
   float: left;
@@ -2032,25 +2037,25 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 393, ../scss/partials/_master.scss */
+/* line 396, ../scss/partials/_master.scss */
 .wpsc_product_price {
   font-size: 18px;
   font-weight: bold;
 }
 
-/* line 397, ../scss/partials/_master.scss */
+/* line 400, ../scss/partials/_master.scss */
 .wpsc_product_price .pricedisplay {
   margin: 5px 0;
 }
 
-/* line 400, ../scss/partials/_master.scss */
+/* line 403, ../scss/partials/_master.scss */
 .wpsc_buy_button_container {
   float: left;
   clear: both;
   width: 100%;
 }
 
-/* line 405, ../scss/partials/_master.scss */
+/* line 408, ../scss/partials/_master.scss */
 .wpsc_buy_button_container input.wpsc_buy_button {
   cursor: pointer;
   float: left;
@@ -2065,78 +2070,78 @@ a.shophere-button .text {
   text-transform: uppercase;
 }
 
-/* line 418, ../scss/partials/_master.scss */
+/* line 421, ../scss/partials/_master.scss */
 .wpsc_loading_animation {
   display: none;
 }
 
-/* line 421, ../scss/partials/_master.scss */
+/* line 424, ../scss/partials/_master.scss */
 .wpsc_product-footer-notifications {
   float: left;
 }
 
-/* line 424, ../scss/partials/_master.scss */
+/* line 427, ../scss/partials/_master.scss */
 .wpsc_variation_forms {
   float: left;
   clear: both;
   width: 100%;
 }
 
-/* line 429, ../scss/partials/_master.scss */
+/* line 432, ../scss/partials/_master.scss */
 .wpsc_variation_forms table {
   margin: 10px 0;
 }
 
-/* line 432, ../scss/partials/_master.scss */
+/* line 435, ../scss/partials/_master.scss */
 .wpsc_variation_forms table tr td {
   padding: 0;
 }
 
-/* line 435, ../scss/partials/_master.scss */
+/* line 438, ../scss/partials/_master.scss */
 .wpsc_variation_forms table tr {
   height: 30px;
 }
 
-/* line 438, ../scss/partials/_master.scss */
+/* line 441, ../scss/partials/_master.scss */
 .wpsc_variation_forms table tr td.col1 {
   padding: 7px 7px 7px 0px;
 }
 
-/* line 443, ../scss/partials/_master.scss */
+/* line 446, ../scss/partials/_master.scss */
 .wpsc_select_variation {
   width: 185px;
 }
 
-/* line 446, ../scss/partials/_master.scss */
+/* line 449, ../scss/partials/_master.scss */
 .product_description {
   padding-left: 10px;
   margin-left: 240px;
 }
 
-/* line 450, ../scss/partials/_master.scss */
+/* line 453, ../scss/partials/_master.scss */
 tr.wpsc_cart_seperatorrow td {
   padding: 0;
   height: 3px;
   background-color: #000;
 }
 
-/* line 455, ../scss/partials/_master.scss */
+/* line 458, ../scss/partials/_master.scss */
 form.wpsc_checkout_forms textarea {
   height: auto;
 }
 
-/* line 458, ../scss/partials/_master.scss */
-form.wpsc_checkout_forms asterix {
+/* line 461, ../scss/partials/_master.scss */
+form.wpsc_checkout_forms .asterix {
   color: red;
 }
 
-/* line 461, ../scss/partials/_master.scss */
+/* line 464, ../scss/partials/_master.scss */
 #grid {
   margin: 0;
   padding: 0;
 }
 
-/* line 467, ../scss/partials/_master.scss */
+/* line 470, ../scss/partials/_master.scss */
 .box {
   position: relative;
   float: left;
@@ -2145,7 +2150,7 @@ form.wpsc_checkout_forms asterix {
   margin-bottom: 10px;
 }
 
-/* line 474, ../scss/partials/_master.scss */
+/* line 477, ../scss/partials/_master.scss */
 .box .meta {
   position: absolute;
   bottom: 0;
@@ -2156,7 +2161,7 @@ form.wpsc_checkout_forms asterix {
   color: #fff;
 }
 
-/* line 484, ../scss/partials/_master.scss */
+/* line 487, ../scss/partials/_master.scss */
 .box .post-title,
 .box .product-title {
   position: relative;
@@ -2167,7 +2172,7 @@ form.wpsc_checkout_forms asterix {
   white-space: nowrap;
 }
 
-/* line 492, ../scss/partials/_master.scss */
+/* line 495, ../scss/partials/_master.scss */
 .product-price {
   position: relative;
   float: right;
@@ -2176,7 +2181,7 @@ form.wpsc_checkout_forms asterix {
   z-index: 30;
 }
 
-/* line 499, ../scss/partials/_master.scss */
+/* line 502, ../scss/partials/_master.scss */
 .box a {
   color: black;
   text-decoration: none;
@@ -2184,7 +2189,7 @@ form.wpsc_checkout_forms asterix {
   font-weight: normal;
 }
 
-/* line 506, ../scss/partials/_master.scss */
+/* line 509, ../scss/partials/_master.scss */
 .col1 {
   display: inline;
   float: left;
@@ -2196,7 +2201,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 507, ../scss/partials/_master.scss */
+/* line 510, ../scss/partials/_master.scss */
 .col2 {
   display: inline;
   float: left;
@@ -2208,7 +2213,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 508, ../scss/partials/_master.scss */
+/* line 511, ../scss/partials/_master.scss */
 .col3 {
   display: inline;
   float: left;
@@ -2220,7 +2225,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 509, ../scss/partials/_master.scss */
+/* line 512, ../scss/partials/_master.scss */
 .col4 {
   display: inline;
   float: left;
@@ -2232,7 +2237,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 510, ../scss/partials/_master.scss */
+/* line 513, ../scss/partials/_master.scss */
 .col5 {
   display: inline;
   float: left;
@@ -2244,7 +2249,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 511, ../scss/partials/_master.scss */
+/* line 514, ../scss/partials/_master.scss */
 .col6 {
   display: inline;
   float: left;
@@ -2256,7 +2261,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 512, ../scss/partials/_master.scss */
+/* line 515, ../scss/partials/_master.scss */
 .col7 {
   display: inline;
   float: left;
@@ -2268,7 +2273,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 513, ../scss/partials/_master.scss */
+/* line 516, ../scss/partials/_master.scss */
 .col8 {
   display: inline;
   float: left;
@@ -2280,7 +2285,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 514, ../scss/partials/_master.scss */
+/* line 517, ../scss/partials/_master.scss */
 .col9 {
   display: inline;
   float: left;
@@ -2292,7 +2297,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 515, ../scss/partials/_master.scss */
+/* line 518, ../scss/partials/_master.scss */
 .col10 {
   display: inline;
   float: left;
@@ -2304,7 +2309,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 516, ../scss/partials/_master.scss */
+/* line 519, ../scss/partials/_master.scss */
 .col11 {
   display: inline;
   float: left;
@@ -2316,7 +2321,7 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 517, ../scss/partials/_master.scss */
+/* line 520, ../scss/partials/_master.scss */
 .col12 {
   display: inline;
   float: left;
@@ -2328,150 +2333,150 @@ form.wpsc_checkout_forms asterix {
   overflow-x: hidden;
 }
 
-/* line 520, ../scss/partials/_master.scss */
+/* line 523, ../scss/partials/_master.scss */
 .row1 {
   height: 40px;
 }
 
-/* line 521, ../scss/partials/_master.scss */
+/* line 524, ../scss/partials/_master.scss */
 .row2 {
   height: 90px;
 }
 
-/* line 522, ../scss/partials/_master.scss */
+/* line 525, ../scss/partials/_master.scss */
 .row3 {
   height: 140px;
 }
 
-/* line 523, ../scss/partials/_master.scss */
+/* line 526, ../scss/partials/_master.scss */
 .row4 {
   height: 190px;
 }
 
-/* line 524, ../scss/partials/_master.scss */
+/* line 527, ../scss/partials/_master.scss */
 .row5 {
   height: 240px;
 }
 
-/* line 525, ../scss/partials/_master.scss */
+/* line 528, ../scss/partials/_master.scss */
 .row6 {
   height: 290px;
 }
 
-/* line 526, ../scss/partials/_master.scss */
+/* line 529, ../scss/partials/_master.scss */
 .row7 {
   height: 340px;
 }
 
-/* line 527, ../scss/partials/_master.scss */
+/* line 530, ../scss/partials/_master.scss */
 .row8 {
   height: 390px;
 }
 
-/* line 528, ../scss/partials/_master.scss */
+/* line 531, ../scss/partials/_master.scss */
 .row9 {
   height: 440px;
 }
 
-/* line 529, ../scss/partials/_master.scss */
+/* line 532, ../scss/partials/_master.scss */
 .row10 {
   height: 490px;
 }
 
-/* line 530, ../scss/partials/_master.scss */
+/* line 533, ../scss/partials/_master.scss */
 .row11 {
   height: 540px;
 }
 
-/* line 531, ../scss/partials/_master.scss */
+/* line 534, ../scss/partials/_master.scss */
 .row12 {
   height: 590px;
 }
 
-/* line 534, ../scss/partials/_master.scss */
+/* line 537, ../scss/partials/_master.scss */
 .row1 img {
   height: 10px;
 }
 
-/* line 535, ../scss/partials/_master.scss */
+/* line 538, ../scss/partials/_master.scss */
 .row2 img {
   height: 60px;
   width: auto;
 }
 
-/* line 536, ../scss/partials/_master.scss */
+/* line 539, ../scss/partials/_master.scss */
 .row3 img {
   height: 110px;
   width: auto;
 }
 
-/* line 537, ../scss/partials/_master.scss */
+/* line 540, ../scss/partials/_master.scss */
 .row4 img {
   height: 160px;
   width: auto;
 }
 
-/* line 538, ../scss/partials/_master.scss */
+/* line 541, ../scss/partials/_master.scss */
 .row5 img {
   height: 210px;
   width: auto;
 }
 
-/* line 539, ../scss/partials/_master.scss */
+/* line 542, ../scss/partials/_master.scss */
 .row6 img {
   height: 260px;
   width: auto;
 }
 
-/* line 540, ../scss/partials/_master.scss */
+/* line 543, ../scss/partials/_master.scss */
 .row7 img {
   height: 310px;
   width: auto;
 }
 
-/* line 541, ../scss/partials/_master.scss */
+/* line 544, ../scss/partials/_master.scss */
 .row8 img {
   height: 360px;
   width: auto;
 }
 
-/* line 542, ../scss/partials/_master.scss */
+/* line 545, ../scss/partials/_master.scss */
 .row9 img {
   height: 410px;
   width: auto;
 }
 
-/* line 543, ../scss/partials/_master.scss */
+/* line 546, ../scss/partials/_master.scss */
 .row10 img {
   height: 460px;
   width: auto;
 }
 
-/* line 544, ../scss/partials/_master.scss */
+/* line 547, ../scss/partials/_master.scss */
 .row11 img {
   height: 510px;
   width: auto;
 }
 
-/* line 545, ../scss/partials/_master.scss */
+/* line 548, ../scss/partials/_master.scss */
 .row12 img {
   height: 560px;
   width: auto;
 }
 
-/* line 547, ../scss/partials/_master.scss */
+/* line 550, ../scss/partials/_master.scss */
 .shop-products img {
   height: auto;
   width: auto;
 }
 
-/* line 549, ../scss/partials/_master.scss */
+/* line 552, ../scss/partials/_master.scss */
 #post-mcbox {
   background: url("../images/newsletter-text.png") no-repeat 25px right;
   background-color: #000;
 }
 
-/* line 553, ../scss/partials/_master.scss */
+/* line 556, ../scss/partials/_master.scss */
 #post-mcbox form input {
   float: left;
   height: 21px;
@@ -2480,7 +2485,7 @@ form.wpsc_checkout_forms asterix {
   border: 0;
 }
 
-/* line 560, ../scss/partials/_master.scss */
+/* line 563, ../scss/partials/_master.scss */
 #post-mcbox form input.emailbutton {
   float: left;
   border: 0;
@@ -2495,7 +2500,7 @@ form.wpsc_checkout_forms asterix {
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 573, ../scss/partials/_master.scss */
+/* line 576, ../scss/partials/_master.scss */
 #footer-container {
   margin: 20px 0;
   clear: both;
@@ -2503,50 +2508,50 @@ form.wpsc_checkout_forms asterix {
 
 /* Subsidiary widget section */
 /* Footer section */
-/* line 584, ../scss/partials/_master.scss */
+/* line 587, ../scss/partials/_master.scss */
 #footer {
   width: 100%;
   overflow: hidden;
   *zoom: 1;
 }
 
-/* line 588, ../scss/partials/_master.scss */
+/* line 591, ../scss/partials/_master.scss */
 #footer .fb-like {
   margin: 2px 10px 0 0;
   float: left;
 }
 
 /* Footer extra */
-/* line 593, ../scss/partials/_master.scss */
+/* line 596, ../scss/partials/_master.scss */
 #footer .meta {
   padding-top: 4px;
   float: left;
 }
 
-/* line 597, ../scss/partials/_master.scss */
+/* line 600, ../scss/partials/_master.scss */
 #footer .quicklinks {
   float: right;
 }
 
-/* line 600, ../scss/partials/_master.scss */
+/* line 603, ../scss/partials/_master.scss */
 #footer .quicklinks ul {
   list-style-type: none;
   padding: 4px;
   margin: 0;
 }
 
-/* line 605, ../scss/partials/_master.scss */
+/* line 608, ../scss/partials/_master.scss */
 #footer .quicklinks li {
   margin-right: 10px;
   float: left;
 }
 
-/* line 609, ../scss/partials/_master.scss */
+/* line 612, ../scss/partials/_master.scss */
 #footer .quicklinks li a {
   margin-right: 10px;
 }
 
-/* line 612, ../scss/partials/_master.scss */
+/* line 615, ../scss/partials/_master.scss */
 #footer .cards {
   float: right;
 }

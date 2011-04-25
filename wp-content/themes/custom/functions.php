@@ -402,8 +402,8 @@ function customColors() {
 				
 			.custom-color-2,
 			a.custom-color-2,
+			.master-shoppingbag a.custom-color-2,
 			ul#masterbar-menu.custom-color-2 li a,
-			ul#primary-menu.custom-color-2 li a:hover,
 			.wpsc_buy_button_container input.wpsc_buy_button {
 				color: ' . hybrid_get_setting( 'custom-color-2' ) . '; }
 
