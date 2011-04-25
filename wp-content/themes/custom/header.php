@@ -11,10 +11,12 @@
 		<base href="<?php echo get_bloginfo( 'wpurl' ); ?>/" />
 		<title><?php custom_document_title(); ?></title>
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo('charset'); ?>" />
-		<meta name="viewport" content="width=970,initial-scale=1.0,maximum-scale=2.0,minimum-scale=0.5" />
+		<meta name="viewport" content="width=960,maximum-scale=1.0" />
 		
 		<link rel="shortcut icon" type="image/ico" href="<?php echo THEME_URI .'/library/images/favicon.ico'; ?>" />
 		<link rel="apple-touch-icon" href="<?php echo THEME_URI . '/library/images/apple-touch-icon.png'; ?>" />
+		<link rel="apple-touch-icon" sizes="72x72" href="<?php echo THEME_URI . '/library/images/apple-touch-icon-72.png'; ?>" />
+		<link rel="apple-touch-icon" sizes="114x114" href="<?php echo THEME_URI . '/library/images/apple-touch-icon-114.png'; ?>" />		
 		<link type="text/css" href="<?php echo THEME_URI . '/library/css/screen.css'; ?>" rel="stylesheet" media="screen" />
 		<link type="text/css" href="<?php echo THEME_URI . '/library/css/print.css'; ?>" rel="stylesheet" media="print" />
 		
