@@ -342,16 +342,13 @@ body {
 		#nivo_product_images {
 		    position: relative;
 			width: 470px;
-			height: 725px;
+			height: 755px;
 			background: url('../images/loader.gif') no-repeat 50% 50%; }
 			 		 
-			#nivo_product_images img {
-			    position: absolute;
-			    top: 0px;
-			    left: 0px;
+			#nivo_product_images .nivo-slice {
 				width: 470px;
-				height: 725px;			    
-			    display: none; }	
+				height: 725px;
+				background-color: #fff; }	
 
 			.nivo-directionNav {
 			    position: absolute;
