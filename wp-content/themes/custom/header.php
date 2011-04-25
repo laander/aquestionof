@@ -68,7 +68,7 @@
 			<div id="header">
 						
 				<div id="site-title">
-					<a class="gridButton" href="#">
+					<a class="gridButton" href="#all">
 						<img src="<?php echo THEME_URI . '/library/images/logo-new.png'; ?>" alt="A Question Of" />
 						<h2><?php echo get_bloginfo( 'name' ); ?></h2>
 					</a>

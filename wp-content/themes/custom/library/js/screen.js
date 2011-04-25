@@ -250,13 +250,18 @@ jQuery.noConflict();
 		// previous elements
 		var $previousElm = $(gridElementSpecific);
 		
-		// If hash is set to show all
+		// If its the frontpage, impersonate the priority-frontpage category
 		if (category == "all") {
-			var $elmToBeRemoved = $([]); //create empty jQuery object
-			var $newElm = $allElm.not($previousElm);
+			category = "priority-frontpage";
+		}
+		
+		// If hash is set to show all
+//		if (category == "all") {
+//			var $elmToBeRemoved = $([]); //create empty jQuery object
+//			var $newElm = $allElm.not($previousElm);
 		
 		// If hash is set to show categories
-		} else {	
+//		} else {	
 			// remove elements which are not chosen from previous
 			var $matchedElm = $(gridElement + "." + category);
 			var $removeElm = $previousElm.not($matchedElm);
@@ -268,7 +273,7 @@ jQuery.noConflict();
 			// category and deselect all that are already there (from previous)
 			var $newElm = $allElm.filter(gridElement + "." + category).not($keptElm);
 			var $elmToBeRemoved = $previousElm.filter($removeElm);	
-		}	
+//		}	
 			
 		// Check if there are any elements to remove
 		if($elmToBeRemoved.size() > 0){		

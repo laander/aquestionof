@@ -70,13 +70,14 @@ add_action( 'init', 'build_taxanomies' );
 function build_taxanomies() {
 	register_taxonomy(
 		'priority',
-		'post',
+		array(
+			'post', 
+			'wpsc-product'),
 		array(
 			'hierarchical' => true,
 			'label' => 'Priority',
 			'query_var' => true,
-			'rewrite' => true
-		)
+			'rewrite' => true)
 	);	
 }
 
@@ -210,11 +211,12 @@ function masonry_grid($type = 'all') {
 		// Get the post priority if any (featured or new)
 		$post_priority = get_the_terms($post->ID, 'priority');
 		$post_pri = "";
+		$delimiter = "";		
 		if(!empty($post_priority)){
 			foreach($post_priority as $priority) { 
-				if($priority->slug == "featured") {
-					$post_pri = "priority-featured";
-				}
+				$post_pri .= $delimiter . "priority-";
+				$post_pri .= $priority->slug;
+			    $delimiter = " ";			
 			}
 		}
 	
@@ -273,6 +275,18 @@ function masonry_grid($type = 'all') {
 		// Get all posts from WP and loop through WP posts
 		if ( have_posts() ) : while ( have_posts() ) : the_post();
 
+			// Get the post priority if any (featured or new)
+			$post_priority = wp_get_post_terms($post->ID, 'priority');
+			$post_pri = "";
+			$delimiter = "";		
+			if(!empty($post_priority)){
+				foreach($post_priority as $priority) { 
+					$post_pri .= $delimiter . "priority-";
+					$post_pri .= $priority->slug;
+				    $delimiter = " ";			
+				}
+			}
+
 			// Get post categories and save to html-friendly string for class
 			$post_categories = wp_get_post_terms($post->ID, 'wpsc_product_category');
 			$post_cat = "";
@@ -285,8 +299,8 @@ function masonry_grid($type = 'all') {
 			$post_cat .= $delimiter . "category-shop";
 
 			// Add the current post to items array
-			$items[] = '
-				<div id="product-' . $post->ID . '" class="box col6 row8 ' . $post_cat . '">
+			$temp_item = '
+				<div id="product-' . $post->ID . '" class="box col6 row8 ' . $post_cat . ' ' . $post_pri . '">
 					<a href="' . get_permalink($post->ID) . '" alt="' . get_the_title() . '">
 						<img src="' . wpsc_the_product_thumbnail(get_option('product_image_width','','default'),get_option('product_image_height'),'','default') . '" />
 						<div class="meta">
@@ -299,6 +313,12 @@ function masonry_grid($type = 'all') {
 						</div>
 					</a>
 				</div>' . "\n";
+				
+			if ($post_pri != "") {
+				$pri_items[] = $temp_item;
+			} else {
+				$items[] = $temp_item;
+			}				
 
 		endwhile; endif;
 	}	
