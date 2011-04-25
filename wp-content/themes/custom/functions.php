@@ -165,40 +165,7 @@ function masonry_grid($type = 'all') {
 
 	global $post;
 	$items = array();
-	$pri_items = array();
-
-/*
-	// Fetch products from OpenCart
-	if ($type == 'all') {	
-			
-		// Get all products from OC and save returned json object as array
-		$products_url = site_url() . '/shop/index.php?route=custom/products'; 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $products_url); 
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$products_json = curl_exec($ch);
-		curl_close($ch);
-		$products_decoded = json_decode($products_json);
-		
-		// Loop through all items and save to  array
-		foreach($products_decoded as $product) {
-			$items[] = '
-				<div id="product-' . $product->id . '" class="box col6 row8 category-shop">
-					<a href="' . $product->href . '">
-						<img src="' . $product->thumb . '" width="230" height="320" alt="" />
-						<div class="meta">
-							<div class="product-title">
-								' . $product->name . '
-							</div>
-							<div class="product-price">
-								' . $product->price . '
-							</div>
-						</div>
-					</a>
-				</div>' . "\n";	
-		}	
-	}
-*/
+	$featured_items = array();
 	
 	// Only fetch posts if not limited to category fetch
 	if ($type == 'all') {	
@@ -210,10 +177,12 @@ function masonry_grid($type = 'all') {
 	
 		// Get the post priority if any (featured or new)
 		$post_priority = get_the_terms($post->ID, 'priority');
+		$featured = false;
 		$post_pri = "";
 		$delimiter = "";		
 		if(!empty($post_priority)){
-			foreach($post_priority as $priority) { 
+			foreach($post_priority as $priority) {
+				if ($priority->slug == 'featured') { $featured = true; }
 				$post_pri .= $delimiter . "priority-";
 				$post_pri .= $priority->slug;
 			    $delimiter = " ";			
@@ -277,13 +246,15 @@ function masonry_grid($type = 'all') {
 
 			// Get the post priority if any (featured or new)
 			$post_priority = wp_get_post_terms($post->ID, 'priority');
+			$featured = false;
 			$post_pri = "";
 			$delimiter = "";		
 			if(!empty($post_priority)){
 				foreach($post_priority as $priority) { 
+				    if ($priority->slug == 'featured') { $featured = true; }
 					$post_pri .= $delimiter . "priority-";
 					$post_pri .= $priority->slug;
-				    $delimiter = " ";			
+				    $delimiter = " ";
 				}
 			}
 
@@ -314,8 +285,8 @@ function masonry_grid($type = 'all') {
 					</a>
 				</div>' . "\n";
 				
-			if ($post_pri != "") {
-				$pri_items[] = $temp_item;
+			if ($featured) {
+				$featured_items[] = $temp_item;
 			} else {
 				$items[] = $temp_item;
 			}				
@@ -327,7 +298,7 @@ function masonry_grid($type = 'all') {
 				
 		// Add Facebook fanbox to items array
 		$items[] = '
-				<div id="post-fbbox" class="box col6 row8 category-updates category-updates-social" style="background-color: #000;">
+				<div id="post-fbbox" class="box col6 row8 category-updates category-updates-social priority-frontpage" style="background-color: #000;">
 					<a href="#">
 						<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Faquestionof&amp;width=230&amp;colorscheme=dark&amp;show_faces=false&amp;stream=true&amp;header=false&amp;height=390" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:230px; height:390px;" allowTransparency="true"></iframe>					
 					</a>
@@ -335,7 +306,7 @@ function masonry_grid($type = 'all') {
 				
 		// Add Mailchimp newsletter signup form box
 		$items[] = '
-			<div id="post-mcbox" class="box col6 row4 category-updates category-updates-social">
+			<div id="post-mcbox" class="box col6 row4 category-updates category-updates-social priority-frontpage">
 				<!-- Begin MailChimp Signup Form -->
 				<div id="mc_embed_signup">
 					<form action="http://aquestionof.us1.list-manage.com/subscribe/post?u=4b158f023b1059770a5f4ff44&amp;id=b1ea1a5e55" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
@@ -346,10 +317,10 @@ function masonry_grid($type = 'all') {
 				<!--End mc_embed_signup-->
 			</div>' . "\n";
 	}
-
+	
 	// Shuffle all items and return
 	shuffle($items);
-	$items = array_merge($pri_items, $items);
+	$items = array_merge($featured_items, $items);
 	return $items;
 }
 
