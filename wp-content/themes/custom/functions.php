@@ -223,11 +223,11 @@ function masonry_grid($type = 'all') {
 				</a>
 			</div>' . "\n";
 			
-		if ($post_pri != "") {
-			$pri_items[] = $temp_item;
+		if ($featured) {
+			$featured_items[] = $temp_item;
 		} else {
 			$items[] = $temp_item;
-		}
+		}				
 			
 	endwhile; endif;
 	
