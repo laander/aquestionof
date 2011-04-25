@@ -158,7 +158,6 @@ jQuery.noConflict();
 			Cufon.replace('.master-shoppingbag a');
 			Cufon.replace('.entry-content h1');
 			Cufon.replace('.entry-content .related-post-title');
-			Cufon.replace('.wpsc_buy_button');
 	    }
 	}
 	

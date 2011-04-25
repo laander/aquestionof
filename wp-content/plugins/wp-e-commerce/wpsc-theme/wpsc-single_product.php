@@ -92,7 +92,6 @@
 							<?php endif; ?>	
 						<?php /** the variation group HTML and loop */?>
                         <?php if (wpsc_have_variation_groups()) { ?>
-                        <fieldset><legend><?php _e('Product Options', 'wpsc'); ?></legend>
 						<div class="wpsc_variation_forms">
                         	<table>
 							<?php while (wpsc_have_variation_groups()) : wpsc_the_variation_group(); ?>
@@ -106,7 +105,6 @@
 							<?php endwhile; ?>
                             </table>
 						</div><!--close wpsc_variation_forms-->
-                        </fieldset>
 						<?php } ?>
 						<?php /** the variation group HTML and loop ends here */?>
 
