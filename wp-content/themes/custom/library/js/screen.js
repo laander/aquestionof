@@ -140,12 +140,12 @@ jQuery.noConflict();
 	 */
 	function applyCufon() {
 	    if(!$.fontAvailable('DIN')) {
-			Cufon.replace('#primary-menu li a.topcat');
-			Cufon.replace('#primary-menu li a.subcat');
-			Cufon.replace('.shopping-bag .text');
+			Cufon.replace('#primary-menu li a');
+			Cufon.replace('#masterbar-menu li a');
+			Cufon.replace('.master-shoppingbag a');
 			Cufon.replace('.entry-content h1');
 			Cufon.replace('.entry-content .related-post-title');
-			// Cufon.replace('.shopping-bag .text');
+			Cufon.replace('.wpsc_buy_button');
 	    }
 	}
 	

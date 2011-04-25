@@ -548,8 +548,12 @@ body {
 			.shop-products img { height: auto; width: auto; }	
 			
 			#post-mcbox {
-				background: url('../images/newsletter-text.png') no-repeat 25px right;
-				background-color: #000; }
+				background: #000 url('../images/newsletter-text.png') no-repeat right 25px; }
+				
+				#mc_embed_signup { 
+					padding: 10px; 
+					margin-top: 140px;
+					background: transparent; }
 				
 				#post-mcbox form input {
 					float: left;

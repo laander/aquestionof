@@ -2470,11 +2470,17 @@ form.wpsc_checkout_forms .asterix {
 
 /* line 550, ../scss/partials/_master.scss */
 #post-mcbox {
-  background: url("../images/newsletter-text.png") no-repeat 25px right;
-  background-color: #000;
+  background: black url("../images/newsletter-text.png") no-repeat right 25px;
 }
 
-/* line 554, ../scss/partials/_master.scss */
+/* line 553, ../scss/partials/_master.scss */
+#mc_embed_signup {
+  padding: 10px;
+  margin-top: 140px;
+  background: transparent;
+}
+
+/* line 558, ../scss/partials/_master.scss */
 #post-mcbox form input {
   float: left;
   height: 21px;
@@ -2483,7 +2489,7 @@ form.wpsc_checkout_forms .asterix {
   border: 0;
 }
 
-/* line 561, ../scss/partials/_master.scss */
+/* line 565, ../scss/partials/_master.scss */
 #post-mcbox form input.emailbutton {
   float: left;
   border: 0;
@@ -2498,7 +2504,7 @@ form.wpsc_checkout_forms .asterix {
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 574, ../scss/partials/_master.scss */
+/* line 578, ../scss/partials/_master.scss */
 #footer-container {
   margin: 20px 0;
   clear: both;
@@ -2506,50 +2512,50 @@ form.wpsc_checkout_forms .asterix {
 
 /* Subsidiary widget section */
 /* Footer section */
-/* line 585, ../scss/partials/_master.scss */
+/* line 589, ../scss/partials/_master.scss */
 #footer {
   width: 100%;
   overflow: hidden;
   *zoom: 1;
 }
 
-/* line 589, ../scss/partials/_master.scss */
+/* line 593, ../scss/partials/_master.scss */
 #footer .fb-like {
   margin: 2px 10px 0 0;
   float: left;
 }
 
 /* Footer extra */
-/* line 594, ../scss/partials/_master.scss */
+/* line 598, ../scss/partials/_master.scss */
 #footer .meta {
   padding-top: 4px;
   float: left;
 }
 
-/* line 598, ../scss/partials/_master.scss */
+/* line 602, ../scss/partials/_master.scss */
 #footer .quicklinks {
   float: right;
 }
 
-/* line 601, ../scss/partials/_master.scss */
+/* line 605, ../scss/partials/_master.scss */
 #footer .quicklinks ul {
   list-style-type: none;
   padding: 4px;
   margin: 0;
 }
 
-/* line 606, ../scss/partials/_master.scss */
+/* line 610, ../scss/partials/_master.scss */
 #footer .quicklinks li {
   margin-right: 10px;
   float: left;
 }
 
-/* line 610, ../scss/partials/_master.scss */
+/* line 614, ../scss/partials/_master.scss */
 #footer .quicklinks li a {
   margin-right: 10px;
 }
 
-/* line 613, ../scss/partials/_master.scss */
+/* line 617, ../scss/partials/_master.scss */
 #footer .cards {
   float: right;
 }

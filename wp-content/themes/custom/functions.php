@@ -317,7 +317,7 @@ function masonry_grid($type = 'all') {
 		$items[] = '
 			<div id="post-mcbox" class="box col6 row4 category-updates category-updates-social">
 				<!-- Begin MailChimp Signup Form -->
-				<div id="mc_embed_signup" style="padding: 10px; margin-top: 140px">
+				<div id="mc_embed_signup">
 					<form action="http://aquestionof.us1.list-manage.com/subscribe/post?u=4b158f023b1059770a5f4ff44&amp;id=b1ea1a5e55" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
 						<input type="text" value="E-mail address" name="EMAIL" style="width: 100px">
 						<input type="submit" class="emailbutton" value="" name="subscribe" id="mce-embedded-subscribe">
@@ -368,27 +368,6 @@ function nivo_get_images($product_id = null, $size = 'medium', $limit = '0', $of
 			$i++;
 		} 
 	}
-}
-
-function hexDarker($hex,$factor = 30) {
-    $new_hex = '';
-    
-    $base['R'] = hexdec($hex{0}.$hex{1});
-    $base['G'] = hexdec($hex{2}.$hex{3});
-    $base['B'] = hexdec($hex{4}.$hex{5});
-    
-    foreach ($base as $k => $v) {
-        $amount = $v / 100;
-        $amount = round($amount * $factor);
-        $new_decimal = $v - $amount;
-
-        $new_hex_component = dechex($new_decimal);
-        if(strlen($new_hex_component) < 2)
-                { $new_hex_component = "0".$new_hex_component; }
-        $new_hex .= $new_hex_component;
-	}
-            
-    return $new_hex;        
 }
 
 function customColors() {
