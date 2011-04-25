@@ -46,7 +46,7 @@ jQuery.noConflict();
 			$(".masterbar-shoppingbag").show();
 			
 			var bagCount = parseInt($(".masterbar-shoppingbag span").html());
-			if(isNaN(bagCount)) { bagCount == 0; }
+			if(isNaN(parseInt($(".masterbar-shoppingbag span").html()))) { bagCount == 0; }
 			
 			$(".masterbar-shoppingbag span").html(bagCount + 1);
 			bounceEffect('.masterbar-shoppingbag');
