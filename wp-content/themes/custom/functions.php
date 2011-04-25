@@ -309,7 +309,7 @@ function masonry_grid($type = 'all') {
 		$items[] = '
 				<div id="post-fbbox" class="box col6 row8 category-updates category-updates-social" style="background-color: #000;">
 					<a href="#">
-						<iframe id="f1614db9d8" name="f619b271" scrolling="no" style="border-top-style: none; border-right-style: none; border-bottom-style: none; border-left-style: none; border-width: initial; border-color: initial; overflow-x: hidden; overflow-y: hidden; height: 390px; width: 230px; " class="fb_ltr" src="http://www.facebook.com/plugins/likebox.php?api_key=113869198637480&amp;channel=http%3A%2F%2Fstatic.ak.fbcdn.net%2Fconnect%2Fxd_proxy.php%23cb%3Df148b6f924%26origin%3Dhttp%253A%252F%252Fdevelopers.facebook.com%252Ff19c251008%26relation%3Dparent.parent%26transport%3Dpostmessage&amp;colorscheme=dark&amp;header=false&amp;height=390&amp;href=http%3A%2F%2Ffacebook.com%2Faquestionof&amp;locale=en_US&amp;sdk=joey&amp;show_faces=false&amp;stream=true&amp;width=230"></iframe>
+						<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Faquestionof&amp;width=230&amp;colorscheme=dark&amp;show_faces=false&amp;stream=true&amp;header=false&amp;height=390" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:230px; height:390px;" allowTransparency="true"></iframe>					
 					</a>
 				</div>' . "\n";
 				
@@ -319,7 +319,7 @@ function masonry_grid($type = 'all') {
 				<!-- Begin MailChimp Signup Form -->
 				<div id="mc_embed_signup">
 					<form action="http://aquestionof.us1.list-manage.com/subscribe/post?u=4b158f023b1059770a5f4ff44&amp;id=b1ea1a5e55" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">
-						<input type="text" value="E-mail address" name="EMAIL" style="width: 100px">
+						<input type="text" value="Fill in e-mail" name="EMAIL" style="width: 100px">
 						<input type="submit" class="emailbutton" value="" name="subscribe" id="mce-embedded-subscribe">
 					</form>
 				</div>

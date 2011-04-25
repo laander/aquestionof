@@ -22,8 +22,19 @@ jQuery.noConflict();
 		masterbarLinkHoverEvent();
 		
 		addToCartEvent();
+		
+		emailFormFocusClear();
 	
 	});
+	
+	function emailFormFocusClear() {
+		$('form#mc-embedded-subscribe-form input[type="text"]').focus(function() {
+			if($(this).val() == 'Fill in e-mail') {
+				$(this).val('');
+			}
+		});
+	}
+	
 	
 	/**
 	 * When item is added to cart, it will show shopping bag with incremented count and bounce links
@@ -35,6 +46,10 @@ jQuery.noConflict();
 			$(".masterbar-shoppingbag").show();
 			
 			var bagCount = parseInt($(".masterbar-shoppingbag span").html());
+			if(bagCount == 'NaN') {
+				bagCount == 0;
+			}
+			
 			$(".masterbar-shoppingbag span").html(bagCount + 1);
 			bounceEffect('.masterbar-shoppingbag');
 						
