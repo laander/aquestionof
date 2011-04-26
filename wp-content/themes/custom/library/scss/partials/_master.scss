@@ -456,7 +456,8 @@ body {
 		form.wpsc_checkout_forms textarea {
 			height: auto; }
 
-		form.wpsc_checkout_forms .asterix {
+		form.wpsc_checkout_forms .asterix,
+		.wpsc_coupon_error_row {
 			color: red; }		
 			
 		#grid {

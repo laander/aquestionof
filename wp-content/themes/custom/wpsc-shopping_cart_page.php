@@ -85,12 +85,16 @@ endif;
    <?php endwhile; ?>
    <?php //this HTML displays coupons if there are any active coupons to use ?>
 
+   		<tr class="wpsc_cart_seperatorrow">
+   			<td colspan="6"></td>
+   		</tr>
+
    <?php
 
    if(wpsc_uses_coupons()): ?>
 
       <?php if(wpsc_coupons_error()): ?>
-         <tr class="wpsc_coupon_row wpsc_coupon_error_row"><td><?php _e('Coupon is not valid.', 'wpsc'); ?></td></tr>
+         <tr class="wpsc_coupon_row wpsc_coupon_error_row"><td colspan="2"><?php _e('Coupon is not valid.', 'wpsc'); ?></td></tr>
       <?php endif; ?>
       <tr class="wpsc_coupon_row">
          <td colspan="2"><?php _e('Enter coupon code'); ?> :</td>
@@ -101,21 +105,34 @@ endif;
             </form>
          </td>
       </tr>
+  <?php if(wpsc_uses_shipping()): ?>      
       <tr class="wpsc_total_before_shipping">
 	      <td colspan="3"><?php _e('Cost before shipping:','wpsc'); ?></td>
 	      <td colspan="3" class="wpsc_total_amount_before_shipping"><?php echo wpsc_cart_total_widget(false,false,false);?></td>
       </tr>
+     <?php endif ?>      
+            
    <?php endif; ?>
    		
-   		<tr class="wpsc_cart_seperatorrow">
-   			<td colspan="6"></td>
-   		</tr>
+		
+     <?php if(wpsc_uses_coupons() && (wpsc_coupon_amount(false) > 0)): ?>
+      <tr class="total_price">
+			<td colspan="3"></td>      
+         <td colspan="1" class="wpsc_totals">
+            <?php _e('Discount', 'wpsc'); ?>
+         </td>
+         <td colspan="2" class="wpsc_totals">
+            <span id="coupons_amount" class="pricedisplay">-<?php echo wpsc_coupon_amount(); ?></span>
+          </td>
+         </tr>
+     <?php endif ?>      
+		
 		
 		<tr class="wpsc_cart_totalprice">
 			<td colspan="3"></td>
 			<td colspan="1"><?php _e('Total Price', 'wpsc'); ?></td>
 			<td colspan="2"><span id="checkout_total" class="pricedisplay checkout-total wpsc_product_price"><?php echo wpsc_cart_total(); ?></span></td>
-		</tr>  	
+		</tr>
    <?php
       $wpec_taxes_controller = new wpec_taxes_controller();
       if($wpec_taxes_controller->wpec_taxes_isenabled()):
@@ -491,17 +508,6 @@ endif;
 	         </td>
 	      </tr>
       <?php endif; ?>
-
-     <?php if(wpsc_uses_coupons() && (wpsc_coupon_amount(false) > 0)): ?>
-      <tr class="total_price">
-         <td class='wpsc_totals'>
-            <?php _e('Discount', 'wpsc'); ?>
-         </td>
-         <td class='wpsc_totals'>
-            <span id="coupons_amount" class="pricedisplay"><?php echo wpsc_coupon_amount(); ?></span>
-          </td>
-         </tr>
-     <?php endif ?>
 
    </table>
 

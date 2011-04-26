@@ -2128,18 +2128,19 @@ form.wpsc_checkout_forms textarea {
   height: auto;
 }
 
-/* line 459, ../scss/partials/_master.scss */
-form.wpsc_checkout_forms .asterix {
+/* line 460, ../scss/partials/_master.scss */
+form.wpsc_checkout_forms .asterix,
+.wpsc_coupon_error_row {
   color: red;
 }
 
-/* line 462, ../scss/partials/_master.scss */
+/* line 463, ../scss/partials/_master.scss */
 #grid {
   margin: 0;
   padding: 0;
 }
 
-/* line 468, ../scss/partials/_master.scss */
+/* line 469, ../scss/partials/_master.scss */
 .box {
   position: relative;
   float: left;
@@ -2148,7 +2149,7 @@ form.wpsc_checkout_forms .asterix {
   margin-bottom: 10px;
 }
 
-/* line 475, ../scss/partials/_master.scss */
+/* line 476, ../scss/partials/_master.scss */
 .box .meta {
   position: absolute;
   bottom: 0;
@@ -2159,7 +2160,7 @@ form.wpsc_checkout_forms .asterix {
   color: #fff;
 }
 
-/* line 485, ../scss/partials/_master.scss */
+/* line 486, ../scss/partials/_master.scss */
 .box .post-title,
 .box .product-title {
   position: relative;
@@ -2170,7 +2171,7 @@ form.wpsc_checkout_forms .asterix {
   white-space: nowrap;
 }
 
-/* line 493, ../scss/partials/_master.scss */
+/* line 494, ../scss/partials/_master.scss */
 .product-price {
   position: relative;
   float: right;
@@ -2179,7 +2180,7 @@ form.wpsc_checkout_forms .asterix {
   z-index: 30;
 }
 
-/* line 500, ../scss/partials/_master.scss */
+/* line 501, ../scss/partials/_master.scss */
 .box a {
   color: black;
   text-decoration: none;
@@ -2187,7 +2188,7 @@ form.wpsc_checkout_forms .asterix {
   font-weight: normal;
 }
 
-/* line 507, ../scss/partials/_master.scss */
+/* line 508, ../scss/partials/_master.scss */
 .col1 {
   display: inline;
   float: left;
@@ -2199,7 +2200,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 508, ../scss/partials/_master.scss */
+/* line 509, ../scss/partials/_master.scss */
 .col2 {
   display: inline;
   float: left;
@@ -2211,7 +2212,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 509, ../scss/partials/_master.scss */
+/* line 510, ../scss/partials/_master.scss */
 .col3 {
   display: inline;
   float: left;
@@ -2223,7 +2224,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 510, ../scss/partials/_master.scss */
+/* line 511, ../scss/partials/_master.scss */
 .col4 {
   display: inline;
   float: left;
@@ -2235,7 +2236,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 511, ../scss/partials/_master.scss */
+/* line 512, ../scss/partials/_master.scss */
 .col5 {
   display: inline;
   float: left;
@@ -2247,7 +2248,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 512, ../scss/partials/_master.scss */
+/* line 513, ../scss/partials/_master.scss */
 .col6 {
   display: inline;
   float: left;
@@ -2259,7 +2260,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 513, ../scss/partials/_master.scss */
+/* line 514, ../scss/partials/_master.scss */
 .col7 {
   display: inline;
   float: left;
@@ -2271,7 +2272,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 514, ../scss/partials/_master.scss */
+/* line 515, ../scss/partials/_master.scss */
 .col8 {
   display: inline;
   float: left;
@@ -2283,7 +2284,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 515, ../scss/partials/_master.scss */
+/* line 516, ../scss/partials/_master.scss */
 .col9 {
   display: inline;
   float: left;
@@ -2295,7 +2296,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 516, ../scss/partials/_master.scss */
+/* line 517, ../scss/partials/_master.scss */
 .col10 {
   display: inline;
   float: left;
@@ -2307,7 +2308,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 517, ../scss/partials/_master.scss */
+/* line 518, ../scss/partials/_master.scss */
 .col11 {
   display: inline;
   float: left;
@@ -2319,7 +2320,7 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 518, ../scss/partials/_master.scss */
+/* line 519, ../scss/partials/_master.scss */
 .col12 {
   display: inline;
   float: left;
@@ -2331,156 +2332,156 @@ form.wpsc_checkout_forms .asterix {
   overflow-x: hidden;
 }
 
-/* line 521, ../scss/partials/_master.scss */
+/* line 522, ../scss/partials/_master.scss */
 .row1 {
   height: 40px;
 }
 
-/* line 522, ../scss/partials/_master.scss */
+/* line 523, ../scss/partials/_master.scss */
 .row2 {
   height: 90px;
 }
 
-/* line 523, ../scss/partials/_master.scss */
+/* line 524, ../scss/partials/_master.scss */
 .row3 {
   height: 140px;
 }
 
-/* line 524, ../scss/partials/_master.scss */
+/* line 525, ../scss/partials/_master.scss */
 .row4 {
   height: 190px;
 }
 
-/* line 525, ../scss/partials/_master.scss */
+/* line 526, ../scss/partials/_master.scss */
 .row5 {
   height: 240px;
 }
 
-/* line 526, ../scss/partials/_master.scss */
+/* line 527, ../scss/partials/_master.scss */
 .row6 {
   height: 290px;
 }
 
-/* line 527, ../scss/partials/_master.scss */
+/* line 528, ../scss/partials/_master.scss */
 .row7 {
   height: 340px;
 }
 
-/* line 528, ../scss/partials/_master.scss */
+/* line 529, ../scss/partials/_master.scss */
 .row8 {
   height: 390px;
 }
 
-/* line 529, ../scss/partials/_master.scss */
+/* line 530, ../scss/partials/_master.scss */
 .row9 {
   height: 440px;
 }
 
-/* line 530, ../scss/partials/_master.scss */
+/* line 531, ../scss/partials/_master.scss */
 .row10 {
   height: 490px;
 }
 
-/* line 531, ../scss/partials/_master.scss */
+/* line 532, ../scss/partials/_master.scss */
 .row11 {
   height: 540px;
 }
 
-/* line 532, ../scss/partials/_master.scss */
+/* line 533, ../scss/partials/_master.scss */
 .row12 {
   height: 590px;
 }
 
-/* line 535, ../scss/partials/_master.scss */
+/* line 536, ../scss/partials/_master.scss */
 .row1 img {
   height: 10px;
 }
 
-/* line 536, ../scss/partials/_master.scss */
+/* line 537, ../scss/partials/_master.scss */
 .row2 img {
   height: 60px;
   width: auto;
 }
 
-/* line 537, ../scss/partials/_master.scss */
+/* line 538, ../scss/partials/_master.scss */
 .row3 img {
   height: 110px;
   width: auto;
 }
 
-/* line 538, ../scss/partials/_master.scss */
+/* line 539, ../scss/partials/_master.scss */
 .row4 img {
   height: 160px;
   width: auto;
 }
 
-/* line 539, ../scss/partials/_master.scss */
+/* line 540, ../scss/partials/_master.scss */
 .row5 img {
   height: 210px;
   width: auto;
 }
 
-/* line 540, ../scss/partials/_master.scss */
+/* line 541, ../scss/partials/_master.scss */
 .row6 img {
   height: 260px;
   width: auto;
 }
 
-/* line 541, ../scss/partials/_master.scss */
+/* line 542, ../scss/partials/_master.scss */
 .row7 img {
   height: 310px;
   width: auto;
 }
 
-/* line 542, ../scss/partials/_master.scss */
+/* line 543, ../scss/partials/_master.scss */
 .row8 img {
   height: 360px;
   width: auto;
 }
 
-/* line 543, ../scss/partials/_master.scss */
+/* line 544, ../scss/partials/_master.scss */
 .row9 img {
   height: 410px;
   width: auto;
 }
 
-/* line 544, ../scss/partials/_master.scss */
+/* line 545, ../scss/partials/_master.scss */
 .row10 img {
   height: 460px;
   width: auto;
 }
 
-/* line 545, ../scss/partials/_master.scss */
+/* line 546, ../scss/partials/_master.scss */
 .row11 img {
   height: 510px;
   width: auto;
 }
 
-/* line 546, ../scss/partials/_master.scss */
+/* line 547, ../scss/partials/_master.scss */
 .row12 img {
   height: 560px;
   width: auto;
 }
 
-/* line 548, ../scss/partials/_master.scss */
+/* line 549, ../scss/partials/_master.scss */
 .shop-products img {
   height: auto;
   width: auto;
 }
 
-/* line 550, ../scss/partials/_master.scss */
+/* line 551, ../scss/partials/_master.scss */
 #post-mcbox {
   background: black url("../images/newsletter-text.png") no-repeat right 25px;
 }
 
-/* line 553, ../scss/partials/_master.scss */
+/* line 554, ../scss/partials/_master.scss */
 #mc_embed_signup {
   padding: 10px;
   margin-top: 140px;
   background: transparent;
 }
 
-/* line 558, ../scss/partials/_master.scss */
+/* line 559, ../scss/partials/_master.scss */
 #post-mcbox form input {
   float: left;
   height: 21px;
@@ -2489,7 +2490,7 @@ form.wpsc_checkout_forms .asterix {
   border: 0;
 }
 
-/* line 565, ../scss/partials/_master.scss */
+/* line 566, ../scss/partials/_master.scss */
 #post-mcbox form input.emailbutton {
   float: left;
   border: 0;
@@ -2504,7 +2505,7 @@ form.wpsc_checkout_forms .asterix {
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 578, ../scss/partials/_master.scss */
+/* line 579, ../scss/partials/_master.scss */
 #footer-container {
   margin: 20px 0;
   clear: both;
@@ -2512,50 +2513,50 @@ form.wpsc_checkout_forms .asterix {
 
 /* Subsidiary widget section */
 /* Footer section */
-/* line 589, ../scss/partials/_master.scss */
+/* line 590, ../scss/partials/_master.scss */
 #footer {
   width: 100%;
   overflow: hidden;
   *zoom: 1;
 }
 
-/* line 593, ../scss/partials/_master.scss */
+/* line 594, ../scss/partials/_master.scss */
 #footer .fb-like {
   margin: 2px 10px 0 0;
   float: left;
 }
 
 /* Footer extra */
-/* line 598, ../scss/partials/_master.scss */
+/* line 599, ../scss/partials/_master.scss */
 #footer .meta {
   padding-top: 4px;
   float: left;
 }
 
-/* line 602, ../scss/partials/_master.scss */
+/* line 603, ../scss/partials/_master.scss */
 #footer .quicklinks {
   float: right;
 }
 
-/* line 605, ../scss/partials/_master.scss */
+/* line 606, ../scss/partials/_master.scss */
 #footer .quicklinks ul {
   list-style-type: none;
   padding: 4px;
   margin: 0;
 }
 
-/* line 610, ../scss/partials/_master.scss */
+/* line 611, ../scss/partials/_master.scss */
 #footer .quicklinks li {
   margin-right: 10px;
   float: left;
 }
 
-/* line 614, ../scss/partials/_master.scss */
+/* line 615, ../scss/partials/_master.scss */
 #footer .quicklinks li a {
   margin-right: 10px;
 }
 
-/* line 617, ../scss/partials/_master.scss */
+/* line 618, ../scss/partials/_master.scss */
 #footer .cards {
   float: right;
 }
