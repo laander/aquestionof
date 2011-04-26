@@ -65,7 +65,7 @@ function gateway_epay($seperator, $sessionid) {
   			<body onload="open_ePay_window()">';
   
   echo '<form action="https://ssl.ditonlinebetalingssystem.dk/popup/default.asp" method="post" name="ePay" target="ePay_window" id="ePay">
-  				<input type="hidden" name="language" value="2">
+  				<input type="hidden" name="language" value="2"> 
   				<input type="hidden" name="merchantnumber" value="' . get_option('payment_epay_merchantnumber') . '">
   				<input type="hidden" name="amount" value="' . trimAmountForEpay(wpsc_cart_total(false) * 100). '">
   				<input type="hidden" name="currency" value="' . get_option('payment_epay_currency') . '">
