@@ -1819,7 +1819,7 @@ a.shophere-button .text {
   margin-right: 10px;
   width: 230px;
   float: left;
-  clear: both;
+  clear: left;
 }
 /* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .hentry .related-post {
@@ -1831,16 +1831,21 @@ a.shophere-button .text {
   float: left;
   margin-right: 10px;
   width: 230px;
-  float: right;
-  clear: right;
-  margin-left: 40px;
+  float: left;
 }
 /* line 138, ../../../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.10.6/frameworks/blueprint/stylesheets/blueprint/_grid.scss */
 * html .hentry .related-product {
   overflow-x: hidden;
 }
+/* line 275, ../scss/partials/_master.scss */
+.hentry .related-product a {
+  display: block;
+  width: 120px;
+  height: 160px;
+  margin: 0 auto;
+}
 
-/* line 281, ../scss/partials/_master.scss */
+/* line 286, ../scss/partials/_master.scss */
 .single_product_display .imagecol {
   display: inline;
   float: left;
@@ -1852,7 +1857,7 @@ a.shophere-button .text {
 * html .single_product_display .imagecol {
   overflow-x: hidden;
 }
-/* line 285, ../scss/partials/_master.scss */
+/* line 290, ../scss/partials/_master.scss */
 .single_product_display .productcol {
   *zoom: 1;
   margin-left: 490px;
@@ -1867,14 +1872,14 @@ a.shophere-button .text {
   overflow: hidden;
   visibility: hidden;
 }
-/* line 290, ../scss/partials/_master.scss */
+/* line 295, ../scss/partials/_master.scss */
 .single_product_display .entry-content h1 {
   margin-bottom: 15px;
   text-transform: uppercase;
   font-size: 26px;
   font-family: DIN;
 }
-/* line 296, ../scss/partials/_master.scss */
+/* line 301, ../scss/partials/_master.scss */
 .single_product_display .related-post-title {
   display: inline;
   float: left;
@@ -1893,7 +1898,7 @@ a.shophere-button .text {
 * html .single_product_display .related-post-title {
   overflow-x: hidden;
 }
-/* line 307, ../scss/partials/_master.scss */
+/* line 312, ../scss/partials/_master.scss */
 .single_product_display .related-post {
   display: inline;
   float: left;
@@ -1907,7 +1912,7 @@ a.shophere-button .text {
 * html .single_product_display .related-post {
   overflow-x: hidden;
 }
-/* line 313, ../scss/partials/_master.scss */
+/* line 318, ../scss/partials/_master.scss */
 .single_product_display .related-product {
   display: inline;
   float: left;
@@ -1923,7 +1928,7 @@ a.shophere-button .text {
 }
 
 /* WPEC Fancy Notifications styling */
-/* line 322, ../scss/partials/_master.scss */
+/* line 327, ../scss/partials/_master.scss */
 #fancy_notification {
   margin-left: 490px;
   display: none;
@@ -1931,12 +1936,12 @@ a.shophere-button .text {
   z-index: 9;
 }
 
-/* line 328, ../scss/partials/_master.scss */
+/* line 333, ../scss/partials/_master.scss */
 #fancy_notification #loading_animation {
   display: none;
 }
 
-/* line 331, ../scss/partials/_master.scss */
+/* line 336, ../scss/partials/_master.scss */
 #fancy_notification #fancy_notification_content {
   display: none;
   width: 100%;
@@ -1946,7 +1951,7 @@ a.shophere-button .text {
   margin: 0 !important;
 }
 
-/* line 339, ../scss/partials/_master.scss */
+/* line 344, ../scss/partials/_master.scss */
 #fancy_notification #fancy_notification_content span {
   margin: 0;
   display: block;
@@ -1954,7 +1959,7 @@ a.shophere-button .text {
   font-weight: normal;
 }
 
-/* line 345, ../scss/partials/_master.scss */
+/* line 350, ../scss/partials/_master.scss */
 #fancy_notification #fancy_notification_content a {
   display: block;
   float: left;
@@ -1962,7 +1967,7 @@ a.shophere-button .text {
   margin-bottom: 3px;
 }
 
-/* line 351, ../scss/partials/_master.scss */
+/* line 356, ../scss/partials/_master.scss */
 #nivo_product_images {
   position: relative;
   width: 470px;
@@ -1970,14 +1975,14 @@ a.shophere-button .text {
   background: url("../images/loader.gif") no-repeat 50% 50%;
 }
 
-/* line 357, ../scss/partials/_master.scss */
+/* line 362, ../scss/partials/_master.scss */
 #nivo_product_images .nivo-slice {
   width: 470px;
   height: 730px;
   background-color: #fff;
 }
 
-/* line 362, ../scss/partials/_master.scss */
+/* line 367, ../scss/partials/_master.scss */
 .nivo-directionNav {
   position: absolute;
   height: 30px;
@@ -1986,7 +1991,7 @@ a.shophere-button .text {
   background-color: #000;
 }
 
-/* line 369, ../scss/partials/_master.scss */
+/* line 374, ../scss/partials/_master.scss */
 .nivo-directionNav a {
   border: 0;
   cursor: pointer;
@@ -1999,24 +2004,24 @@ a.shophere-button .text {
   text-decoration: none;
 }
 
-/* line 380, ../scss/partials/_master.scss */
+/* line 385, ../scss/partials/_master.scss */
 .nivo-directionNav a:hover {
   color: grey;
 }
 
-/* line 383, ../scss/partials/_master.scss */
+/* line 388, ../scss/partials/_master.scss */
 .nivo-directionNav a.nivo-prevNav {
   display: block;
   float: left;
 }
 
-/* line 387, ../scss/partials/_master.scss */
+/* line 392, ../scss/partials/_master.scss */
 .nivo-directionNav a.nivo-nextNav {
   display: block;
   float: right;
 }
 
-/* line 391, ../scss/partials/_master.scss */
+/* line 396, ../scss/partials/_master.scss */
 .FB_like {
   display: inline;
   float: left;
@@ -2032,7 +2037,7 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 398, ../scss/partials/_master.scss */
+/* line 403, ../scss/partials/_master.scss */
 .product_form {
   display: inline;
   float: left;
@@ -2045,25 +2050,25 @@ a.shophere-button .text {
   overflow-x: hidden;
 }
 
-/* line 402, ../scss/partials/_master.scss */
+/* line 407, ../scss/partials/_master.scss */
 .wpsc_product_price {
   font-size: 18px;
   font-weight: bold;
 }
 
-/* line 406, ../scss/partials/_master.scss */
+/* line 411, ../scss/partials/_master.scss */
 .wpsc_product_price .pricedisplay {
   margin: 5px 0;
 }
 
-/* line 409, ../scss/partials/_master.scss */
+/* line 414, ../scss/partials/_master.scss */
 .wpsc_buy_button_container {
   float: left;
   clear: both;
   width: 100%;
 }
 
-/* line 414, ../scss/partials/_master.scss */
+/* line 419, ../scss/partials/_master.scss */
 .wpsc_buy_button_container input.wpsc_buy_button {
   cursor: pointer;
   float: left;
@@ -2078,80 +2083,80 @@ a.shophere-button .text {
   text-transform: uppercase;
 }
 
-/* line 427, ../scss/partials/_master.scss */
+/* line 432, ../scss/partials/_master.scss */
 .wpsc_loading_animation {
   display: none;
 }
 
-/* line 430, ../scss/partials/_master.scss */
+/* line 435, ../scss/partials/_master.scss */
 .wpsc_product-footer-notifications {
   float: left;
 }
 
-/* line 433, ../scss/partials/_master.scss */
+/* line 438, ../scss/partials/_master.scss */
 .wpsc_variation_forms {
   float: left;
   clear: both;
   width: 100%;
 }
 
-/* line 438, ../scss/partials/_master.scss */
+/* line 443, ../scss/partials/_master.scss */
 .wpsc_variation_forms table {
   margin: 10px 0;
 }
 
-/* line 441, ../scss/partials/_master.scss */
+/* line 446, ../scss/partials/_master.scss */
 .wpsc_variation_forms table tr td {
   padding: 0;
 }
 
-/* line 444, ../scss/partials/_master.scss */
+/* line 449, ../scss/partials/_master.scss */
 .wpsc_variation_forms table tr {
   height: 30px;
 }
 
-/* line 447, ../scss/partials/_master.scss */
+/* line 452, ../scss/partials/_master.scss */
 .wpsc_variation_forms table tr td.col1 {
   padding: 7px 7px 7px 0px;
 }
 
-/* line 452, ../scss/partials/_master.scss */
+/* line 457, ../scss/partials/_master.scss */
 .wpsc_select_variation {
   width: 185px;
 }
 
-/* line 455, ../scss/partials/_master.scss */
+/* line 460, ../scss/partials/_master.scss */
 .product_description {
   padding-left: 10px;
   margin-left: 240px;
 }
 
-/* line 459, ../scss/partials/_master.scss */
+/* line 464, ../scss/partials/_master.scss */
 tr.wpsc_cart_seperatorrow td {
   padding: 0;
   height: 3px;
   background-color: #000;
 }
 
-/* line 464, ../scss/partials/_master.scss */
+/* line 469, ../scss/partials/_master.scss */
 form.wpsc_checkout_forms textarea {
   height: auto;
 }
 
-/* line 469, ../scss/partials/_master.scss */
+/* line 474, ../scss/partials/_master.scss */
 form.wpsc_checkout_forms .asterix,
 .wpsc_coupon_error_row,
 .validation-error {
   color: red;
 }
 
-/* line 472, ../scss/partials/_master.scss */
+/* line 477, ../scss/partials/_master.scss */
 #grid {
   margin: 0;
   padding: 0;
 }
 
-/* line 478, ../scss/partials/_master.scss */
+/* line 483, ../scss/partials/_master.scss */
 .box {
   position: relative;
   float: left;
@@ -2160,7 +2165,7 @@ form.wpsc_checkout_forms .asterix,
   margin-bottom: 10px;
 }
 
-/* line 485, ../scss/partials/_master.scss */
+/* line 490, ../scss/partials/_master.scss */
 .box .meta {
   position: absolute;
   bottom: 0;
@@ -2171,7 +2176,7 @@ form.wpsc_checkout_forms .asterix,
   color: #fff;
 }
 
-/* line 495, ../scss/partials/_master.scss */
+/* line 500, ../scss/partials/_master.scss */
 .box .post-title,
 .box .product-title {
   position: relative;
@@ -2181,12 +2186,12 @@ form.wpsc_checkout_forms .asterix,
   white-space: nowrap;
 }
 
-/* line 502, ../scss/partials/_master.scss */
+/* line 507, ../scss/partials/_master.scss */
 .box .product-title {
   max-width: 160px;
 }
 
-/* line 505, ../scss/partials/_master.scss */
+/* line 510, ../scss/partials/_master.scss */
 .product-price {
   position: relative;
   float: right;
@@ -2195,7 +2200,7 @@ form.wpsc_checkout_forms .asterix,
   z-index: 30;
 }
 
-/* line 512, ../scss/partials/_master.scss */
+/* line 517, ../scss/partials/_master.scss */
 .box a {
   color: black;
   text-decoration: none;
@@ -2203,7 +2208,7 @@ form.wpsc_checkout_forms .asterix,
   font-weight: normal;
 }
 
-/* line 519, ../scss/partials/_master.scss */
+/* line 524, ../scss/partials/_master.scss */
 .col1 {
   display: inline;
   float: left;
@@ -2215,7 +2220,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 520, ../scss/partials/_master.scss */
+/* line 525, ../scss/partials/_master.scss */
 .col2 {
   display: inline;
   float: left;
@@ -2227,7 +2232,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 521, ../scss/partials/_master.scss */
+/* line 526, ../scss/partials/_master.scss */
 .col3 {
   display: inline;
   float: left;
@@ -2239,7 +2244,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 522, ../scss/partials/_master.scss */
+/* line 527, ../scss/partials/_master.scss */
 .col4 {
   display: inline;
   float: left;
@@ -2251,7 +2256,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 523, ../scss/partials/_master.scss */
+/* line 528, ../scss/partials/_master.scss */
 .col5 {
   display: inline;
   float: left;
@@ -2263,7 +2268,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 524, ../scss/partials/_master.scss */
+/* line 529, ../scss/partials/_master.scss */
 .col6 {
   display: inline;
   float: left;
@@ -2275,7 +2280,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 525, ../scss/partials/_master.scss */
+/* line 530, ../scss/partials/_master.scss */
 .col7 {
   display: inline;
   float: left;
@@ -2287,7 +2292,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 526, ../scss/partials/_master.scss */
+/* line 531, ../scss/partials/_master.scss */
 .col8 {
   display: inline;
   float: left;
@@ -2299,7 +2304,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 527, ../scss/partials/_master.scss */
+/* line 532, ../scss/partials/_master.scss */
 .col9 {
   display: inline;
   float: left;
@@ -2311,7 +2316,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 528, ../scss/partials/_master.scss */
+/* line 533, ../scss/partials/_master.scss */
 .col10 {
   display: inline;
   float: left;
@@ -2323,7 +2328,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 529, ../scss/partials/_master.scss */
+/* line 534, ../scss/partials/_master.scss */
 .col11 {
   display: inline;
   float: left;
@@ -2335,7 +2340,7 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 530, ../scss/partials/_master.scss */
+/* line 535, ../scss/partials/_master.scss */
 .col12 {
   display: inline;
   float: left;
@@ -2347,156 +2352,156 @@ form.wpsc_checkout_forms .asterix,
   overflow-x: hidden;
 }
 
-/* line 533, ../scss/partials/_master.scss */
+/* line 538, ../scss/partials/_master.scss */
 .row1 {
   height: 40px;
 }
 
-/* line 534, ../scss/partials/_master.scss */
+/* line 539, ../scss/partials/_master.scss */
 .row2 {
   height: 90px;
 }
 
-/* line 535, ../scss/partials/_master.scss */
+/* line 540, ../scss/partials/_master.scss */
 .row3 {
   height: 140px;
 }
 
-/* line 536, ../scss/partials/_master.scss */
+/* line 541, ../scss/partials/_master.scss */
 .row4 {
   height: 190px;
 }
 
-/* line 537, ../scss/partials/_master.scss */
+/* line 542, ../scss/partials/_master.scss */
 .row5 {
   height: 240px;
 }
 
-/* line 538, ../scss/partials/_master.scss */
+/* line 543, ../scss/partials/_master.scss */
 .row6 {
   height: 290px;
 }
 
-/* line 539, ../scss/partials/_master.scss */
+/* line 544, ../scss/partials/_master.scss */
 .row7 {
   height: 340px;
 }
 
-/* line 540, ../scss/partials/_master.scss */
+/* line 545, ../scss/partials/_master.scss */
 .row8 {
   height: 390px;
 }
 
-/* line 541, ../scss/partials/_master.scss */
+/* line 546, ../scss/partials/_master.scss */
 .row9 {
   height: 440px;
 }
 
-/* line 542, ../scss/partials/_master.scss */
+/* line 547, ../scss/partials/_master.scss */
 .row10 {
   height: 490px;
 }
 
-/* line 543, ../scss/partials/_master.scss */
+/* line 548, ../scss/partials/_master.scss */
 .row11 {
   height: 540px;
 }
 
-/* line 544, ../scss/partials/_master.scss */
+/* line 549, ../scss/partials/_master.scss */
 .row12 {
   height: 590px;
 }
 
-/* line 547, ../scss/partials/_master.scss */
+/* line 552, ../scss/partials/_master.scss */
 .row1 img {
   height: 10px;
 }
 
-/* line 548, ../scss/partials/_master.scss */
+/* line 553, ../scss/partials/_master.scss */
 .row2 img {
   height: 60px;
   width: auto;
 }
 
-/* line 549, ../scss/partials/_master.scss */
+/* line 554, ../scss/partials/_master.scss */
 .row3 img {
   height: 110px;
   width: auto;
 }
 
-/* line 550, ../scss/partials/_master.scss */
+/* line 555, ../scss/partials/_master.scss */
 .row4 img {
   height: 160px;
   width: auto;
 }
 
-/* line 551, ../scss/partials/_master.scss */
+/* line 556, ../scss/partials/_master.scss */
 .row5 img {
   height: 210px;
   width: auto;
 }
 
-/* line 552, ../scss/partials/_master.scss */
+/* line 557, ../scss/partials/_master.scss */
 .row6 img {
   height: 260px;
   width: auto;
 }
 
-/* line 553, ../scss/partials/_master.scss */
+/* line 558, ../scss/partials/_master.scss */
 .row7 img {
   height: 310px;
   width: auto;
 }
 
-/* line 554, ../scss/partials/_master.scss */
+/* line 559, ../scss/partials/_master.scss */
 .row8 img {
   height: 360px;
   width: auto;
 }
 
-/* line 555, ../scss/partials/_master.scss */
+/* line 560, ../scss/partials/_master.scss */
 .row9 img {
   height: 410px;
   width: auto;
 }
 
-/* line 556, ../scss/partials/_master.scss */
+/* line 561, ../scss/partials/_master.scss */
 .row10 img {
   height: 460px;
   width: auto;
 }
 
-/* line 557, ../scss/partials/_master.scss */
+/* line 562, ../scss/partials/_master.scss */
 .row11 img {
   height: 510px;
   width: auto;
 }
 
-/* line 558, ../scss/partials/_master.scss */
+/* line 563, ../scss/partials/_master.scss */
 .row12 img {
   height: 560px;
   width: auto;
 }
 
-/* line 560, ../scss/partials/_master.scss */
+/* line 565, ../scss/partials/_master.scss */
 .shop-products img {
   height: auto;
   width: auto;
 }
 
-/* line 562, ../scss/partials/_master.scss */
+/* line 567, ../scss/partials/_master.scss */
 #post-mcbox {
   background: black url("../images/newsletter-text.png") no-repeat right 25px;
 }
 
-/* line 565, ../scss/partials/_master.scss */
+/* line 570, ../scss/partials/_master.scss */
 #mc_embed_signup {
   padding: 10px;
   margin-top: 140px;
   background: transparent;
 }
 
-/* line 570, ../scss/partials/_master.scss */
+/* line 575, ../scss/partials/_master.scss */
 #post-mcbox form input {
   float: left;
   height: 21px;
@@ -2505,7 +2510,7 @@ form.wpsc_checkout_forms .asterix,
   border: 0;
 }
 
-/* line 577, ../scss/partials/_master.scss */
+/* line 582, ../scss/partials/_master.scss */
 #post-mcbox form input.emailbutton {
   float: left;
   border: 0;
@@ -2520,7 +2525,7 @@ form.wpsc_checkout_forms .asterix,
 * Footer
 ************************************************/
 /* Wrapper for the entire footer */
-/* line 590, ../scss/partials/_master.scss */
+/* line 595, ../scss/partials/_master.scss */
 #footer-container {
   margin: 20px 0;
   clear: both;
@@ -2528,50 +2533,50 @@ form.wpsc_checkout_forms .asterix,
 
 /* Subsidiary widget section */
 /* Footer section */
-/* line 601, ../scss/partials/_master.scss */
+/* line 606, ../scss/partials/_master.scss */
 #footer {
   width: 100%;
   overflow: hidden;
   *zoom: 1;
 }
 
-/* line 605, ../scss/partials/_master.scss */
+/* line 610, ../scss/partials/_master.scss */
 #footer .fb-like {
   margin: 2px 10px 0 0;
   float: left;
 }
 
 /* Footer extra */
-/* line 610, ../scss/partials/_master.scss */
+/* line 615, ../scss/partials/_master.scss */
 #footer .meta {
   padding-top: 4px;
   float: left;
 }
 
-/* line 614, ../scss/partials/_master.scss */
+/* line 619, ../scss/partials/_master.scss */
 #footer .quicklinks {
   float: right;
 }
 
-/* line 617, ../scss/partials/_master.scss */
+/* line 622, ../scss/partials/_master.scss */
 #footer .quicklinks ul {
   list-style-type: none;
   padding: 4px;
   margin: 0;
 }
 
-/* line 622, ../scss/partials/_master.scss */
+/* line 627, ../scss/partials/_master.scss */
 #footer .quicklinks li {
   margin-right: 10px;
   float: left;
 }
 
-/* line 626, ../scss/partials/_master.scss */
+/* line 631, ../scss/partials/_master.scss */
 #footer .quicklinks li a {
   margin-right: 10px;
 }
 
-/* line 629, ../scss/partials/_master.scss */
+/* line 634, ../scss/partials/_master.scss */
 #footer .cards {
   float: right;
 }

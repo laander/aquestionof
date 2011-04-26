@@ -266,14 +266,19 @@ body {
 				.related-post {
 					@include column(6);
 					float: left;
-					clear: both; }
-			
-			.related-product {
-				@include column(6);		
-				float: right;
-				clear: right;
-				margin-left: $grid-columnwidth;}
-		
+					clear: left; }		
+					
+				.related-product {	
+					@include column(6);
+					float: left; }
+				
+				.related-product a {
+					display: block;
+					width: 120px;
+					height: 160px;
+					margin: 0 auto;
+				}			
+				
 		}
 
 		.single_product_display {

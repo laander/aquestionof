@@ -30,6 +30,12 @@ get_header(); ?>
 					
 					<?php $custom_fields = get_post_custom($post->ID); ?>
 
+					<?php // If related boxes, output header 
+						if (isset($custom_fields['related-post']) || isset($custom_fields['related-product'])) {
+								echo '<div class="related-post-container"><div class="related-post-title">Related</div>';
+						}
+					?>
+
 					<?php // Related Posts box						
 						if (isset($custom_fields['related-post'])) {
 								
@@ -42,8 +48,6 @@ get_header(); ?>
 							else { $item_height = 4; }
 							
 							$related_post = '
-								<div class="related-post-container">
-									<div class="related-post-title">Related</div>
 									<div class="related-post box row' . $item_height . '">
 										<a href="' . get_permalink($related_post->ID) . '">
 											'.  get_the_post_thumbnail($related_post->ID, 'large') .'
@@ -53,17 +57,45 @@ get_header(); ?>
 												</div>
 											</div>
 										</a>
-									</div>
-								</div>' . "\n";
+									</div>' . "\n";
 							echo $related_post;
 							$post = $tmp_post;						
-					?>	
-					<?php } ?>
+					} ?>
 					
-					<?php // Related Products box
-						if (isset($custom_fields['related-product'])) { ?>
-							<div class="related-product box"></div>
-					<?php } ?>
+					<?php // Related Posts box						
+						if (isset($custom_fields['related-product'])) {
+								
+							$tmp_post = $post;
+							$related_post_field = $custom_fields['related-product'];
+							$related_post = get_post($related_post_field[0]);
+							
+							$related_post_custom_fields = get_post_custom($related_post->ID);
+							if (isset($related_post_custom_fields['height'])) { $item_height = $related_post_custom_fields['height'][0] * 4; }
+							else { $item_height = 4; }
+							
+							$related_post = '
+									<div class="related-product box row' . $item_height . '">
+										<a href="' . get_permalink($related_post->ID) . '">
+											'.  get_the_post_thumbnail($related_post->ID, 'default') .'
+											<div class="meta">
+												<div class="post-title">
+													' . get_the_title($related_post->ID) . '
+												</div>
+												<div class="product-price">
+													' . wpsc_product_variation_price_available($related_post->ID) . '
+												</div>																			
+											</div>
+										</a>
+									</div>' . "\n";
+							echo $related_post;
+							$post = $tmp_post;						
+					} ?>
+					
+					<?php // If related boxes, output ending div to header 
+						if (isset($custom_fields['related-post']) || isset($custom_fields['related-product'])) {
+								echo '</div>';
+						}
+					?>					
 													
 				</div><!-- .entry-content -->
 

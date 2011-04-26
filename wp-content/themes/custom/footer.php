@@ -12,6 +12,7 @@
 			<div id="footer">
 				
 				<div class="cards">
+					<img src="<?php echo CHILD_THEME_URI . '/library/images/cards/paypal.gif'; ?>" alt="Paypal" title="Paypal" />
 					<img src="<?php echo CHILD_THEME_URI . '/library/images/cards/visa.gif'; ?>" alt="Visa Card" title="Visa Card" />
 					<img src="<?php echo CHILD_THEME_URI . '/library/images/cards/master.gif'; ?>" alt="Master Card" title="Master Card" />		
 					<img src="<?php echo CHILD_THEME_URI . '/library/images/cards/maestro.gif'; ?>" alt="Maestro Card" title="Maestro Card" />
