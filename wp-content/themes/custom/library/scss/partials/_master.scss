@@ -242,8 +242,7 @@ body {
 					font-family: DIN; }
 			
 			.related-post-container {
-				float: left;
-				clear: both; }
+				float: left; }
 			
 				.related-post-title {
 					@include column(6);
@@ -343,12 +342,12 @@ body {
 		#nivo_product_images {
 		    position: relative;
 			width: 470px;
-			height: 755px;
+			height: 760px;
 			background: url('../images/loader.gif') no-repeat 50% 50%; }
 			 		 
 			#nivo_product_images .nivo-slice {
 				width: 470px;
-				height: 725px;
+				height: 730px;
 				background-color: #fff; }	
 
 			.nivo-directionNav {
@@ -457,7 +456,8 @@ body {
 			height: auto; }
 
 		form.wpsc_checkout_forms .asterix,
-		.wpsc_coupon_error_row {
+		.wpsc_coupon_error_row,
+		.validation-error {
 			color: red; }		
 			
 		#grid {

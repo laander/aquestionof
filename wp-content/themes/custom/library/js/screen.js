@@ -131,8 +131,8 @@ jQuery.noConflict();
 	function primaryMenuEffect(activateMenuItem) {
 	
 		// Only run if the clicked menu item is not already the current one
-		if ($(activateMenuItem).next("ul.sub-menu.current").length == 0) {
-			
+		if ($(activateMenuItem).next("ul.sub-menu.current").length == 0 && $(activateMenuItem).next("ul.sub-menu").length != 0) {
+					
 			// Collapse the previous current
 			$("ul.sub-menu.current").removeClass("current").animate(
 				{width: "1", opacity: 0}, 
