@@ -81,7 +81,8 @@
 					'menu_id' 		=> 'primary-menu',
 					'fallback_cb' 	=> false,
 					'link_before' 	=> '/ '
-					)); ?> 
+					)); ?>
+				<div class="primary-menu-slash">/</div>
 																					
 			</div><!-- #header -->
 		</div><!-- #header-container -->
