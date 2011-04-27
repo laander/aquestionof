@@ -210,6 +210,15 @@ jQuery.noConflict();
 	
 			// Watch for hash change and do masonry when changed
 			$(window).hashchange(function() {
+			
+				// Alert Google Analytics that new async page has been called (converted to non-hashed url) and track with _gaq
+				if (checkGoogleAnalyticsLoaded()) {
+					var trackUrl = antiHashizeUrl(getHash(), true, false);
+					if (trackUrl == "all") { trackUrl == "/"; }
+					var trackLocation = '/' + trackUrl;					
+					_gaq.push(['_trackPageview', trackLocation]);
+				}
+
 				prepareMasonry();
 			});		
 			
@@ -232,12 +241,6 @@ jQuery.noConflict();
 	function prepareMasonry() {
 		$(loadingIcon).fadeIn("fast"); // Show the loading icon
 		elmBusy = true;
-
-		// Alert Google Analytics that new async page has been called (converted to non-hashed url) and track with _gaq
-		if (checkGoogleAnalyticsLoaded()) {
-			var trackLocation = '/' + antiHashizeUrl(getHash(), true, false);
-			_gaq.push(['_trackPageview', trackLocation]);
-		}
 	
 		// Get the current category and attempt to find the link in primary-menu that it should correspondingly open
 		var category = getHash();
