@@ -233,7 +233,7 @@ jQuery.noConflict();
 		$(loadingIcon).fadeIn("fast"); // Show the loading icon
 		elmBusy = true;
 
-		// Alert Google Analytics that new async page has been called (converted to non-hashed url)
+		// Alert Google Analytics that new async page has been called (converted to non-hashed url) and track with _gaq
 		if (checkGoogleAnalyticsLoaded()) {
 			var trackLocation = '/' + antiHashizeUrl(getHash(), true, false);
 			_gaq.push(['_trackPageview', trackLocation]);
