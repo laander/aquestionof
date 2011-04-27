@@ -28,7 +28,7 @@ jQuery.noConflict();
 	});
 	
 	function emailFormFocusClear() {
-		$('form#mc-embedded-subscribe-form input[type="text"]').focus(function() {
+		$('form#mc-embedded-subscribe-form input[type="text"]').live('focus', function() {
 			if($(this).val() == 'Fill in e-mail') {
 				$(this).val('');
 			}
