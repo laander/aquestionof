@@ -205,12 +205,6 @@ jQuery.noConflict();
 				var category = hashizeUrl($(this).attr("href"), true);
 //				category = category.replace(/\//g,"-");
 				setHash(category);
-
-				// Alert Google Analytics that new page has been called
-//				var hash = location.hash;
-//				if (hash && hash.charAt(0) != '#') hash = '#' + hash;
-//				pageTracker._trackPageview(location.pathname + location.search + escape(hash));				
-
 				return false;
 			});			
 	
@@ -238,6 +232,13 @@ jQuery.noConflict();
 	function prepareMasonry() {
 		$(loadingIcon).fadeIn("fast"); // Show the loading icon
 		elmBusy = true;
+
+		// Alert Google Analytics that new async page has been called (converted to non-hashed url)
+		if (checkGoogleAnalyticsLoaded()) {
+			alert('eureka!');
+			var trackLocation = '/' + antiHashizeUrl(getHash(), true, false);
+			_gaq.push(['_trackPageview', trackLocation]);
+		}
 	
 		// Get the current category and attempt to find the link in primary-menu that it should correspondingly open
 		var category = getHash();
@@ -255,25 +256,17 @@ jQuery.noConflict();
 			category = "priority-frontpage";
 		}
 		
-		// If hash is set to show all
-//		if (category == "all") {
-//			var $elmToBeRemoved = $([]); //create empty jQuery object
-//			var $newElm = $allElm.not($previousElm);
-		
-		// If hash is set to show categories
-//		} else {	
-			// remove elements which are not chosen from previous
-			var $matchedElm = $(gridElement + "." + category);
-			var $removeElm = $previousElm.not($matchedElm);
-	
-			// previous elements which are to be kept
-			var $keptElm = $previousElm.filter($matchedElm);
-	
-			// get new elements - select all elm that have the corresponding
-			// category and deselect all that are already there (from previous)
-			var $newElm = $allElm.filter(gridElement + "." + category).not($keptElm);
-			var $elmToBeRemoved = $previousElm.filter($removeElm);	
-//		}	
+		// remove elements which are not chosen from previous
+		var $matchedElm = $(gridElement + "." + category);
+		var $removeElm = $previousElm.not($matchedElm);
+
+		// previous elements which are to be kept
+		var $keptElm = $previousElm.filter($matchedElm);
+
+		// get new elements - select all elm that have the corresponding
+		// category and deselect all that are already there (from previous)
+		var $newElm = $allElm.filter(gridElement + "." + category).not($keptElm);
+		var $elmToBeRemoved = $previousElm.filter($removeElm);	
 			
 		// Check if there are any elements to remove
 		if($elmToBeRemoved.size() > 0){		
@@ -374,6 +367,18 @@ jQuery.noConflict();
 			return category; // Create new url with hash
 		}
 	}
-
+	
+	// Will check if site uses Google Analytics and return true/false
+	function checkGoogleAnalyticsLoaded() {
+		try {
+			if (_gaq && _gaq._getTracker) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch(err) {
+			return false;
+		}
+	}
 
 })(jQuery)
