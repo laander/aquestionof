@@ -371,7 +371,7 @@ jQuery.noConflict();
 	// Will check if site uses Google Analytics and return true/false
 	function checkGoogleAnalyticsLoaded() {
 		try {
-			if (_gaq && _gaq._getTracker) {
+			if (_gaq) {
 				return true;
 			} else {
 				return false;
