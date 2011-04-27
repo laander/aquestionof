@@ -235,7 +235,6 @@ jQuery.noConflict();
 
 		// Alert Google Analytics that new async page has been called (converted to non-hashed url)
 		if (checkGoogleAnalyticsLoaded()) {
-			alert('eureka!');
 			var trackLocation = '/' + antiHashizeUrl(getHash(), true, false);
 			_gaq.push(['_trackPageview', trackLocation]);
 		}
