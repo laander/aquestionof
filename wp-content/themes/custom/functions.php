@@ -210,10 +210,17 @@ function masonry_grid($type = 'all') {
 		if (isset($custom_fields['height'])) { $item_height = $custom_fields['height'][0] * 4; }
 		else { $item_height = 4; }
 		
+		// Check if post is in Link Mode and set anchor href accordingly
+		if ($custom_fields['link-mode'][0] == "enabled") {
+			$box_link = $custom_fields['link-destination'][0];
+		} else {
+			$box_link = get_permalink($post->ID);
+		}
+		
 		// Add the current post to items array
 		$temp_item = '
 			<div id="post-' . $post->ID . '" class="box col' . $item_width . ' row' . $item_height . ' ' . $post_cat . ' ' . $post_pri . '">
-				<a href="' . get_permalink($post->ID) . '" alt="' . get_the_title() . '">
+				<a href="' . $box_link . '" alt="' . get_the_title() . '">
 					'.  get_the_post_thumbnail( $post->ID, 'large' ) .'
 					<div class="meta">
 						<div class="post-title">
