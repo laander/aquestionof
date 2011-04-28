@@ -275,7 +275,7 @@ function masonry_grid($type = 'all') {
 					<a href="' . get_permalink($post->ID) . '" alt="' . get_the_title() . '">
 						<img src="' . wpsc_the_product_thumbnail(get_option('product_image_width','','default'),get_option('product_image_height'),'','default') . '" />
 						<div class="meta">
-							<div class="post-title">
+							<div class="product-title">
 								' . get_the_title() . '
 							</div>
 							<div class="product-price">

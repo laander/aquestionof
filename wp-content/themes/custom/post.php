@@ -78,7 +78,7 @@ get_header(); ?>
 										<a href="' . get_permalink($related_post->ID) . '">
 											'.  get_the_post_thumbnail($related_post->ID, 'default') .'
 											<div class="meta">
-												<div class="post-title">
+												<div class="product-title">
 													' . get_the_title($related_post->ID) . '
 												</div>
 												<div class="product-price">
