@@ -7,12 +7,6 @@
 	// @todo: Investigate if these are still needed here
 	$image_width  = get_option( 'single_view_image_width' );
 	$image_height = get_option( 'single_view_image_height' );
-	
-	// Add Facebook like to meta-description for showing correct image thumbnail
-	add_action('wp_head', 'fb_like_metaimage');
-	function fb_like_metaimage() {
-		echo "<meta property='og:image' content='" . wpsc_the_product_thumbnail(get_option('product_image_width'),get_option('product_image_height'),'','single') . "' />";
-	}
 ?>
 
 <div id="single_product_page_container">

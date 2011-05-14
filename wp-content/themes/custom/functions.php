@@ -368,6 +368,7 @@ function nivo_get_images($product_id = null, $size = 'medium', $limit = '0', $of
 	}
 }
 
+// Outputs custom colors set in the admin
 function customColors() {
 	echo '
 		<style type="text/css">
@@ -386,5 +387,14 @@ function customColors() {
 
 		</style>';
 }
+
+// For WPEC products: will provide a correct product image for the FB likes
+function metaOpenGraph() {
+	if ( wpsc_the_product_thumbnail() ) {
+		echo "<meta property='og:image' content='" . wpsc_the_product_thumbnail(get_option('product_image_width'),get_option('product_image_height'),'','single') . "' />";	
+		echo "<meta property='og:type' content='product' />";
+	}
+}
+
 
 ?>

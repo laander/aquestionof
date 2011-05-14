@@ -32,6 +32,7 @@
 		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/screen.js'; ?>"></script>
 			
 		<?php customColors(); ?>
+		<?php metaOpenGraph(); ?>
 			
 	</head>
 
