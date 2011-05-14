@@ -7,10 +7,16 @@
 	// @todo: Investigate if these are still needed here
 	$image_width  = get_option( 'single_view_image_width' );
 	$image_height = get_option( 'single_view_image_height' );
+	
+	// Add Facebook like to meta-description for showing correct image thumbnail
+/*	add_action('wp_head', 'fb_like_metaimage');
+	function fb_like_metaimage() { */
+		echo "<meta property='og:image' content='" . wpsc_the_product_thumbnail(get_option('product_image_width'),get_option('product_image_height'),'','single') . "' />";
+/*	} */
 ?>
 
 <div id="single_product_page_container">
-	
+
 	<?php
 		// Breadcrumbs
 		wpsc_output_breadcrumbs();
@@ -154,7 +160,7 @@
 							
 							<?php if(wpsc_show_fb_like()): ?>
 		                        <div class="FB_like">
-		                        <iframe src="https://www.facebook.com/plugins/like.php?href=<?php echo wpsc_the_product_permalink(); ?>&amp;layout=standard&amp;show_faces=true&amp;width=435&amp;action=like&amp;font=arial&amp;colorscheme=light" frameborder="0"></iframe>
+								<iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo wpsc_the_product_permalink(); ?>&amp;send=false&amp;layout=standard&amp;width=230&amp;show_faces=true&amp;action=like&amp;colorscheme=dark&amp;font=arial&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:230px; height:80px;" allowTransparency="true"></iframe>		                        
 		                        </div><!--close FB_like-->
 	                        <?php endif; ?>								
 

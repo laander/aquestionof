@@ -22,7 +22,7 @@
 		
 		<?php wp_head(); // WP head hook ?>
 	
-		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/jquery.fontavailable-1.1.min.js'; ?>"></script>	
+		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/isFontFaceSupported.js'; ?>"></script>	
 		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/jquery.cufon/cufon-yui.js'; ?>"></script>	
 		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/jquery.cufon/DIN_1451_Std_400.font.js'; ?>"></script>	
 		<script type="text/javascript" src="<?php echo THEME_URI . '/library/js/jquery.masonry/onhashchange.min.js'; ?>"></script> 

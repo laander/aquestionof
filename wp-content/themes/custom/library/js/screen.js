@@ -152,7 +152,7 @@ jQuery.noConflict();
 	 * Will apply custom font with cufon for supplied texts
 	 */
 	function applyCufon() {
-	    if(!$.fontAvailable('DIN')) {
+	    if(isFontFaceSupported() != true) {
 			Cufon.replace('#primary-menu li a');
 			Cufon.replace('#masterbar-menu li a');
 			Cufon.replace('.master-shoppingbag a');

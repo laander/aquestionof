@@ -57,7 +57,7 @@ body {
 							float: left;
 							margin: 0 10px 0 0; // 0 6px 0 0
 							text-decoration: none;
-							font-family: DIN;
+							font-family: "DIN 1451 Std Engschrift";
 							font-size: 20px;
 							text-transform: uppercase; }
 							
@@ -74,7 +74,7 @@ body {
 		
 				#masterbar .master-shoppingbag a {
 					margin-left: 5px;
-					font-family: DIN;									
+					font-family: "DIN 1451 Std Engschrift";									
 					font-size: 20px;
 					text-transform: uppercase;
 					text-decoration: none;
@@ -141,7 +141,7 @@ body {
 					float: left;
 					margin: 0 0 0 7px; // 0 6px 0 0
 					text-decoration: none;
-					font-family: DIN;
+					font-family: "DIN 1451 Std Engschrift";
 					font-size: 26px;
 					text-transform: uppercase; }
 
@@ -157,7 +157,7 @@ body {
 			width: auto;
 			margin: 0 0 0 7px;
 			padding: 0;
-			font-family: DIN;
+			font-family: "DIN 1451 Std Engschrift";
 			font-size: 26px;
 			text-transform: uppercase; }		
 				
@@ -187,7 +187,7 @@ body {
 					margin: 0;
 					color: gray;
 					text-decoration: none;
-					font-family: DIN;									
+					font-family: "DIN 1451 Std Engschrift";									
 					font-size: 26px;
 					text-transform: uppercase; }
 					
@@ -213,7 +213,7 @@ body {
 				float: right;
 				clear: both;				
 				font-size: 24px;
-				font-family: DIN;					
+				font-family: "DIN 1451 Std Engschrift";					
 				text-decoration: none;
 				color: #fff; }
 		
@@ -248,7 +248,7 @@ body {
 					color: #fff;
 					text-transform: uppercase;
 					font-size: 20px;
-					font-family: DIN; }
+					font-family: "DIN 1451 Std Engschrift"; }
 			
 			.related-post-container {
 				float: left; }
@@ -259,7 +259,7 @@ body {
 					clear: both;
 					margin-bottom: 15px;				
 					font-size: 26px;
-					font-family: DIN;
+					font-family: "DIN 1451 Std Engschrift";
 					text-transform: uppercase;
 					line-height: 1; }
 									
@@ -296,7 +296,7 @@ body {
 					margin-bottom: 15px;
 					text-transform: uppercase;
 					font-size: 26px;
-					font-family: DIN; }
+					font-family: "DIN 1451 Std Engschrift"; }
 			
 			.related-post-title {
 				@include column(6);
@@ -304,7 +304,7 @@ body {
 				float: right;
 				margin-bottom: 15px;				
 				font-size: 26px;
-				font-family: DIN;
+				font-family: "DIN 1451 Std Engschrift";
 				text-transform: uppercase;
 				line-height: 1;
 				margin-left: $grid-margin * 2; }
@@ -425,7 +425,7 @@ body {
 				color: #000;
 				border: 0;
 				margin-right: $grid-margin;
-				font-family: DIN; 
+				font-family: "DIN 1451 Std Engschrift"; 
 				font-size: 20px;
 				text-transform: uppercase; }
 

@@ -92,7 +92,7 @@ a img {
 * Settings
 ************************************************/
 @font-face {
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
   src: url("../misc/DINEngschriftStd.otf");
 }
 
@@ -1560,7 +1560,7 @@ ul#masterbar-menu > li > a {
   float: left;
   margin: 0 10px 0 0;
   text-decoration: none;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
   font-size: 20px;
   text-transform: uppercase;
 }
@@ -1578,7 +1578,7 @@ ul#masterbar-menu > li > ul {
 /* line 75, ../scss/partials/_master.scss */
 #masterbar .master-shoppingbag a {
   margin-left: 5px;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
   font-size: 20px;
   text-transform: uppercase;
   text-decoration: none;
@@ -1660,7 +1660,7 @@ ul#primary-menu > li > a {
   float: left;
   margin: 0 0 0 7px;
   text-decoration: none;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
   font-size: 26px;
   text-transform: uppercase;
 }
@@ -1671,7 +1671,7 @@ ul#primary-menu > li > a {
   width: auto;
   margin: 0 0 0 7px;
   padding: 0;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
   font-size: 26px;
   text-transform: uppercase;
 }
@@ -1706,7 +1706,7 @@ ul.sub-menu > li > a {
   margin: 0;
   color: gray;
   text-decoration: none;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
   font-size: 26px;
   text-transform: uppercase;
 }
@@ -1734,7 +1734,7 @@ a.shophere-button .text {
   float: right;
   clear: both;
   font-size: 24px;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
   text-decoration: none;
   color: #fff;
 }
@@ -1788,7 +1788,7 @@ a.shophere-button .text {
   color: #fff;
   text-transform: uppercase;
   font-size: 20px;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
 }
 /* line 253, ../scss/partials/_master.scss */
 .hentry .related-post-container {
@@ -1804,7 +1804,7 @@ a.shophere-button .text {
   clear: both;
   margin-bottom: 15px;
   font-size: 26px;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
   text-transform: uppercase;
   line-height: 1;
 }
@@ -1877,7 +1877,7 @@ a.shophere-button .text {
   margin-bottom: 15px;
   text-transform: uppercase;
   font-size: 26px;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
 }
 /* line 301, ../scss/partials/_master.scss */
 .single_product_display .related-post-title {
@@ -1889,7 +1889,7 @@ a.shophere-button .text {
   float: right;
   margin-bottom: 15px;
   font-size: 26px;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
   text-transform: uppercase;
   line-height: 1;
   margin-left: 20px;
@@ -2078,7 +2078,7 @@ a.shophere-button .text {
   color: #000;
   border: 0;
   margin-right: 10px;
-  font-family: DIN;
+  font-family: "DIN 1451 Std Engschrift";
   font-size: 20px;
   text-transform: uppercase;
 }
@@ -2192,7 +2192,7 @@ form.wpsc_checkout_forms .asterix,
 }
 
 /* line 510, ../scss/partials/_master.scss */
-.product-price {
+.box .product-price {
   position: relative;
   float: right;
   margin: 7px 10px 7px 7px;
