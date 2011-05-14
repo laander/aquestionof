@@ -303,7 +303,7 @@ function masonry_grid($type = 'all') {
 	
 	if ($type == 'all') {	
 				
-		// Add Facebook fanbox to items array
+		// Add Facebook like fanbox to items array
 		$items[] = '
 				<div id="post-fbbox" class="box col12 row12 category-updates category-updates-social priority-featured priority-frontpage" style="background-color: #000;">
 					<a href="#">
