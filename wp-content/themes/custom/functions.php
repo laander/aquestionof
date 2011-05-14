@@ -305,9 +305,9 @@ function masonry_grid($type = 'all') {
 				
 		// Add Facebook fanbox to items array
 		$items[] = '
-				<div id="post-fbbox" class="box col6 row8 category-updates category-updates-social priority-frontpage" style="background-color: #000;">
+				<div id="post-fbbox" class="box col12 row12 category-updates category-updates-social priority-featured priority-frontpage" style="background-color: #000;">
 					<a href="#">
-						<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Faquestionof&amp;width=230&amp;colorscheme=dark&amp;show_faces=false&amp;stream=true&amp;header=false&amp;height=390" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:230px; height:390px;" allowTransparency="true"></iframe>					
+						<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Faquestionof&amp;colorscheme=dark&amp;show_faces=true&amp;stream=true&amp;header=false&amp;width=468&amp;height=588" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:470px; height:590px;" allowTransparency="true"></iframe>					
 					</a>
 				</div>' . "\n";
 				
